@@ -4,42 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../css/common.css" />
     <link rel="stylesheet" href="../css/reservation.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="reservation_wrapper">
-      <div id="reservations_status">
-        <button>이용 중/예정</button>
-        <button>이용 완료</button>
-        <button>취소</button>
-      </div>
-      <div id="reservation_list">
-        <div id="total_reservation">
-          <span>총</span>
-          <span>건</span>
-        </div>
-        <div id="reservation_content_wrapper">
-          <div id="reservation_status_wrapper">
-            <span id="reservation_status">예약</span>
+    <!-- 모바일 컨테이너 -->
+    <div id="mobileContainer">
+      <!--헤더-->
+      <header>
+        <img src="../img/left arrow.svg" alt="이전 페이지 이동" />
+        <span>페이지 이름</span>
+      </header>
+      <!-- 컨텐츠 컨테이너 -->
+      <div id="container">
+        <div id="reservation_wrapper">
+          <div id="reservations_status">
+            <button>이용 중/예정</button>
+            <button>이용 완료</button>
+            <button>취소</button>
           </div>
-          <div id="reservation_content">
-            <div id="KK_img">
-              <img src="../img/KK_img.svg" />
+          <div id="reservation_list">
+            <div id="total_reservation">
+              <span>총</span>
+              <span>건</span>
             </div>
-            <div id="reservation_detail_wrapper">
-              <div id="reservation_detail">
-                <span>세븐스타코인노래연습장 철산역점</span>
-                <img src="../img/arrow_right.svg" />
-                <span>16:00 - 17:30</span>
+            <div id="reservation_content_wrapper">
+              <div id="reservation_status_wrapper">
+                <span id="reservation_status">예약</span>
               </div>
-              <div id="button_wrapper">
-                <button>시간 추가</button>
-                <button>예약 취소</button>
+              <div id="reservation_content">
+                <div id="KK_img">
+                  <img src="../img/KK_img.svg" />
+                </div>
+                <div id="reservation_detail_wrapper">
+                  <div id="reservation_detail">
+                    <span id="karaoke_name"
+                      >세븐스타코인노래연습장 철산역점</span
+                    >
+                    <img src="../img/arrow_right.svg" />
+                    <span id="reservation_time">16:00 - 17:30</span>
+                  </div>
+                  <div id="button_wrapper">
+                    <button>시간 추가</button>
+                    <button>예약 취소</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- 하단 메뉴바 -->
+      <nav>
+        <div><img src="../img/mainPageIcon.svg" alt="메인 페이지" /></div>
+        <div><img src="../img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
+        <div><img src="../img/musicIcon.svg" alt="노래 검색 페이지" /></div>
+        <div>
+          <img src="../img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
+        </div>
+        <div><img src="../img/userIcon.svg" alt="마이페이지" /></div>
+      </nav>
     </div>
   </body>
 </html>
