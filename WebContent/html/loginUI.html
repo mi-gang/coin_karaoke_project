@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginUI</title>
+    <style>
+        html {
+            font-size: 62.5%;
+        }
+
+        #container {
+            height: 100%;
+            width: 100%;
+            display: grid;
+            justify-items: center;
+            align-content: space-around;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+        }
+
+        .inputError {
+            color: #FC6262;
+        }
+
+        input {
+            width: 32.4rem;
+        }
+
+        .loginBtn {
+            width: 4.2rem;
+            height: 4.2rem;
+        }
+
+        button {
+            border-radius: 2rem;
+            background-color: #9747FF;
+            color: white;
+            border: none;
+            width: 32.4rem;
+            height: 5.8rem;
+            font-family: ;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <img src="../img/logo.svg" style="width: 21.6rem;height: 21.6rem;">
+        <form action="" method="post">
+            <input type="email" id="userId" placeholder="hello@gmail.com" required><br>
+            <input type="password" id="password" placeholder="비밀번호 입력" required><br>
+            <div class="inputError">이메일 혹은 비밀번호를 다시 확인해주세요.</div>
+            <button>로그인</button>
+
+        </form>
+        <a href="controller?cmd=findPasswordUI">비밀번호 찾기</a>
+        <a href="controller?cmd=addUserUI">아직 계정이 없으신가요?</a>
+
+        <div id="socialLoginBox">
+            <img src="../img/naver_btn.png" class="loginBtn" href=""></a>
+            <img src="../img/google_btn.svg" class="loginBtn" href=""></a>
+            <img src="../img/kakao_btn.svg" class="loginBtn" href=""></a>
+        </div>
+    </div>
+</body>
+
+</html>
