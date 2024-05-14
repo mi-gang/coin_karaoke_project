@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/musicSearchUI.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 모바일 컨테이너 -->
+    <div id="mobileContainer">
+        <!--헤더-->
+        <header>
+            <img src="../img/left arrow.svg" alt="이전 페이지 이동">
+            <span>노래 검색</span>
+        </header>
+        <!-- 컨텐츠 컨테이너 -->
+        <div id="container">
+            <div class="music_input_group">
+                <input class="music_input" type="search" id="search" placeholder="곡명, 가수로 검색하세요" >
+                <img class="music_search" src="../img/search.svg">
+             </div>
+             <div class="ent_button_group">
+                <input class="TJ_button" type="button" value="TJ">
+                <input class="KY_button" type="button" value="KY">
+             </div>
+             <div class="music_list_output">
+     <template music_search_container>
+        <div class="music_output">
+            <div class="music_num"></div>
+            <div class="music_info"></div>
+            <div clas="music_like"></div>
+        </div>
+     </template>
+             </div>
+        </div>
+        <!-- 하단 메뉴바 -->
+        <nav>
+            <div><img src="../img/mainPageIcon.svg" alt="메인 페이지"/></div>
+            <div><img src="../img/searchIcon.svg" alt="노래방 검색 페이지"/></div>
+            <div><img src="../img/musicIcon.svg" alt="노래 검색 페이지"/></div>
+            <div><img src="../img/reservationIcon.svg" alt="나의 예약 내역 페이지"/></div>
+            <div><img src="../img/userIcon.svg" alt="마이페이지"/></div>
+        </nav>
+    </div>
+</body>
+</html>
