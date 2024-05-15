@@ -28,7 +28,6 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <!-- 모바일 컨테이너 -->
@@ -114,129 +113,31 @@
           <div class="timeItemWrapper">
             <p>검색 시간대</p>
             <div id="timeSettingWrapper">
-              <div
-                id="startTime"
-                class="timeSettingItem"
-              >
-                <input
-                  readonly
-                  placeholder="-- : --"
-                />
+              <div class="timeSettingItem">
+                <input placeholder="-- : ---" />
                 <img
                   src="../img/down arrow.svg"
                   alt="드롭다운"
                 />
               </div>
               <span>~</span>
-              <div
-                id="endTime"
-                class="timeSettingItem"
-              >
-                <input
-                  readonly
-                  placeholder="-- : --"
-                />
+              <div class="timeSettingItem">
+                <input placeholder="-- : ---" />
                 <img
                   src="../img/down arrow.svg"
                   alt="드롭다운"
                 />
               </div>
-              <div
-                id="searchTimeModal"
-                class="modal searchTime"
-              >
-                <div class="modalContent">
-                  <p id="startDate">2024.05.16(목)</p>
-                  <div class="timeSettingWrapper">
-                    <div class="timeTypeWrapper">
-                      <div class="timeType">AM</div>
-                      <div class="timeType">PM</div>
-                    </div>
-                    <div class="timeWrapper">
-                      <div
-                        id="hour"
-                        class="time"
-                      >
-                        <p>시</p>
-                        <input
-                          name="hour"
-                          type="number"
-                        />
-                      </div>
-                      <span>:</span>
-                      <div
-                        id="minute"
-                        class="time"
-                      >
-                        <p>분</p>
-                        <input
-                          name="minute"
-                          type="number"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="btnWrapper">
-                    <div class="btn cancel">취소</div>
-                    <div class="btn">설정</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           <div class="timeItemWrapper item3">
             <p>이용 시간</p>
-            <div
-              id="hoursOfUse"
-              class="timeSettingItem item3"
-            >
-              <input
-                readonly
-                placeholder="-- : --"
-              />
+            <div class="timeSettingItem item3">
+              <input placeholder="-- : ---" />
               <img
                 src="../img/down arrow.svg"
                 alt="드롭다운"
               />
-            </div>
-          </div>
-          <div
-            id="usingTimeModal"
-            class="modal usingTime"
-          >
-            <div class="modalContent">
-              <img
-                src="../img/close.svg"
-                alt="모달창 닫기"
-                class="closeBtn"
-              />
-              <p>이용 시간</p>
-              <div class="timeWrapper">
-                <div
-                  id="hour"
-                  class="time"
-                >
-                  <p>시</p>
-                  <input
-                    name="hour"
-                    type="number"
-                  />
-                </div>
-                <span>:</span>
-                <div
-                  id="minute"
-                  class="time"
-                >
-                  <p>분</p>
-                  <input
-                    name="minute"
-                    type="number"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="btn">설정</div>
             </div>
           </div>
         </div>
@@ -273,7 +174,6 @@
             </div>
           </div>
         </div>
-        <button>검색</button>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
@@ -312,8 +212,6 @@
     <script>
       const label = document.querySelector(".label");
       const options = document.querySelectorAll(".regionItem");
-      const searchOptions = document.querySelectorAll(".optionItem");
-      const timeTypes = document.querySelectorAll(".timeType");
       // 클릭한 옵션의 텍스트를 라벨 안에 넣음
       const handleSelect = function (item) {
         label.innerHTML = item.textContent;
@@ -332,89 +230,6 @@
         } else {
           label.parentNode.classList.add("active");
         }
-      });
-      // 옵션 아이템 클릭시 테두리 색상 변경
-      searchOptions.forEach(function (option) {
-        option.addEventListener("click", function () {
-          // 클릭한 옵션 아이템에만 active 클래스 추가
-          option.classList.toggle("active");
-          const svg = option.querySelector("img");
-          svg.style.fill = option.classList.contains("active")
-            ? "#e3cdff"
-            : "currentColor";
-        });
-      });
-
-      // 모달
-      // 모달 가져오기
-      var modal = document.getElementById("searchTimeModal");
-      // var timeSettingItems = document.querySelectorAll(".timeSettingItem");
-      var startTimeBtn = document.getElementById("startTime");
-      var entTimeBtn = document.getElementById("endTime");
-      // 모달 닫기 버튼(취소) 가져오기
-      var cancelBtn = document.querySelector(".btn.cancel");
-
-      startTimeBtn.addEventListener("click", function () {
-        modal.style.display = "flex";
-      });
-
-      cancelBtn.addEventListener("click", function () {
-        console.log("취소 버튼 클릭");
-        modal.style.display = "none";
-      });
-
-      // AM, PM 선택한 div에 테두리 색 변경
-      timeTypes.forEach(function (option) {
-        option.addEventListener("click", function () {
-          timeTypes.forEach(function (item) {
-            item.classList.remove("active");
-          });
-          option.classList.add("active");
-        });
-      });
-
-      $(document).ready(function () {
-        const modal = $("#searchTimeModal");
-        const startTimeInput = $("#startTime input");
-        const hourInput = $("#hour input");
-        const minuteInput = $("#minute input");
-        const cancelBtn = $(".btn.cancel");
-        const settingBtn = $(".btn");
-
-        $("#startTime").on("click", function () {
-          modal.css("display", "flex");
-        });
-
-        cancelBtn.on("click", function () {
-          modal.css("display", "none");
-        });
-
-        // 이용시간 설정 모달 열기
-        $("#hoursOfUse").on("click", function () {
-          console.log("이용시간 시간 설정영역 클릭");
-          $("usingTimeModal").css("display", "flex");
-        });
-
-        // 이용시간 모달 닫기
-        $("#usingTimeModal .closeBtn").on("click", function () {
-          $("#usingTimeModal").css("display", "none");
-        });
-
-        settingBtn.on("click", function () {
-          const hour = hourInput.val().trim() !== "" ? hourInput.val() : 0;
-          const minute =
-            minuteInput.val().trim() !== "" ? minuteInput.val() : 0;
-
-          if (hourInput.val().trim() === "" && minuteInput.val().trim() == "") {
-            alert("검색할 시간을 입력해주세요!");
-            return;
-          }
-
-          startTimeInput.val(
-            `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`
-          );
-          modal.css("display", "none");
-        });
       });
     </script>
   </body>
