@@ -118,9 +118,15 @@
                 id="startTime"
                 class="timeSettingItem"
               >
+              <input
+              id="hiddenTime1"
+              type="hidden"
+            />
                 <input
+                    id="startTimeInput"
                   readonly
                   placeholder="-- : --"
+                  value=""
                 />
                 <img
                   src="../img/down arrow.svg"
@@ -132,9 +138,14 @@
                 id="endTime"
                 class="timeSettingItem"
               >
+              <input
+              id="hiddenTime2"
+              type="hidden"
+            />
                 <input
                   readonly
                   placeholder="-- : --"
+                  value=""
                 />
                 <img
                   src="../img/down arrow.svg"
@@ -142,7 +153,7 @@
                 />
               </div>
               <div
-                id="searchTimeModal"
+                id="searchTimeModal1"
                 class="modal searchTime"
               >
                 <div class="modalContent">
@@ -179,7 +190,7 @@
                   </div>
                   <div class="btnWrapper">
                     <div class="btn cancel">취소</div>
-                    <div class="btn">설정</div>
+                    <div class="btn setting">설정</div>
                   </div>
                 </div>
               </div>
@@ -206,12 +217,14 @@
             class="modal usingTime"
           >
             <div class="modalContent">
-              <img
-                src="../img/close.svg"
-                alt="모달창 닫기"
-                class="closeBtn"
-              />
-              <p>이용 시간</p>
+                <div class="closeIconWrapper">
+                    <img
+                    src="../img/close.svg"
+                    alt="모달창 닫기"
+                    class="closeBtn"
+                    />
+                </div>
+              <p class="subTitle">이용 시간</p>
               <div class="timeWrapper">
                 <div
                   id="hour"
@@ -236,7 +249,7 @@
                   />
                 </div>
               </div>
-              <div class="btn">설정</div>
+              <div id="usingTimeSettingBtn" class="btn">설정</div>
             </div>
           </div>
         </div>
@@ -313,7 +326,9 @@
       const label = document.querySelector(".label");
       const options = document.querySelectorAll(".regionItem");
       const searchOptions = document.querySelectorAll(".optionItem");
-      const timeTypes = document.querySelectorAll(".timeType");
+      // const timeTypes = document.querySelectorAll(".timeType");
+      // let timeType = "";
+
       // 클릭한 옵션의 텍스트를 라벨 안에 넣음
       const handleSelect = function (item) {
         label.innerHTML = item.textContent;
@@ -349,39 +364,83 @@
       // 모달 가져오기
       var modal = document.getElementById("searchTimeModal");
       // var timeSettingItems = document.querySelectorAll(".timeSettingItem");
-      var startTimeBtn = document.getElementById("startTime");
-      var entTimeBtn = document.getElementById("endTime");
+      // var startTimeBtn = document.getElementById("startTime");
+      // var entTimeBtn = document.getElementById("endTime");
       // 모달 닫기 버튼(취소) 가져오기
       var cancelBtn = document.querySelector(".btn.cancel");
 
-      startTimeBtn.addEventListener("click", function () {
-        modal.style.display = "flex";
-      });
+    //   startTimeBtn.addEventListener("click", function () {
+    //     modal.style.display = "flex";
+    //   });
 
       cancelBtn.addEventListener("click", function () {
         console.log("취소 버튼 클릭");
         modal.style.display = "none";
       });
 
-      // AM, PM 선택한 div에 테두리 색 변경
-      timeTypes.forEach(function (option) {
-        option.addEventListener("click", function () {
-          timeTypes.forEach(function (item) {
-            item.classList.remove("active");
-          });
-          option.classList.add("active");
-        });
-      });
-
       $(document).ready(function () {
-        const modal = $("#searchTimeModal");
-        const startTimeInput = $("#startTime input");
-        const hourInput = $("#hour input");
-        const minuteInput = $("#minute input");
+        const modal = $("#searchTimeModal1");
+        let searchType = 0;  // 0: 시작 시간대, 1: 종료 시간대
+        let startTimeInput = $("#startTime input");
+        let endTimeInput = $("#endTime input");
+        let startModalHourInput = $("#searchTimeModal1 #hour input");
+        let startMinuteHourInput = $("#searchTimeModal1 #minute input");
+        const timeTypes = $(".timeType").get();
+        let timeType = "";
         const cancelBtn = $(".btn.cancel");
-        const settingBtn = $(".btn");
+        const settingBtn = $(".btn.setting");
 
+        const modal2 = $("#usingTimeModal");
+        let usingTimeInput = $("#hoursOfUse");
+        let usingModalHourInput = $("#usingTimeModal #hour input");
+        let usingModalMinuteInput = $("#usingTimeModal #minute input");
+        const usingTimeSettingBtn = $("#usingTimeSettingBtn");
+
+        // 검색시간대 - 시작 모달 열기
         $("#startTime").on("click", function () {
+            searchType = 0;
+            // startModalHourInput.val($("#hiddenTime1").val);
+            let tmp1 = $("#hiddenTime1").val().split(" : ");
+            // console.log(tmp1);
+            // console.log(typeof(tmp1));
+            // console.log(tmp1[0]);
+            // console.log(tmp1[1]);
+            startModalHourInput.val(tmp1[0]);
+            startMinuteHourInput.val(tmp1[1]);
+
+            // if(startModalHourInput.val() < 12) {
+            //     timeTypes[0].classList.add("active");
+            //     timeTypes[1].classList.remove("active");
+            // } else if(timeType === "PM") {
+            //     timeTypes[0].classList.remove("active");
+            //     timeTypes[1].classList.add("active");
+            // }
+            if(startModalHourInput.val() < 12) {
+                timeTypes[0].classList.add("active");
+                timeTypes[1].classList.remove("active");
+            } else if(startModalHourInput.val() >= 12) {
+                timeTypes[0].classList.remove("active");
+                timeTypes[1].classList.add("active");
+            }
+          modal.css("display", "flex");
+        });
+        // 검색시간대 - 종료 모달 열기
+        $("#endTime").on("click", function () {
+            searchType = 1;
+            let tmp2 = $("#hiddenTime2").val().split(" : ");
+            // console.log(tmp1);
+            // console.log(typeof(tmp1));
+            // console.log(tmp1[0]);
+            // console.log(tmp1[1]);
+            startModalHourInput.val(tmp2[0]);
+            startMinuteHourInput.val(tmp2[1]);
+            if(startModalHourInput.val() < 12) {
+                timeTypes[0].classList.add("active");
+                timeTypes[1].classList.remove("active");
+            } else if(startModalHourInput.val() >= 12) {
+                timeTypes[0].classList.remove("active");
+                timeTypes[1].classList.add("active");
+            }
           modal.css("display", "flex");
         });
 
@@ -389,10 +448,72 @@
           modal.css("display", "none");
         });
 
+        // AM, PM 선택한 div에 테두리 색 변경
+        timeTypes.forEach(function (option) {
+            option.addEventListener("click", function () {
+            timeTypes.forEach(function (item) {
+                item.classList.remove("active");
+            });
+            option.classList.add("active");
+                timeType = option.innerHTML;
+            });
+        });
+
+        settingBtn.on("click", function () {
+          let hour = startModalHourInput.val();
+          let minute = startMinuteHourInput.val();
+
+          if(timeType == "") {
+            alert("AM 또는 PM 시간대를 설정해주세요!");
+          }
+          if (startModalHourInput.val() === "" || startMinuteHourInput.val() === "") {
+            alert("시, 분 모두 입력해주세요!");
+            return;
+          } else {
+            if(hour > 12) {
+                alert("'시'는 0~12 사이의 값으로 입력 가능합니다.");
+            }
+            if(minute > 59) {
+                alert("'분'은 0~59사이의 값으로 입력 가능합니다.");
+            }
+            if(timeType === "PM") {
+                // hour = hour + 12;
+                hour = parseInt(hour) + 12;
+            }
+          }
+
+          if(searchType === 0) {
+            startTimeInput.val(hour + " : " + minute);
+            $("#startTimeInput").val(hour + " : " + minute);
+            $("#hiddenTime1").val(hour + " : " + minute);
+            // console.log("#hiddenTime1");
+            // console.log($("#hiddenTime1").val());
+            // console.log(typeof($("#hiddenTime1").val()));
+            // let tmp1 = $("#hiddenTime1").val().split(" : ");
+            // console.log(tmp1);
+            // console.log(typeof(tmp1));
+            // console.log(tmp1[0]);
+            // console.log(tmp1[1]);
+        } else if(searchType === 1) {
+            // console.log("종료 시간대");
+            endTimeInput.val(hour + " : " + minute);
+            $("#hiddenTime2").val(hour + " : " + minute);
+            // console.log("#hiddenTime2");
+            // console.log($("#hiddenTime2").val());
+            // console.log(typeof($("#hiddenTime2").val()));
+            // let tmp2 = $("#hiddenTime2").val().split(" : ");
+            // console.log(tmp2);
+            // console.log(typeof(tmp2));
+            // console.log(tmp2[0]);
+            // console.log(tmp2[1]);
+          }
+
+          modal.css("display", "none");
+        });
+
         // 이용시간 설정 모달 열기
         $("#hoursOfUse").on("click", function () {
-          console.log("이용시간 시간 설정영역 클릭");
-          $("usingTimeModal").css("display", "flex");
+          $("#usingTimeModal").css("display", "flex");
         });
 
         // 이용시간 모달 닫기
@@ -400,21 +521,24 @@
           $("#usingTimeModal").css("display", "none");
         });
 
-        settingBtn.on("click", function () {
-          const hour = hourInput.val().trim() !== "" ? hourInput.val() : 0;
-          const minute =
-            minuteInput.val().trim() !== "" ? minuteInput.val() : 0;
+        usingTimeSettingBtn.on("click", function() {
+            let hour = usingModalHourInput.val();
+            let minute = usingModalMinuteInput.val();
 
-          if (hourInput.val().trim() === "" && minuteInput.val().trim() == "") {
-            alert("검색할 시간을 입력해주세요!");
-            return;
-          }
+            if(hour === "" && minute === "") {
+                alert("이용하실 시간을 입력해주세요!");
+                return;
+            } else {
+                if(hour === "" && minute !== "" && minute < 10) {
+                    alert("최소 이용 시간은 10분입니다 :)");
+                }
+                if(minute > 59) {
+                    alert("'분'은 0~59 사이의 값으로 입력 가능합니다.");
+                }
+            }
+        })
 
-          startTimeInput.val(
-            `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`
-          );
-          modal.css("display", "none");
-        });
+        
       });
     </script>
   </body>

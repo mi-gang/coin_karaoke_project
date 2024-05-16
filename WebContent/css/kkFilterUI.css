@@ -217,9 +217,12 @@ input[readonly]:focus {
   outline: none;
 }
 
+/* 모달 - 검색 시간대 */
 .modal {
   display: none;
   position: fixed;
+  justify-content: center;
+  align-items: center;
   left: 0;
   bottom: 0;
   z-index: 999;
@@ -229,16 +232,16 @@ input[readonly]:focus {
   background-color: #fff;
 }
 
-.modal.searchTime {
-  justify-content: center;
-  align-items: center;
+.modalContent {
+    display: flex;
+    flex-direction: column;
 }
 
-.modalContent {
-  display: flex;
+.modal.searchTime .modalContent {
+  /* display: flex; */
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   width: 34.9rem;
   height: 34.3rem;
 }
@@ -292,6 +295,7 @@ input[readonly]:focus {
 .timeWrapper span {
   margin: 0;
   margin-top: 3.5rem;
+  font-size: 6rem;
 }
 
 .time {
@@ -358,6 +362,43 @@ input[readonly]:focus {
 .timeSettingItem.item3 {
   margin: 0.6rem 0.7rem 1.6rem 0;
 }
+
+/* 모달 - 이용시간 */
+.modal.usingTime .modalContent {
+    justify-content: center;
+    align-items: center;
+    width: 37rem;
+    height: 37rem;
+}
+
+.modal.usingTime .modalContent img {
+    width: 4.1rem;
+    height: 4.1rem;
+}
+
+/* .modal.usingTime .modalContent p {
+    font-size: 2.8rem;
+    font-weight: 700;
+} */
+
+.closeIconWrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+
+.modalContent .subTitle {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 4rem;
+}
+
+.modal.usingTime .btn {
+    margin-top: 4rem;
+}
+
+
 
 /* .timeSettingItem div {
     display: flex;
