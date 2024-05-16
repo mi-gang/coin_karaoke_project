@@ -15,12 +15,15 @@
         #container {
             height: 100%;
             width: 100%;
-            display: grid;
+            display: flex;
+            flex-direction: column;
             justify-items: center;
+            align-items: center;
         }
 
         #logo {
             margin-top: 12.6vh;
+            margin-bottom: 9vh;
         }
 
         #inputField {
@@ -33,7 +36,7 @@
                 font-size: 2rem;
                 font-weight: bold;
                 padding-top: 0.8rem;
-                width: calc(32.4rem - 4.7rem);
+                width: 32.4rem;
                 padding-left: 4.7rem;
                 padding-bottom: 0.8rem;
                 border: none;
@@ -75,6 +78,7 @@
             height: 5.8rem;
             font-size: 3rem;
             margin-top: 3.5rem;
+            margin-bottom: 3.5rem;
             font-weight: bold;
         }
 
@@ -88,6 +92,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 5.1rem;
+            justify-content: space-between;
+            margin-bottom: 3.5rem;
         }
 
         .inputError {
