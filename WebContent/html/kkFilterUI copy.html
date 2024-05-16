@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>:: 노래방 검색</title>
+    <link
+      rel="stylesheet"
+      href="../css/kkFilterUI.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../css/common.css"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 모바일 컨테이너 -->
+    <div id="mobileContainer">
+      <!--헤더-->
+      <header>
+        <img
+          src="../img/left arrow.svg"
+          alt="이전 페이지 이동"
+        />
+        <span>노래방 검색</span>
+      </header>
+      <!-- 컨텐츠 컨테이너 -->
+      <div id="container">
+        <div id="regionWrapper">
+          <p class="subTitle">지역</p>
+          <div class="regionBox">
+            <button class="label">이용 지역을 선택해주세요.</button>
+            <img
+              src="../img/down arrow.svg"
+              alt="드롭다운"
+            />
+            <ul class="regionList">
+              <li class="regionItem">서울 전체</li>
+              <li class="regionItem">강남구</li>
+              <li class="regionItem">강동구</li>
+              <li class="regionItem">강북구</li>
+              <li class="regionItem">강서구</li>
+              <li class="regionItem">관악구</li>
+              <li class="regionItem">광진구</li>
+              <li class="regionItem">구로구</li>
+              <li class="regionItem">금천구</li>
+              <li class="regionItem">노원구</li>
+              <li class="regionItem">도봉구</li>
+              <li class="regionItem">동대문구</li>
+              <li class="regionItem">동작구</li>
+              <li class="regionItem">마포구</li>
+              <li class="regionItem">서대문구</li>
+              <li class="regionItem">서초구</li>
+              <li class="regionItem">성동구</li>
+              <li class="regionItem">성북구</li>
+              <li class="regionItem">송파구</li>
+              <li class="regionItem">양천구</li>
+              <li class="regionItem">영등포구</li>
+              <li class="regionItem">용산구</li>
+              <li class="regionItem">은평구</li>
+              <li class="regionItem">종로구</li>
+              <li class="regionItem">중구</li>
+              <li class="regionItem">중랑구</li>
+            </ul>
+          </div>
+          <!-- <select id="region" name="region">
+                    <option value="">이용 지역을 선택해주세요.</option>
+                    <option value="강남구">강남구</option>
+                    <option value="강동구">강동구</option>
+                    <option value="강북구">강북구</option>
+                    <option value="강서구">강서구</option>
+                    <option value="관악구">관악구</option>
+                    <option value="광진구">광진구</option>
+                    <option value="구로구">구로구</option>
+                    <option value="금천구">금천구</option>
+                    <option value="노원구">노원구</option>
+                    <option value="도봉구">도봉구</option>
+                    <option value="동대문구">동대문구</option>
+                    <option value="동작구">동작구</option>
+                    <option value="마포구">마포구</option>
+                    <option value="서대문구">서대문구</option>
+                    <option value="서초구">서초구</option>
+                    <option value="성동구">성동구</option>
+                    <option value="성북구">성북구</option>
+                    <option value="송파구">송파구</option>
+                    <option value="양천구">양천구</option>
+                    <option value="영등포구">영등포구</option>
+                    <option value="용산구">용산구</option>
+                    <option value="은평구">은평구</option>
+                    <option value="종로구">종로구</option>
+                    <option value="중구">중구</option>
+                    <option value="중랑구">중랑구</option>
+                </select>  -->
+        </div>
+        <div id="timeWrapper">
+          <p class="subTitle">검색 시간대 및 이용시간</p>
+          <div class="timeItemWrapper">
+            <p>검색 시간대</p>
+            <div id="timeSettingWrapper">
+              <div class="timeSettingItem">
+                <input placeholder="-- : ---" />
+                <img
+                  src="../img/down arrow.svg"
+                  alt="드롭다운"
+                />
+              </div>
+              <span>~</span>
+              <div class="timeSettingItem">
+                <input placeholder="-- : ---" />
+                <img
+                  src="../img/down arrow.svg"
+                  alt="드롭다운"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="timeItemWrapper item3">
+            <p>이용 시간</p>
+            <div class="timeSettingItem item3">
+              <input placeholder="-- : ---" />
+              <img
+                src="../img/down arrow.svg"
+                alt="드롭다운"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="additionalOptionWrapper">
+          <p class="subTitle">추가 조건</p>
+          <div class="optionsWrapper">
+            <div class="optionItem">
+              <img
+                src="../img/Car.svg"
+                alt="주차 가능 아이콘"
+              />
+              <p class="optionName">주차 가능</p>
+            </div>
+            <div class="optionItem">
+              <img
+                src="../img/up.svg"
+                alt="지상층 아이콘"
+              />
+              <p class="optionName">지상층</p>
+            </div>
+            <div class="optionItem">
+              <img
+                src="../img/ThermometerHalf.svg"
+                alt="냉난방 아이콘"
+              />
+              <p class="optionName">냉난방</p>
+            </div>
+            <div class="optionItem">
+              <img
+                src="../img/users.svg"
+                alt="단체 아이콘"
+              />
+              <p class="optionName">단체 가능</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 하단 메뉴바 -->
+      <nav>
+        <div>
+          <img
+            src="../img/mainPageIcon.svg"
+            alt="메인 페이지"
+          />
+        </div>
+        <div>
+          <img
+            src="../img/searchIcon.svg"
+            alt="노래방 검색 페이지"
+          />
+        </div>
+        <div>
+          <img
+            src="../img/musicIcon.svg"
+            alt="노래 검색 페이지"
+          />
+        </div>
+        <div>
+          <img
+            src="../img/reservationIcon.svg"
+            alt="나의 예약 내역 페이지"
+          />
+        </div>
+        <div>
+          <img
+            src="../img/userIcon.svg"
+            alt="마이페이지"
+          />
+        </div>
+      </nav>
+    </div>
+    <script>
+      const label = document.querySelector(".label");
+      const options = document.querySelectorAll(".regionItem");
+      // 클릭한 옵션의 텍스트를 라벨 안에 넣음
+      const handleSelect = function (item) {
+        label.innerHTML = item.textContent;
+        label.parentNode.classList.remove("active");
+      };
+      // 옵션 클릭시 클릭한 옵션을 넘김
+      options.forEach(function (option) {
+        option.addEventListener("click", function () {
+          handleSelect(option);
+        });
+      });
+      // 라벨을 클릭시 옵션 목록이 열림/닫힘
+      label.addEventListener("click", function () {
+        if (label.parentNode.classList.contains("active")) {
+          label.parentNode.classList.remove("active");
+        } else {
+          label.parentNode.classList.add("active");
+        }
+      });
+    </script>
+  </body>
+</html>
