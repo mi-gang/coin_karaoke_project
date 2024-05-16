@@ -43,6 +43,9 @@ form {
     background-position: right;
     border: none;
   }
+  img.default {
+    content: url("/img/default.svg");
+  }
   img.check {
     content: url("/img/check.svg");
   }

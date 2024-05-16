@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>loginUI</title>
+    <title>회원가입</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -34,20 +34,21 @@
                 <div id="inputField">
                     <!-- <input type="date" id="hiddenDate"> -->
                     <div><input name="userId" id="userId" placeholder="이메일 입력">
-                        <img class="check">
+                        <img class="default">
                     </div>
                     <div><input name="nickname" id="nickname" placeholder="닉네임 입력">
-                        <img class="check">
+                        <img class="default">
                     </div>
                     <!-- <input name="birthDate" id="birthDate" placeholder="생년월일" disabled> -->
                     <div><input type="date" name="birthDate" id="birthDate"></div>
 
-                    <div><input name="password" type="password" id="password" placeholder="비밀번호 입력"><img class="fail">
+                    <div><input name="password" type="password" id="password" placeholder="비밀번호 입력"><img
+                            class="default">
                     </div>
-                    <div><input id="passwordConfirm" placeholder="비밀번호 확인"><img class="check"></div>
+                    <div><input id="passwordConfirm" type="password" placeholder="비밀번호 확인"><img class="default"></div>
                 </div>
                 <div class="inputError"></div>
-                <button class="inactivate" disabled>회원가입</button>
+                <button type="submit" class="inactivate" disabled>회원가입</button>
 
             </form>
 
@@ -58,48 +59,174 @@
     </div>
     <script>
         const userId = $("#userId");
+        const nickname = $("#nickname")
+        const birthDate = $("#birthDate");
         const password = $("#password");
+        const passwordConfirm = $("#passwordConfirm");
+
         const errorMessage = $("div.inputError");
         const loginBtn = $("form button");
 
-        $("#inputField input").on("keyup", checkInput);
+        $("header img").on("click", () => window.history.back());
 
+        $("#userId").on("change focus", checkUserId);
+        $("#nickname").on("change focus", checkNickname);
+        $("#birthDate").on("change focus", checkBirthDate);
+        $("#password").on("change focus", checkPassword);
+        $("#passwordConfirm").on("change focus", checkPassword);
+        $("#inputField input").on("change", checkLoginActivate);
         // $("#hiddenDate").on("change", (e) => { $("#birthDate").val(e.target.value); console.log(e.target.value) });
 
-        function checkInput(e) {
-            loginBtn.addClass("inactivate");
-            loginBtn.attr("disabled", true);
-            $("#inputField img").each(function (idx) {
-                $(this).addClass("fail");
-            });
+        // $("button").on("click", addUser);
+        $("form").on("submit", addUser);
 
-
-            let valid = true;
-
-            if (userId.val() == "" && password.val() == "")
-                errorMessage.text("");
-            else if (!checkEmail(userId.val())) {
-                errorMessage.text("유효한 이메일을 입력해주세요.")
+        async function addUser(e) {
+            e.preventDefault();
+            let result = false;
+            try {
+                const res = await fetch("controller?cmd=login&userId=" + userId + "&nickname=" + nickname + "&birthDate=" + birthDate + "&password=" + password);
+                const data = res.json();
+                result = data.result;
+            } catch {
+                console.log("todo");
             }
-            else if (!checkPassword(password.val())) {
-                errorMessage.text("비밀번호는 영문 대소문자와 숫자, 기호를 포함한 6자 이상이어야 합니다.");
-            }
+            if (result)
+                location.href = "controller?cmd=mainUI";
+            else
+                alert("회원가입에 실패했습니다. 같은 현상이 반복될 시 관리자에게 문의해주세요!");
 
-            if (valid) {
-                errorMessage.text("");
+        }
+
+
+        function checkLoginActivate(e) {
+            if (loginBtn.hasClass('userIdOk') && loginBtn.hasClass('nicknameOk') && loginBtn.hasClass('birthDateOk') && loginBtn.hasClass('passwordOk')) {
                 loginBtn.removeClass("inactivate");
-                loginBtn.attr("disabled", false);
+                loginBtn.removeAttr("disabled");
+            }
+            else {
+                loginBtn.addClass("inactivate");
+                loginBtn.attr("disabled", "disabled");
             }
         }
 
+        async function checkUserId(e) {
+            let flag = isExistUserId(userId.val())
+            let valid = true;
+            userId.next().get()[0].className = "check";
+            if (userId.val() == "") {
+                valid = false;
+                userId.next().get()[0].className = "default";
+            } else if (!checkEmail(userId.val())) {
+                valid = false;
+                errorMessage.text("유효한 이메일을 입력해주세요.");
+                userId.next().get()[0].className = "fail";
+            } else if (await flag) {
+                valid = false;
+                errorMessage.text("해당 이메일로 가입된 계정이 이미 존재합니다.");
+                userId.next().get()[0].className = "fail";
+            } else {
+                errorMessage.text("");
+            }
+
+            if (valid)
+                loginBtn.addClass("userIdOk");
+            else
+                loginBtn.removeClass("userIdOk");
+        }
+
+        function checkNickname(e) {
+            let valid = true;
+            nickname.next().get()[0].className = "check";
+            if (nickname.val() == "") {
+                valid = false;
+                nickname.next().get()[0].className = "default";
+            } else if (nickname.val().length < 2) {
+                valid = false;
+                errorMessage.text("닉네임은 두 글자 이상이어야 합니다.");
+                nickname.next().get()[0].className = "fail";
+            } else {
+                errorMessage.text("");
+            }
+
+            if (valid)
+                loginBtn.addClass("nicknameOk");
+            else
+                loginBtn.removeClass("nicknameOk");
+        }
+
+        function checkBirthDate(e) {
+            let valid = true;
+            if (birthDate.val() == "") {
+                valid = false;
+            } else if (new Date(birthDate.val()) > new Date()) {
+                valid = false;
+                errorMessage.text("UN 총회 결의 제217호에 따라 시간여행자는 회원가입이 불가능합니다.");
+            } else {
+                errorMessage.text("");
+            }
+            if (valid)
+                loginBtn.addClass("birthDateOk");
+            else
+                loginBtn.removeClass("birthDateOk");
+        }
+
+        function checkPassword(e) {
+            let valid = true;
+            password.next().get()[0].className = "check";
+
+            if (password.val() == "") {
+                valid = false;
+                password.next().get()[0].className = "default";
+            } else if (!checkStrongPassword(password.val())) {
+                valid = false;
+                errorMessage.text("비밀번호는 영문 대소문자와 숫자, 기호를 포함한 6자 이상이어야 합니다.");
+                password.next().get()[0].className = "fail";
+            } else if (passwordConfirm.val() == "") {
+                valid = false;
+                errorMessage.text("");
+                passwordConfirm.next().get()[0].className = "default";
+            }
+            else if (password.val() != passwordConfirm.val()) {
+                valid = false;
+                errorMessage.text("비밀번호가 일치하지 않습니다.");
+                passwordConfirm.next().get()[0].className = "fail";
+            } else {
+                errorMessage.text("");
+
+                passwordConfirm.next().get()[0].className = "check";
+            }
+
+
+
+            if (valid)
+                loginBtn.addClass("passwordOk");
+            else
+                loginBtn.removeClass("passwordOk");
+        }
+
+        function checkPasswordConfirm(password, passwordConfirm) {
+            return password == passwordConfirm;
+        }
+
+        async function isExistUserId(userId) {
+            let result = false;
+            try {
+                const res = await fetch("controller?cmd=isExistUserId&userId=" + userId);
+                const data = await res.json();
+                result = data.result;
+            } catch {
+                console.log("아이디 검증 실패");
+                result = false;
+            }
+            return result;
+        }
 
         function checkEmail(email) {
             const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-            if (pattern.test(email) === false) { return false; }
-            else { return true; }
+            return pattern.test(email);
         }
 
-        function checkPassword(password) {
+        function checkStrongPassword(password) {
             // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
             return password.length > 0;
         }
