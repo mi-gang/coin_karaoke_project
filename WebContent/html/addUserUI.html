@@ -42,7 +42,7 @@
                     <!-- <input name="birthDate" id="birthDate" placeholder="생년월일" disabled> -->
                     <div><input type="date" name="birthDate" id="birthDate"></div>
 
-                    <div><input name="password" type="password" id="password" placeholder="비밀번호 입력"><img class="check">
+                    <div><input name="password" type="password" id="password" placeholder="비밀번호 입력"><img class="fail">
                     </div>
                     <div><input id="passwordConfirm" placeholder="비밀번호 확인"><img class="check"></div>
                 </div>
@@ -69,6 +69,13 @@
         function checkInput(e) {
             loginBtn.addClass("inactivate");
             loginBtn.attr("disabled", true);
+            $("#inputField img").each(function (idx) {
+                $(this).addClass("fail");
+            });
+
+
+            let valid = true;
+
             if (userId.val() == "" && password.val() == "")
                 errorMessage.text("");
             else if (!checkEmail(userId.val())) {
@@ -77,12 +84,15 @@
             else if (!checkPassword(password.val())) {
                 errorMessage.text("비밀번호는 영문 대소문자와 숫자, 기호를 포함한 6자 이상이어야 합니다.");
             }
-            else {
+
+            if (valid) {
                 errorMessage.text("");
                 loginBtn.removeClass("inactivate");
                 loginBtn.attr("disabled", false);
             }
         }
+
+
         function checkEmail(email) {
             const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
             if (pattern.test(email) === false) { return false; }

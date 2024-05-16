@@ -22,11 +22,11 @@ body {
 
 form {
   width: 32.4rem;
-  height: 49.2rem;
+  height: 36.2rem;
 }
 
 #inputField {
-  height: 43.44rem;
+  height: 36.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
