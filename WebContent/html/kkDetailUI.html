@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>:: 노래방 상세정보</title>
+    <link
+      rel="stylesheet"
+      href="../css/common.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../css/kkDetailUI.css"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!--헤더-->
+    <header>
+        <img
+          src="../img/left arrow.svg"
+          alt="이전 페이지 이동"
+        />
+        <span>스타버스 코인노래방</span> <!-- 목록에서 클릭한 노래방명이 들어갈 자리 -->
+    </header>
+    <!-- 컨텐츠 컨테이너 -->
+    <div id="container">
+        <img src="../img/representativeKKImg2.png" alt="노래방 상세정보 대표 이미지">
+        <div class="wrapper">
+            <div class="tabWrapper">
+                <div class="tapMenu active">기본 정보</div>
+                <div class="tapMenu">리뷰</div>
+            </div>
+            <div class="contentsContainer">
+                <div id="defaultInfoContainer">
+                    <div class="infoList">
+                        <p class="infoTitle">주소</p>
+                        <p class="kkAddress">서울 금천구 가산디지털1로 15</p>
+                        <p id="distance">현재 위치: 800m</p>
+                        <div class="toMapBtn">길찾기</div>
+                    </div>
+                    <div class="infoList">
+                        <p class="infoTitle">영업시간</p>
+                        <p>00:00 ~ 24:00     연중무휴</p>
+                    </div>
+                    <div class="infoList">
+                        <p class="infoTitle">대표 키워드</p>
+                        <div class="keywordsWrapper">
+                            <span class="keywordItem">단체 이용 가능</span>
+                            <span class="keywordItem">코인노래방</span>
+                            <span class="keywordItem">24시</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="reviewContainer"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 하단 메뉴바 -->
+    <nav>
+        <div id="bookmark" class="bookmark"></div>
+        <div class="btn">예약하기</div>
+    </nav>
+
+    <script>
+        $(document).ready(function () {
+            // 북마크 아이콘 클릭해서 추가/취소
+            $("#bookmark").click(function() {
+                console.log(this.className);
+                if(this.className === "bookmark") {
+                    $(this).addClass("add");
+                } else {
+                    $(this).removeClass("add");
+                }
+            })
+            // 예약하기 버튼 클릭시, 예약하기 페이지로 이동 (현재는 alert)
+            $(".btn").click(function() {
+                alert("예약 페이지로 이동!");
+                return;
+            })
+        });       
+    </script>
+  </body>
+</html>
