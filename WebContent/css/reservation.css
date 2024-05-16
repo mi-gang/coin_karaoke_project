@@ -158,6 +158,11 @@
   font-size: 1.2rem;
 }
 
+/* #KK_img > img {
+  width: 10rem;
+  height: 10rem;
+} */
+
 /* 모달 */
 
 /* 부트스트랩 속성 변경 */
@@ -310,7 +315,7 @@
   border: none;
   background-color: transparent;
 
-  background-image: url("../img/down\ arrow.svg");
+  background-image: url("/img/down\ arrow.svg");
   background-repeat: no-repeat;
   background-size: 3rem;
   cursor: pointer;

@@ -10,8 +10,8 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/WebContent/css/common.css" />
-    <link rel="stylesheet" href="../css/reservation.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/reservation.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +26,7 @@
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="../img/left arrow.svg" alt="이전 페이지 이동" />
+        <img src="/img/left arrow.svg" alt="이전 페이지 이동" />
         <span>페이지 이름</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -43,13 +43,15 @@
               <span>2</span>
               <span>건</span>
             </div>
+
+            <!-- 이용 예정 -->
             <div id="reservation_content_wrapper">
               <div id="reservation_status_wrapper">
                 <span id="reservation_status">예약</span>
               </div>
               <div id="reservation_content">
                 <div id="KK_img">
-                  <img src="../img/KK_img.svg" />
+                  <img src="/img/KK_img.svg" />
                 </div>
                 <div id="reservation_detail_wrapper">
                   <div id="reservation_detail">
@@ -57,7 +59,7 @@
                       <span id="karaoke_name"
                         >세븐스타코인노래연습장 철산역점</span
                       >
-                      <img src="../img/arrow_right.svg" id="arrow_right" />
+                      <img src="/img/arrow_right.svg" id="arrow_right" />
                     </div>
                     <div id="reservation-time">
                       <div id="reservation-start-time">
@@ -93,18 +95,124 @@
                 </div>
               </div>
             </div>
+
+            <!-- 이용 중 -->
+            <div id="reservation_content_wrapper">
+              <div id="reservation_status_wrapper">
+                <span id="reservation_status">이용 중</span>
+              </div>
+              <div id="reservation_content">
+                <div id="KK_img">
+                  <img src="/img/KK_img.svg" />
+                </div>
+                <div id="reservation_detail_wrapper">
+                  <div id="reservation_detail">
+                    <div id="reservation_detail_row">
+                      <span id="karaoke_name"
+                        >세븐스타코인노래연습장 철산역점</span
+                      >
+                      <img src="/img/arrow_right.svg" id="arrow_right" />
+                    </div>
+                    <div id="reservation-time">
+                      <div id="reservation-start-time">
+                        <span id="reservation-start-hour">16</span>
+                        <span>:</span>
+                        <span id="reservation-start-minute">00</span>
+                      </div>
+                      <span>-</span>
+                      <div id="reservation-end-time">
+                        <span id="reservation-end-hour">18</span>
+                        <span>:</span>
+                        <span id="reservation-end-minute">00</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="button_wrapper">
+                    <button
+                      type="button"
+                      class="submit_button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#addTimeModal"
+                    >
+                      시간 추가
+                    </button>
+                    <button
+                      class="cancle_button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#"
+                    >
+                      문의/신고
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 이용 완료 1 -->
+            <div id="reservation_content_wrapper">
+              <div id="reservation_status_wrapper">
+                <span id="reservation_status">이용 완료</span>
+              </div>
+              <div id="reservation_content">
+                <div id="KK_img">
+                  <img src="/img/KK_img.svg" />
+                </div>
+                <div id="reservation_detail_wrapper">
+                  <div id="reservation_detail">
+                    <div id="reservation_detail_row">
+                      <span id="karaoke_name"
+                        >세븐스타코인노래연습장 철산역점</span
+                      >
+                      <img src="/img/arrow_right.svg" id="arrow_right" />
+                    </div>
+                    <div id="reservation-time">
+                      <div id="reservation-start-time">
+                        <span id="reservation-start-hour">16</span>
+                        <span>:</span>
+                        <span id="reservation-start-minute">00</span>
+                      </div>
+                      <span>-</span>
+                      <div id="reservation-end-time">
+                        <span id="reservation-end-hour">18</span>
+                        <span>:</span>
+                        <span id="reservation-end-minute">00</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="button_wrapper">
+                    <button
+                      type="button"
+                      class="submit_button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#addTimeModal"
+                    >
+                      시간 추가
+                    </button>
+                    <button
+                      class="cancle_button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#cancleReservationModal1"
+                    >
+                      예약 취소
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 취소 -->
           </div>
         </div>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
-        <div><img src="../img/mainPageIcon.svg" alt="메인 페이지" /></div>
-        <div><img src="../img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
-        <div><img src="../img/musicIcon.svg" alt="노래 검색 페이지" /></div>
+        <div><img src="/img/mainPageIcon.svg" alt="메인 페이지" /></div>
+        <div><img src="/img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
+        <div><img src="/img/musicIcon.svg" alt="노래 검색 페이지" /></div>
         <div>
-          <img src="../img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
+          <img src="/img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
         </div>
-        <div><img src="../img/userIcon.svg" alt="마이페이지" /></div>
+        <div><img src="/img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
 
@@ -383,8 +491,8 @@
             <div class="cancle-modal-body-wrapper">
               <span class="cancle-modal-title">예약을 취소하시겠습니까?</span>
               <span class="cancle-modal-content"
-                >노래방 이용 시작 시간 기준 <b>20분</b> 내 취소 시 취소 수수료가
-                부과됩니다.</span
+                >노래방 이용 시작 시간 기준 <b>20분</b> 내 취소 시 <br />취소
+                수수료가 부과됩니다.</span
               >
             </div>
           </div>
@@ -425,8 +533,8 @@
             <div class="cancle-modal-body-wrapper">
               <span class="cancle-modal-title">취소 완료</span>
               <span class="cancle-modal-content"
-                >예약이 취소되었습니다. 자세한 내용은 나의 예약 - 취소 내역에서
-                확인해주세요.</span
+                >예약이 취소되었습니다. <br />자세한 내용은 나의 예약 - 취소
+                내역에서 확인해주세요.</span
               >
             </div>
           </div>
@@ -447,6 +555,6 @@
       </div>
     </div>
 
-    <script src="../js/reservation.js"></script>
+    <script src="/js/reservation.js"></script>
   </body>
 </html>
