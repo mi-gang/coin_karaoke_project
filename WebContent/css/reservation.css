@@ -1,6 +1,6 @@
-body {
-  font-family: "Noto Sans";
-  font-style: normal;
+/* 임시 폰트 설정 */
+* {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 #container {
@@ -105,11 +105,25 @@ body {
 } */
 
 #karaoke_name {
+  font-weight: 700;
   font-size: 1.5rem;
+  line-height: 20px;
 }
 
-#reservation_time {
+#reservation-time {
   font-size: 1.4rem;
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.2rem;
+}
+
+#reservation-start-time {
+  display: flex;
+  flex-direction: row;
+}
+#reservation-end-time {
+  display: flex;
+  flex-direction: row;
 }
 
 #button_wrapper {
@@ -118,7 +132,7 @@ body {
   gap: 1.5rem;
 }
 
-#submit_button {
+.submit_button {
   width: 7.5rem;
   height: 3.2rem;
 
@@ -130,7 +144,7 @@ body {
   color: #ffffff;
 }
 
-#cancle_button {
+.cancle_button {
   width: 7.5rem;
   height: 3.2rem;
 
@@ -142,4 +156,278 @@ body {
   background-color: #ffffff;
 
   font-size: 1.2rem;
+}
+
+/* 모달 */
+
+/* 부트스트랩 속성 변경 */
+
+.modal-header {
+  border-bottom: none;
+  padding: 2rem 2rem;
+}
+
+.modal-footer {
+  justify-content: center;
+  border-top: none;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.btn-close {
+  width: 3rem;
+  height: 2rem;
+}
+
+/* 공통 */
+
+.modal-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
+}
+
+/* 시간 추가 모달 */
+
+#add1-modal-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#add1-modal-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 4rem;
+  /* padding: 2rem; */
+  padding: 0 2rem 2rem 2rem;
+}
+
+#add1-modal-body-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#add1-modal-body-title > span {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+
+  text-align: center;
+}
+
+#add1-modal-body-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#add1-modal-body-contents > hr {
+  border: 0.8px solid #b6b6b6;
+}
+
+.add1-modal-body-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row; /* row or column 알아서 */
+  width: 100%;
+}
+
+.add1-modal-body-content-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add1-modal-body-content-time {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add1-addTime {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+
+  color: #9747ff;
+}
+
+.add-button {
+  width: 9rem;
+  height: 4rem;
+  font-size: 1.5rem;
+}
+
+#add1-add-time-arrow-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+
+  width: 20rem;
+  height: 3rem;
+}
+
+#set-hour {
+  margin-left: 3rem;
+}
+
+/* .modal-footer > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+} */
+
+#add1-notice {
+  width: auto;
+  height: 2rem;
+}
+
+.add1-add-time-arrow {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background-color: transparent;
+
+  background-image: url("../img/down\ arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  cursor: pointer;
+}
+
+/* 시간 추가 모달 2 : 추가 시간 설정 */
+
+#add2-modal-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 2rem;
+}
+
+#add2-modal-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 10rem;
+}
+
+#add2-modal-time > span {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+#add2-modal-time-setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+#add2-modal-time-setting > span {
+  font-size: 6rem;
+}
+
+.add2-time-setting-input {
+  width: 10rem;
+  height: 10rem;
+  left: 89px;
+  top: 695px;
+  font-size: 80px;
+
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  outline: none;
+
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 82px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* 시간 추가 모달 3 : 예약 내용 확인 */
+
+#add3-pay-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+
+  /* width: 155px;
+  height: 27px;
+  left: 227px;
+  top: 580px; */
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+/* 모달 4 */
+#add4-modal-body-wrapper {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+
+  text-align: center;
+  padding: 1.5rem 3rem 3rem 3rem; /* 안됨 */
+}
+
+/* 예약 취소 모달 */
+
+.cancle-modal-body-wrapper {
+  width: 40rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+}
+
+.cancle-modal-title {
+  /* width: 196px;
+  height: 25px;
+  left: 116px;
+  top: 400px; */
+
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 25px;
+  /* identical to box height */
+  text-align: center;
+}
+
+.cancle-modal-content {
+  /* width: 30rem;
+  height: 15rem; */
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 22px;
+  text-align: center;
 }
