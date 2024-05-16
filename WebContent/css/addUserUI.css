@@ -26,7 +26,7 @@ form {
 }
 
 #inputField {
-  height: 36.2rem;
+  height: 43.44rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -90,15 +90,7 @@ form {
 
   #birthDate {
     background-image: url("/img/cake.svg");
-    width: 30rem;
-    background-color: white;
-    z-index: 1;
-  }
-  #hiddenDate {
-    position: relative;
-    top: 19rem;
     width: 32.4rem;
-    border-bottom: 0.1rem solid black;
   }
 }
 

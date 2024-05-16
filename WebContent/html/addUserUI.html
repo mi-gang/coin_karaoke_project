@@ -32,14 +32,15 @@
         <div id="container">
             <form action="controller?cmd=login" method="post">
                 <div id="inputField">
-                    <input type="date" id="hiddenDate">
+                    <!-- <input type="date" id="hiddenDate"> -->
                     <div><input name="userId" id="userId" placeholder="이메일 입력">
                         <img class="check">
                     </div>
                     <div><input name="nickname" id="nickname" placeholder="닉네임 입력">
                         <img class="check">
                     </div>
-                    <input name="birthDate" id="birthDate" placeholder="생년월일" disabled>
+                    <!-- <input name="birthDate" id="birthDate" placeholder="생년월일" disabled> -->
+                    <div><input type="date" name="birthDate" id="birthDate"></div>
 
                     <div><input name="password" type="password" id="password" placeholder="비밀번호 입력"><img class="check">
                     </div>
@@ -63,7 +64,7 @@
 
         $("#inputField input").on("keyup", checkInput);
 
-        $("#hiddenDate").on("change", (e) => { $("#birthDate").val(e.target.value); console.log(e.target.value) });
+        // $("#hiddenDate").on("change", (e) => { $("#birthDate").val(e.target.value); console.log(e.target.value) });
 
         function checkInput(e) {
             loginBtn.addClass("inactivate");
