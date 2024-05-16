@@ -21,13 +21,13 @@
 <body>
     <div id="container">
         <img id="logo" src="../img/logo.svg" style="width: 21.6rem;height: 21.6rem;">
-        <form action="" method="post">
+        <form action="controller?cmd=login" method="post">
             <div id="inputField">
-                <input type="email" id="userId" placeholder="이메일 입력" required>
-                <input type="password" id="password" placeholder="비밀번호 입력" required>
+                <input name="userId" id="userId" placeholder="이메일 입력">
+                <input name="password" type="password" id="password" placeholder="비밀번호 입력">
             </div>
-            <div class="inputError">이메일 혹은 비밀번호를 다시 확인해주세요.</div>
-            <button>로그인</button>
+            <div class="inputError"></div>
+            <button class="inactivate" disabled>로그인</button>
 
         </form>
         <div id="links">
@@ -42,7 +42,40 @@
         </div>
     </div>
     <script>
-        $()
+        const userId = $("#userId");
+        const password = $("#password");
+        const errorMessage = $("div.inputError");
+        const loginBtn = $("form button");
+
+        $("#inputField input").on("keyup", checkInput);
+
+        function checkInput(e) {
+            loginBtn.addClass("inactivate");
+            loginBtn.attr("disabled", true);
+            if (userId.val() == "" && password.val() == "")
+                errorMessage.text("");
+            else if (!checkEmail(userId.val())) {
+                errorMessage.text("유효한 이메일을 입력해주세요.")
+            }
+            else if (!checkPassword(password.val())) {
+                errorMessage.text("비밀번호는 영문 대소문자와 숫자, 기호를 포함한 6자 이상이어야 합니다.");
+            }
+            else {
+                errorMessage.text("");
+                loginBtn.removeClass("inactivate");
+                loginBtn.attr("disabled", false);
+            }
+        }
+        function checkEmail(email) {
+            const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+            if (pattern.test(email) === false) { return false; }
+            else { return true; }
+        }
+
+        function checkPassword(password) {
+            // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
+            return password.length > 0;
+        }
     </script>
 </body>
 

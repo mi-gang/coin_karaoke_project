@@ -26,6 +26,9 @@
             margin-bottom: 9vh;
         }
 
+        form{
+            width: 32.4rem;
+        }
         #inputField {
             height: 11.7rem;
             display: flex;
@@ -42,6 +45,7 @@
                 border: none;
                 border-bottom: 0.1rem solid black;
             }
+
 
             input::placeholder {
                 color: #979797;
@@ -80,6 +84,11 @@
             margin-top: 3.5rem;
             margin-bottom: 3.5rem;
             font-weight: bold;
+        }
+
+        .inactivate{
+            background-color: #E4E4E4;
+            color: #979797;
         }
 
         a {
