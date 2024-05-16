@@ -16,8 +16,8 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/addUserUI.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/addUserUI.css">
 
 </head>
 
@@ -25,23 +25,28 @@
     <div id="mobileContainer">
         <!--헤더-->
         <header>
-            <img src="../img/left arrow.svg" alt="이전 페이지 이동">
+            <img src="/img/left arrow.svg" alt="이전 페이지 이동">
             <span>회원가입</span>
         </header>
         <!-- 컨텐츠 컨테이너 -->
         <div id="container">
             <form action="controller?cmd=login" method="post">
                 <div id="inputField">
-                    <input name="userId" type="date" id="hiddenDate" placeholder="이메일 입력">
-                    <input name="userId" id="userId" placeholder="이메일 입력">
-                    <input name="nickname" id="nickname" placeholder="닉네임 입력">
-                    <input name="birthDate" id="birthDate" type="date"></input>
+                    <input type="date" id="hiddenDate">
+                    <div><input name="userId" id="userId" placeholder="이메일 입력">
+                        <img class="check">
+                    </div>
+                    <div><input name="nickname" id="nickname" placeholder="닉네임 입력">
+                        <img class="check">
+                    </div>
+                    <input name="birthDate" id="birthDate" placeholder="생년월일" disabled>
 
-                    <input name="password" type="password" id="password" placeholder="비밀번호 입력">
-                    <input id="passwordConfirm" placeholder="비밀번호 확인">
+                    <div><input name="password" type="password" id="password" placeholder="비밀번호 입력"><img class="check">
+                    </div>
+                    <div><input id="passwordConfirm" placeholder="비밀번호 확인"><img class="check"></div>
                 </div>
                 <div class="inputError"></div>
-                <button class="inactivate" disabled>로그인</button>
+                <button class="inactivate" disabled>회원가입</button>
 
             </form>
 
@@ -57,6 +62,8 @@
         const loginBtn = $("form button");
 
         $("#inputField input").on("keyup", checkInput);
+
+        $("#hiddenDate").on("change", (e) => { $("#birthDate").val(e.target.value); console.log(e.target.value) });
 
         function checkInput(e) {
             loginBtn.addClass("inactivate");

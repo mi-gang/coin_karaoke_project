@@ -31,15 +31,34 @@ form {
   flex-direction: column;
   justify-content: space-between;
 
+  div {
+    border-bottom: 0.1rem solid black;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  img {
+    width: 3rem;
+    background-repeat: no-repeat;
+    background-position: right;
+    border: none;
+  }
+  img.check {
+    content: url("/img/check.svg");
+  }
+  img.fail {
+    content: url("/img/fail.svg");
+  }
+
   input {
     font-size: 2rem;
     font-weight: bold;
     padding-top: 0.8rem;
-    width: 32.4rem;
+    width: 29.4rem;
     padding-left: 4.7rem;
     padding-bottom: 0.8rem;
     border: none;
-    border-bottom: 0.1rem solid black;
+
     background-repeat: no-repeat;
     background-size: 3rem;
     background-position: left;
@@ -51,26 +70,35 @@ form {
   }
 
   #userId {
-    background-image: url("../img/email.svg");
+    background-image: url("/img/email.svg");
+  }
+
+  #userId::after {
+    width: 3rem;
+    height: 3rem;
+    background-image: url("/img/check.svg");
   }
 
   #password,
   #passwordConfirm {
-    background-image: url("../img/password.svg");
+    background-image: url("/img/password.svg");
   }
 
   #nickname {
-    background-image: url("../img/user.svg");
+    background-image: url("/img/user.svg");
   }
 
   #birthDate {
-    background-image: url("../img/cake.svg");
-    color: #979797;
+    background-image: url("/img/cake.svg");
+    width: 30rem;
+    background-color: white;
+    z-index: 1;
   }
   #hiddenDate {
     position: relative;
-    top: 18.9rem;
-    z-index: -1;
+    top: 19rem;
+    width: 32.4rem;
+    border-bottom: 0.1rem solid black;
   }
 }
 
