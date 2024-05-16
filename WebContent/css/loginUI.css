@@ -1,0 +1,121 @@
+* {
+            font-family: "Noto Sans KR", sans-serif;
+
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            align-items: center;
+        }
+
+        #logo {
+            margin-top: 12.6vh;
+            margin-bottom: 9vh;
+        }
+
+        form{
+            width: 32.4rem;
+        }
+        #inputField {
+            height: 11.7rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            input {
+                font-size: 2rem;
+                font-weight: bold;
+                padding-top: 0.8rem;
+                width: 32.4rem;
+                padding-left: 4.7rem;
+                padding-bottom: 0.8rem;
+                border: none;
+                border-bottom: 0.1rem solid black;
+            }
+
+
+            input::placeholder {
+                color: #979797;
+            }
+
+            #userId {
+                background-image: url("../img/email.svg");
+                background-repeat: no-repeat;
+                background-size: 3rem;
+                background-position: left;
+                background-position-x: 0.5rem;
+            }
+
+            #password {
+                background-image: url("../img/password.svg");
+                background-repeat: no-repeat;
+                background-size: 3rem;
+                background-position: left;
+                background-position-x: 0.5rem;
+            }
+        }
+
+        .inputError {
+            color: #FC6262;
+        }
+
+
+        button {
+            border-radius: 2rem;
+            background-color: #9747FF;
+            color: white;
+            border: none;
+            width: 32.4rem;
+            height: 5.8rem;
+            font-size: 3rem;
+            margin-top: 3.5rem;
+            margin-bottom: 3.5rem;
+            font-weight: bold;
+        }
+
+        .inactivate{
+            background-color: #E4E4E4;
+            color: #979797;
+        }
+
+        a {
+            color: #979797;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 5.1rem;
+            justify-content: space-between;
+            margin-bottom: 3.5rem;
+        }
+
+        .inputError {
+            font-size: 1.5rem;
+            margin-top: 1.1rem;
+        }
+
+        #socialLoginBox {
+            img {
+                margin-right: 0.9rem;
+                margin-left: 0.9rem;
+                width: 4.2rem;
+                height: 4.2rem;
+            }
+        }
