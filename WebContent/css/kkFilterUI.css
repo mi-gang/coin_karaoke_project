@@ -439,12 +439,14 @@ input[readonly]:focus {
 
 .optionItem.active {
   border-color: #e3cdff;
+  box-shadow: 0px 4px 4px 0px rgba(227, 205, 255, 0.2);
 }
 .optionItem.active svg {
   fill: #e3cdff;
 }
 .optionItem.active p {
-  color: #e3cdff;
+  color: #9747FF;
+  font-weight: 700;
 }
 
 .optionItem img {
