@@ -1,0 +1,125 @@
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+#container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+form {
+  width: 32.4rem;
+  height: 40.4rem;
+  margin-top: 10rem;
+}
+
+#inputField {
+  height: 24.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  div {
+    border-bottom: 0.1rem solid black;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  img {
+    width: 3rem;
+    background-repeat: no-repeat;
+    background-position: right;
+    border: none;
+  }
+  img.default {
+    content: url("/img/default.svg");
+  }
+  img.check {
+    content: url("/img/validate.svg");
+  }
+  img.fail {
+    content: url("/img/fail.svg");
+  }
+
+  input {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 0.8rem;
+    width: 29.4rem;
+    padding-left: 4.7rem;
+    padding-bottom: 0.8rem;
+    border: none;
+
+    background-repeat: no-repeat;
+    background-size: 3rem;
+    background-position: left;
+    background-position-x: 0.5rem;
+  }
+
+  input::placeholder {
+    color: #979797;
+  }
+
+  #userId {
+    background-image: url("/img/email.svg");
+    color: #979797;
+  }
+
+  #password,
+  #passwordConfirm {
+    background-image: url("/img/password.svg");
+  }
+
+  #nickname {
+    background-image: url("/img/user.svg");
+  }
+
+  #birthDate {
+    background-image: url("/img/cake.svg");
+    width: 32.4rem;
+  }
+}
+
+.inputError {
+  color: #fc6262;
+  font-size: 1.5rem;
+  margin-top: 1.1rem;
+}
+
+button {
+  border-radius: 2rem;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  width: 32.4rem;
+  height: 5.8rem;
+  font-size: 3rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+  font-weight: bold;
+}
+
+.inactivate {
+  background-color: #e4e4e4;
+  color: #979797;
+  margin-top: 9.7rem;
+}
+
+a {
+  color: #979797;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
