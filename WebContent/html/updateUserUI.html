@@ -35,24 +35,95 @@
                     <!-- <input type="date" id="hiddenDate"> -->
                     <div><input name="userId" id="userId" placeholder="hellonuri" value="hellonuri" readonly>
                     </div>
-                    <div><input name="nickname" id="nickname" data-original-id="소리꾼123" placeholder="소리꾼123">
+                    <div><input name="nickname" id="nickname" data-original-id="소리꾼123" value="소리꾼123">
                         <img class="default">
                     </div>
                     <!-- <input name="birthDate" id="birthDate" placeholder="생년월일" disabled> -->
                     <div><input type="date" name="birthDate" id="birthDate" value="2024-05-01" readonly></div>
 
-                    <div><input name="password" type="password" id="password" placeholder="••••••••" readonly><img
-                            class="default">
+                    <div><input type="password" placeholder="••••••••" readonly><img class="editPencil"
+                            id="pwEditPencil">
                     </div>
                 </div>
-                <div class="inputError"></div>
+                <div class="inputError" id="errorMessage"></div>
                 <button type="submit" class="inactivate" disabled>수정</button>
 
             </form>
 
         </div>
+        <!-- The Modal -->
+        <div class="modal" id="updatePasswordModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
 
-    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div id="add1-modal-body-wrapper">
+                            <h4 class="modal-title">비밀번호 변경</h4>
+                            <div id="add1-modal-body-contents">
+                                <form action="controller?cmd=login" method="post">
+                                    <div id="pwInputField">
+                                        <div><input name="password" type="password" id="oldPassword"
+                                                placeholder="기존 비밀번호"><img class="default">
+                                        </div>
+                                        <div><input name="password" type="password" id="password"
+                                                placeholder="비밀번호 입력"><img class="default">
+                                        </div>
+                                        <div><input id="passwordConfirm" type="password" placeholder="비밀번호 확인"><img
+                                                class="default"></div>
+                                    </div>
+                                    <div class="inputError" id="pwErrorMessage"></div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="submit_button add-button" id="hidePasswordModal"
+                            data-bs-toggle="modal" data-bs-dismiss="modal">
+                            취소
+                        </button>
+                        <button type="button" class="submit_button add-button" id="time-setting-button">
+                            변경
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="updatePasswordModal2">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <!-- <h4 class="modal-title">이용시간</h4> -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div id="add4-modal-body-wrapper">
+                            <span>비밀번호가 변경되었습니다.</span>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="submit_button add-button" id="add2-add-time-button"
+                            data-bs-toggle="modal" data-bs-dismiss="modal">
+                            닫기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </div>
     <script>
@@ -60,7 +131,7 @@
         const password = $("#password");
         const passwordConfirm = $("#passwordConfirm");
 
-        const errorMessage = $("div.inputError");
+        const errorMessage = $("#errorMessage");
         const loginBtn = $("form button");
 
         $("header img").on("click", () => window.history.back());
@@ -71,26 +142,43 @@
         $("#inputField input").on("change", checkLoginActivate);
         $("form").on("submit", updateUser);
 
-        async function addUser(e) {
-            e.preventDefault();
-            let result = false;
-            try {
-                const res = await fetch("controller?cmd=login&userId=" + userId + "&nickname=" + nickname + "&birthDate=" + birthDate + "&password=" + password);
-                const data = res.json();
-                result = data.result;
-            } catch {
-                console.log("todo");
-            }
-            if (result)
-                location.href = "controller?cmd=mainUI";
-            else
-                alert("회원가입에 실패했습니다. 같은 현상이 반복될 시 관리자에게 문의해주세요!");
+        $("#pwEditPencil").on("click", showPasswordModal);
+        // let updatePasswordModalEL = document.getElementById('updatePassword');
 
+        function showPasswordModal() {
+            const updatePasswordModal = new bootstrap.Modal(document.getElementById("updatePasswordModal"));
+            updatePasswordModal.show();
         }
 
 
+        function updateUser(e) {
+            e.preventDefault();
+        }
+
+        $("#time-setting-button").on("click", updatePassword);
+        async function updatePassword(e) {
+            e.preventDefault();
+            let result = false;
+            const oldPassword = $("#oldPassword");
+            const newPassword = $("#password");
+
+            try {
+                const res = await fetch("controller?cmd=updatePassword&oldPassword" + oldPassword.val() + "&newPassword=" + newPassword.val());
+                const data = await res.json();
+                result = data.result;
+            } catch {
+
+            }
+            if (result)
+                new bootstrap.Modal(document.getElementById("updatePasswordModal2")).show();
+            else {
+                $("#pwErrorMessage").text("기존 비밀번호가 일치하지 않습니다.");
+            }
+
+        }
+
         function checkLoginActivate(e) {
-            if (loginBtn.hasClass('userIdOk') && loginBtn.hasClass('nicknameOk') && loginBtn.hasClass('birthDateOk') && loginBtn.hasClass('passwordOk')) {
+            if (loginBtn.hasClass('nicknameOk')) {
                 loginBtn.removeClass("inactivate");
                 loginBtn.removeAttr("disabled");
             }
@@ -98,31 +186,6 @@
                 loginBtn.addClass("inactivate");
                 loginBtn.attr("disabled", "disabled");
             }
-        }
-
-        async function checkUserId(e) {
-            let flag = isExistUserId(userId.val())
-            let valid = true;
-            userId.next().get()[0].className = "check";
-            if (userId.val() == "") {
-                valid = false;
-                userId.next().get()[0].className = "default";
-            } else if (!checkEmail(userId.val())) {
-                valid = false;
-                errorMessage.text("유효한 이메일을 입력해주세요.");
-                userId.next().get()[0].className = "fail";
-            } else if (await flag) {
-                valid = false;
-                errorMessage.text("해당 이메일로 가입된 계정이 이미 존재합니다.");
-                userId.next().get()[0].className = "fail";
-            } else {
-                errorMessage.text("");
-            }
-
-            if (valid)
-                loginBtn.addClass("userIdOk");
-            else
-                loginBtn.removeClass("userIdOk");
         }
 
         function checkNickname(e) {
@@ -135,6 +198,10 @@
                 valid = false;
                 errorMessage.text("닉네임은 두 글자 이상이어야 합니다.");
                 nickname.next().get()[0].className = "fail";
+            } else if (nickname.val() == nickname.data("originalId")) {
+                errorMessage.text("");
+                nickname.next().get()[0].className = "default";
+                valid = false;
             } else {
                 errorMessage.text("");
             }
@@ -144,23 +211,6 @@
             else
                 loginBtn.removeClass("nicknameOk");
         }
-
-        function checkBirthDate(e) {
-            let valid = true;
-            if (birthDate.val() == "") {
-                valid = false;
-            } else if (new Date(birthDate.val()) > new Date()) {
-                valid = false;
-                errorMessage.text("UN 총회 결의 제217호에 따라 시간여행자는 회원가입이 불가능합니다.");
-            } else {
-                errorMessage.text("");
-            }
-            if (valid)
-                loginBtn.addClass("birthDateOk");
-            else
-                loginBtn.removeClass("birthDateOk");
-        }
-
         function checkPassword(e) {
             let valid = true;
             password.next().get()[0].className = "check";
@@ -199,27 +249,10 @@
             return password == passwordConfirm;
         }
 
-        async function isExistUserId(userId) {
-            let result = false;
-            try {
-                const res = await fetch("controller?cmd=isExistUserId&userId=" + userId);
-                const data = await res.json();
-                result = data.result;
-            } catch {
-                console.log("아이디 검증 실패");
-                result = false;
-            }
-            return result;
-        }
-
-        function checkEmail(email) {
-            const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-            return pattern.test(email);
-        }
 
         function checkStrongPassword(password) {
             // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
-            return password.length > 0;
+            return password.length > 1;
         }
     </script>
 </body>
