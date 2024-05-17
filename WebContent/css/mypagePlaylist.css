@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+#container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.playlists {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.playlists::-webkit-scrollbar {
+  display: none;
+}
+.playlist {
+  width: 100%;
+  height: 8rem;
+  border: 1px solid #e4e4e4;
+  display: flex;
+  flex-direction: column;
+}
+.playlist_group {
+  display: flex;
+  flex-direction: row;
+}
+.playlist_title {
+  width: 90%;
+  height: 5rem;
+  font-size: 200%;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  float: left;
+}
+
+.delete_img {
+  float: right;
+  margin: 0;
+}
+.delete_playlist {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 0;
+  flex-direction: row;
+  margin-right: 0;
+}
+.playlist_song_num {
+  width: 80%;
+  height: 3rem;
+  font-size: 150%;
+  font-weight: bold;
+  color: #979797;
+  position: relative;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-right: 4.5rem;
+  text-align: right;
+}

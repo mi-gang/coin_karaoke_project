@@ -126,17 +126,19 @@ input {
 }
 
 .music_title {
-  height: 50%;
+  height: 60%;
   width: 100%;
-  font-size: 180%;
+  font-size: 170%;
   font-weight: 400;
+  text-overflow: hidden;
 }
 
 .music_singer {
-  height: 50%;
+  height: 40%;
   width: 100%;
   color: #7b7b7b;
   font-size: 140%;
+  margin-top: 1rem;
 }
 .music_like {
   width: 7.2rem;
@@ -224,7 +226,7 @@ input {
   /* border: 1px solid #b6b6b6; */
   margin-left: 4.1rem;
   overflow-y: scroll;
-  max-height: 18rem;
+  max-height: 1rem;
 }
 
 /* .playlist_list::-webkit-scrollbar {
@@ -322,4 +324,53 @@ input {
   margin-top: 0.5rem;
   margin-left: 3rem;
   border-width: 0 0 1px;
+}
+
+.modal_isMember {
+  width: 35rem;
+  height: 29.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70%;
+  margin-left: 9%;
+  position: absolute;
+  border: 1px solid #d7d7d7;
+  border-radius: 0.5rem;
+  /* display: none;*/
+  background-color: white;
+}
+
+.close_btn3 {
+  margin-top: 1.7rem;
+  margin-left: 31.1rem;
+}
+.close_img3 {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.modal_alert {
+  font-size: 200%;
+  width: 27erm;
+  height: 7.1rem;
+  word-break: keep-all;
+  margin-top: 9rem;
+  text-align: center;
+}
+
+.login_btn {
+  width: 15.7rem;
+  height: 3.5rem;
+  border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2.6rem;
+  margin-left: 9.5rem;
+  margin-bottom: 1rem;
 }
