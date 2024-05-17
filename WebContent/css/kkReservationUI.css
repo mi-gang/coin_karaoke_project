@@ -1,0 +1,196 @@
+/* 
+  테마 컬러
+    color: #9747FF;  // 찐보라색
+    color: #E3CDFF;  // 연보라색
+    color: #E4E4E4;  // 옅은회색
+ */
+
+p {
+    margin: 0;
+}
+
+#container {
+    justify-content: flex-start;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: #E4E4E4;
+}
+
+.infoTxt {
+    width: calc(100% - 4.3rem);
+    height: 2.7rem;
+    margin-top: 2.2rem;
+    margin-bottom: 2.5rem;
+    padding-left: 4.3rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.infoTxt span {
+    color: #9747FF;
+}
+
+.timeTableContainer {
+    display: grid;
+    grid-template-rows: 3.3rem auto;
+    width: 42.2rem;
+    height: 67.3rem;
+    overflow-y: scroll;
+    border: 1px solid violet;
+}
+
+.timeLine {
+    display: grid;
+    grid-template-columns: repeat(24, 10.5rem);
+    width: calc(100% - 6.7rem);
+    margin-left: 6.7rem;
+    border-bottom: 0.1rem solid #b6b6b6;
+    /* height: inherit;*/
+    /* height: 3.3rem;*/
+}
+
+.time {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* text-align: start;
+    font-size: 1.2rem;
+    /* border: 1px solid coral;*/
+}
+
+.roomNTimeTableContainer {
+    display: grid;
+    /* grid-template-rows: repeat(auto-fit, 1fr); */
+    grid-template-rows: repeat(auto-fit, minmax(5.7rem, auto));
+    /* grid-auto-rows: 5.7rem; */
+    height: calc(67.3rem - 3.3rem);
+    /* grid-template-rows: repeat(auto-fit, minmax(5.7rem, auto)); */
+    background-color: palegoldenrod;
+}
+
+.roomNTimeTableContainer.over10 {
+    grid-template-rows: repeat(10, 5.74rem);
+    /* max-height: 60.1rem; */
+    grid-auto-rows: 5.7rem;
+    height: calc(67.3rem - 3.3rem);
+    overflow-y: scroll;
+}
+
+.reservationStatusByRoom {
+    border: 1px solid coral;
+}
+
+
+/* 구조 수정 전 스타일링 */
+/* 
+수정 전
+.timeTableContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; 
+    gap: 0.7rem;
+    width: 42.2rem;
+    height: 67.3rem;
+    /* overflow-x: scroll; 
+}
+
+.rightSide {
+    display: grid;
+    grid-template-rows: 3.3rem auto;
+    /* grid-template-columns: repeat(24, 10.5rem);
+    width: 35.5rem;
+    height: inherit;
+    overflow-x: scroll;
+}
+.timeLine {
+    display: grid;
+    grid-template-columns: repeat(24, 10.5rem);
+    width: 100%;
+    border-bottom: 0.1rem solid #b6b6b6;
+    /* height: inherit;
+    /* height: 3.3rem;
+}
+.time {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* text-align: start;
+    font-size: 1.2rem;
+    /* border: 1px solid coral;
+}
+
+.roomTimeTableWrapper {
+    display: grid;
+    grid-template-columns: repeat(24, 10.5rem);
+    grid-row-gap: 1.1rem;
+    margin-top: 1rem;
+}
+.roomTimeTableWrapper.over10 {
+    grid-template-rows: repeat(10, 5.74rem);
+}
+
+
+.roomTypeNameList {
+    display: grid;
+    /* grid-template-rows: repeat(minmax(3, 10), 1fr); 
+    grid-template-rows: repeat(auto-fit, minmax(5.7rem, auto));
+    /* grid-template-rows: repeat(10, 5.7rem); 
+    grid-row-gap: 1.1rem;
+    height: 61rem;
+    margin-top: 2rem;
+    overflow-y: scroll;
+}
+.roomTypeNameList.over10 {
+    grid-template-rows: repeat(10, 5.74rem);
+}
+*/
+
+.roomTypeName.btn {
+    width: 6rem;
+    height: 5.2rem;
+}
+
+.roomType.btn {
+    width: 6rem;
+    height: 5.2rem;
+}
+
+.reservationWrapper {
+    height: 2.6rem;
+}
+
+.reservationTime {
+    background-color: #E4E4E4;
+}
+
+.cleaningTime {
+    width: 2.55rem;
+
+    background-color: #9747FF;
+}
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation.btn {
+    width: 7.4rem;
+    height: 2rem;
+    padding: 1.7rem 16.2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #9747FF;
+}

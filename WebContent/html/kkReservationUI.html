@@ -6,15 +6,16 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>:: 노래방 상세정보</title>
+    <title>:: 노래방 예약</title>
     <link
       rel="stylesheet"
       href="../css/common.css"
     />
     <link
       rel="stylesheet"
-      href="../css/kkDetailUI.css"
+      href="../css/kkReservationUI.css"
     />
+    
     <link
       rel="preconnect"
       href="https://fonts.googleapis.com"
@@ -31,27 +32,114 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
-    <!--헤더-->
-    <header>
-      <img
-        src="../img/left arrow.svg"
-        alt="이전 페이지 이동"
-      />
-      <span>스타버스 코인노래방</span>
-      <!-- 목록에서 클릭한 노래방명이 들어갈 자리 -->
-    </header>
-    <!-- 컨텐츠 컨테이너 -->
-    <div id="container">
-    </div>
-    <!-- 하단 메뉴바 -->
-    <nav>
-        <div
-          id="bookmark"
-          class="bookmark"
-        ></div>
-        <div class="btn">예약하기</div>
-    </nav>
+    <!-- 모바일 컨테이너 -->
+    <div id="mobileContainer">
+        <!--헤더-->
+        <header>
+          <img
+            src="../img/left arrow.svg"
+            alt="이전 페이지 이동"
+          />
+          <span>스타버스 코인노래방</span>
+        </header>
+        <!-- 컨텐츠 컨테이너 -->
+        <div id="container">
+          <div class="infoTxt">* <span>보라색</span>은 청소시간입니다.</div>
+          <div class="timeTableContainer">
+            <div class="timeLine"></div>
+            <div class="roomNTimeTableContainer">
 
-    <script></script>
-  </body>
+            </div>
+            <!-- <div class="roomTypeNameList">
+              <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+              <div id="roomTypeName" class="roomType btn">2인실 (2)</div>
+              <div id="roomTypeName" class="roomType btn">2인실 (3)</div>
+              <div id="roomTypeName" class="roomType btn">2인실 (4)</div>
+              <div id="roomTypeName" class="roomType btn">2인실 (5)</div>
+              <div id="roomTypeName" class="roomType btn">2인실 (6)</div>
+              <div id="roomTypeName" class="roomType btn">4인실 (1)</div>
+              <div id="roomTypeName" class="roomType btn">4인실 (2)</div>
+              <div id="roomTypeName" class="roomType btn">4인실 (3)</div>
+              <div id="roomTypeName" class="roomType btn">4인실 (4)</div>
+              <div id="roomTypeName" class="roomType btn">단체실 (1)</div>
+              <div id="roomTypeName" class="roomType btn">단체실 (2)</div>
+            </div>
+            <div class="rightSide">
+              <div class="timeLine">
+              </div>
+              <div class="roomTimeTableWrapper">
+                <div class="reservationsContainer">
+                  <div class="reservationWrapper">
+                    <div class="reservationTime"></div>
+                    <div class="cleaningTime"></div>
+                  </div>
+                  <div class="reservationWrapper">
+                    <div class="reservationTime"></div>
+                    <div class="cleaningTime"></div>
+                  </div>
+                  <div class="reservationWrapper">
+                    <div class="reservationTime"></div>
+                    <div class="cleaningTime"></div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <!-- 하단 메뉴바 -->
+        <nav>
+          <div class="reservation btn">
+            예약하기
+          </div>
+        </nav>
+    </div>
+    
+    <script>
+      // let kkRoomCnt = $(".roomType").length;
+      let kkRoomCnt = 12;  // 노래방 방 개수 데이터 불러와서 넣을 곳
+      console.log("노래방 방 개수: ");
+      console.log(kkRoomCnt);
+
+      for(let i=0; i<kkRoomCnt; i++) {
+        $(".roomNTimeTableContainer").append("<div class='reservationStatusByRoom'></div>");
+        $(".reservationStatusByRoom").append("<div class='roomTypeName btn'></div>");       
+      }
+
+      // roomNTimeTableContainer
+
+      if(kkRoomCnt > 10) {
+        console.log("kkRoomCnt 10 초과!");
+        $(".roomNTimeTableContainer").addClass("over10");
+        // $(".roomTimeTableWrapper").addClass("over10");
+
+      } else if(kkRoomCnt > 0 && kkRoomCnt <= 10) {
+        console.log("kkRoomCnt 10 이하!");
+      }
+      
+      // 구조 수정 전
+      // if(kkRoomCnt > 10) {
+      //   console.log("kkRoomCnt 10 초과!");
+      //   $(".roomTypeNameList").addClass("over10");
+      //   $(".roomTimeTableWrapper").addClass("over10");
+
+      // } else if(kkRoomCnt > 0 && kkRoomCnt <= 10) {
+      //   console.log("kkRoomCnt 10 이하!");
+      //   $(".roomType.btn").css("height", "100%");
+      // }
+      
+      // 현재 날짜, 시간 정보
+      let now = new Date();
+      let currentHour = now.getHours();
+
+      for(let i=0; i<24; i++) {
+        let hour = currentHour+i;
+        if(hour > 24) {
+          hour = hour - 24;
+        }
+        $(".timeLine").append("<div class='time'>"+hour+":00</div");
+      }
+
+    </script>
+
+    </body>
 </html>
