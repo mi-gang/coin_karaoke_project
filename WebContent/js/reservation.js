@@ -1,4 +1,4 @@
-// 예약 상태 탭 클릭 시
+6; // 예약 상태 탭 클릭 시
 
 $(".reservations-status-button").on("click", function () {
   $(".reservations-status-button").removeClass("active");
@@ -89,8 +89,8 @@ $("#add2-add-time-button").on("click", function (event) {
   }
 
   // 추가가능시간 미만 검사
-  let additionalHour = $(".additionalHourStatus").text();
-  let additionalMinute = $(".additionalMinuteStatus").text();
+  let additionalHour = $(".additional-hour-a-status").text();
+  let additionalMinute = $(".additional-minute-a-status").text();
 
   parseInt(additionalHour);
   parseInt(additionalMinute);

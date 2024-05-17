@@ -193,10 +193,18 @@
   width: 9.5rem;
 }
 
-/* #KK_img > img {
-  width: 10rem;
-  height: 10rem;
-} */
+#cancle-info {
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 16px;
+
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+#cancle-info > div {
+  color: #ff5e5e;
+}
 
 /* 모달 */
 
@@ -214,10 +222,19 @@
 }
 
 .btn-close {
-  width: 3rem;
+  width: 2rem;
   height: 2rem;
+  background-size: 2rem;
 }
 
+.modal-dialog-centered {
+  justify-content: center;
+}
+
+.modal-content {
+  width: 90%;
+  border-radius: 1rem;
+}
 /* 공통 */
 
 .modal-title {
@@ -289,9 +306,9 @@
 }
 
 .add1-modal-body-content-time {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 27px;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.7rem;
 
   width: 20rem;
   height: 3rem;
@@ -302,11 +319,29 @@
 }
 
 .add1-addTime {
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 30px;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.7rem;
+
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
 
   color: #9747ff;
+}
+
+#additional-hour-a {
+  display: flex;
+  flex-direction: row;
+}
+
+#additional-minute-a {
+  display: flex;
+  flex-direction: row;
 }
 
 .add-button {
@@ -344,11 +379,6 @@
   justify-content: center;
 } */
 
-#add1-notice {
-  width: auto;
-  height: 2rem;
-}
-
 .add1-add-time-arrow {
   width: 3rem;
   height: 3rem;
@@ -362,7 +392,10 @@
 }
 
 #add1-notice {
-  margin-top: 2rem;
+  width: auto;
+  height: 2rem;
+
+  margin-top: 1rem;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
@@ -435,11 +468,7 @@
   display: flex;
   flex-direction: row;
   justify-content: end;
-
-  /* width: 155px;
-  height: 27px;
-  left: 227px;
-  top: 580px; */
+  padding: 1rem 1rem 0 0;
 
   font-weight: 400;
   font-size: 20px;
@@ -470,23 +499,20 @@
 /* 예약 취소 모달 */
 
 .cancle-modal-body-wrapper {
-  width: 40rem;
-  height: 15rem;
+  width: 100%;
+  height: 11rem;
   display: flex;
   flex-direction: column;
-  row-gap: 5rem;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 3rem;
 }
 
 .cancle-modal-title {
-  /* width: 196px;
-  height: 25px;
-  left: 116px;
-  top: 400px; */
-
   font-weight: 700;
   font-size: 1.8rem;
   line-height: 25px;
-  /* identical to box height */
+
   text-align: center;
 }
 
@@ -525,7 +551,7 @@
   outline: none;
 
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 16px;
   display: flex;
   flex-direction: row;

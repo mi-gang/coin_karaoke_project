@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>나의 예약</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,7 +18,6 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
@@ -339,9 +338,9 @@
                           <span id="reservation-end-minute">00</span>
                         </div>
                       </div>
-                      <div>
+                      <div id="cancle-info">
+                        <span>취소 수수료</span>
                         <div>
-                          <span>취소 수수료</span>
                           <span>4500</span>
                           <span>원</span>
                           <span>(50%)</span>
@@ -415,11 +414,15 @@
                   <span class="add1-modal-body-content-title"
                     >추가 가능 시간</span
                   >
-                  <div class="add1-modal-body-content-time add1-addTime">
-                    <span class="additionalHourStatus">1</span>
-                    <span>시간</span>
-                    <span class="additionalMinuteStatus">34</span>
-                    <span>분</span>
+                  <div class="add1-addTime">
+                    <div id="additional-hour-a">
+                      <span class="additional-hour-a-status">1</span>
+                      <span>시간</span>
+                    </div>
+                    <div id="additional-minute-a">
+                      <span class="additional-minute-a-status">34</span>
+                      <span>분</span>
+                    </div>
                   </div>
                 </div>
                 <hr />
@@ -698,7 +701,7 @@
             <div class="cancle-modal-body-wrapper">
               <span class="cancle-modal-title">취소 완료</span>
               <span class="cancle-modal-content"
-                >예약이 취소되었습니다. <br />자세한 내용은 나의 예약 - 취소
+                >예약이 취소되었습니다. <br />세부 내역은 나의 예약 - 취소
                 내역에서 확인해주세요.</span
               >
             </div>
@@ -757,8 +760,47 @@
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
+              data-bs-target="#addReviewModal2"
             >
               리뷰 등록
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 리뷰 작성 완료 모달 -->
+    <!-- The Modal -->
+    <div class="modal" id="addReviewModal2">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="cancle-modal-body-wrapper">
+              <span class="cancle-modal-title">등록 완료</span>
+              <span class="cancle-modal-content">리뷰가 등록되었습니다.</span>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button add-button"
+              id="add2-add-time-button"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              닫기
             </button>
           </div>
         </div>
@@ -801,8 +843,49 @@
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
+              data-bs-target="#addInquireModal2"
             >
               문의/신고하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 리뷰 작성 완료 모달 -->
+    <!-- The Modal -->
+    <div class="modal" id="addInquireModal2">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="cancle-modal-body-wrapper">
+              <span class="cancle-modal-title">등록 완료</span>
+              <span class="cancle-modal-content"
+                >문의/신고가 접수되었습니다.</span
+              >
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button add-button"
+              id="add2-add-time-button"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              닫기
             </button>
           </div>
         </div>
