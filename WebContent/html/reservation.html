@@ -33,9 +33,9 @@
       <div id="container">
         <div id="reservation_wrapper">
           <div id="reservations_status">
-            <button>이용 중/예정</button>
-            <button>이용 완료</button>
-            <button>취소</button>
+            <button class="reservations-status-button">이용 중/예정</button>
+            <button class="reservations-status-button">이용 완료</button>
+            <button class="reservations-status-button">취소</button>
           </div>
           <div id="reservation_list">
             <div id="total_reservation">
@@ -43,271 +43,313 @@
               <span>2</span>
               <span>건</span>
             </div>
-
-            <!-- 이용 예정 -->
-            <div id="reservation_content_wrapper">
-              <div id="reservation_status_wrapper">
-                <span id="reservation_status">예약</span>
-              </div>
-              <div id="reservation_content">
-                <div id="KK_img">
-                  <img src="/img/KK_img.svg" />
+            <div id="reservation-contents-wrapper">
+              <!-- 이용 예정 -->
+              <div id="reservation_content_wrapper">
+                <div id="reservation_status_wrapper">
+                  <span id="reservation_status">예약</span>
                 </div>
-                <div id="reservation_detail_wrapper">
-                  <div id="reservation_detail">
-                    <div id="reservation_detail_row">
-                      <span id="karaoke_name"
-                        >세븐스타코인노래연습장 철산역점</span
+                <div id="reservation_content">
+                  <div id="KK_img">
+                    <img src="/img/KK_img.svg" />
+                  </div>
+                  <div id="reservation_detail_wrapper">
+                    <div id="reservation_detail">
+                      <div id="reservation_detail_row">
+                        <span id="karaoke_name"
+                          >세븐스타코인노래연습장 철산역점</span
+                        >
+                        <img src="/img/arrow_right.svg" id="arrow_right" />
+                      </div>
+                      <div id="reservation-time">
+                        <div>2024.05.09 (목)</div>
+                        <div id="reservation-start-time">
+                          <span id="reservation-start-hour">16</span>
+                          <span>:</span>
+                          <span id="reservation-start-minute">00</span>
+                        </div>
+                        <span>-</span>
+                        <div id="reservation-end-time">
+                          <span id="reservation-end-hour">18</span>
+                          <span>:</span>
+                          <span id="reservation-end-minute">00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="button_wrapper">
+                      <button
+                        type="button"
+                        class="submit_button"
+                        id="add-time-button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addTimeModal"
                       >
-                      <img src="/img/arrow_right.svg" id="arrow_right" />
-                    </div>
-                    <div id="reservation-time">
-                      <div id="reservation-start-time">
-                        <span id="reservation-start-hour">16</span>
-                        <span>:</span>
-                        <span id="reservation-start-minute">00</span>
-                      </div>
-                      <span>-</span>
-                      <div id="reservation-end-time">
-                        <span id="reservation-end-hour">18</span>
-                        <span>:</span>
-                        <span id="reservation-end-minute">00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="button_wrapper">
-                    <button
-                      type="button"
-                      class="submit_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#addTimeModal"
-                    >
-                      시간 추가
-                    </button>
-                    <button
-                      class="cancle_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#cancleReservationModal1"
-                    >
-                      예약 취소
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 이용 중 -->
-            <div id="reservation_content_wrapper">
-              <div id="reservation_status_wrapper">
-                <span id="reservation_status">이용 중</span>
-              </div>
-              <div id="reservation_content">
-                <div id="KK_img">
-                  <img src="/img/KK_img.svg" />
-                </div>
-                <div id="reservation_detail_wrapper">
-                  <div id="reservation_detail">
-                    <div id="reservation_detail_row">
-                      <span id="karaoke_name"
-                        >세븐스타코인노래연습장 철산역점</span
+                        시간 추가
+                      </button>
+                      <button
+                        class="cancle_button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#cancleReservationModal1"
                       >
-                      <img src="/img/arrow_right.svg" id="arrow_right" />
+                        예약 취소
+                      </button>
                     </div>
-                    <div id="reservation-time">
-                      <div id="reservation-start-time">
-                        <span id="reservation-start-hour">16</span>
-                        <span>:</span>
-                        <span id="reservation-start-minute">00</span>
-                      </div>
-                      <span>-</span>
-                      <div id="reservation-end-time">
-                        <span id="reservation-end-hour">18</span>
-                        <span>:</span>
-                        <span id="reservation-end-minute">00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="button_wrapper">
-                    <button
-                      type="button"
-                      class="submit_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#addReviewModal"
-                    >
-                      시간 추가
-                    </button>
-                    <button
-                      class="cancle_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#"
-                    >
-                      문의/신고
-                    </button>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- 이용 완료 1 -->
-            <div id="reservation_content_wrapper">
-              <div id="reservation_status_wrapper">
-                <span id="reservation_status">이용 완료</span>
-              </div>
-              <div id="reservation_content">
-                <div id="KK_img">
-                  <img src="/img/KK_img.svg" />
+              <!-- 이용 중 -->
+              <div id="reservation_content_wrapper">
+                <div id="reservation_status_wrapper">
+                  <span id="reservation_status">이용 중</span>
                 </div>
-                <div id="reservation_detail_wrapper">
-                  <div id="reservation_detail">
-                    <div id="reservation_detail_row">
-                      <span id="karaoke_name"
-                        >세븐스타코인노래연습장 철산역점</span
+                <div id="reservation_content">
+                  <div id="KK_img">
+                    <img src="/img/KK_img.svg" />
+                  </div>
+                  <div id="reservation_detail_wrapper">
+                    <div id="reservation_detail">
+                      <div id="reservation_detail_row">
+                        <span id="karaoke_name"
+                          >세븐스타코인노래연습장 철산역점</span
+                        >
+                        <img src="/img/arrow_right.svg" id="arrow_right" />
+                      </div>
+                      <div id="reservation-time">
+                        <div>2024.05.09 (목)</div>
+                        <div id="reservation-start-time">
+                          <span id="reservation-start-hour">16</span>
+                          <span>:</span>
+                          <span id="reservation-start-minute">00</span>
+                        </div>
+                        <span>-</span>
+                        <div id="reservation-end-time">
+                          <span id="reservation-end-hour">18</span>
+                          <span>:</span>
+                          <span id="reservation-end-minute">00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="button_wrapper">
+                      <button
+                        type="button"
+                        class="submit_button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addTimeModal"
                       >
-                      <img src="/img/arrow_right.svg" id="arrow_right" />
-                    </div>
-                    <div id="reservation-time">
-                      <div id="reservation-start-time">
-                        <span id="reservation-start-hour">16</span>
-                        <span>:</span>
-                        <span id="reservation-start-minute">00</span>
-                      </div>
-                      <span>-</span>
-                      <div id="reservation-end-time">
-                        <span id="reservation-end-hour">18</span>
-                        <span>:</span>
-                        <span id="reservation-end-minute">00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="button_wrapper">
-                    <button
-                      type="button"
-                      class="submit_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#addTimeModal"
-                    >
-                      리뷰 작성(3일 남음)
-                    </button>
-                    <button
-                      class="cancle_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#cancleReservationModal1"
-                    >
-                      예약 취소
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 이용 완료 2 -->
-            <div id="reservation_content_wrapper">
-              <div id="reservation_status_wrapper">
-                <span id="reservation_status">이용 완료</span>
-              </div>
-              <div id="reservation_content">
-                <div id="KK_img">
-                  <img src="/img/KK_img.svg" />
-                </div>
-                <div id="reservation_detail_wrapper">
-                  <div id="reservation_detail">
-                    <div id="reservation_detail_row">
-                      <span id="karaoke_name"
-                        >세븐스타코인노래연습장 철산역점</span
+                        시간 추가
+                      </button>
+                      <button
+                        class="cancle_button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addInquireModal"
                       >
-                      <img src="/img/arrow_right.svg" id="arrow_right" />
+                        문의/신고
+                      </button>
                     </div>
-                    <div id="reservation-time">
-                      <div id="reservation-start-time">
-                        <span id="reservation-start-hour">16</span>
-                        <span>:</span>
-                        <span id="reservation-start-minute">00</span>
-                      </div>
-                      <span>-</span>
-                      <div id="reservation-end-time">
-                        <span id="reservation-end-hour">18</span>
-                        <span>:</span>
-                        <span id="reservation-end-minute">00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="button_wrapper">
-                    <button
-                      type="button"
-                      class="submit_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#addTimeModal"
-                    >
-                      <!-- 버튼 비활성화 -->
-                      리뷰 작성 완료
-                    </button>
-                    <button
-                      class="cancle_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#cancleReservationModal1"
-                    >
-                      문의/신고
-                    </button>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- 취소 -->
-            <!-- 버튼 제거 -->
-            <div id="reservation_content_wrapper">
-              <div id="reservation_status_wrapper">
-                <span id="reservation_status">이용 완료</span>
-              </div>
-              <div id="reservation_content">
-                <div id="KK_img">
-                  <img src="/img/KK_img.svg" />
+              <!-- 이용 완료 1 -->
+              <div id="reservation_content_wrapper">
+                <div id="reservation_status_wrapper">
+                  <span id="reservation_status">이용 완료</span>
                 </div>
-                <div id="reservation_detail_wrapper">
-                  <div id="reservation_detail">
-                    <div id="reservation_detail_row">
-                      <span id="karaoke_name"
-                        >세븐스타코인노래연습장 철산역점</span
+                <div id="reservation_content">
+                  <div id="KK_img">
+                    <img src="/img/KK_img.svg" />
+                  </div>
+                  <div id="reservation_detail_wrapper">
+                    <div id="reservation_detail">
+                      <div id="reservation_detail_row">
+                        <span id="karaoke_name"
+                          >세븐스타코인노래연습장 철산역점</span
+                        >
+                        <img src="/img/arrow_right.svg" id="arrow_right" />
+                      </div>
+                      <div id="reservation-time">
+                        <div>2024.05.09 (목)</div>
+                        <div id="reservation-start-time">
+                          <span id="reservation-start-hour">16</span>
+                          <span>:</span>
+                          <span id="reservation-start-minute">00</span>
+                        </div>
+                        <span>-</span>
+                        <div id="reservation-end-time">
+                          <span id="reservation-end-hour">18</span>
+                          <span>:</span>
+                          <span id="reservation-end-minute">00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="button_wrapper">
+                      <button
+                        type="button"
+                        class="submit_button review-button1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addReviewModal"
                       >
-                      <img src="/img/arrow_right.svg" id="arrow_right" />
+                        리뷰 작성(3일 남음)
+                      </button>
+                      <button
+                        class="cancle_button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#cancleReservationModal1"
+                      >
+                        예약 취소
+                      </button>
                     </div>
-                    <div id="reservation-time">
-                      <div id="reservation-start-time">
-                        <span id="reservation-start-hour">16</span>
-                        <span>:</span>
-                        <span id="reservation-start-minute">00</span>
-                      </div>
-                      <span>-</span>
-                      <div id="reservation-end-time">
-                        <span id="reservation-end-hour">18</span>
-                        <span>:</span>
-                        <span id="reservation-end-minute">00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="button_wrapper">
-                    <button
-                      type="button"
-                      class="submit_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#addTimeModal"
-                    >
-                      <!-- 버튼 비활성화 -->
-                      리뷰 작성 완료
-                    </button>
-                    <button
-                      class="cancle_button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#cancleReservationModal1"
-                    >
-                      문의/신고
-                    </button>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!--  -->
+              <!-- 이용 완료 2 -->
+              <div id="reservation_content_wrapper">
+                <div id="reservation_status_wrapper">
+                  <span id="reservation_status">이용 완료</span>
+                </div>
+                <div id="reservation_content">
+                  <div id="KK_img">
+                    <img src="/img/KK_img.svg" />
+                  </div>
+                  <div id="reservation_detail_wrapper">
+                    <div id="reservation_detail">
+                      <div id="reservation_detail_row">
+                        <span id="karaoke_name"
+                          >세븐스타코인노래연습장 철산역점</span
+                        >
+                        <img src="/img/arrow_right.svg" id="arrow_right" />
+                      </div>
+                      <div id="reservation-time">
+                        <div>2024.05.09 (목)</div>
+                        <div id="reservation-start-time">
+                          <span id="reservation-start-hour">16</span>
+                          <span>:</span>
+                          <span id="reservation-start-minute">00</span>
+                        </div>
+                        <span>-</span>
+                        <div id="reservation-end-time">
+                          <span id="reservation-end-hour">18</span>
+                          <span>:</span>
+                          <span id="reservation-end-minute">00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="button_wrapper">
+                      <button
+                        type="button"
+                        disabled
+                        class="submit_button review-button2"
+                      >
+                        <!-- 버튼 비활성화 -->
+                        리뷰 작성 완료
+                      </button>
+                      <button
+                        class="cancle_button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addInquireModal"
+                      >
+                        문의/신고
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 이용 완료 3 : 리뷰 작성 불가 -->
+              <div id="reservation_content_wrapper">
+                <div id="reservation_status_wrapper">
+                  <span id="reservation_status">이용 완료</span>
+                </div>
+                <div id="reservation_content">
+                  <div id="KK_img">
+                    <img src="/img/KK_img.svg" />
+                  </div>
+                  <div id="reservation_detail_wrapper">
+                    <div id="reservation_detail">
+                      <div id="reservation_detail_row">
+                        <span id="karaoke_name"
+                          >세븐스타코인노래연습장 철산역점</span
+                        >
+                        <img src="/img/arrow_right.svg" id="arrow_right" />
+                      </div>
+                      <div id="reservation-time">
+                        <div>2024.05.09 (목)</div>
+                        <div id="reservation-start-time">
+                          <span id="reservation-start-hour">16</span>
+                          <span>:</span>
+                          <span id="reservation-start-minute">00</span>
+                        </div>
+                        <span>-</span>
+                        <div id="reservation-end-time">
+                          <span id="reservation-end-hour">18</span>
+                          <span>:</span>
+                          <span id="reservation-end-minute">00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="button_wrapper">
+                      <button
+                        type="button"
+                        disabled
+                        class="submit_button review-button2"
+                      >
+                        <!-- 버튼 비활성화 -->
+                        리뷰 작성 불가
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 취소 -->
+              <!-- 버튼 제거 -->
+              <div id="reservation_content_wrapper">
+                <div id="reservation_status_wrapper">
+                  <span id="reservation_status">취소 완료</span>
+                </div>
+                <div id="reservation_content">
+                  <div id="KK_img">
+                    <img src="/img/KK_img.svg" />
+                  </div>
+                  <div id="reservation_detail_wrapper">
+                    <div id="reservation_detail">
+                      <div id="reservation_detail_row">
+                        <span id="karaoke_name"
+                          >세븐스타코인노래연습장 철산역점</span
+                        >
+                        <img src="/img/arrow_right.svg" id="arrow_right" />
+                      </div>
+                      <div id="reservation-time">
+                        <div>2024.05.09 (목)</div>
+                        <div id="reservation-start-time">
+                          <span id="reservation-start-hour">16</span>
+                          <span>:</span>
+                          <span id="reservation-start-minute">00</span>
+                        </div>
+                        <span>-</span>
+                        <div id="reservation-end-time">
+                          <span id="reservation-end-hour">18</span>
+                          <span>:</span>
+                          <span id="reservation-end-minute">00</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <span>취소 수수료</span>
+                          <span>4500</span>
+                          <span>원</span>
+                          <span>(50%)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--  -->
+            </div>
           </div>
         </div>
       </div>
@@ -369,9 +411,12 @@
                   <span class="add1-modal-body-content-title"
                     >추가 가능 시간</span
                   >
-                  <span class="add1-modal-body-content-time add1-addTime"
-                    >1시간 34분</span
-                  >
+                  <div class="add1-modal-body-content-time add1-addTime">
+                    <span class="additionalHourStatus">1</span>
+                    <span>시간</span>
+                    <span class="additionalMinuteStatus">34</span>
+                    <span>분</span>
+                  </div>
                 </div>
                 <hr />
                 <div class="add1-modal-body-content">
@@ -400,6 +445,7 @@
             <div>
               <button
                 type="button"
+                disabled="disabled"
                 class="submit_button add-button"
                 id="add1-add-time-button"
                 data-bs-toggle="modal"
@@ -438,17 +484,21 @@
               </div>
               <div id="add2-modal-time-setting">
                 <input
-                  type="number"
+                  type="text"
                   class="add2-time-setting-input"
                   id="setting-hour"
-                  value="00"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  maxlength="2"
+                  placeholder="00"
                 />
                 <span>:</span>
                 <input
-                  type="number"
+                  type="text"
                   class="add2-time-setting-input"
                   id="setting-minute"
-                  value="00"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  maxlength="2"
+                  placeholder="00"
                 />
               </div>
             </div>
@@ -461,7 +511,7 @@
               class="submit_button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
-              data-bs-target="#addTimeModal2"
+              data-bs-dismiss="modal"
             >
               설정
             </button>
@@ -476,13 +526,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <!-- Modal Header -->
-          <div class="modal-header">
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
+          <div class="modal-header"></div>
 
           <!-- Modal body -->
           <div class="modal-body">
@@ -516,9 +560,9 @@
                   </div>
                 </div>
                 <div id="add3-pay-amount">
-                  <span id="add3-notice">결제금액 : </span>
-                  <span id="add3-notice"></span>
-                  <span id="add3-notice">원</span>
+                  <span id="">결제금액 : </span>
+                  <span id="add3-amount"></span>
+                  <span id="">원</span>
                 </div>
               </div>
             </div>
@@ -526,6 +570,16 @@
 
           <!-- Modal footer -->
           <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button add-button back-button"
+              id="time-setting-button"
+              data-bs-toggle="modal"
+              data-bs-target="#addTimeModal"
+              data-bs-dismiss="modal"
+            >
+              이전
+            </button>
             <button
               type="button"
               class="submit_button add-button"
@@ -678,16 +732,16 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
+            <div class="review-modal-body-wrapper">
               <!-- <span class="cancle-modal-title">취소 완료</span> -->
-              <span class="cancle-modal-content"
+              <span class="review-modal-content"
                 >세븐스타코인노래연습장 철산역점</span
               >
               <!-- 별점 자리 -->
-              <input
-                type="text"
+              <textarea
+                id="review-description"
                 placeholder="이용한 노래방에 대한 솔직한 리뷰를 남겨주세요."
-              />
+              ></textarea>
             </div>
           </div>
 
@@ -706,8 +760,9 @@
         </div>
       </div>
     </div>
+
     <!-- 문의 작성 모달 -->
-    <div class="modal" id="addReviewModal">
+    <div class="modal" id="addInquireModal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <!-- Modal Header -->
@@ -722,16 +777,15 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
+            <div class="inquire-modal-body-wrapper">
               <!-- <span class="cancle-modal-title">취소 완료</span> -->
-              <span class="cancle-modal-content"
+              <span class="review-modal-content"
                 >세븐스타코인노래연습장 철산역점</span
               >
-              <!-- 별점 자리 -->
-              <input
-                type="text"
+              <textarea
+                id="review-description"
                 placeholder="노래방에 문의 또는 신고할 내용을 작성해주세요."
-              />
+              ></textarea>
             </div>
           </div>
 
@@ -739,7 +793,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit_button add-button inquire-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
