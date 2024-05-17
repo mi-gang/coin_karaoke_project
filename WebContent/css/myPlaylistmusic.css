@@ -6,6 +6,8 @@
 .musiclist {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .selected_playlist {
@@ -31,16 +33,17 @@
   float: left;
 }
 
-.select_img {
+.select_btn {
   float: right;
   margin: 0;
+  background-color: transparent;
+  border: 0px;
 }
-.select_option {
+.select_img {
   width: 2.4rem;
   height: 2.4rem;
   margin-right: 0;
-  flex-direction: row;
-  margin-right: 0;
+  flex-direction: column;
 }
 
 .playlist_song_num {
@@ -120,4 +123,39 @@
   align-items: center;
   justify-content: center;
   display: flex;
+}
+.option1 {
+  width: 90%;
+  height: 50%;
+  float: left;
+  position: flex;
+  margin-left: 1rem;
+  background-color: white;
+  border-bottom: 1px solid #979797;
+  align-content: center;
+}
+.option2 {
+  width: 90%;
+  height: 40%;
+  float: left;
+  position: flex;
+  margin-left: 1rem;
+  background-color: white;
+  align-content: center;
+}
+.dropdown_menu {
+  width: 19rem;
+  height: 7.4rem;
+  border-radius: 1rem;
+  border: 2px solid #979797;
+  background-color: white;
+  color: black;
+  font-size: 140%;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  right: 0%;
+  top: 10.5%;
+  z-index: 4000;
+  display: none;
 }

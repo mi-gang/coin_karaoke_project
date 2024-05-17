@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <!-- 모바일 컨테이너 -->
@@ -28,7 +29,17 @@
             <div class="playlist_group">
               <div class="playlist_title">Espa</div>
               <div class="select_option">
-                <img class="select_img" src="/img/dehaze.svg" />
+                <button
+                  class="select_btn"
+                  type="button"
+                  aria-label="Open_select_menu"
+                >
+                  <img class="select_img" src="/img/dehaze.svg" />
+                </button>
+                <div class="dropdown_menu">
+                  <div class="option1">플레이 리스트 이름 변경</div>
+                  <div class="option2">플레이 리스트 삭제</div>
+                </div>
               </div>
             </div>
             <div class="playlist_song_num">21곡</div>
@@ -60,5 +71,14 @@
         <div><img src="../img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
+    <script>
+      const dropDown = document.querySelector(".select_btn");
+      dropDown.addEventListener("click", function () {
+        $(".dropdown_menu").css("display", "block");
+      });
+      modalClose.addEventListener("click", function () {
+        modal.classList.remove("on");
+      });
+    </script>
   </body>
 </html>
