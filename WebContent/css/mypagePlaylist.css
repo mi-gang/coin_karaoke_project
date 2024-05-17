@@ -61,3 +61,213 @@
   margin-right: 4.5rem;
   text-align: right;
 }
+
+.create_new_playlist {
+  width: 38.8rem;
+  height: 6.5rem;
+  background-color: #e4e4e4;
+  border-radius: 1.5rem;
+  position: fixed;
+  top: 70.2rem;
+  left: 2.1rem;
+}
+.plus_img {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  margin-top: 1.6rem;
+  margin-left: 3.1rem;
+}
+.create_title {
+  font-size: 200%;
+  font-weight: bold;
+  flex-direction: row;
+  margin-top: 1.6rem;
+  margin-left: 4rem;
+  text-align: right;
+  display: flex;
+}
+.create {
+  display: flex;
+}
+
+.modal_overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: rgba(71, 58, 58, 0.25);
+}
+.modal_overlay.on {
+  display: block;
+}
+
+.modal_overlay2 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: rgba(71, 58, 58, 0.25);
+}
+.modal_overlay2.on {
+  display: block;
+}
+
+.modal_create {
+  width: 35rem;
+  height: 29.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70%;
+  margin-left: 9%;
+  position: absolute;
+  border: 1px solid #d7d7d7;
+  border-radius: 0.5rem;
+  /* display: none;*/
+  background-color: white;
+}
+.close_btn {
+  margin-top: 1.7rem;
+  margin-left: 31.1rem;
+}
+.close_img {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.modal_title {
+  font-size: 240%;
+  margin-top: 7%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-weight: bolder;
+}
+.playlist_list {
+  width: 26.8rem;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid #b6b6b6; */
+  margin-left: 4.1rem;
+  overflow-y: scroll;
+  max-height: 1rem;
+}
+.new_play_list_title {
+  width: 28.5rem;
+  height: 3rem;
+  font-size: 140%;
+  font-weight: bold;
+  margin-top: 2.4rem;
+  margin-left: 3rem;
+  border: none;
+}
+
+.new_play_list_title_input {
+  width: 28.5rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+  border-width: 0 0 1px;
+}
+.confirm_btn {
+  width: 5.7rem;
+  height: 3.5rem;
+  border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2.6rem;
+  margin-left: 40%;
+  margin-bottom: 1rem;
+}
+.delete_modal {
+  width: 35rem;
+  height: 29.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70%;
+  margin-left: 9%;
+  position: absolute;
+  border: 1px solid #d7d7d7;
+  border-radius: 0.5rem;
+  /* display: none;*/
+  background-color: white;
+}
+.modal_playlist_title {
+  margin-top: 5.2rem;
+  color: black;
+  font-weight: bold;
+  font-size: 200%;
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+.delete_alert {
+  font-size: 200%;
+  color: black;
+  text-align: center;
+}
+.delete_alert_red {
+  font-size: 160%;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.cancel_btn {
+  width: 5.7rem;
+  height: 3.5rem;
+  border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: white;
+  color: black;
+  border: 1px solid #e4e4e4;
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2.6rem;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+.btn_group {
+  width: 35rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  background: none;
+}
+.ok_btn {
+  width: 5.7rem;
+  height: 3.5rem;
+  border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2.6rem;
+  margin-bottom: 1rem;
+}
+.close_btn2 {
+  margin-top: 1.7rem;
+  margin-left: 31.1rem;
+}
+.close_img2 {
+  width: 2.4rem;
+  height: 2.4rem;
+}

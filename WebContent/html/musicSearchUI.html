@@ -153,9 +153,12 @@
       modalClose3.addEventListener("click", function () {
         $("#modal_isMember").hide();
       });
+     
 
+      $(".music_output").hide();
       const searchInput = document.querySelector("#search");
       $(".music_search").on("click", function () {
+        $(".music_output").show();
         let data = "";
         $.ajax({
           type: "GET",
