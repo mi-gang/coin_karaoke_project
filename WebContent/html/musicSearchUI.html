@@ -102,14 +102,19 @@
                 value="저장"
               />
             </div>
-              <div class="modal_isMember" id="modal_isMember">
-                  <div class="close_btn3">
-                    <img class="close_img3" src="/img/close.svg" />
-                  </div>
-                  <div class="modal_alert">로그인 유저만 사용할 수 있는 서비스입니다</div>
-                  <input class="login_btn" id="login_move" type="button" value="로그인하러 가기">
-           </div>
+            <div class="modal_isMember" id="modal_isMember">
+              <div class="close_btn3">
+                <img class="close_img3" src="/img/close.svg" />
               </div>
+              <div class="modal_alert">
+                로그인 유저만 사용할 수 있는 서비스입니다
+              </div>
+              <input
+                class="login_btn"
+                id="login_move"
+                type="button"
+                value="로그인하러 가기"
+              />
             </div>
           </div>
         </div>
@@ -153,7 +158,6 @@
       modalClose3.addEventListener("click", function () {
         $("#modal_isMember").hide();
       });
-     
 
       $(".music_output").hide();
       const searchInput = document.querySelector("#search");
