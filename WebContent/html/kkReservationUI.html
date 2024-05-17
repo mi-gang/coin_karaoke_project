@@ -1,56 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>:: 노래방 예약</title>
-    <link
-      rel="stylesheet"
-      href="../css/common.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../css/kkReservationUI.css"
-    />
-    
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <!-- 모바일 컨테이너 -->
-    <div id="mobileContainer">
-        <!--헤더-->
-        <header>
-          <img
-            src="../img/left arrow.svg"
-            alt="이전 페이지 이동"
-          />
-          <span>스타버스 코인노래방</span>
-        </header>
-        <!-- 컨텐츠 컨테이너 -->
-        <div id="container">
-          <div class="infoTxt">* <span>보라색</span>은 청소시간입니다.</div>
-          <div class="timeTableContainer">
-            <div class="timeLine"></div>
-            <div class="roomNTimeTableContainer">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>:: 노래방 예약</title>
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/css/kkReservationUI.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- 모바일 컨테이너 -->
+  <div id="mobileContainer">
+    <!--헤더-->
+    <header>
+      <img src="/img/left arrow.svg" alt="이전 페이지 이동" />
+      <span>스타버스 코인노래방</span>
+    </header>
+    <!-- 컨텐츠 컨테이너 -->
+    <div id="container">
+      <div class="infoTxt">* <span>보라색</span>은 청소시간입니다.</div>
+      <div class="timeTableContainer">
+        <div class="timeLine"></div>
+        <div class="roomNTimeTableContainer">
+          <div id="roomContainer">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div id="roomTypeName" class="roomType btn">2인실 (2)</div>
+          </div>
+          <div id="timeTableContainer">
+            <div class="timeRow">
+              <div class="emptyTime" data-start-time="16:00" data-used-minute="23"></div>
+              <div class="usedTime" data-start-time="16:23" data-used-minute="37"></div>
+              <div class="empty" data-start-time="17:00" data-used-minute="30"></div>
             </div>
-            <!-- <div class="roomTypeNameList">
+            <div class="timeRow">1</div>
+          </div>
+        </div>
+
+
+        <!-- <div class="roomTypeNameList">
               <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
               <div id="roomTypeName" class="roomType btn">2인실 (2)</div>
               <div id="roomTypeName" class="roomType btn">2인실 (3)</div>
@@ -84,111 +77,108 @@
                 </div>
               </div>
             </div> -->
-          </div>
-        </div>
+      </div>
+      <div id="timeTableBorder">
+        <div></div>
+      </div>
+    </div>
 
-        <div id="modal1" class="modal reservationContainer">
-          <div class="modalWrapper">
-            <div class="closeIconWrapper">
-              <img
-              src="../img/close.svg"
-              alt="모달창 닫기"
-              class="closeBtn"
-              />
-            </div>  
-            <div class="reservationFormContainer">
-              <p class="modalTitle">예약하기</p>
-              <div class="roomSelecBoxContainer">
-                <div class="roomBox">
-                  <button class="label">예약하실 방을 선택해주세요.</button>
-                  <img
-                    src="../img/down arrow.svg"
-                    alt="드롭다운"
-                  />
-                  <ul class="roomList">
-                    <!-- <li class="roomItem"></li> -->
-                  </ul>
-                </div>
-              </div>
+    <div id="modal1" class="modal reservationContainer">
+      <div class="modalWrapper">
+        <div class="closeIconWrapper">
+          <img src="/img/close.svg" alt="모달창 닫기" class="closeBtn" />
+        </div>
+        <div class="reservationFormContainer">
+          <p class="modalTitle">예약하기</p>
+          <div class="roomSelecBoxContainer">
+            <div class="roomBox">
+              <button class="label">예약하실 방을 선택해주세요.</button>
+              <img src="/img/down arrow.svg" alt="드롭다운" />
+              <ul class="roomList">
+                <!-- <li class="roomItem"></li> -->
+              </ul>
             </div>
           </div>
         </div>
-        <!-- 하단 메뉴바 -->
-        <nav>
-          <div id="reservationBtn" class="reservation btn">
-            예약하기
-          </div>
-        </nav>
+      </div>
     </div>
-    
-    <script>
-      // let kkRoomCnt = $(".roomType").length;
-      let kkRoomCnt = 12;  // 노래방 방 개수 데이터 불러와서 넣을 곳
-      console.log("노래방 방 개수: ");
-      console.log(kkRoomCnt);
+    <!-- 하단 메뉴바 -->
+    <nav>
+      <div id="reservationBtn" class="reservation btn">
+        예약하기
+      </div>
+    </nav>
+  </div>
 
-      for(let i=0; i<kkRoomCnt; i++) {
-        $(".roomNTimeTableContainer").append("<div class='reservationStatusByRoom'></div>");
-        $(".reservationStatusByRoom").append("<div class='roomTypeName btn'></div>");       
+  <script>
+    // let kkRoomCnt = $(".roomType").length;
+    /*let kkRoomCnt = 12;  // 노래방 방 개수 데이터 불러와서 넣을 곳
+    console.log("노래방 방 개수: ");
+    console.log(kkRoomCnt);
+
+    for (let i = 0; i < kkRoomCnt; i++) {
+      $(".roomNTimeTableContainer").append("<div class='reservationStatusByRoom'></div>");
+      $(".reservationStatusByRoom").append("<div class='roomTypeName btn'></div>");
+    }
+
+    // roomNTimeTableContainer
+
+    if (kkRoomCnt > 10) {
+      console.log("kkRoomCnt 10 초과!");
+      $(".roomNTimeTableContainer").addClass("over10");
+      // $(".roomTimeTableWrapper").addClass("over10");
+
+    } else if (kkRoomCnt > 0 && kkRoomCnt <= 10) {
+      console.log("kkRoomCnt 10 이하!");
+    }*/
+
+    // 구조 수정 전
+    // if(kkRoomCnt > 10) {
+    //   console.log("kkRoomCnt 10 초과!");
+    //   $(".roomTypeNameList").addClass("over10");
+    //   $(".roomTimeTableWrapper").addClass("over10");
+
+    // } else if(kkRoomCnt > 0 && kkRoomCnt <= 10) {
+    //   console.log("kkRoomCnt 10 이하!");
+    //   $(".roomType.btn").css("height", "100%");
+    // }
+
+    // 현재 날짜, 시간 정보
+    let now = new Date();
+    let currentHour = now.getHours();
+
+    for (let i = 0; i < 24; i++) {
+      let hour = currentHour + i;
+      if (hour > 24) {
+        hour = hour - 24;
       }
+      $(".timeLine").append("<div class='time'>" + hour + ":00</div");
+    }
 
-      // roomNTimeTableContainer
+    // 예약하기 버튼 클릭시, 예약하기 모달1 열기
+    $("#reservationBtn").click(function () {
+      $("#modal1").css("display", "flex");
+    });
 
-      if(kkRoomCnt > 10) {
-        console.log("kkRoomCnt 10 초과!");
-        $(".roomNTimeTableContainer").addClass("over10");
-        // $(".roomTimeTableWrapper").addClass("over10");
+    // 예약하기 모달1 닫기
+    // 이용시간 모달 닫기
+    $("#modal1 .closeBtn").on("click", function () {
+      $("#modal1").css("display", "none");
+    });
 
-      } else if(kkRoomCnt > 0 && kkRoomCnt <= 10) {
-        console.log("kkRoomCnt 10 이하!");
+    // 방 선택 드롭박스 열림/닫힘
+    let dropBox = $(".label");
+    dropBox.click(function () {
+      if ($(this).parent().hasClass("active")) {
+        $(this).parent().removeClass("active");
+      } else {
+        $(this).parent().addClass("active");
       }
-      
-      // 구조 수정 전
-      // if(kkRoomCnt > 10) {
-      //   console.log("kkRoomCnt 10 초과!");
-      //   $(".roomTypeNameList").addClass("over10");
-      //   $(".roomTimeTableWrapper").addClass("over10");
+    });
 
-      // } else if(kkRoomCnt > 0 && kkRoomCnt <= 10) {
-      //   console.log("kkRoomCnt 10 이하!");
-      //   $(".roomType.btn").css("height", "100%");
-      // }
-      
-      // 현재 날짜, 시간 정보
-      let now = new Date();
-      let currentHour = now.getHours();
+    //<li class="roomItem"></li>
+  </script>
 
-      for(let i=0; i<24; i++) {
-        let hour = currentHour+i;
-        if(hour > 24) {
-          hour = hour - 24;
-        }
-        $(".timeLine").append("<div class='time'>"+hour+":00</div");
-      }
+</body>
 
-      // 예약하기 버튼 클릭시, 예약하기 모달1 열기
-      $("#reservationBtn").click(function(){
-        $("#modal1").css("display", "flex");
-      });
-      
-      // 예약하기 모달1 닫기
-      // 이용시간 모달 닫기
-      $("#modal1 .closeBtn").on("click", function () {
-        $("#modal1").css("display", "none");
-      });
-
-      // 방 선택 드롭박스 열림/닫힘
-      let dropBox = $(".label");
-      dropBox.click(function() {
-        if($(this).parent().hasClass("active")) {
-          $(this).parent().removeClass("active");
-        } else {
-          $(this).parent().addClass("active");
-        }
-      });
-
-      //<li class="roomItem"></li>
-    </script>
-
-    </body>
 </html>
