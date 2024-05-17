@@ -57,6 +57,67 @@
             </div>
           </div>
         </div>
+        <div class="modal_overlay">
+          <div class="modal_change_title" id="nameChange_playlist">
+            <div class="music_like_modal">
+              <div class="close_btn">
+                <img class="close_img" src="/img/close.svg" />
+              </div>
+              <div class="modal_title">플레이 리스트 이름 변경</div>
+              <div class="new_play_list_title">플레이 리스트 명</div>
+            </div>
+            <input
+              class="new_play_list_title_input"
+              type="text"
+              placeholder="플레이리스트 명을 입력하세요"
+            />
+            <input
+              class="confirm_btn"
+              id="confirm"
+              type="button"
+              value="저장"
+            />
+          </div>
+        </div>
+        <div class="modal_overlay2">
+          <div class="delete_modal">
+            <div class="close_btn2">
+              <img class="close_img2" src="/img/close.svg" />
+            </div>
+            <div class="modal_playlist_title">'회식 음악 리스트'</div>
+            <div class="delete_alert_text">
+              <div class="delete_alert">삭제 하시겠습니까?</div>
+              <div class="delete_alert_red">저장된 음악이 모두 삭제됩니다</div>
+            </div>
+            <div class="btn_group">
+              <input class="ok_btn" id="confirm" type="button" value="확인" />
+              <input
+                class="cancel_btn"
+                id="cancel"
+                type="button"
+                value="취소"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal_overlay3">
+          <div class="delete_music_modal">
+            <div class="close_btn3">
+              <img class="close_img3" src="/img/close.svg" />
+            </div>
+            <div class="modal_playlist_title1">'회식 음악 리스트'</div>
+            <div class="delete_alert1">삭제 하시겠습니까?</div>
+            <div class="btn_group1">
+              <input class="ok_btn1" id="confirm" type="button" value="확인" />
+              <input
+                class="cancel_btn1"
+                id="cancel"
+                type="button"
+                value="취소"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
@@ -72,12 +133,45 @@
       </nav>
     </div>
     <script>
+      var count = 0;
+      const dropDown1 = document.querySelector(".select_btn");
+      dropDown1.addEventListener("click", function () {
+        count++;
+      });
       const dropDown = document.querySelector(".select_btn");
       dropDown.addEventListener("click", function () {
-        $(".dropdown_menu").css("display", "block");
+        if (count == 0 || count % 2 == 0) {
+          $(".dropdown_menu").css("display", "block");
+        } else {
+          $(".dropdown_menu").css("display", "none");
+        }
+      });
+      const modal = document.querySelector(".modal_overlay");
+      const modalOpen = document.querySelector(".option1");
+      const modalClose = document.querySelector(".close_img");
+      modalOpen.addEventListener("click", function () {
+        modal.classList.add("on");
       });
       modalClose.addEventListener("click", function () {
         modal.classList.remove("on");
+      });
+      const modal2 = document.querySelector(".modal_overlay2");
+      const modalOpen2 = document.querySelector(".option2");
+      const modalClose2 = document.querySelector(".close_img2");
+      modalOpen2.addEventListener("click", function () {
+        modal2.classList.add("on");
+      });
+      modalClose2.addEventListener("click", function () {
+        modal2.classList.remove("on");
+      });
+      const modal3 = document.querySelector(".modal_overlay3");
+      const modalOpen3 = document.querySelector(".delete_img");
+      const modalClose3 = document.querySelector(".close_img3");
+      modalOpen3.addEventListener("click", function () {
+        modal3.classList.add("on");
+      });
+      modalClose3.addEventListener("click", function () {
+        modal3.classList.remove("on");
       });
     </script>
   </body>
