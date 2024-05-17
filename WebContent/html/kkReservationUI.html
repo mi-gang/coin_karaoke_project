@@ -12,6 +12,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -31,14 +36,28 @@
           <div id="roomContainer">
             <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
             <div id="roomTypeName" class="roomType btn">2인실 (2)</div>
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div id="roomTypeName" class="roomType btn">2인실 (2)</div>
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div id="roomTypeName" class="roomType btn">2인실 (2)</div>
           </div>
           <div id="timeTableContainer">
             <div class="timeRow">
-              <div class="emptyTime" data-start-time="16:00" data-used-minute="23"></div>
-              <div class="usedTime" data-start-time="16:23" data-used-minute="37"></div>
-              <div class="empty" data-start-time="17:00" data-used-minute="30"></div>
+              <div class="time emptyTime" style="width: 105px;"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px;">
+              </div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px;"></div>
+
+
             </div>
-            <div class="timeRow">1</div>
+            <div class="timeRow"></div>
+            <div class="timeRow"></div>
+            <div class="timeRow"></div>
+            <div class="timeRow"></div>
+            <div class="timeRow"></div>
           </div>
         </div>
 
@@ -111,6 +130,14 @@
   </div>
 
   <script>
+    //bootstrap popover
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+  </script>
+  <script>
+    // 
     // let kkRoomCnt = $(".roomType").length;
     /*let kkRoomCnt = 12;  // 노래방 방 개수 데이터 불러와서 넣을 곳
     console.log("노래방 방 개수: ");

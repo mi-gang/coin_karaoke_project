@@ -69,13 +69,11 @@ p {
   display: grid;
   grid-template-columns: 6rem 1fr;
   height: 64rem;
-  background-color: palegoldenrod;
   overflow: auto;
 
   #roomContainer {
     width: 100%;
     height: 100%;
-    background-color: red;
 
     display: grid;
     grid-template-rows: repeat(auto-fit, minmax(6.4rem, auto));
@@ -85,7 +83,6 @@ p {
   #timeTableContainer {
     width: 100%;
     height: 100%;
-    background-color: blue;
 
     display: grid;
     display: grid;
@@ -94,6 +91,23 @@ p {
 
     .timeRow {
       background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .time {
+        height: 90%;
+      }
+      .emptyTime {
+        background-color: white;
+      }
+      .usedTime {
+        background-color: #e4e4e4;
+      }
+
+      .cleaningTime {
+        background-color: #9747ff;
+      }
     }
   }
 }
@@ -126,16 +140,6 @@ p {
 
 .reservationWrapper {
   height: 2.6rem;
-}
-
-.reservationTime {
-  background-color: #e4e4e4;
-}
-
-.cleaningTime {
-  width: 2.55rem;
-
-  background-color: #9747ff;
 }
 
 /* 예약하기 모달 */
