@@ -43,7 +43,7 @@
   background-color: transparent;
 }
 
-.reservations-status-button:focus {
+.active {
   border: 1px solid #9747ff;
   border-radius: 40px;
   background-color: transparent;
@@ -76,7 +76,7 @@
   row-gap: 2rem;
 }
 
-#reservation_content_wrapper {
+.reservation_content_wrapper {
   display: flex;
   flex-direction: column;
   background: #ffffff;

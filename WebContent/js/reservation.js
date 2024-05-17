@@ -1,16 +1,33 @@
 // 예약 상태 탭 클릭 시
 
-let reservationStatus = $(".reservations-status-button");
+$(".reservations-status-button").on("click", function () {
+  $(".reservations-status-button").removeClass("active");
+  $(this).addClass("active");
+
+  $(".reservation_content_wrapper").hide();
+
+  if ($(this).attr("id") == "status-1") {
+    $(".status-1-1").show();
+    $(".status-1-2").show();
+    return false;
+  }
+  if ($(this).attr("id") == "status-2") {
+    $(".status-2-1").show();
+    $(".status-2-2").show();
+    $(".status-2-3").show();
+    return false;
+  }
+  if ($(this).attr("id") == "status-3") {
+    $(".status-3").show();
+    return false;
+  }
+});
 
 // for (let i = 0; i < reservationStatus.length; i++) {
 //   reservationStatus.on("click", function () {
 //     reservationStatus[i].focus();
 //   });
 // }
-
-reservationStatus.on("click", function () {
-  reservationStatus.focus();
-});
 
 // 시간 추가 버튼 클릭 시 - 시간 추가 모달 설정
 $("#add-time-button").on("click", function () {
