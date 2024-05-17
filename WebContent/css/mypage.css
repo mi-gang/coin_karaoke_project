@@ -1,3 +1,7 @@
+#container {
+  row-gap: 3rem;
+}
+
 #mypage-header {
   display: flex;
   flex-direction: row;
@@ -20,6 +24,38 @@
   border-radius: 40px;
   background-color: transparent;
 }
+
+/* 페이지 공통 */
+.info-setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 1.8rem;
+}
+
+.info-1-setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.info-2-setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.info-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+/*****************************/
 
 #user-info-wrapper {
   display: flex;
@@ -59,4 +95,115 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* 북마크 */
+
+#bookmark-info-wrapper {
+}
+
+#bookmark-info {
+}
+
+#bookmark-info-1 {
+}
+
+#bookmark-info-2 {
+}
+
+/* 폰트/크기 설정 */
+
+.info-bold-text {
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 22px;
+}
+
+.info-amount {
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 19px;
+  color: #a4a4a4;
+}
+
+.info-normal-text {
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 16px;
+}
+
+.arrow-right {
+  width: 1rem;
+  height: 1rem;
+}
+
+.playlist-name {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 16px;
+}
+
+/* 플레이리스트 */
+
+#playlists {
+  display: flex;
+  flex-direction: row;
+  column-gap: 3rem;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.playlist {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 리뷰 */
+
+#review-item {
+  width: 35rem;
+  height: 12rem;
+
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#review-content1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#review-content2 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.8rem;
+}
+
+.review-date {
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+
+  color: #808080;
+}
+
+.review-description {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  padding-top: 0.5rem;
 }
