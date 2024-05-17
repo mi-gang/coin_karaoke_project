@@ -86,9 +86,36 @@
             </div> -->
           </div>
         </div>
+
+        <div id="modal1" class="modal reservationContainer">
+          <div class="modalWrapper">
+            <div class="closeIconWrapper">
+              <img
+              src="../img/close.svg"
+              alt="모달창 닫기"
+              class="closeBtn"
+              />
+            </div>  
+            <div class="reservationFormContainer">
+              <p class="modalTitle">예약하기</p>
+              <div class="roomSelecBoxContainer">
+                <div class="roomBox">
+                  <button class="label">예약하실 방을 선택해주세요.</button>
+                  <img
+                    src="../img/down arrow.svg"
+                    alt="드롭다운"
+                  />
+                  <ul class="roomList">
+                    <!-- <li class="roomItem"></li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- 하단 메뉴바 -->
         <nav>
-          <div class="reservation btn">
+          <div id="reservationBtn" class="reservation btn">
             예약하기
           </div>
         </nav>
@@ -139,6 +166,28 @@
         $(".timeLine").append("<div class='time'>"+hour+":00</div");
       }
 
+      // 예약하기 버튼 클릭시, 예약하기 모달1 열기
+      $("#reservationBtn").click(function(){
+        $("#modal1").css("display", "flex");
+      });
+      
+      // 예약하기 모달1 닫기
+      // 이용시간 모달 닫기
+      $("#modal1 .closeBtn").on("click", function () {
+        $("#modal1").css("display", "none");
+      });
+
+      // 방 선택 드롭박스 열림/닫힘
+      let dropBox = $(".label");
+      dropBox.click(function() {
+        if($(this).parent().hasClass("active")) {
+          $(this).parent().removeClass("active");
+        } else {
+          $(this).parent().addClass("active");
+        }
+      });
+
+      //<li class="roomItem"></li>
     </script>
 
     </body>
