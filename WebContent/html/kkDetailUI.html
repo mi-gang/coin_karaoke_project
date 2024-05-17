@@ -315,6 +315,17 @@
               </div>
             </div>
             <div class="textReviewContainer">
+              <div class="guideWordsNoReview">
+                <p>아직 작성된 상세리뷰가 없습니다</p>
+              </div>
+              <div id="invisibleUnLoginUser" class="invisibleUnLoginUser">
+                <div class="invisibleWrapper">
+                  <p>이 노래방의 상세 리뷰가 궁금하신가요?</p>
+                  <div id="reviewLoginBtn" class="reviewLoginBtn">
+                    로그인하고 리얼 리뷰 보기
+                  </div>
+                </div>
+              </div>
               <div class="reviewItem">
                 <div class="writerInfo">
                   <img
@@ -365,8 +376,11 @@
 
     <script>
       $(document).ready(function () {
+        let isLogin = true;
+
         // tapMenu에 따라 상세정보 변경하기
         $(".tapMenu").click(function () {
+
           $(".tapMenu").removeClass("active");
           $(this).addClass("active");
           let menuType = $(this).data("menu");
@@ -375,8 +389,30 @@
             $("#defaultInfoContainer").addClass("selected");
             $("#reviewContainer").removeClass("selected");
           } else if (menuType === "review") {
-            $("#defaultInfoContainer").removeClass("selected");
-            $("#reviewContainer").addClass("selected");
+            if(isLogin === false) {
+              // 로그인한 유저만 리뷰 볼 수 있도록 가림판
+              $(".reviewItem").css("background-color", "rgba(246,246,246,0.94)");
+              $(".reviewItem").css("color", "rgba(246,246,246,0.94)");
+              $(".reviewContents").css("background-color", "rgba(246,246,246,0.94)");
+              $("#defaultInfoContainer").removeClass("selected");
+              $("#reviewContainer").addClass("selected notLogin");
+              $("#invisibleUnLoginUser").addClass("on");
+            } else {
+              // 가림판 해제
+              $("#invisibleLoginUser").removeClass("on");
+              let detailTxtReviewCnt = 3;  // 임의로 작성한 값
+              if(detailTxtReviewCnt < 1) {
+                $(".textReviewContainer").addClass("noReview");
+                $(".guideWordsNoReview").addClass("on");
+              } else {
+                // $(".invisibleLoginUser").css("display", "none");
+                $(".guideWordsNoReview").removeClass("on");
+                // $("#defaultInfoContainer").removeClass("selected");
+                // $("#reviewContainer").addClass("selected");
+              }
+              $("#defaultInfoContainer").removeClass("selected");
+              $("#reviewContainer").addClass("selected");
+            }
           }
         });
 
@@ -439,6 +475,12 @@
           alert("예약 페이지로 이동!");
           return;
         });
+
+        // 로그인하고 텍스트 리뷰 보기 버튼 클릭시, 로그인 페이지로 이동 (현재는 alert)
+        $("#reviewLoginBtn").click(function() {
+          alert("로그인 페이지로 이동!");
+          return;
+        })
       });
     </script>
   </body>

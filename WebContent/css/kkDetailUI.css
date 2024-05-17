@@ -130,6 +130,7 @@ p {
 }
 
 #reviewContainer {
+    position: relative;
   display: none;
   flex-wrap: wrap;
   /* gap: 5.6rem; */
@@ -240,10 +241,71 @@ p {
   -ms-overflow-style: none; */
 }
 
-/* .textReviewContainer::-webkit-scrollbar {
-  display: none;
+/* 비로그인 회원 리뷰 가림 */
+.invisibleUnLoginUser {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 42.7rem;
+    font-size: 2rem;
+    background-color: rgba(246,246,246,0.94);
+}
+
+.invisibleUnLoginUser.on {
+    display: flex;
+}
+
+.invisibleWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 21.1rem;
+    text-align: center;
+}
+
+.reviewLoginBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16.4rem;
+    height: 1.5rem;
+    padding: 2rem 2.7rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #9747ff;
+    border-radius: 1rem;
+    border: 0.3rem solid #9747ff;
+    cursor: pointer;
+}
+
+/* 상세리뷰 없는 경우 */
+/* .textReviewContainer.noReview {
+    display: none;
 } */
 
+.guideWordsNoReview {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    background-color: #fff;
+}
+.guideWordsNoReview.on {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height:100%;
+    margin-top: 2rem;
+    font-size: 2rem;
+    color: #9747ff;
+}
+
+
+/* 각각의 상세리뷰 */
 .reviewItem {
   display: flex;
   flex-direction: column;
