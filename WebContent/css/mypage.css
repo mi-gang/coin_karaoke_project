@@ -1,0 +1,62 @@
+#mypage-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  /* column-gap: 10rem; */
+  /* padding-left: 3rem; */
+}
+
+.logout-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  width: 8rem;
+  height: 3rem;
+
+  border: 1px solid #fc6262;
+  color: #fc6262;
+  border-radius: 40px;
+  background-color: transparent;
+}
+
+#user-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+}
+
+#mypage-user-icon {
+  width: 6rem;
+  height: 6rem;
+}
+
+#user-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+#user-nickname {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+
+  /* display: flex;
+  align-items: center; */
+}
+
+#edit-user-info-button {
+  width: 111px;
+  height: 31px;
+  left: 140px;
+  top: 157px;
+
+  border: 1px solid #9747ff;
+  border-radius: 40px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
