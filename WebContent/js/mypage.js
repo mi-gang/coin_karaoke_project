@@ -27,4 +27,3 @@ $("#edit-user-info-button").on("click", function () {
 $("#logout-button").on("click", function () {
   alert("action: logout");
 });
-logout - button;
