@@ -1,5 +1,6 @@
 #container {
   row-gap: 3rem;
+  overflow: scroll;
 }
 
 header {
@@ -207,7 +208,7 @@ header {
 
 #review-item {
   width: 35rem;
-  height: 12rem;
+  height: 16rem;
 
   background: #ffffff;
   border: 1px solid #f1f1f1;
@@ -274,4 +275,12 @@ header {
   flex-direction: row;
   column-gap: 0.5rem;
   cursor: pointer;
+}
+
+/* ************** 나의 리뷰 페이지 ******************* */
+
+#review-items {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 }
