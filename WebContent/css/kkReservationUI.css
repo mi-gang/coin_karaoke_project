@@ -752,15 +752,15 @@ nav {
   align-items: center;
 }
 
-.reservation.btn {
+#reservationBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32.4rem;
   height: 6rem;
-  font-size: 2rem;
-  font-weight: 700;
+  border-radius: 1rem;
   color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
   background-color: #9747ff;
-}
-
-#reservationBtn {
-  height: 5rem;
 }
