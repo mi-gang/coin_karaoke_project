@@ -385,6 +385,7 @@
           <div class="searchDate"></div>
           <div class="timeSettingWrapper">
             <div class="timeTypeWrapper">
+              <input id="timeType" type="hidden" />
               <div class="timeType">AM</div>
               <div class="timeType">PM</div>
             </div>
@@ -396,7 +397,7 @@
               <span>:</span>
               <div id="minute" class="time">
                 <p>분</p>
-                <input name="minute" type="number" required />
+                <input name="minute" type="number" />
               </div>
             </div>
           </div>
@@ -606,6 +607,15 @@
       //Modal2: 시작시간
       $("#startTime").on("click", showModal2);
       $("#modal2 .btn.setting, #modal2 .btn.cancel").on("click", hideModal2);
+      // AM/PM 설정: #timeType에 value로 저장
+      $("#modal2 .timeType").on("click", setTimeType);
+      //시, 분 설정:
+
+      function setTimeType(e) {
+        $("#timeType").val(e.target.textContent);
+        $("#modal2 .timeType").removeClass("active");
+        $(e.target).addClass("active");
+      }
       function showModal2() {
         $("#modal2").css("display", "flex");
       }
