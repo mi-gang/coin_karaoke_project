@@ -39,8 +39,8 @@
           />
         </div>
         <div class="ent_button_group">
-          <input class="button" id="TJ" type="button" value="TJ" />
-          <input class="button" id="KY" type="button" value="KY" />
+          <input class="button" id="tj" type="button" value="TJ" />
+          <input class="button" id="kumyoung" type="button" value="KY" />
         </div>
         <div class="music_list_output">
           <div class="music_output" id="music_output">
@@ -51,70 +51,6 @@
             </div>
             <div class="music_like">
               <img class="like_img" src="/img/folder_open.svg" />
-            </div>
-          </div>
-          <div class="modal_overlay">
-            <div class="modal_playlist" id="modal_playlist">
-              <div class="music_like_modal">
-                <div class="close_btn">
-                  <img class="close_img" src="/img/close.svg" />
-                </div>
-                <div class="modal_title">내 음악에 저장하기</div>
-                <div class="playlist_list">
-                  <span class="playlist">
-                    <img class="like_btn" src="/img/folder_open.svg" />
-                    <span class="list_title">음악 리스트</span>
-                  </span>
-                </div>
-              </div>
-              <div class="create_music_list">
-                <img class="plus_img" src="/img/add_circle_outline.svg" />
-                <span class="create_title">신규 플레이리스트 생성</span>
-              </div>
-              <input
-                class="confirm_btn"
-                id="confirm"
-                type="button"
-                value="저장"
-              />
-            </div>
-            <div
-              class="modal_create"
-              id="create_playlist"
-              style="display: none"
-            >
-              <div class="music_like_modal">
-                <div class="close_btn2">
-                  <img class="close_img2" src="/img/close.svg" />
-                </div>
-                <div class="modal_title">새 플레이 리스트</div>
-                <div class="new_play_list_title">플레이 리스트 명</div>
-              </div>
-              <input
-                class="new_play_list_title_input"
-                type="text"
-                placeholder="플레이리스트 명을 입력하세요"
-              />
-              <input
-                class="confirm_btn"
-                id="confirm"
-                type="button"
-                value="저장"
-              />
-            </div>
-            <div class="modal_isMember" id="modal_isMember">
-              <div class="close_btn3">
-                <img class="close_img3" src="/img/close.svg" />
-              </div>
-              <div class="modal_alert">
-                로그인 유저만 사용할 수 있는 서비스입니다
-              </div>
-              <input
-                class="login_btn"
-                id="login_move"
-                type="button"
-                value="로그인하러 가기"
-              />
             </div>
           </div>
         </div>
@@ -130,23 +66,91 @@
         <div><img src="/img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
+    <div class="modal_overlay">
+      <div class="modal_playlist" id="modal_playlist">
+        <div class="music_like_modal">
+          <div class="close_btn">
+            <img class="close_img" src="/img/close.svg" />
+          </div>
+          <div class="modal_title">내 음악에 저장하기</div>
+          <div class="playlist_list">
+            <span class="playlist">
+              <img class="like_btn" src="/img/folder_open.svg" />
+              <span class="list_title">음악</span>
+            </span>
+          </div>
+        </div>
+        <div class="create_music_list">
+          <img class="plus_img" src="/img/add_circle_outline.svg" />
+          <span class="create_title">신규 플레이리스트 생성</span>
+        </div>
+        <input class="confirm_btn" id="confirm" type="button" value="저장" />
+      </div>
+      <div class="modal_create" id="create_playlist" style="display: none">
+        <div class="music_like_modal">
+          <div class="close_btn2">
+            <img class="close_img2" src="/img/close.svg" />
+          </div>
+          <div class="modal_title">새 플레이 리스트</div>
+          <div class="new_play_list_title">플레이 리스트 명</div>
+        </div>
+        <input
+          class="new_play_list_title_input"
+          type="text"
+          placeholder="플레이리스트 명을 입력하세요"
+        />
+        <input class="confirm_btn" id="confirm" type="button" value="저장" />
+      </div>
+      <div class="modal_isMember" id="modal_isMember">
+        <div class="close_btn3">
+          <img class="close_img3" src="/img/close.svg" />
+        </div>
+        <div class="modal_alert">로그인 유저만 사용할 수 있는 서비스입니다</div>
+        <input
+          class="login_btn"
+          id="login_move"
+          type="button"
+          value="로그인하러 가기"
+        />
+      </div>
+    </div>
     <script>
       // const ent = document.querySelector(".button");
       // ent.addEventListener("click", function () {
       //   ent.classList.add("on");
       //   console.log(ent.value);
       // });
-      // $(document).ready(function () {
-      //   $("#TJ").click();
-      // });
-      const ent = document.querySelector(".button");
-
+      $(document).ready(function () {
+        $("#tj").click();
+      });
+      // const ent = document.querySelector(".button");
+      //클릭한 버튼 값 가지고 오기
+      $(".button").on("click", function () {
+        var entInput = this.id;
+        // console.log(entInput);
+      });
+      const ent = $(".button").get();
+      let button = "";
+      ent.forEach(function (option) {
+        option.addEventListener("click", function () {
+          ent.forEach(function (item) {
+            item.classList.remove("on");
+          });
+          option.classList.add("on");
+        });
+      });
       const modal = document.querySelector(".modal_overlay");
       const modalOpen = document.querySelector(".like_img");
+      $(".music_list_output").on("click", ".music_output .like_img", () =>
+        modal.classList.add("on")
+      );
+
       const modalClose = document.querySelector(".close_img");
       modalOpen.addEventListener("click", function () {
         modal.classList.add("on");
       });
+      // $(".music_like").on("click", ".like_img", function () {});
+
       modalClose.addEventListener("click", function () {
         modal.classList.remove("on");
       });
@@ -171,12 +175,10 @@
 
       $(".music_output").hide();
       const searchInput = document.querySelector("#search");
-      const entInput = document.querySelector(".button");
-      if (entInput.value == "TJ") {
-        entInput.value = "tj";
-        console.log(entInput.value);
-      }
+      // const entInput = document.querySelector(".button.on");
       $(".music_search").on("click", function () {
+        // console.log($(".on").attr("id"));
+        entInput = $(".on").attr("id");
         $(".music_output").show();
         let data = "";
         $.ajax({
@@ -185,7 +187,7 @@
             "https://api.manana.kr/karaoke/song/" +
             searchInput.value +
             "/" +
-            entInput.value +
+            entInput +
             ".json",
           data: {},
           success: function (response) {

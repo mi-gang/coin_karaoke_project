@@ -235,15 +235,14 @@ input {
   height: auto;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid #b6b6b6; */
   margin-left: 4.1rem;
   overflow-y: scroll;
-  max-height: 1rem;
+  max-height: 15rem;
 }
 
-/* .playlist_list::-webkit-scrollbar {
+.playlist_list::-webkit-scrollbar {
   display: none;
-} */
+}
 .playlist {
   width: 22.5rem;
   height: 4.8rem;
@@ -258,7 +257,7 @@ input {
 }
 
 .playlist_list::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 .like_btn {
   width: 2.4rem;
