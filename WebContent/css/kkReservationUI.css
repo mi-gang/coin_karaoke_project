@@ -145,7 +145,7 @@ p {
   justify-content: center;
   align-items: center;
   left: 0;
-  bottom: 0;
+  top: 32.1rem;
   z-index: 999;
   width: 100%;
   height: 61.1rem;
@@ -279,7 +279,7 @@ p {
   align-items: center;
   height: 8.1rem;
   border-top: 1px solid #b6b6b6;
-  border-bottom: 1px solid #b6b6b6;
+  /* border-bottom: 1px solid #b6b6b6; */
 }
 
 .timeType {
@@ -343,6 +343,7 @@ input[readonly]:focus {
 
 .btn.cancel {
   color: #979797;
+  background-color: #e4e4e4;
 }
 
 .btn.submit {
@@ -353,6 +354,7 @@ input[readonly]:focus {
 #modal2 {
   /* position: absolute; */
   /* display: none; */
+
   background-color: #fff;
 
   &.modal {
@@ -361,7 +363,7 @@ input[readonly]:focus {
     justify-content: center;
     align-items: center;
     left: 0;
-    bottom: 0;
+    top: 52.2rem;
     z-index: 999;
     width: 100%;
     height: 41rem;
@@ -381,7 +383,7 @@ input[readonly]:focus {
     height: 34.3rem;
   }
 
-  &.timeTypeWrapper {
+  .timeTypeWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -456,7 +458,7 @@ input[readonly]:focus {
     display: flex;
     justify-content: space-between;
     width: 32rem;
-    margin-top: 4rem;
+    margin: 4rem auto;
   }
 
   .btn {
@@ -492,7 +494,7 @@ input[readonly]:focus {
     justify-content: center;
     align-items: center;
     left: 0;
-    bottom: 0;
+    top: 52.2rem;
     z-index: 999;
     width: 100%;
     height: 41rem;
@@ -563,11 +565,13 @@ input[readonly]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4.8rem;
+    /* width: 4.8rem;
     height: 2.3rem;
+    padding: 1.6rem 4.7rem; */
     margin-top: 4rem;
-    padding: 1.6rem 4.7rem;
     font-size: 2.5rem;
+    padding: 1rem 4rem;
+    border-radius: 1rem;
     font-weight: 700;
     color: #fff;
     cursor: pointer;
@@ -648,7 +652,7 @@ input[readonly]:focus {
     flex-wrap: wrap;
     height: 8.1rem;
     border-top: 1px solid #b6b6b6;
-    border-bottom: 1px solid #b6b6b6;
+    /* border-bottom: 1px solid #b6b6b6; */
   }
 
   .paymentInfo {
