@@ -40,7 +40,7 @@
   justify-content: center;
   background: none;
 }
-.TJ_button {
+.button {
   flex-basis: auto;
   width: 7rem;
   height: 3.5rem;
@@ -51,7 +51,19 @@
   border-radius: 4rem;
   font-size: 150%;
 }
-.KY_button {
+.button.on {
+  flex-basis: auto;
+  width: 7rem;
+  height: 3.5rem;
+  position: relative;
+  margin-right: 0.5rem;
+  background: #9747ff;
+  border-radius: 4rem;
+  font-size: 150%;
+  color: white;
+  box-shadow: 5px 5px 5px;
+}
+/* .KY_button {
   flex-basis: auto;
   width: 7rem;
   height: 3.5rem;
@@ -60,7 +72,7 @@
   background: white;
   border-radius: 4rem;
   font-size: 150%;
-}
+} */
 .ent_button {
   flex-basis: auto;
   width: 7rem;

@@ -39,8 +39,8 @@
           />
         </div>
         <div class="ent_button_group">
-          <input class="TJ_button" id="TJ" type="button" value="TJ" />
-          <input class="KY_button" id="KY" type="button" value="KY" />
+          <input class="button" id="TJ" type="button" value="TJ" />
+          <input class="button" id="KY" type="button" value="KY" />
         </div>
         <div class="music_list_output">
           <div class="music_output" id="music_output">
@@ -131,6 +131,14 @@
       </nav>
     </div>
     <script>
+      const ent = document.querySelector(".button");
+      ent.addEventListener("click", function () {
+        ent.classList.add("on");
+        console.log(ent.value);
+      });
+      $(document).ready(function () {
+        $("#TJ").click();
+      });
       const modal = document.querySelector(".modal_overlay");
       const modalOpen = document.querySelector(".like_img");
       const modalClose = document.querySelector(".close_img");
@@ -161,17 +169,24 @@
 
       $(".music_output").hide();
       const searchInput = document.querySelector("#search");
+      const entInput = document.querySelector(".button");
+      if (entInput.value == "TJ") {
+        entInput.value = "tj";
+      }
       $(".music_search").on("click", function () {
         $(".music_output").show();
         let data = "";
         $.ajax({
           type: "GET",
           url:
-            "https://api.manana.kr/karaoke/song/" + searchInput.value + ".json",
+            "https://api.manana.kr/karaoke/song/" +
+            searchInput.value +
+            "/" +
+            entInput.value +
+            ".json",
           data: {},
           success: function (response) {
             // 서버에서 준 결과를 response라는 변수에 담음
-            console.log(response);
             result_data = response; //JSON.parse()
 
             for (const value of result_data) {
@@ -186,7 +201,6 @@
              </div>`;
             }
             $(".music_list_output").html(data);
-            console.log(response);
           },
         });
       });
