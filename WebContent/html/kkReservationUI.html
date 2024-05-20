@@ -87,6 +87,7 @@
           </div>
         </div>
 
+        <!-- 예약하기 모달(#modal1) -->
         <div id="modal1" class="modal reservationContainer">
           <div class="modalWrapper">
             <div class="closeIconWrapper">
@@ -125,7 +126,7 @@
                   <div class="timeType">이용 시간</div>
                   <div class="timeSettingWrapper">
                     <div id="hoursOfUse" class="timeSettingItem item3">
-                      <input id="hiddenTime3" type="hidden" />
+                      <input id="hiddenTime2" type="hidden" />
                       <input readonly placeholder="-- : --" />
                       <img src="../img/down arrow.svg" alt="드롭다운" />
                     </div>
@@ -149,6 +150,7 @@
           </div>
         </div>
 
+        <!-- 시작시간 설정 모달(#modal2) -->
         <div id="modal2" class="modal startTime">
             <div class="modalContent">
               <div class="searchDate"></div>
@@ -189,7 +191,7 @@
             </div>
         </div>
 
-        <!-- id="usingTimeModal"  class="modal usingTime" -->
+        <!-- 이용시간 설정 모달(#modal3) -->
         <div
             id="modal3"
             class="modal usingTime"
@@ -227,6 +229,74 @@
             </div>
         </div>
 
+        <!-- 예약 내용 확인 모달(#modal4) -->
+        <div id="modal4" class="modal checkReservation">
+          <div class="modalWrapper">
+            <div class="closeIconWrapper">
+              <img
+              src="../img/close.svg"
+              alt="모달창 닫기"
+              class="closeBtn"
+              />
+            </div>  
+            <div class="reservationFormContainer">
+              <p class="modalTitle">예약 내용을<br/>다시 한 번 확인해주세요</p>
+              <div class="kkRoomInfo">
+                <span class="kkRoomName"></span> <!--선택한 노래방 상호명_피그마: 스타버스 코인노래방-->
+                <span class="kkRoomType"></span> <!--#modal1에서 선택한 노래방 타입-->
+              </div>
+              <div class="reservateDate"></div>
+              <div class="reservationTimeFormContainer">
+                <div class="timeWrapper">
+                  <div class="timeType">시작 시간</div>
+                  <div class="timeSettingWrapper">
+                    <div id="startTime" class="timeSettingItem">
+                      <input id="hiddenTime1" type="hidden"/>
+                      <input id="startTimeInput" readonly placeholder="-- : --" value=""/>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeWrapper">
+                  <div class="timeType">이용 시간</div>
+                  <div class="timeSettingWrapper">
+                    <div id="hoursOfUse" class="timeSettingItem item3">
+                      <input id="hiddenTime2" type="hidden" />
+                      <input readonly placeholder="-- : --" />
+                    </div>
+                  </div>
+                </div>
+                <div class="timeWrapper">
+                  <div class="timeType">이용 종료 시간</div>
+                  <div class="timeSettingWrapper">
+                    <div id="endTime" class="timeSettingItem">
+                      <input id="hiddenTime3" type="hidden" />
+                      <input id="endTimeInput" readonly placeholder="-- : --" />
+                    </div>
+                  </div>
+                </div>
+                <p class="paymentInfo">결제금액: <span>4,000</span>원</p>
+                <div class="m4btnContainer">
+                  <div class="btn back">이전</div> <!--클릭 시, #modal4 창 닫고, #modal3 보이기-->
+                  <div class="btn submit">결제</div> <!--클릭 시, #modal4 창 닫고,결제 완료 모달(#modal5) 보이기-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- 결제 및 예약 완료 모달(#modal5) -->
+        <div id="modal5" class="modal5Background">
+          <div class="modal">
+            <div class="contentsContainer">
+              <p class="largeTxt">결제 및 예약이<br/>확정되었습니다.</p>
+              <p class="smallTxt">이용 시작 <span>20분 전</span>부터는 취소 수수료가<br/>부과되는 점 참고해주세요!</p>
+              <div class="btn">나의 예약 보기</div>
+            </div>
+          </div>
+        </div>
+
         
         <!-- 하단 메뉴바 -->
         <nav>
@@ -234,7 +304,7 @@
             예약하기
           </div>
         </nav>
-    </div>
+    
     
     <script>
       // let kkRoomCnt = $(".roomType").length;
@@ -259,8 +329,6 @@
       if(kkRoomCnt > 10) {
         console.log("kkRoomCnt 10 초과!");
         $(".roomNTimeTableContainer").addClass("over10");
-        // $(".roomTimeTableWrapper").addClass("over10");
-
       } else if(kkRoomCnt > 0 && kkRoomCnt <= 10) {
         console.log("kkRoomCnt 10 이하!");
       }
@@ -299,9 +367,8 @@
       });
 
       $("#modal1 .btn.cancel").click(function() {
-          console.log("모달2 취소버튼 클릭");
-          $("#modal1").css("display", "none");
-        })
+        $("#modal1").css("display", "none");
+      })
 
       // 예약하기 모달 - 방 선택 드롭박스 열림/닫힘
       dropBox.click(function() {
@@ -329,6 +396,8 @@
 
       // 예약하기 모달 - 시간 설정폼
       // 년 월+1 일 요일(0: 일요일, 6: 토요일)
+      let date = now.getFullYear()+"."+(now.getMonth()+1)+"."+now.getDate()+".";
+      
       let currentYear = now.getFullYear();
       let currentMonth = now.getMonth()+1;
       let currentDate = now.getDate();
@@ -397,35 +466,59 @@
 
       // 모달2 시간에 따라 searchDate 오늘/내일로 변경
       $(document).ready(function() {
-        console.log("현재 날짜 및 시간");
-        console.log(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")"+now.getHours()+":"+now.getMinutes());
         $("#modal2 #hour input").on("input", function() {
           console.log($(this).val());
-          // 계산을 하려면 할 수는 있는데, 17일 오후10시에 18일 오후 5시가 궁금한 경우도 자동변환? or 선택하도록?
-          if(timeType === "PM" && parseInt($(this).val())+12 > now.getHours) {
+          if((timeType === "PM" && parseInt($(this).val())+12 < now.getHours()) || (timeType === "AM" && parseInt($(this).val()) < now.getHours())) {
+            currentDay = now.getDay() + 1;
+            switch(currentDay) {
+              case 0:
+                currentDay = "일";
+                break;
+              case 1:
+                currentDay = "월";
+                break;
+              case 2:
+                currentDay = "화";
+                break;
+              case 3:
+                currentDay = "수";
+                break;
+              case 4:
+                currentDay = "목";
+                break;
+              case 5:
+                currentDay = "금";
+                break;
+              case 6:
+                currentDay = "토";
+                break;
+            }
             console.log("계산한 날짜 및 시간");
-            console.log(currentYear+"."+currentMonth+"."+(currentDate+1)+"("+(currentDay+1)+")");
+            console.log(currentYear+"."+currentMonth+"."+(currentDate+1)+"("+(currentDay)+")");
+            $(".searchDate").html(currentYear+"."+currentMonth+"."+(currentDate+1)+"("+currentDay+")");
+          } else {
+            $(".searchDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
           }
         })
      });
 
-      $(".searchDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
-      
-
-      // // AM, PM 선택한 div에 테두리 색 변경
-      // timeTypes.forEach(function (option) {
-      //   option.addEventListener("click", function () {
-      //     timeTypes.forEach(function (item) {
-      //         item.classList.remove("active");
-      //     });
-      //     option.classList.add("active");
-      //     timeType = option.innerHTML;
-      //   });
-      // });
+      // $(".searchDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
 
       // 모달(modal2) 취소(닫기)
       $("#modal2 .btn.cancel").click(function() {
         $("#modal2").css("display", "none");
+      });
+
+
+      // modal1의 시작시간(#hiddenTime1)이 변경되어 내일로 날짜가 바뀌면 업데이트하도록
+      $("#modal2 #hour input").on("DOMSubtreeModified", function() {
+        console.log($(this).val());
+        if($("hiddenTime1").val() == "") {
+          console.log("hiddenTime1 빈 값 상태");
+          $(".reservateDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
+        } else {
+          $(".reservateDate").html($(".searchDate").val());
+        }
       });
 
       // 모달(modal2) 설정 버튼 클릭
@@ -455,9 +548,88 @@
         startTimeInput.val(hour + ":" + minute);
         $("#startTimeInput").val(hour + ":" + minute);
         $("#hiddenTime1").val(hour + ":" + minute);
+        // // modal1의 시작시간(#hiddenTime1)이 변경되어 내일로 날짜가 바뀌면 업데이트하도록
+        // $("#hiddenTime1").on("DOMSubtreeModified", function() {
+        //   console.log($(this).val());
+        //   if($("hiddenTime1").val() == "") {
+        //     console.log("hiddenTime1 빈 값 상태");
+        //     $(".reservateDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
+        //   } else {
+        //     $(".reservateDate").html($(".searchDate").val());
+        //   }
+        // });
 
-        $("#modal2").css("display", "none");
-      });
+        // // 검색하는 시작 시간이 자정을 넘겨 내일이라면 reservateDate + 1
+        // console.log("현재 시간 정보");
+        // console.log(now.getHours);
+        // console.log(now.getMinutes);
+        // console.log("시작 시간 정보");
+        // console.log(parseInt(hour));
+        // console.log(parseInt(minute));
+
+        if(now.getHours() >= 12 && parseInt(hour) < 12 && timeType === "AM") {
+          console.log("지금 오후 12시인데 시작시간이 새벽 2시라면 5.21");
+          currentDay = now.getDay() + 1;
+          switch(currentDay) {
+            case 0:
+              currentDay = "일";
+              break;
+            case 1:
+              currentDay = "월";
+              break;
+            case 2:
+              currentDay = "화";
+              break;
+            case 3:
+              currentDay = "수";
+              break;
+            case 4:
+              currentDay = "목";
+              break;
+            case 5:
+              currentDay = "금";
+              break;
+            case 6:
+              currentDay = "토";
+              break;
+          }
+          
+          $(".reservateDate").html(currentYear+"."+currentMonth+"."+(currentDate+1)+"("+currentDay+")");
+
+        }
+        if(timeType==="PM" && parseInt(hour) < 12 && now.getHours() >= 12 && (parseInt(hour)+12) > now.getHours()) {
+          console.log("지금 체크 else if");
+          currentDay = now.getDay();
+          switch(currentDay) {
+            case 0:
+              currentDay = "일";
+              break;
+            case 1:
+              currentDay = "월";
+              break;
+            case 2:
+              currentDay = "화";
+              break;
+            case 3:
+              currentDay = "수";
+              break;
+            case 4:
+              currentDay = "목";
+              break;
+            case 5:
+              currentDay = "금";
+              break;
+            case 6:
+              currentDay = "토";
+              break;
+          }
+          $(".searchDate").html(currentYear+"."+currentMonth+"."+(currentDate)+"("+currentDay+")");
+          $(".reservateDate").html(currentYear+"."+currentMonth+"."+(currentDate)+"("+currentDay+")");
+        } //else if(timeType==="AM" && parseInt(hour) < 12 && now.getHours() >= 12 && (parseInt(hour)+12) > now.getHours()) {
+        // $(".reservateDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
+
+          $("#modal2").css("display", "none");
+        });
 
 
       // 이용시간 설정 모달(modal3) 내용
@@ -496,7 +668,8 @@
                 hour = 0;
             }
             usingTimeInput.val(hour+":"+minute);
-            $("#hiddenTime3").val(hour + ":" + minute);
+            $("#hiddenTime2").val(hour + ":" + minute);
+            // $("#hiddenTime3").val(hour + ":" + minute);
         }
 
         // 이용 종료 시간 계산
@@ -509,7 +682,7 @@
         let tmpHour;
         let tmpMinute;
         
-        if(startMinute + minute > 59) {
+        if(startMinute + parseInt(minute) > 59) {
           tmpHour = startHour + parseInt(hour) + 1;
           tmpMinute = startMinute + parseInt(minute) - 60;
           if(startHour + parseInt(hour) > 24) {
@@ -520,16 +693,246 @@
           tmpMinute = startMinute + parseInt(minute);
           if(startHour + parseInt(hour) > 24) {
             tmpHour = startHour + parseInt(hour) - 24;
+
+            // 이용 종료 시간이 자정을 넘겨 내일 시도2
+            let tmpDay1 = now.getDay();
+            let tmpDay2 = now.getDay()+1;
+
+            switch(tmpDay1) {
+              case 0:
+              tmpDay1 = "일";
+                break;
+              case 1:
+              tmpDay1 = "월";
+                break;
+              case 2:
+              tmpDay1 = "화";
+                break;
+              case 3:
+              tmpDay1 = "수";
+                break;
+              case 4:
+              tmpDay1 = "목";
+                break;
+              case 5:
+              tmpDay1 = "금";
+                break;
+              case 6:
+              tmpDay1 = "토";
+                break;
+            }
+            switch(tmpDay2) {
+              case 0:
+              tmpDay2 = "일";
+                break;
+              case 1:
+              tmpDay2 = "월";
+                break;
+              case 2:
+              tmpDay2 = "화";
+                break;
+              case 3:
+              tmpDay2 = "수";
+                break;
+              case 4:
+              tmpDay2 = "목";
+                break;
+              case 5:
+              tmpDay2 = "금";
+                break;
+              case 6:
+              tmpDay2 = "토";
+                break;
+            }
+
+            $(".reservateDate").html(currentYear+"."+currentMonth+"."+now.getDate()+"("+tmpDay1+")"
+           +" ~ " + currentYear+"."+currentMonth+"."+(now.getDate()+1)+"("+tmpDay2+")");
           }
         }
 
         endingTime = tmpHour + ":" + tmpMinute;
         console.log(endingTime);
-        useEndingTimeInput.val(endingTime);
-        $("#hiddenTime3").val(endingTime);
+
+         // 이용 종료시간이 자정을 넘겨 내일이라면 reservateDate + 1
+         console.log("이용 종료시간이 자정 넘겨 내일 ...");
+         console.log("시작시간(modal1)");
+         let modal1TimeInfo = $("#hiddenTime1").val().split(":");
+         let modal1Hour = modal1TimeInfo[0];
+         let modal1Minute = modal1TimeInfo[1];
+
+         // reservateDate에 표기할 년, 월, 일, 시, 요일
+         let reservateYear = currentYear;
+         let reservateMonth = currentMonth;
+         let reservateDate = currentDate;
+         let reservateDay = now.getDay();
+
+         /*
+         if((now.getHours() < 12 && now.getHours() > modal1Hour) || (now.getHours() > 12 && now.getHours() > modal1Hour)) {
+          let tmpDay = now.getDay();
+          switch(tmpDay) {
+            case 0:
+            tmpDay = "일";
+              break;
+            case 1:
+            tmpDay = "월";
+              break;
+            case 2:
+            tmpDay = "화";
+              break;
+            case 3:
+            tmpDay = "수";
+              break;
+            case 4:
+            tmpDay = "목";
+              break;
+            case 5:
+            tmpDay = "금";
+              break;
+            case 6:
+            tmpDay = "토";
+              break;
+          }
+          $(".reservateDate").html(currentYear+"."+currentMonth+"."+(now.getDate()+1)+"("+tmpDay+")");
+         } else if(now.getHours() > 12 && modal1Hour > now.getHours() && modal1Hour < 24 && tmpHour < modal1Hour) {
+          let tmpDay1 = now.getDay();
+          let tmpDay2 = now.getDay()+1;
+
+          switch(tmpDay1) {
+            case 0:
+            tmpDay1 = "일";
+              break;
+            case 1:
+            tmpDay1 = "월";
+              break;
+            case 2:
+            tmpDay1 = "화";
+              break;
+            case 3:
+            tmpDay1 = "수";
+              break;
+            case 4:
+            tmpDay1 = "목";
+              break;
+            case 5:
+            tmpDay1 = "금";
+              break;
+            case 6:
+            tmpDay1 = "토";
+              break;
+          }
+          switch(tmpDay2) {
+            case 0:
+            tmpDay2 = "일";
+              break;
+            case 1:
+            tmpDay2 = "월";
+              break;
+            case 2:
+            tmpDay2 = "화";
+              break;
+            case 3:
+            tmpDay2 = "수";
+              break;
+            case 4:
+            tmpDay2 = "목";
+              break;
+            case 5:
+            tmpDay2 = "금";
+              break;
+            case 6:
+            tmpDay2 = "토";
+              break;
+          }
+
+          $(".reservateDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+tmpDay1+")"
+           +" ~ " + currentYear+"."+currentMonth+"."+(currentDate+1)+"("+tmpDay2+")");
+         } else {$(".reservateDate").html(currentYear+"."+currentMonth+"."+(currentDate)+"("+(currentDay)+")");
+
+         }
+         */
+        // if((now.getHours() < 12) && (now.getHours() + parseInt(hour) > 23)) {
+        //   $(".reservateDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")"
+        // +" ~ " + currentYear+"."+currentMonth+"."+(currentDate+1)+"("+(currentDay+1)+")");
+        // } else if ((now.getHours > 12) && (now.getHours() + parseInt(hour) > 23)) {
+        //   $(".reservateDate").html(currentYear+"."+currentMonth+"."+currentDate+"("+currentDay+")");
+        // }
+
+        useEndingTimeInput.val(tmpHour + ":" + tmpMinute);
+        $("#hiddenTime3").val(tmpHour + ":" + tmpMinute);
+        // useEndingTimeInput.val(endingTime);
+        // $("#hiddenTime3").val(endingTime);
 
         $("#modal3").css("display", "none");
+      })
+
+      // 예약하기 모달 -> 예약확인 모달
+      $("#modal1 .btn.submit").on("click", function() {
+        console.log($("#modal1 .label").text());
+        console.log($("#modal1 #hiddenTime1").val());
+        console.log($("#modal1 #hiddenTime2").val());
+        console.log($("#modal1 #hiddenTime3").val());
+
+        if(($("#modal1 .label").text() == "예약하실 방을 선택해주세요.") || ($("#modal1 #hiddenTime1").val() == "") || ($("#modal1 #hiddenTime2").val() == "")) {
+          alert("예약하실 방, 이용 시작 시간, 이용 시간 모두 입력해주세요!");
+        } else {
+          $("#modal4 .kkRoomName").html($("header span").text());
+          $("#modal4 .kkRoomType").html($("#modal1 .label").text());
+          $("#modal4 .reservateDate").html($("#modal1 .reservateDate").text());
+          $("#modal4 #hiddenTime3").val($("#modal1 #hiddenTime3").val());
+
+          $("#modal4").css("display", "flex");
+        }
+      })
+
+      // 예약확인 모달(#modal4) 창 닫기
+      // 예약하기 모달1 닫기
+      $("#modal4 .closeBtn").on("click", function () {
+        $("#modal4").css("display", "none");
       });
+
+      // 예약확인 모달 '이전'버튼 클릭 -> 예약 모달(#modal1)
+      // 예약하기 모달1 닫기
+      $("#modal4 .btn.back").on("click", function () {
+        $("#modal4").css("display", "none");
+      });
+
+      // 예약확인 모달의 '결제' 버튼 클릭하면 결제 및 예약 최종 완료
+      $("#modal4 .btn.submit").on("click", function () {
+        $("#modal1").css("display", "none");
+        $("#modal4").css("display", "none");
+        // $("#modal5").css("display", "flex");
+        // (비동기)결제 요청 보내기 -> 서버 요청 결과에 따라 #modal5를 보여주거나, 예약에 실패하거나의 결과
+        async function() {
+          // Fetch 요청 옵션
+          const fetchOptions = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", // 요청 본문 형식
+            },
+            body: JSON.stringify({}), // 전송할 JSON 데이터
+          };
+
+          // Fetch 요청 전송
+          try {
+            const response = await fetch("/api/addReservation", fetchOptions);
+            const responseData = await response.json();
+
+            if(responseData.success) {
+              console.log("예약 성공!");
+            } else {
+              console.error("예약 실패", responseData.message);
+            }
+          } catch(error) {
+            console.log("Fetch요청 오류", error);
+          }
+        }
+      });
+
+      // 예약 최종 모달(#modal5)의 '나의 예약 보기' 클릭 -> 마이페이지 예약내역
+      $("#modal5 .btn").on("click", function() {
+        alert("마이페이지 - 예약 내역으로 이동!");
+        $("#modal5").css("display", "none");
+      })
     </script>
     </body>
 </html>
