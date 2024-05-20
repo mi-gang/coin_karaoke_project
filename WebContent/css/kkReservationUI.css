@@ -753,11 +753,14 @@ nav {
 }
 
 .reservation.btn {
-  width: 7.4rem;
-  height: 2rem;
-  padding: 1.7rem 16.2rem;
+  width: 32.4rem;
+  height: 6rem;
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
   background-color: #9747ff;
+}
+
+#reservationBtn {
+  height: 5rem;
 }
