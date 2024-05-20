@@ -205,7 +205,34 @@
              <img class="like_img" src="/img/folder_open.svg"></div>
              </div>`;
             }
-            $(".music_list_output").html(data);
+            $.ajax({
+              type: "GET",
+              url:
+                "https://api.manana.kr/karaoke/singer/" +
+                searchInput.value +
+                "/" +
+                entInput +
+                ".json",
+              data: {},
+              success: function (response) {
+                // 서버에서 준 결과를 response라는 변수에 담음
+                result_data = response; //JSON.parse()
+
+                for (const value of result_data) {
+                  data += `<div class="music_output" id="music_output">
+            <div class="music_num">${value.no}</div>
+            <div class="music_info">
+              <span class="music_title">${value.title}</span>
+              <span class="music_singer">${value.singer}</span>
+            </div>
+            <div class="music_like">
+             <img class="like_img" src="/img/folder_open.svg"></div>
+             </div>`;
+                }
+                $(".music_list_output").html(data);
+              },
+            });
+            // $(".music_list_output").html(data);
           },
         });
       });
