@@ -128,6 +128,16 @@ p {
   height: 2.6rem;
 }
 
+.reservationTime {
+  background-color: #e4e4e4;
+}
+
+.cleaningTime {
+  width: 2.55rem;
+
+  background-color: #9747ff;
+}
+
 /* 예약하기 모달 */
 #modal1 {
   display: none;
@@ -150,7 +160,6 @@ p {
   align-items: center;
   width: 38rem;
   height: 57.2rem;
-  border: 1px solid blue;
 }
 
 .closeIconWrapper {
@@ -253,6 +262,489 @@ p {
   background: #686868;
 }
 
+/* 예약하기 모달 - 시간 설정폼 */
+.reservationTimeFormContainer {
+  width: 36.4rem;
+  font-size: 1.8rem;
+}
+
+.reservateDate {
+  margin-top: 3.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 8.1rem;
+  border-top: 1px solid #b6b6b6;
+  border-bottom: 1px solid #b6b6b6;
+}
+
+.timeType {
+  width: 22.6rem;
+}
+
+.timeSettingWrapper {
+  display: flex;
+  align-items: center;
+  width: 12.3rem;
+  height: 3.2rem;
+}
+
+/* 시간 설정 모달 관련 */
+.timeSettingItem {
+  display: flex;
+  font-display: column;
+  justify-content: space-around;
+  width: 10.2rem;
+}
+
+.timeSettingItem input {
+  width: 8rem;
+  border: none;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.timeSettingItem img {
+  cursor: pointer;
+}
+
+input[readonly] {
+  border: none;
+  cursor: pointer;
+}
+
+input[readonly]:focus {
+  outline: none;
+}
+
+#endTime.timeSettingItem {
+  margin-left: -0.8rem;
+}
+
+/* 모달1의 버튼 영역 */
+.m1btnContainer {
+  display: flex;
+  gap: 3.6rem;
+  width: 32rem;
+  height: 5.6rem;
+  margin-top: 2.5rem;
+  margin-left: 3.1rem;
+}
+
+.m1btnContainer .btn {
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 14.2rem;
+}
+
+.btn.cancel {
+  color: #979797;
+}
+
+.btn.submit {
+  color: #fff;
+  background-color: #9747ff;
+}
+
+#modal2 {
+  /* position: absolute; */
+  /* display: none; */
+  background-color: #fff;
+
+  &.modal {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    height: 41rem;
+    box-shadow: 0px -5px 3px 3px rgba(181, 181, 181, 0.25);
+    background-color: #fff;
+  }
+  &.modalContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &.modal.searchTime .modalContent {
+    justify-content: center;
+    align-items: center;
+    width: 34.9rem;
+    height: 34.3rem;
+  }
+
+  &.timeTypeWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 7.2rem;
+    height: 10.2rem;
+    margin-top: 4.9rem;
+  }
+
+  .timeSettingWrapper {
+    display: flex;
+    gap: 2.1rem;
+    width: 34.9rem;
+    height: 15.1rem;
+    margin-top: 4rem;
+  }
+
+  .timeType {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.2rem;
+    height: 3.7rem;
+    border-radius: 1rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+    border: 0.1rem solid #e4e4e4;
+  }
+
+  .timeType.active {
+    border: 0.2rem solid #9747ff;
+  }
+
+  .timeWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 25.6rem;
+  }
+
+  .timeWrapper span {
+    margin: 0;
+    margin-top: 3.5rem;
+    font-size: 6rem;
+  }
+
+  .time {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 10.9rem;
+    height: 15.1rem;
+    font-size: 6rem;
+  }
+
+  .time p {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .time input {
+    width: 10.9rem;
+    height: 10.4rem;
+    border: none;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 6rem;
+    box-shadow: 2px 2px 2px 2px rgba(181, 181, 181, 0.25);
+  }
+
+  .btnWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 32rem;
+    margin-top: 4rem;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14.2rem;
+    height: 5.5rem;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    background-color: #9747ff;
+  }
+
+  .btn.cancel {
+    color: #979797;
+    background-color: #e4e4e4;
+  }
+
+  .searchDate {
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+}
+
+#modal3 {
+  display: none;
+
+  &.modal {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    height: 41rem;
+    box-shadow: 0px -5px 3px 3px rgba(181, 181, 181, 0.25);
+    background-color: #fff;
+  }
+
+  .modalContent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .modalContent .subTitle {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 4rem;
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+
+  .timeWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 25.6rem;
+  }
+
+  .timeWrapper span {
+    margin: 0;
+    margin-top: 3.5rem;
+    font-size: 6rem;
+  }
+
+  .time {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 10.9rem;
+    height: 15.1rem;
+    font-size: 6rem;
+  }
+
+  .time p {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .time input {
+    width: 10.9rem;
+    height: 10.4rem;
+    border: none;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 6rem;
+    box-shadow: 2px 2px 2px 2px rgba(181, 181, 181, 0.25);
+  }
+
+  .modal.usingTime .modalContent {
+    justify-content: center;
+    align-items: center;
+    width: 37rem;
+    height: 37rem;
+  }
+
+  &.modal.usingTime .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.8rem;
+    height: 2.3rem;
+    margin-top: 4rem;
+    padding: 1.6rem 4.7rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    background-color: #9747ff;
+  }
+
+  &.modal.usingTime .btn.cancel {
+    color: #979797;
+    background-color: #e4e4e4;
+  }
+
+  .btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3.6rem;
+    width: 32rem;
+    margin-top: 5.4rem;
+  }
+}
+
+#modal4 {
+  display: none;
+
+  &.modal {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    height: 74rem;
+    box-shadow: 0px -5px 3px 3px rgba(181, 181, 181, 0.25);
+    background-color: #fff;
+  }
+
+  .modalTitle {
+    margin-bottom: 4.6rem;
+  }
+
+  .modalWrapper {
+    height: 68.6rem;
+  }
+
+  .reservationFormContainer {
+    height: 60.1rem;
+    margin-top: 4.4rem;
+  }
+
+  .kkRoomInfo {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3.33rem;
+  }
+
+  .kkRoomName {
+    margin-right: 1.9rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  .kkRoomType {
+    font-size: 1.8rem;
+  }
+
+  .reservateDate {
+    margin-bottom: 2.1rem;
+    font-size: 1.8rem;
+  }
+
+  .timeWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 8.1rem;
+    border-top: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+  }
+
+  .paymentInfo {
+    margin-top: 2.63rem;
+    text-align: right;
+    font-size: 2.6rem;
+  }
+
+  .modalWrapper .m4btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3.6rem;
+    width: 32rem;
+    height: 5.6rem;
+    margin-top: 5.5rem;
+    margin-left: 3.1rem;
+  }
+
+  .btn {
+    width: 14.2rem;
+    height: 5.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+
+  .btn.back {
+    background-color: #e3cdff;
+  }
+  .btn.submit {
+    background-color: #9747ff;
+  }
+}
+
+.modal5Background {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.35);
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 39.5rem;
+    height: 33.1rem;
+    padding-bottom: 2.1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+  }
+
+  .contentsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    height: 24.6rem;
+    text-align: center;
+  }
+
+  .largeTxt {
+    font-size: 2.8rem;
+  }
+
+  .smallTxt {
+    font-size: 1.8rem;
+  }
+
+  .smallTxt span {
+    font-weight: 700;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16.5rem;
+    height: 5.5rem;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #9747ff;
+  }
+}
+
 /* 하단 메뉴바 */
 nav {
   display: flex;
@@ -261,11 +753,9 @@ nav {
 }
 
 .reservation.btn {
+  width: 7.4rem;
   height: 2rem;
   padding: 1.7rem 16.2rem;
-  margin-left: 1rem;
-  height: 5.5rem;
-  margin-right: 1rem;
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
