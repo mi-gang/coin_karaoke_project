@@ -538,6 +538,29 @@
         }
         $(".timeLine").append("<div class='time'>" + hour + ":00</div");
       }
+      // 예약하기 모달 - 방 선택 드롭박스 열림/닫힘
+      dropBox.click(function () {
+        if ($(this).parent().hasClass("active")) {
+          $(this).parent().removeClass("active");
+        } else {
+          $(this).parent().addClass("active");
+        }
+      });
+
+      // 예약하기 모달 - 드롭박스 - 선택한 방 종류 넘기기
+      const options = $(".roomItem").get();
+      const handleSelect = function (item) {
+        dropBox.html(item.textContent);
+        if (dropBox.parent().hasClass("active")) {
+          dropBox.parent().removeClass("active");
+        }
+      };
+
+      options.forEach(function (option) {
+        option.addEventListener("click", function () {
+          handleSelect(option);
+        });
+      });
 
       function numericDayToKorean(numericDay) {
         result = "";
@@ -567,44 +590,51 @@
         return result;
       }
 
+      //Modal1: 예약하기
       $("#reservationBtn").on("click", showModal1);
       $("#modal1 .closeIconWrapper, #modal1 .btn.cancel").on(
         "click",
         hideModal1
       );
-      $("#startTime").on("click", showModal2);
-      $("#modal2 .btn.setting, #modal2 .btn.cancel").on("click", hideModal2);
-
-      $("#hoursOfUse").on("click", showModal3);
-      $("#modal3 .btn.setting, #modal3 .btn.cancel").on("click", hideModal3);
-      $("#modal1 .btn.submit").on("click", showModal4);
-      $("#modal4 .closeIconWrapper, #modal4 .btn.back").on("click", hideModal4);
-      $("#modal4 .btn.submit").on("click", showModal5);
-
       function showModal1() {
         $("#modal1").css("display", "flex");
       }
+      function hideModal1() {
+        $("#modal1").css("display", "none");
+      }
+
+      //Modal2: 시작시간
+      $("#startTime").on("click", showModal2);
+      $("#modal2 .btn.setting, #modal2 .btn.cancel").on("click", hideModal2);
       function showModal2() {
         $("#modal2").css("display", "flex");
       }
+      function hideModal2() {
+        $("#modal2").css("display", "none");
+      }
+
+      //Modal3: 이용시간
+      $("#hoursOfUse").on("click", showModal3);
+      $("#modal3 .btn.setting, #modal3 .btn.cancel").on("click", hideModal3);
       function showModal3() {
         $("#modal3").css("display", "flex");
       }
+      function hideModal3() {
+        $("#modal3").css("display", "none");
+      }
+
+      //Modal4: 결제 전 최종확인
+      $("#modal1 .btn.submit").on("click", showModal4);
+      $("#modal4 .closeIconWrapper, #modal4 .btn.back").on("click", hideModal4);
       function showModal4() {
         $("#modal4").css("display", "flex");
       }
       function showModal5() {
         $("#modal5").css("display", "flex");
       }
-      function hideModal1() {
-        $("#modal1").css("display", "none");
-      }
-      function hideModal2() {
-        $("#modal2").css("display", "none");
-      }
-      function hideModal3() {
-        $("#modal3").css("display", "none");
-      }
+
+      //Modal5: 결제완료
+      $("#modal4 .btn.submit").on("click", showModal5);
       function hideModal4() {
         $("#modal4").css("display", "none");
       }
