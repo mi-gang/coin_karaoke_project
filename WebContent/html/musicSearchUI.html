@@ -75,7 +75,11 @@
           <div class="modal_title">내 음악에 저장하기</div>
           <div class="playlist_list">
             <span class="playlist">
-              <img class="like_btn" src="/img/folder_open.svg" />
+              <img
+                class="like_btn"
+                id="music_saved"
+                src="/img/folder_open.svg"
+              />
               <span class="list_title">음악</span>
             </span>
           </div>
@@ -115,6 +119,15 @@
       </div>
     </div>
     <script>
+      var img = document.getElementById("music_saved");
+      img.addEventListener("click", function () {
+        img.src = "/img/song_notsave.svg";
+      });
+
+      // function toggleSaved() {
+      //   document.getElementById("music_saved").src = "/img/song_notsave.svg";
+      // }
+      // $(".like_btn").on("click", function toggleSaved() {});
       // const ent = document.querySelector(".button");
       // ent.addEventListener("click", function () {
       //   ent.classList.add("on");
@@ -155,7 +168,7 @@
         modal.classList.remove("on");
       });
 
-      const createModalOpen = document.querySelector(".plus_img");
+      const createModalOpen = document.querySelector(".create_music_list");
       const modalClose2 = document.querySelector(".close_img2");
       createModalOpen.addEventListener("click", function () {
         $("#create_playlist").show();
@@ -164,7 +177,7 @@
         $("#create_playlist").hide();
       });
 
-      const isMemberModal = document.querySelector(".plus_img");
+      const isMemberModal = document.querySelector(".create_music_list");
       const modalClose3 = document.querySelector(".close_img3");
       isMemberModal.addEventListener("click", function () {
         $("#create_playlist").show();
