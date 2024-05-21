@@ -102,6 +102,30 @@ public class ReservationDAO {
 		}
 		return reservationVOs;
 	}
+
+			/** 예약 가능 시간 검증하기 */
+			public boolean isValidTimeForReservation(ReservationVO reservationVO) {
+
+				String sql = "select count(*) from reservations  where not ( "
+				+ "start_time >= TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') or "
+				+ "end_time <= TO_DATE(?,'YYYY-MM-DD HH24:MI:SS')) and room_id=?";
+		
+				boolean result = false;
+		
+				try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+					pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getEndTime()));
+					pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getStartTime()));
+					pstmt.setInt(3, reservationVO.getRoomId());
+		
+					int num = pstmt.executeUpdate();
+					if (num > 0) {
+						result = true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return result;
+			}
 	
 
 	/** 예약내역 중 이용 중/예정 내역 불러오기 */
