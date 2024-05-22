@@ -8,7 +8,7 @@ public class Url {
 	
 	
 	public Url(String url){
-		this(url, REDIRECT);
+		this(url, FORWARD);
 	}
 	
 	public Url(String url, int flag){
