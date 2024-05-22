@@ -84,17 +84,17 @@ public class ReviewDAO {
 		return result;
 	}
 
-	/* *내가 작성한 리뷰 리스트 불러오기 */
+	/** 나의 리뷰 리스트 불러오기 */
 	public Collection<ReviewVO> getReviewListByUserId(int userId){
         
         String sql = "select review_id, content, star, start_time, end_time, name from "
-        + "(SELECT * from reviews rev, reservations res, KKs k where rev.RESERVATION_ID = res.RESERVATION_ID "
-        + "and k.KK_ID = ? order by res.END_TIME desc) where rownum >= 1 and rownum <= 10";
+			+ "(SELECT * from reviews rev, reservations res, KKs k where rev.RESERVATION_ID = res.RESERVATION_ID "
+			+ "and res.USER_ID = ? order by rev.review_date desc) where rownum > 0 and rownum <= 10";
 
         Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, KKId);
+			pstmt.setInt(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
 					reviewVOs.add(new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime(),
