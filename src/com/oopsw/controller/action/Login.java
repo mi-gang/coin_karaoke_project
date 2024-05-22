@@ -21,6 +21,7 @@ public class Login implements Action {
 			session.setAttribute("userId", userId);
 			url.setUrl("controller?cmd=mainUI");
 			url.setFlag(Url.REDIRECT);
+			System.out.println("로그인 성공: " + userId);
 		}
 		
 		return url;
