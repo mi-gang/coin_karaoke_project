@@ -100,8 +100,7 @@ public class DAOTest {
 	public void getRoomInfoList() {
 		assertNotNull(new KKDAO(conn).getRoomInfoList(1));
 	}
-<<<<<<< HEAD
-=======
+	//
 
 //	@Test
 //	public void test() {
@@ -166,5 +165,5 @@ public class DAOTest {
 	public void isSongInDB(){
 		assertTrue(new SongDAO(conn).isSongInDB(79337, "TJ"));
 	}
->>>>>>> 8e0185c1852c1fdda0152f3fcb6b29630cd99d19
+	//
 }
