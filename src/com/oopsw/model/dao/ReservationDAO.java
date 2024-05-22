@@ -56,7 +56,7 @@ public class ReservationDAO {
 
 		String sql = "select avg(r.star), k.kk_id from reviews r,reservations v,room_infos f,kks k "
 				+ "where r.reservation_id= v.reservation_id AND v.room_id=f.room_id AND f.kk_id=k.kk_id "
-				+ "and kk_id = ? group by k.kk_id";
+				+ "and k.kk_id = ? group by k.kk_id";
 
 		float num = 0;
 
