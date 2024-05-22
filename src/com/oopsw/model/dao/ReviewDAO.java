@@ -12,40 +12,62 @@ import com.oopsw.model.vo.ReservationVO;
 import com.oopsw.model.vo.ReviewVO;
 
 public class ReviewDAO {
-    	private Connection conn;
+	private Connection conn;
 
 	public ReviewDAO(Connection conn) {
 		this.conn = conn;
 	}
 
-    // 리뷰애 출력할 정보를 다시 확인할 필요가 있음 ..
-    public Collection<ReviewVO> getReviewListByKKId(int KKId){
-        
-        String sql = "select review_id, content, star, start_time, end_time, name from "
-        + "(SELECT * from reviews rev, reservations res, KKs k where rev.RESERVATION_ID = res.RESERVATION_ID "
-        + "and k.KK_ID = ? order by res.END_TIME desc) where rownum >= 1 and rownum <= 10";
+	// sql 체크 필요
+	/** 노래방 별점 불러오기 */
+	public float getStarAvgByKKId(int KKId) {
 
-        Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
+		String sql = "select avg(r.star), k.kk_id from reviews r,reservations v,room_infos f,kks k "
+				+ "where r.reservation_id= v.reservation_id AND v.room_id=f.room_id AND f.kk_id=k.kk_id "
+				+ "and kk_id = ? group by k.kk_id";
+
+		float num = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, KKId);
+
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
+	}
+
+	// sql 체크 필요
+	/** 해당 노래방 리뷰 불러오기 */
+	public Collection<ReviewVO> getReviewListByKKId(int KKId) {
+
+		String sql = "select review_id, content, nickname from "
+				+ "(SELECT * from reviews rev, reservations res, KKs k where rev.RESERVATION_ID = res.RESERVATION_ID "
+				+ "and k.KK_ID = ? order by res.END_TIME desc) where rownum >= 1 and rownum <= 10";
+
+		Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, KKId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reviewVOs.add(new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime(),
-							rs.getTimestamp(3).toLocalDateTime(), roomInfoVO.getRoomId()));
+					reviewVOs.add(new ReviewVO(rs.getInt(1), rs.getString(2), rs.getFloat(3),
+							rs.getTimestamp(4).toLocalDateTime(), rs.getTimestamp(5).toLocalDateTime(),
+							rs.getString(6)));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return reviewVOs;
-    }
+	}
 
 	/** 리뷰 작성하기 */
 	public boolean addReview(ReviewVO reviewVO) {
 
 		String sql = "INSERT into reviews (review_id, content, star, reservation_id, review_date) "
-		+ "values (review_id_seq.nextval, ?, ?, ?, sysdate)";
+				+ "values (review_id_seq.nextval, ?, ?, ?, sysdate)";
 
 		boolean result = false;
 
@@ -64,7 +86,7 @@ public class ReviewDAO {
 		return result;
 	}
 
-	/**리뷰 삭제하기 */
+	/** 리뷰 삭제하기 */
 	public boolean addReview(int reviewId) {
 
 		String sql = "delete from reviews where review_id = ?";
@@ -85,25 +107,26 @@ public class ReviewDAO {
 	}
 
 	/** 나의 리뷰 리스트 불러오기 */
-	public Collection<ReviewVO> getReviewListByUserId(int userId){
-        
-        String sql = "select review_id, content, star, start_time, end_time, name from "
-			+ "(SELECT * from reviews rev, reservations res, KKs k where rev.RESERVATION_ID = res.RESERVATION_ID "
-			+ "and res.USER_ID = ? order by rev.review_date desc) where rownum > 0 and rownum <= 10";
+	public Collection<ReviewVO> getReviewListByUserId(int userId) {
 
-        Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
+		String sql = "select review_id, content, star, start_time, end_time, name from "
+				+ "(SELECT * from reviews rev, reservations res, KKs k where rev.RESERVATION_ID = res.RESERVATION_ID "
+				+ "and res.USER_ID = ? order by rev.review_date desc) where rownum > 0 and rownum <= 10";
+
+		Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reviewVOs.add(new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime(),
-							rs.getTimestamp(3).toLocalDateTime(), roomInfoVO.getRoomId()));
+					reviewVOs.add(new ReviewVO(rs.getInt(1), rs.getString(2), rs.getFloat(3),
+							rs.getTimestamp(4).toLocalDateTime(), rs.getTimestamp(5).toLocalDateTime(),
+							rs.getString(6)));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return reviewVOs;
-    }
+	}
 }
