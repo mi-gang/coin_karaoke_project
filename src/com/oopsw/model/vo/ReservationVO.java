@@ -23,6 +23,8 @@ public class ReservationVO {
 		setKKId(KKId);
 		setName(name);
 	}
+
+	public ReservationVO(){};
 	
 	// 이용 시간 확인용
 	public ReservationVO(LocalDateTime startTime, LocalDateTime endTime) {
@@ -38,11 +40,6 @@ public class ReservationVO {
 	public ReservationVO(int reservationId, LocalDateTime startTime) {
 		setReservationId(reservationId);
 		setStartTime(startTime);
-	}
-	
-	public ReservationVO(LocalDateTime endTime, int reservationId) {
-		setEndTime(endTime);
-		setReservationId(reservationId);
 	}
 	
 	// 예약 현황 정보용
