@@ -9,8 +9,8 @@ public class Login implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		Url url = new Url("controller?cmd=url", Url.REDIRECT);
+		return url;
 	}
 
 }
