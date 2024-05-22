@@ -71,10 +71,11 @@ public class KKDAO {
 			System.out.println(rs);
 
 			while (rs.next()) {
-				String[] tmp = new String[3];
+				String[] tmp = new String[4];
 				tmp[0] = Integer.toString(rs.getInt(1));
 				tmp[1] = rs.getString(2);
 				tmp[2] = rs.getString(3);
+				tmp[3] = rs.getString(4);
 				resultList.add(tmp);
 			}
 
@@ -165,7 +166,7 @@ public class KKDAO {
 
 	// 완료 - 추가조건O인 경우
 	public List<String[]> getSearchKKList(int[] chkAdditionalOptions, int countChkOption, String addressGu) {
-		String sql = "SELECT kks.kk_id, kks.name, kw.content, kw.keyword_id "
+		String sql = "SELECT kks.kk_id, kks.name, kks.address, kw.content "
 				+ "FROM kks, keywords kw, kk_keywords kkw "
 				+ "WHERE kks.kk_id IN ("
 				+ "SELECT kk_id "
@@ -195,10 +196,11 @@ public class KKDAO {
 
 			while (rs.next()) {
 				System.out.println("while문");
-				String[] tmp = new String[3];
+				String[] tmp = new String[4];
 				tmp[0] = Integer.toString(rs.getInt(1));
 				tmp[1] = rs.getString(2);
 				tmp[2] = rs.getString(3);
+				tmp[3] = rs.getString(4);
 				resultList.add(tmp);
 			}
 
@@ -215,6 +217,61 @@ public class KKDAO {
 
 		return resultList;
 	}
+	/*
+	 * public List<String[]> getSearchKKList (int[] chkAdditionalOptions, int
+	 * countChkOption, String addressGu) {
+	 * String sql =
+	 * "SELECT kks.kk_id, kks.name, kks.address, kw.content, kw.keyword_id "
+	 * + "FROM kks, keywords kw, kk_keywords kkw "
+	 * + "WHERE kks.kk_id IN ("
+	 * + "SELECT kk_id "
+	 * + "FROM kk_keywords "
+	 * + "WHERE ((keyword_id=3 AND 1 = ?) "
+	 * + "OR (keyword_id=5 AND 1 = ?) "
+	 * + "OR (keyword_id=6 AND 1 = ?) "
+	 * + "OR (keyword_id=1 AND 1 = ?)) "
+	 * + "GROUP BY kk_id "
+	 * + "HAVING COUNT(kk_id)=?) "
+	 * + "AND trim(substr(kks.address, 4, 3)) = ? "
+	 * + "AND (kks.kk_id = kkw.kk_id AND kkw.keyword_id = kw.keyword_id) "
+	 * + "AND (kks.note NOT IN('금일휴업', '임시휴무')) "
+	 * + "ORDER BY kks.kk_id";
+	 * List<String[]> resultList = new ArrayList<String[]>();
+	 * try {
+	 * PreparedStatement pstmt = conn.prepareStatement(sql);
+	 * pstmt.setInt(1, chkAdditionalOptions[0]);
+	 * pstmt.setInt(2, chkAdditionalOptions[1]);
+	 * pstmt.setInt(3, chkAdditionalOptions[2]);
+	 * pstmt.setInt(4, chkAdditionalOptions[3]);
+	 * pstmt.setInt(5, countChkOption);
+	 * pstmt.setString(6, addressGu);
+	 * System.out.println("pstmt");
+	 * ResultSet rs = pstmt.executeQuery();
+	 * System.out.println(rs);
+	 * 
+	 * while (rs.next()) {
+	 * System.out.println("while문");
+	 * String[] tmp = new String[3];
+	 * tmp[0] = Integer.toString(rs.getInt(1));
+	 * tmp[1] = rs.getString(2);
+	 * tmp[2] = rs.getString(3);
+	 * resultList.add(tmp);
+	 * }
+	 * 
+	 * for (int i = 0; i < resultList.size(); i++) {
+	 * for (int j = 0; j < resultList.get(0).length; j++) {
+	 * System.out.println(resultList.get(i)[j]);
+	 * }
+	 * System.out.println("----------------");
+	 * }
+	 * 
+	 * } catch (SQLException e) {
+	 * e.printStackTrace();
+	 * }
+	 * 
+	 * return resultList;
+	 * }
+	 */
 
 	// 완료 - 해당 노래방 즐겨찾기(북마크) 여부 - isKKBookmark
 	public boolean isKKBookmark(String userId, int kkId) {

@@ -10,6 +10,13 @@ public class ReviewVO {
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 	private String KKname;
+	private String userNickname;
+	
+	public ReviewVO(int reviewId, String content, String userNickname){
+		setReviewId(reviewId);
+		setContent(content);
+		setUserNickname(userNickname);
+	}
 
 	public ReviewVO(int reviewId, String content, float star, LocalDateTime startTime, LocalDateTime endTime,
 			String KKname) {
@@ -78,6 +85,14 @@ public class ReviewVO {
 		KKname = kKname;
 	}
 
+	public String getUserNickname() {
+		return userNickname;
+	}
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,6 +104,7 @@ public class ReviewVO {
 		result = prime * result + reviewId;
 		result = prime * result + Float.floatToIntBits(star);
 		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+		result = prime * result + ((userNickname == null) ? 0 : userNickname.hashCode());
 		return result;
 	}
 
@@ -127,15 +143,20 @@ public class ReviewVO {
 				return false;
 		} else if (!startTime.equals(other.startTime))
 			return false;
+		if (userNickname == null) {
+			if (other.userNickname != null)
+				return false;
+		} else if (!userNickname.equals(other.userNickname))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewId=" + reviewId + ", content=" + content + ", star=" + star + ", reservationId="
-				+ reservationId + ", startTime=" + startTime + ", endTime=" + endTime + ", KKname=" + KKname + "]";
+				+ reservationId + ", startTime=" + startTime + ", endTime=" + endTime + ", KKname=" + KKname
+				+ ", userNickname=" + userNickname + "]";
 	}
-
 	//
 
 }
