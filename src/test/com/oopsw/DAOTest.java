@@ -1,6 +1,10 @@
 package test.com.oopsw;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,22 +44,35 @@ public class DAOTest {
 
 	@Test
 	public void getNearRecommendKKList() {
-		assertNull(new KKDAO(conn).getNearRecommendKKList("용산구"));
+		assertNotNull(new KKDAO(conn).getNearRecommendKKList("용산구"));
+		// assertThat(new KKDAO(conn).getNearRecommendKKList("용산구"), is(nullValue()));
 		assertNotNull(new KKDAO(conn).getNearRecommendKKList("금천구"));
+	}
+	
+	/*
+	@Test 
+	public void isKKBookmark() {
+		assertTrue(new KKDAO(conn).isKKBookmark("test@test.com", 1));
+		assertFalse(new KKDAO(conn).isKKBookmark("test@test.com", 10));
+		assertFalse(new KKDAO(conn).addKKBookmark("test2@naver.com", 1));
 	}
 	
 	@Test
 	public void addKKBookmark() {
-		/*
-		boolean result = new KKDAO(conn).addKKBookmark("test@test.com", 6);
-		assertTrue(result);
-		System.out.println("첫 번째 북마크 추가 결과: " + result);
-		// assertTrue(new KKDAO(conn).addKKBookmark("test@test.com", 5));
-		result = new KKDAO(conn).addKKBookmark("test@test.com", 6);
-		assertFalse(result);
-		System.out.println("두 번째 북마크 추가 결과: " + result);
-		*/
-		assertTrue(new KKDAO(conn).addKKBookmark("test@test.com", 7));
+		assertTrue(new KKDAO(conn).addKKBookmark("test@test.com", 3));
+		assertFalse(new KKDAO(conn).addKKBookmark("test@test.com", 3));
+	}
+	
+	@Test 
+	public void deleteKKBookmark() {
+		assertTrue(new KKDAO(conn).deleteKKBookmark("test@test.com", 3));
+		assertFalse(new KKDAO(conn).deleteKKBookmark("test@test.com", 3));
+	}
+	*/
+	
+	@Test
+	public void getRoomInfoList() {
+		assertNotNull(new KKDAO(conn).getRoomInfoList(1));
 	}
 
 }

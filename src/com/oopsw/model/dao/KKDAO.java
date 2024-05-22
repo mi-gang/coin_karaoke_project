@@ -7,37 +7,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.oopsw.model.vo.KKVO;
 
 public class KKDAO {
 	private Connection conn;
 	
-	
-	// public KKDAO() throws ClassNotFoundException, SQLException {
 	public KKDAO(Connection conn) {
 		this.conn = conn;
-		/*
-		// 1. driver loading
-		Class.forName("oracle.jdbc.OracleDriver");
-		System.out.println("1 loading ok");
-		
-		// 2. driver connection
-		String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
-		conn = DriverManager.getConnection(url, "hr", "hr");
-		System.out.println("2 connection ok");
-		*/
 	}
 	
 	//작성해야하는 메서드
-	
-	// 근처 추천 노래방 목록 불러오기   - getNearRecommendKKList
+	// 완료 - 근처 추천 노래방 목록 불러오기   - getNearRecommendKKList
 	public List<KKVO> getNearRecommendKKList(String addressGu) {
 		String sql = "SELECT kk_id, name, address FROM KKs k1 WHERE trim(substr(address, 4, 3)) = ?";
 		List<KKVO> recommendKKList = new ArrayList<KKVO>();
 		KKVO vo = null;
-		
+		System.out.println("근처 추천 노래방 목록 불러오기");
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, addressGu);
@@ -46,17 +36,18 @@ public class KKDAO {
 			System.out.println(rs);
 			
 			// 상호명, 주소, 대표 키워드
-			while(rs.next()) {
-				vo = new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3));
-				recommendKKList.add(vo);
+			if(rs.next()) {
+				while(rs.next()) {
+					vo = new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3));
+					recommendKKList.add(vo);
+				}
+			} else {
+				System.out.println("검색 결과 없음"); // recommendKKList가 null이 아닌 size 0이다!
 			}
 			
-			// 확인용 출력
-			for(int i=0; i<recommendKKList.size(); i++) {
-				System.out.println(recommendKKList.get(i).getKkId());
-				System.out.println(recommendKKList.get(i).getName());
-				System.out.println(recommendKKList.get(i).getAddress());
-			}
+			
+		System.out.println("------------------------");
+			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -70,7 +61,8 @@ public class KKDAO {
 				+ "FROM kks, keywords kw, kk_keywords kkw "
 				+ "WHERE trim(substr(kks.address, 4, 3)) = ? "
 				+ "AND (kks.kk_id = kkw.kk_id AND kkw.keyword_id = kw.keyword_id) "
-				+ "AND (kks.note not in('금일휴업', '임시휴무'))";
+				+ "AND (kks.note not in('금일휴업', '임시휴무')) "
+				+ "ORDER BY kks.kk_id";
 		List<KKVO> resultKKList = new ArrayList<KKVO>();
 		KKVO vo = null;
 		
@@ -120,10 +112,31 @@ public class KKDAO {
 	  AND (kks.note not in('금일휴업', '임시휴무'))
 	  AND (kw.content IN ('단체', '단체 가능', '단체 이용 가능'));
 	*/
-	// 해당 노래방 즐겨찾기(북마크) 여부   - isKKBookmark
+	
+	// 완료 - 해당 노래방 즐겨찾기(북마크) 여부   - isKKBookmark
+	public boolean isKKBookmark(String userId, int kkId) {
+		boolean result = false;
+		String sql = "SELECT kk_id FROM kk_bookmarks WHERE user_id=? and kk_id=?";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, kkId);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("result: " + result);
+		
+		return result;
+	}
 	
 	
-	// 해당 노래방 즐겨찾기(북마크) On   - addKKBookmark
+	// 완료 - 해당 노래방 즐겨찾기(북마크) On   - addKKBookmark
 	public boolean addKKBookmark(String userId, int kkId) {
 		boolean result = false;
 		String sql = "INSERT INTO kk_bookmarks (user_id, KK_id) VALUES (?, ?)";
@@ -135,21 +148,17 @@ public class KKDAO {
 			System.out.println(pstmt);
 			if(pstmt.executeUpdate() >= 1){
 				result = true;
-				System.out.println("result false -> true");
 			} else {
-				System.out.println("이미 존재하는 북마크");
 				result = false;
-				System.out.println("result false!!!");
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("result 결과: " + result);
 		
 		return result;
 	}
-	// 해당 노래방 즐겨찾기(북마크) Off   - deleteKKBookmark
 	
+	// 완료 - 해당 노래방 즐겨찾기(북마크) Off   - deleteKKBookmark
 	public boolean deleteKKBookmark(String userId, int kkId) {
 		boolean result = false;
 		String sql = "DELETE FROM kk_bookmarks WHERE user_id=? AND kk_id=?";
@@ -169,6 +178,33 @@ public class KKDAO {
 	}
 	
 	
-	// 해당 노래방의 방, 예약 현황 정보 불러오기   - getRoomInfoList  -- 예시상황을 넣어놓기.
-
+	// 해당 노래방의 방  불러오기   - getRoomInfoList
+	public Map<Integer, String> getRoomInfoList (int kkId) {
+		Map<Integer, String> roomInfoList = new HashMap<Integer, String>();
+		String sql = "SELECT room_id, name FROM room_infos WHERE kk_id=?";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, kkId);
+			System.out.println("pstmt");
+			ResultSet rs = pstmt.executeQuery();
+			System.out.println(rs);
+			
+			while(rs.next()) {
+				System.out.println("count");
+				roomInfoList.put(Integer.valueOf(rs.getInt(1)), rs.getString(2));
+			}
+			
+			System.out.println("해당 노래방의 방 정보 불러오기");
+			for(Entry<Integer, String> entrySet : roomInfoList.entrySet()) {
+				System.out.println(entrySet.getKey() + " - " + entrySet.getValue());
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return roomInfoList;
+	}
+	
 }
