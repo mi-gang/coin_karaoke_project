@@ -13,7 +13,7 @@ import com.oopsw.model.dao.UserDAO;
 import com.oopsw.model.vo.UserVO;
 
 public class UserService {
-	Connection conn;
+	private Connection conn;
 
 	public UserService() {
 		try {
@@ -26,21 +26,21 @@ public class UserService {
 		}
 	}
 
-	boolean isKKBookmark(String userId, int KK_ID) {
+	public boolean isKKBookmark(String userId, int KK_ID) {
 		return new KKDAO(conn).isKKBookmark(userId, KK_ID);
 	}
 
-	boolean addKKBookmark(String userId, int KK_ID) {
+	public boolean addKKBookmark(String userId, int KK_ID) {
 		return new KKDAO(conn).addKKBookmark(userId, KK_ID);
 
 	}
 
-	boolean deleteKKBookmark(String userId, int KK_ID) {
+	public boolean deleteKKBookmark(String userId, int KK_ID) {
 		return new KKDAO(conn).deleteKKBookmark(userId, KK_ID);
 
 	}
 
-	boolean login(String userId, String password) {
+	public boolean login(String userId, String password) {
 		boolean result = false;
 		try {
 			String encryptedPassword = getEncryptedPassword(userId, password);
@@ -77,7 +77,7 @@ public class UserService {
 		return builder.toString();
 	}
 
-	boolean isExistEmail(String userId) {
+	public boolean isExistEmail(String userId) {
 		boolean result = false;
 		try {
 			result = new UserDAO(conn).isExistEmailTest(userId);
@@ -88,7 +88,7 @@ public class UserService {
 		return result;
 	}
 
-	boolean addUser(UserVO user) throws SQLException {
+	public boolean addUser(UserVO user) throws SQLException {
 		boolean result = false;
 		user.setPassword(getEncryptedPassword(user.getEmail(), user.getPassword()));
 		result = new UserDAO(conn).addUser(user);
@@ -97,19 +97,19 @@ public class UserService {
 
 	}
 
-	UserVO getUser(String userId) throws SQLException {
+	public UserVO getUser(String userId) throws SQLException {
 		UserVO user = null;
 		user = new UserDAO(conn).getUser(userId);
 		return user;
 
 	}
 
-	String getNickname(String userId) throws SQLException {
+	public String getNickname(String userId) throws SQLException {
 		return new UserDAO(conn).getNickname(userId);
 
 	}
 
-	boolean updateNickname(String userId, String newNickname) {
+	public boolean updateNickname(String userId, String newNickname) {
 		boolean result = false;
 		try {
 			result = new UserDAO(conn).updateNickname(userId, newNickname);
@@ -119,7 +119,7 @@ public class UserService {
 		return result;
 	}
 
-	boolean updatePassword(String userId, String newPassword) {
+	public boolean updatePassword(String userId, String newPassword) {
 		boolean result = false;
 		try {
 			String encryptedPassword = getEncryptedPassword(userId, newPassword);
