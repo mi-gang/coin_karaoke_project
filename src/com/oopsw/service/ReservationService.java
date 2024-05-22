@@ -52,13 +52,13 @@ public class ReservationService {
 
 		// roomInfoVO = new KKDAO(conn).getRoomInfoList(kkId);
 		// 리턴값 : room_id, name(방 이름)
-		reservationVOs = new ReservationDAO(conn).getReservationListByRoomId(roomId);
+		// reservationVOs = new ReservationDAO(conn).getReservationListByRoomId(roomId);
 		// 리턴값 : s.reservation_id, s.start_time, s.end_time
 		// 돌려줄 때 reservationVO + 방 이름 VO가 필요함
 
 		// 정보 받아서 병합
 
-		reservationVOs = reservationDAO(conn).getUpcomingReservation(userId);
+		// reservationVOs = reservationDAO(conn).getUpcomingReservation(userId);
 
 		return reservationRoomInfoVOs;
 	}
@@ -104,16 +104,21 @@ public class ReservationService {
 	}
 
 	/** 기존 이용 시간, 추가 가능 시간 불러오기 */
-	public Collection<ReservationVO> additionalTimeStatus(String userId, int reservationId) {
+	public ReservationVO additionalTimeStatus(String userId, int reservationId) {
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 		
 		ReservationVO reservationVO = null;
+		ReservationVO reservationVO2 = null;
 		
 		reservationVO = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId);
+		reservationVO2 = new ReservationDAO(conn).getAvailableExtraUsingTime(reservationVO.getRoomId(), reservationVO.getEndTime());
 
+		// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
+		// int availableTime = reservationVO2.getStartTime();
+		
 
-		return reservationVOs;
+		return reservationVO2;
 	}
 	
 	

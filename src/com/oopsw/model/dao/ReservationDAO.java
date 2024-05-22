@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -246,7 +247,7 @@ public class ReservationDAO {
 
 	// 15분 처리 -> SERVICE 에서
 	/** 추가 가능 시간 불러오기 */
-	public ReservationVO getAvailableExtraUsingTime(ReservationVO reservationVO) {
+	public ReservationVO getAvailableExtraUsingTime(int roomId, LocalDateTime endTime) {
 
 		String sql = "SELECT reservation_id, start_time FROM (select * FROM reservations r, room_infos ri "
 				+ "WHERE r.room_id = ri.room_id AND r.room_id = ? "
@@ -256,8 +257,8 @@ public class ReservationDAO {
 		ReservationVO newReservationVO = null;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, reservationVO.getRoomId());
-			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getEndTime()));
+			pstmt.setInt(1, roomId);
+			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					newReservationVO = new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime());
@@ -266,7 +267,6 @@ public class ReservationDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return newReservationVO;
 	}
 
