@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.oopsw.model.vo.ReservationVO;
 import com.oopsw.model.vo.ReviewVO;
 
 public class ReviewDAO {
@@ -17,7 +15,7 @@ public class ReviewDAO {
 	public ReviewDAO(Connection conn) {
 		this.conn = conn;
 	}
-	
+
 	// sql 체크 필요
 	/** 해당 노래방 리뷰 불러오기 */
 	public Collection<ReviewVO> getReviewListByKKId(int KKId) {

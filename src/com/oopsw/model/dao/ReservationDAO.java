@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -56,14 +57,16 @@ public class ReservationDAO {
 
 		String sql = "select avg(r.star), k.kk_id from reviews r,reservations v,room_infos f,kks k "
 				+ "where r.reservation_id= v.reservation_id AND v.room_id=f.room_id AND f.kk_id=k.kk_id "
-				+ "and kk_id = ? group by k.kk_id";
+				+ "and k.kk_id = ? group by k.kk_id";
 
 		float num = 0;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, KKId);
-
-			num = pstmt.executeUpdate();
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				num = rs.getFloat(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -244,7 +247,7 @@ public class ReservationDAO {
 
 	// 15분 처리 -> SERVICE 에서
 	/** 추가 가능 시간 불러오기 */
-	public ReservationVO getAvailableExtraUsingTime(ReservationVO reservationVO) {
+	public ReservationVO getAvailableExtraUsingTime(int roomId, LocalDateTime endTime) {
 
 		String sql = "SELECT reservation_id, start_time FROM (select * FROM reservations r, room_infos ri "
 				+ "WHERE r.room_id = ri.room_id AND r.room_id = ? "
@@ -254,8 +257,8 @@ public class ReservationDAO {
 		ReservationVO newReservationVO = null;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, reservationVO.getRoomId());
-			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getEndTime()));
+			pstmt.setInt(1, roomId);
+			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					newReservationVO = new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime());
@@ -264,7 +267,6 @@ public class ReservationDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return newReservationVO;
 	}
 
