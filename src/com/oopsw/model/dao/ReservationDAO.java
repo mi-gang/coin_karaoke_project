@@ -296,15 +296,15 @@ public class ReservationDAO {
 	}
 
 	/** 기존 예약에 시간 추가하기 */
-	public boolean updateReservation(ReservationVO reservationVO) {
+	public boolean updateReservation(LocalDateTime endTime, int reservationId) {
 
 		String sql = "update reservations set end_time = TO_DATE(?,'YYYY-MM-DD HH24:MI') " + "where reservation_id = ?";
 
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getEndTime()));
-			pstmt.setInt(2, reservationVO.getReservationId());
+			pstmt.setTimestamp(1, Timestamp.valueOf(endTime));
+			pstmt.setInt(2, reservationId);
 
 			int num = pstmt.executeUpdate();
 			if (num == 1) {

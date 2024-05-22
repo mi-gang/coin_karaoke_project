@@ -2,6 +2,7 @@ package com.oopsw.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -138,11 +139,15 @@ public class ReservationService {
 		return reservationVO2;
 	}
 	
-	
-	
-	
-	
-	
+	/** 기존 예약에 시간 추가하기 */
+	public boolean payAdditionalTime(LocalDateTime endTime, int reservationId) {
+
+		boolean result = false;
+
+		result = new ReservationDAO(conn).updateReservation(endTime, reservationId);
+
+		return result;
+	}
 	
 	
 	/** 예약 취소하기 */
