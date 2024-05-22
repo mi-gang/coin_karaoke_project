@@ -62,8 +62,10 @@ public class ReservationDAO {
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, KKId);
-
-			num = pstmt.executeUpdate();
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				num = rs.getFloat(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
