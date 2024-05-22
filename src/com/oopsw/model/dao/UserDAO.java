@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.function.IntPredicate;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -126,5 +124,17 @@ public class UserDAO {
 		if(rs.next())
 			nickname = rs.getString(1);
 		return nickname;
+	}
+	
+	public boolean isAdult(String userId) throws SQLException {
+		boolean result = false;
+		String sql = "Select CASE WHEN (((sysdate - birth_date)/365) > 19) THEN 1 ELSE 0 END as "
+				+ "from users where user_id = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next())
+			result = rs.getInt(1) == 1;
+		return result;
 	}
 }

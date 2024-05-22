@@ -1,20 +1,17 @@
 package com.oopsw.service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.oopsw.model.dao.KKDAO;
 import com.oopsw.model.dao.ReservationDAO;
+import com.oopsw.model.dao.UserDAO;
 import com.oopsw.model.vo.ReservationVO;
 import com.oopsw.model.vo.RoomInfoVO;
 
@@ -34,6 +31,9 @@ public class ReservationService {
 
 	// ReservationDAO reservationDAO = null;
 	KKDAO kkDAO = null;
+	UserDAO dao = new UserDAO();
+	
+	
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 */
 	public Collection<ReservationVO> getUpcomingReservation(String userId) {
@@ -112,11 +112,28 @@ public class ReservationService {
 		ReservationVO reservationVO2 = null;
 		
 		reservationVO = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId);
+		// 리턴 : start_time, end_time
 		reservationVO2 = new ReservationDAO(conn).getAvailableExtraUsingTime(reservationVO.getRoomId(), reservationVO.getEndTime());
-
+		// 리턴 : reservation_id, start_time
+		
 		// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
 		// int availableTime = reservationVO2.getStartTime();
 		
+		
+		// 기존 이용 시간을 보내야하는가 ?????
+		
+		// 성인 유무 같이 보내기 
+		boolean isAdult = false;
+		try {
+			isAdult = new UserDAO(conn).isAdult(userId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		// UserDAO dao = new UserDAO();
+		// reservationId, start_time, end_time, availableTime, 성인유무 을 보내야 함
 
 		return reservationVO2;
 	}
