@@ -58,23 +58,25 @@ public class PlaylistDAO {
 	}
 	public boolean isSongInPlaylist(int songId,String brand,int playlistId){
 		String sql="SELECT song_id from SONGS_PLAYLISTS where song_id = ? and brand = ? and playlist_id = ?";
+		int id=0;
 		boolean result=false;
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, songId);
 			pstmt.setString(2, brand);
 			pstmt.setInt(3, playlistId);
-			boolean num=pstmt.execute();
-			System.out.println(num);
-			if(num==true){
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()){
+				id=rs.getInt(1);
+			}if(id!=0){
 				result=true;
-			}
-		} catch (SQLException e) {
+			}}	catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
 	}
+	
 	public boolean deleteSongInPlaylist(int songId,String brand,int playlistId){
 		String sql="DELETE from SONGS_PLAYLISTS where song_id = ? and brand = ? and playlist_id = ?";
 		boolean result=false;	

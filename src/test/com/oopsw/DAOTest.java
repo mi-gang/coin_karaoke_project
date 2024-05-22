@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.oopsw.model.dao.PlaylistDAO;
+import com.oopsw.model.dao.SongDAO;
 import com.oopsw.model.vo.PlaylistVO;
 
 public class DAOTest {
@@ -41,12 +42,12 @@ public class DAOTest {
 	}
 	//@Test
 	public void addSongToPlaylist(){
-		assertTrue(new PlaylistDAO(conn).addSongToPlaylist(11112, "TJ", 1));
+		assertTrue(new PlaylistDAO(conn).addSongToPlaylist(112, "TJ", 1));
 		
 	}
 	//@Test
 	public void isSongInPlaylist(){
-		assertTrue(new PlaylistDAO(conn).isSongInPlaylist(11112, "TJ", 1));
+		assertTrue(new PlaylistDAO(conn).isSongInPlaylist(11111, "TJ", 1));
 		
 	}
 	//@Test
@@ -75,12 +76,20 @@ public class DAOTest {
 	public void getSongInfo(){
 		assertNotNull(new PlaylistDAO(conn).getSongInfo(11112, "TJ"));
 	}
-	@Test
+	//@Test
 	public void updatePlaylistTitle(){
 		assertTrue(new PlaylistDAO(conn).updatePlaylistTitle("에스파는 나야", "test@test.com", 1));
 	}
-	@Test
+	//@Test
 	public void deletePlayList(){
 		assertTrue(new PlaylistDAO(conn).deletePlayList(2));
+	}
+	//@Test
+	public void addSong(){
+		assertTrue(new SongDAO(conn).addSong(79385, "TJ", "The MasterPlan", "Oasis"));
+	}
+	@Test
+	public void isSongInDB(){
+		assertTrue(new SongDAO(conn).isSongInDB(79337, "TJ"));
 	}
 }
