@@ -41,7 +41,17 @@ public class DAOTest {
 	public static void tearDownAfterClass() throws Exception {
 		conn.close();
 	}
+	
+	@Test
+	public void getSearchKKList() {
+		int[] tmp = {1,0,0,1};
+		System.out.println("test 1");
+		assertNotNull(new KKDAO(conn).getSearchKKList("금천구"));
+		System.out.println("test 2");
+		assertNotNull(new KKDAO(conn).getSearchKKList(tmp, 2, "금천구"));
+	}
 
+	
 	@Test
 	public void getNearRecommendKKList() {
 		assertNotNull(new KKDAO(conn).getNearRecommendKKList("용산구"));
@@ -49,7 +59,7 @@ public class DAOTest {
 		assertNotNull(new KKDAO(conn).getNearRecommendKKList("금천구"));
 	}
 	
-	/*
+	
 	@Test 
 	public void isKKBookmark() {
 		assertTrue(new KKDAO(conn).isKKBookmark("test@test.com", 1));
@@ -68,11 +78,10 @@ public class DAOTest {
 		assertTrue(new KKDAO(conn).deleteKKBookmark("test@test.com", 3));
 		assertFalse(new KKDAO(conn).deleteKKBookmark("test@test.com", 3));
 	}
-	*/
+	
 	
 	@Test
 	public void getRoomInfoList() {
 		assertNotNull(new KKDAO(conn).getRoomInfoList(1));
 	}
-
 }
