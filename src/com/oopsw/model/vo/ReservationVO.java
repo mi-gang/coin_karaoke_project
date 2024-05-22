@@ -10,10 +10,10 @@ public class ReservationVO {
 	private String userId;
 	private int roomId;
 	private int KKId;
-	private String name;
+	private String KKname;
 
 	public ReservationVO(int reservationId, int isCancel, LocalDateTime startTime, LocalDateTime endTime,
-			String userId, int roomId, int KKId, String name) {
+			String userId, int roomId, int KKId, String KKname) {
 		setReservationId(reservationId);
 		setIsCancel(isCancel);
 		setStartTime(startTime);
@@ -21,7 +21,7 @@ public class ReservationVO {
 		setUserId(userId);
 		setRoomId(roomId);
 		setKKId(KKId);
-		setName(name);
+		setKKName(KKname);
 	}
 
 	public ReservationVO(){};
@@ -107,12 +107,12 @@ public class ReservationVO {
 		KKId = kKId;
 	}
 
-	public String getName() {
-		return name;
+	public String getKKName() {
+		return KKname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setKKName(String KKname) {
+		this.KKname = KKname;
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class ReservationVO {
 		result = prime * result + KKId;
 		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
 		result = prime * result + isCancel;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((KKname == null) ? 0 : KKname.hashCode());
 		result = prime * result + reservationId;
 		result = prime * result + roomId;
 		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
@@ -148,10 +148,10 @@ public class ReservationVO {
 			return false;
 		if (isCancel != other.isCancel)
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (KKname == null) {
+			if (other.KKname != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!KKname.equals(other.KKname))
 			return false;
 		if (reservationId != other.reservationId)
 			return false;
@@ -173,8 +173,8 @@ public class ReservationVO {
 	@Override
 	public String toString() {
 		return "ReservationVO [reservationId=" + reservationId + ", isCancel=" + isCancel + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", userId=" + userId + ", roomId=" + roomId + ", KKId=" + KKId + ", name="
-				+ name + "]";
+				+ ", endTime=" + endTime + ", userId=" + userId + ", roomId=" + roomId + ", KKId=" + KKId + ", KKname="
+				+ KKname + "]";
 	}
 	
 

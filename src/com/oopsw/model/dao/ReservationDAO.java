@@ -49,6 +49,27 @@ public class ReservationDAO {
 		}
 		return reservationVOs;
 	}
+	
+	// sql 체크 필요
+	/** 노래방 별점 불러오기 */
+	public float getStarAvgByKKId(int KKId) {
+
+		String sql = "select avg(r.star), k.kk_id from reviews r,reservations v,room_infos f,kks k "
+				+ "where r.reservation_id= v.reservation_id AND v.room_id=f.room_id AND f.kk_id=k.kk_id "
+				+ "and kk_id = ? group by k.kk_id";
+
+		float num = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, KKId);
+
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
+	}
+
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 */
 	public Collection<ReservationVO> getUpcomingReservation(String userId) {
@@ -77,7 +98,7 @@ public class ReservationDAO {
 
 	// 예약하기
 	/** 예약 현황 정보 불러오기 */
-	public Collection<ReservationVO> getReservationListByRoomId(RoomInfoVO roomInfoVO) {
+	public Collection<ReservationVO> getReservationListByRoomId(int roomId) {
 
 		String sql = "select s.reservation_id, s.start_time, s.end_time from reservations s, room_infos r "
 				+ "where s.room_id=? AND r.KK_id=? AND s.room_id=r.room_id AND IS_CANCEL = 0 "
@@ -86,12 +107,11 @@ public class ReservationDAO {
 		Collection<ReservationVO> reservationVOs = new ArrayList<ReservationVO>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, roomInfoVO.getRoomId());
-			pstmt.setInt(2, roomInfoVO.getKKId());
+			pstmt.setInt(1, roomId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime(),
-							rs.getTimestamp(3).toLocalDateTime(), roomInfoVO.getRoomId()));
+							rs.getTimestamp(3).toLocalDateTime(), roomId));
 				}
 			}
 		} catch (SQLException e) {
@@ -129,7 +149,7 @@ public class ReservationDAO {
 
 		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
 				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
-				+ "and ro.KK_id = k.KK_id and user_id=? and is_cancel = 1;";
+				+ "and ro.KK_id = k.KK_id and user_id=? and END_TIME >= sysdate and is_cancel = 0";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
@@ -152,9 +172,10 @@ public class ReservationDAO {
 	/** 예약내역 중 이용 완료 내역 불러오기 */
 	public Collection<ReservationVO> getCompletedReservationList(String userId) {
 
-		String sql = "select reservation_id, is_cancel, start_time, end_time, room_Id, k.KK_id, k.name "
-				+ "from RESERVATIONS where user_id=? and END_TIME < sysdate and IS_CANCEL = 0";
-
+		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
+				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
+				+ "and ro.KK_id = k.KK_id and user_id=? and END_TIME < sysdate and is_cancel = 0";
+		
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -176,8 +197,9 @@ public class ReservationDAO {
 	/** 예약내역 중 취소 내역 불러오기 */
 	public Collection<ReservationVO> getCanceledReservationList(String userId) {
 
-		String sql = "select reservation_id, is_cancel, start_time, end_time, room_Id, k.KK_id, k.name "
-				+ "from RESERVATIONS where user_id=? and IS_CANCEL = 1";
+		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
+				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
+				+ "and ro.KK_id = k.KK_id and user_id=? and is_cancel = 1";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
