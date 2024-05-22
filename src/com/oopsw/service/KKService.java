@@ -67,7 +67,7 @@ public class KKService {
 			List<String[]> tmpKKList = new KKDAO(conn).getSearchKKList(addressGu);
 			System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
 			if(tmpKKList.size() > 1) {
-				System.out.println("if문!");
+				System.out.println("if문!~~");
 				System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
 				
 				// 검색 결과 2개 이상 있는 경우
@@ -134,11 +134,18 @@ public class KKService {
 			}
 		} else {
 			// 추가조건에 n개 조건 선택한 경우
-			System.out.println("추가조건 선택O로 노래방 검색!");
+			System.out.println("추가조건 선택O로 노래방 검색!~~");
+			System.out.println("before");
 			List<String[]> tmpKKList = new KKDAO(conn).getSearchKKList(tmp, countChkOption, addressGu);
+			System.out.println("after");
 			if(tmpKKList.size() > 1) {
-				System.out.println("if문!");
+				System.out.println("if문!!!");
 				System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
+				System.out.println("ii");
+				for(int i=0; i<tmpKKList.size(); i++) {
+					System.out.println(i);
+					System.out.println(tmpKKList.get(i));
+				}
 				// 검색 결과 2개 이상 있는 경우
 				kkId = Integer.parseInt(tmpKKList.get(0)[0]);
 				name = tmpKKList.get(0)[1];
@@ -149,7 +156,12 @@ public class KKService {
 				for(int i=1; i<tmpKKList.size(); i++) {
 					if(kkId == Integer.parseInt(tmpKKList.get(i)[0])) {
 						keywordList.add(tmpKKList.get(i)[3]);
-					} else {
+					} else if(i == tmpKKList.size()-1) {
+						System.out.println("-- else if문");
+						KKVO tmpVO = new KKVO(kkId, name, address, starRating, keywordList);
+						result.add(tmpVO);
+					}
+					else {
 						KKVO tmpVO = new KKVO(kkId, name, address, starRating, keywordList);
 						result.add(tmpVO);
 						kkId = Integer.parseInt(tmpKKList.get(i)[0]);

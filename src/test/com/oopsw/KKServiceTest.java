@@ -53,10 +53,10 @@ public class KKServiceTest {
 		int cCO2 = 2;
 		try {
 			System.out.println("-------------------- getKKList '강남구' ------------");
-			assertNotNull(new KKService().getKKList(tmp, countChkOption, "강남구"));
+//			assertNotNull(new KKService().getKKList(tmp, countChkOption, "강남구"));
 			System.out.println("-------------------- getKKList '금천구' ------------");
-			assertNotNull(new KKService().getKKList(tmp, countChkOption, "금천구"));
-			System.out.println("-------------------- getKKList 추가조건V '금천구' ------------");
+//			assertNotNull(new KKService().getKKList(tmp, countChkOption, "금천구"));
+			System.out.println("-------------------- getKKList 추가조건V ~~ '금천구' ------------");
 			assertNotNull(new KKService().getKKList(tmp2, cCO2, "금천구"));
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

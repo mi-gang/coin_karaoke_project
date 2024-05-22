@@ -210,10 +210,13 @@ public class KKDAO {
 				}
 				System.out.println("----------------");
 			}
+			System.out.println("KKDAO 메서드 종료");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
 
 		return resultList;
 	}
