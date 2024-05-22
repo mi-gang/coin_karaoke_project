@@ -9,17 +9,24 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.function.IntPredicate;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.oopsw.model.vo.UserVO;
 
 public class UserDAO {
-	Connection conn;
+	private Connection conn;
 
 	public UserDAO() {
+		Context context;
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
-			conn = DriverManager.getConnection(url, "hr", "hr");
-		} catch (SQLException | ClassNotFoundException e) {
+			context = new InitialContext();
+			DataSource dataSource =
+					(DataSource) context.lookup("java:comp/env/jdbc/myoracle");
+			conn = dataSource.getConnection();
+		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
 		}
 
