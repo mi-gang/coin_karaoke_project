@@ -22,25 +22,30 @@ public class ReviewDAO {
 	/** 해당 노래방 리뷰 불러오기 */
 	public Collection<ReviewVO> getReviewListByKKId(int KKId) {
 
-		String sql = "SELECT DISTINCT r.review_id, r.content, u.nickname "
-				+ "FROM (SELECT * FROM reviews rev, reservations res, kks k "
-				+ "WHERE rev.reservation_id = res.reservation_id "
-				+ "AND k.kk_id = ? "
-				+ "ORDER BY res.end_time DESC), kks, room_infos ri, reviews r, reservations rv, users u "
-				+ "WHERE rownum >= 1 and rownum <= 10 "
+		String sql = "select distinct r.review_id, r.content, u.nickname "
+				+ "from (SELECT * from reviews rev, reservations res, KKs k, room_infos ri "
+				+ "where (k.kk_id=?) and (k.kk_id=ri.kk_id AND ri.room_id=res.room_id AND res.reservation_id=rev.reservation_id) "
+				+ "order by res.END_TIME desc), kks, room_infos ri, reviews r, reservations rv, users u "
+				+ "where rownum >= 1 and rownum <= 10 "
 				+ "AND(kks.kk_id=ri.kk_id AND ri.room_id=rv.room_id AND rv.reservation_id=r.reservation_id AND u.user_id=rv.user_id)";
 
 		Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, KKId);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					reviewVOs.add(new ReviewVO(rs.getInt(1), rs.getString(2), rs.getFloat(3),
-							rs.getTimestamp(4).toLocalDateTime(), rs.getTimestamp(5).toLocalDateTime(),
-							rs.getString(6)));
-				}
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				reviewVOs.add(new ReviewVO(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
+			System.out.println(">>>> ReviewDAO의 reviewVOs size()");
+			System.out.println(reviewVOs.size());
+			/*try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					reviewVOs.add(new ReviewVO(rs.getInt(1), rs.getString(2), rs.getString(3)));
+				}
+				System.out.println(">>>> ReviewDAO의 reviewVOs size()");
+				System.out.println(reviewVOs.size());
+			}*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
