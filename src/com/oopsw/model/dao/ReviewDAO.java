@@ -17,27 +17,7 @@ public class ReviewDAO {
 	public ReviewDAO(Connection conn) {
 		this.conn = conn;
 	}
-
-	// sql 체크 필요
-	/** 노래방 별점 불러오기 */
-	public float getStarAvgByKKId(int KKId) {
-
-		String sql = "select avg(r.star), k.kk_id from reviews r,reservations v,room_infos f,kks k "
-				+ "where r.reservation_id= v.reservation_id AND v.room_id=f.room_id AND f.kk_id=k.kk_id "
-				+ "and kk_id = ? group by k.kk_id";
-
-		float num = 0;
-
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, KKId);
-
-			num = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return num;
-	}
-
+	
 	// sql 체크 필요
 	/** 해당 노래방 리뷰 불러오기 */
 	public Collection<ReviewVO> getReviewListByKKId(int KKId) {
