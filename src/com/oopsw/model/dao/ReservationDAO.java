@@ -18,10 +18,9 @@ public class ReservationDAO {
 	public ReservationDAO(Connection conn) {
 		this.conn = conn;
 	}
-	
-	
+
 	// 메인페이지
-	/**현재 시각 기준(1시간) 이용 중인 예약 정보 불러오기*/
+	/** 현재 시각 기준(1시간) 이용 중인 예약 정보 불러오기 */
 	public Collection<ReservationVO> getOccupiedReservationList(RoomInfoVO roomInfoVO) {
 
 		// 나중에 수정해야함
@@ -50,9 +49,8 @@ public class ReservationDAO {
 		}
 		return reservationVOs;
 	}
-	
-	
-	/**사용자의 가장 최근 예약 일정 불러오기*/
+
+	/** 사용자의 가장 최근 예약 일정 불러오기 */
 	public Collection<ReservationVO> getUpcomingReservation(String userId) {
 
 		String sql = "select reservation_id, is_cancel, start_time, end_time, k.KK_id, k.name from (select * from RESERVATIONS where "
@@ -65,9 +63,9 @@ public class ReservationDAO {
 			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reservationVOs
-							.add(new ReservationVO(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3).toLocalDateTime(),
-									rs.getTimestamp(4).toLocalDateTime(), userId, rs.getInt(5), rs.getInt(6), rs.getString(7)));
+					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
+							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
+							rs.getInt(5), rs.getInt(6), rs.getString(7)));
 				}
 			}
 		} catch (SQLException e) {
@@ -76,8 +74,7 @@ public class ReservationDAO {
 
 		return reservationVOs;
 	}
-	
-	
+
 	// 예약하기
 	/** 예약 현황 정보 불러오기 */
 	public Collection<ReservationVO> getReservationListByRoomId(RoomInfoVO roomInfoVO) {
@@ -103,30 +100,29 @@ public class ReservationDAO {
 		return reservationVOs;
 	}
 
-			/** 예약 가능 시간 검증하기 */
-			public boolean isValidTimeForReservation(ReservationVO reservationVO) {
+	/** 예약 가능 시간 검증하기 */
+	public boolean isValidTimeForReservation(ReservationVO reservationVO) {
 
-				String sql = "select count(*) from reservations  where not ( "
+		String sql = "select count(*) from reservations  where not ( "
 				+ "start_time >= TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') or "
 				+ "end_time <= TO_DATE(?,'YYYY-MM-DD HH24:MI:SS')) and room_id=?";
-		
-				boolean result = false;
-		
-				try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-					pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getEndTime()));
-					pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getStartTime()));
-					pstmt.setInt(3, reservationVO.getRoomId());
-		
-					int num = pstmt.executeUpdate();
-					if (num > 0) {
-						result = true;
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				return result;
+
+		boolean result = false;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getEndTime()));
+			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getStartTime()));
+			pstmt.setInt(3, reservationVO.getRoomId());
+
+			int num = pstmt.executeUpdate();
+			if (num > 0) {
+				result = true;
 			}
-	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	/** 예약내역 중 이용 중/예정 내역 불러오기 */
 	public Collection<ReservationVO> getUncompletedReservationList(String userId) {
@@ -141,9 +137,9 @@ public class ReservationDAO {
 			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reservationVOs
-							.add(new ReservationVO(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3).toLocalDateTime(),
-									rs.getTimestamp(4).toLocalDateTime(), userId, rs.getInt(5), rs.getInt(6), rs.getString(7)));
+					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
+							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
+							rs.getInt(5), rs.getInt(6), rs.getString(7)));
 				}
 			}
 		} catch (SQLException e) {
@@ -165,9 +161,9 @@ public class ReservationDAO {
 			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reservationVOs
-							.add(new ReservationVO(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3).toLocalDateTime(),
-									rs.getTimestamp(4).toLocalDateTime(), userId, rs.getInt(5), rs.getInt(6), rs.getString(7)));
+					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
+							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
+							rs.getInt(5), rs.getInt(6), rs.getString(7)));
 				}
 			}
 		} catch (SQLException e) {
@@ -189,9 +185,9 @@ public class ReservationDAO {
 			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reservationVOs
-							.add(new ReservationVO(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3).toLocalDateTime(),
-									rs.getTimestamp(4).toLocalDateTime(), userId, rs.getInt(5), rs.getInt(6), rs.getString(7)));
+					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
+							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
+							rs.getInt(5), rs.getInt(6), rs.getString(7)));
 				}
 			}
 		} catch (SQLException e) {
@@ -200,8 +196,6 @@ public class ReservationDAO {
 
 		return reservationVOs;
 	}
-
-
 
 	/** 기존 이용 시간 불러오기 */
 	public ReservationVO getOriginalReservationTime(String userId, int reservationId) {
