@@ -9,7 +9,8 @@ public class wrongCmd implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		return new Url("/jsp/wrongCmd.jsp");
+		Url url = new Url("/jsp/wrongCmd.jsp");
+		return url;
 	}
 	
 }
