@@ -28,7 +28,7 @@ public class FrontController extends HttpServlet {
 		//url에 따라 forward or sendRedirect
 		if(url.getFlag() == Url.FORWARD){
 			request.getRequestDispatcher("/" + url.getUrl()).forward(request, response);
-		}else if(url.getFlag() == Url.REDIRECT){
+		}else{
 			response.sendRedirect("/" + url.getUrl());
 		}
 	}
