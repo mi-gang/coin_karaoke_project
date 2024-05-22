@@ -65,7 +65,7 @@ public class ReviewDAO {
 	}
 
 	/** 리뷰 삭제하기 */
-	public boolean addReview(int reviewId) {
+	public boolean deleteReview(int reviewId) {
 
 		String sql = "delete from reviews where review_id = ?";
 

@@ -26,10 +26,11 @@ public class ReservationVO {
 
 	public ReservationVO(){};
 	
-	// 이용 시간 확인용
-	public ReservationVO(LocalDateTime startTime, LocalDateTime endTime) {
+	// 기존 이용 시간 불러오기용
+	public ReservationVO(LocalDateTime startTime, LocalDateTime endTime, int roomId) {
 		setStartTime(startTime);
 		setEndTime(endTime);
+		setRoomId(roomId);
 	}
 	
 	// 추가 시간 확인용

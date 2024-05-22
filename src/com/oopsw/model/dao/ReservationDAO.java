@@ -50,7 +50,7 @@ public class ReservationDAO {
 		}
 		return reservationVOs;
 	}
-	
+
 	// sql 체크 필요
 	/** 노래방 별점 불러오기 */
 	public float getStarAvgByKKId(int KKId) {
@@ -64,7 +64,7 @@ public class ReservationDAO {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, KKId);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				num = rs.getFloat(1);
 			}
 		} catch (SQLException e) {
@@ -72,7 +72,6 @@ public class ReservationDAO {
 		}
 		return num;
 	}
-
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 */
 	public Collection<ReservationVO> getUpcomingReservation(String userId) {
@@ -124,7 +123,7 @@ public class ReservationDAO {
 	}
 
 	/** 예약 가능 시간 검증하기 */
-	public boolean isValidTimeForReservation(ReservationVO reservationVO) {
+	public boolean isValidTimeForReservation(LocalDateTime startTime, LocalDateTime endTime, int roomId) {
 
 		String sql = "select count(*) from reservations  where not ( "
 				+ "start_time >= TO_DATE(?,'YYYY-MM-DD HH24:MI:SS') or "
@@ -133,9 +132,9 @@ public class ReservationDAO {
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getEndTime()));
-			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getStartTime()));
-			pstmt.setInt(3, reservationVO.getRoomId());
+			pstmt.setTimestamp(1, Timestamp.valueOf(startTime));
+			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
+			pstmt.setInt(3, roomId);
 
 			int num = pstmt.executeUpdate();
 			if (num > 0) {
@@ -178,7 +177,7 @@ public class ReservationDAO {
 		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
 				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
 				+ "and ro.KK_id = k.KK_id and user_id=? and END_TIME < sysdate and is_cancel = 0";
-		
+
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -225,7 +224,7 @@ public class ReservationDAO {
 	/** 기존 이용 시간 불러오기 */
 	public ReservationVO getOriginalReservationTime(String userId, int reservationId) {
 
-		String sql = "SELECT start_time, end_time FROM reservations r " + "WHERE r.user_id=? AND r.reservation_id=?";
+		String sql = "SELECT start_time, end_time, room_id FROM reservations r " + "WHERE r.user_id=? AND r.reservation_id=?";
 
 		ReservationVO reservationVO = null;
 
@@ -235,7 +234,7 @@ public class ReservationDAO {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					reservationVO = new ReservationVO(rs.getTimestamp(1).toLocalDateTime(),
-							rs.getTimestamp(2).toLocalDateTime());
+							rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3));
 				}
 			}
 		} catch (SQLException e) {
@@ -254,20 +253,20 @@ public class ReservationDAO {
 				+ "AND r.start_time > TO_DATE(?,'YYYY-MM-DD HH24:MI') AND r.IS_CANCEL = 0"
 				+ "ORDER BY r.start_time) WHERE rownum = 1";
 
-		ReservationVO newReservationVO = null;
+		ReservationVO reservationVO = null;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, roomId);
 			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					newReservationVO = new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime());
+					reservationVO = new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime());
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return newReservationVO;
+		return reservationVO;
 	}
 
 	/** 예약하기 */
