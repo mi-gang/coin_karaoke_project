@@ -20,23 +20,47 @@ public class UserService {
 			Class.forName("oracle.jdbc.OracleDriver");
 			String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
 			conn = DriverManager.getConnection(url, "hr", "hr");
-
+			conn.setAutoCommit(false);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public boolean isKKBookmark(String userId, int KK_ID) {
-		return new KKDAO(conn).isKKBookmark(userId, KK_ID);
+		boolean result = new KKDAO(conn).isKKBookmark(userId, KK_ID);
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
+			//커넥션 연결 실패도 포함될듯?
+		}
+		return result;
 	}
 
 	public boolean addKKBookmark(String userId, int KK_ID) {
-		return new KKDAO(conn).addKKBookmark(userId, KK_ID);
+		boolean result = new KKDAO(conn).addKKBookmark(userId, KK_ID);
+		System.out.println(1);
+		try {
+			conn.commit();
+			conn.close();
+		} catch (SQLException e) {
+			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
+			//커넥션 연결 실패도 포함될듯?
+		}
+		return result;
 
 	}
 
 	public boolean deleteKKBookmark(String userId, int KK_ID) {
-		return new KKDAO(conn).deleteKKBookmark(userId, KK_ID);
+		boolean result = new KKDAO(conn).deleteKKBookmark(userId, KK_ID);
+		try {
+			conn.commit();
+			conn.close();
+		} catch (SQLException e) {
+			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
+			//커넥션 연결 실패도 포함될듯?
+		}
+		return result;
 
 	}
 
@@ -45,6 +69,7 @@ public class UserService {
 		try {
 			String encryptedPassword = getEncryptedPassword(userId, password);
 			result = new UserDAO(conn).login(userId, encryptedPassword);
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -81,6 +106,7 @@ public class UserService {
 		boolean result = false;
 		try {
 			result = new UserDAO(conn).isExistEmailTest(userId);
+			conn.close();
 		} catch (SQLException e) {
 			// result 기본값 false
 		}
@@ -92,7 +118,7 @@ public class UserService {
 		boolean result = false;
 		user.setPassword(getEncryptedPassword(user.getEmail(), user.getPassword()));
 		result = new UserDAO(conn).addUser(user);
-
+		conn.close();
 		return result;
 
 	}
@@ -100,12 +126,15 @@ public class UserService {
 	public UserVO getUser(String userId) throws SQLException {
 		UserVO user = null;
 		user = new UserDAO(conn).getUser(userId);
+		conn.close();
 		return user;
 
 	}
 
 	public String getNickname(String userId) throws SQLException {
-		return new UserDAO(conn).getNickname(userId);
+		String result = new UserDAO(conn).getNickname(userId);
+		conn.close();
+		return result;
 
 	}
 
@@ -113,6 +142,8 @@ public class UserService {
 		boolean result = false;
 		try {
 			result = new UserDAO(conn).updateNickname(userId, newNickname);
+			conn.commit();
+			conn.close();
 		} catch (SQLException e) {
 			// result 기본값 default
 		}
@@ -124,6 +155,8 @@ public class UserService {
 		try {
 			String encryptedPassword = getEncryptedPassword(userId, newPassword);
 			result = new UserDAO(conn).updatePassword(userId, encryptedPassword);
+			conn.commit();
+			conn.close();
 		} catch (SQLException e) {
 			// result 기본값 default
 		}
