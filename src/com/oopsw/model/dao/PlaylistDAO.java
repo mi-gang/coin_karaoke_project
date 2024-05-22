@@ -21,15 +21,11 @@ public class PlaylistDAO {
 	public Collection<PlaylistVO> getPlaylistList(String userId){
 		String sql="Select playlist_id, playlist_title from playlists where user_id=?";
 		Collection<PlaylistVO> list=new ArrayList<>();
-		System.out.println("1");
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,userId);
-			System.out.println("2");
 			ResultSet rs=pstmt.executeQuery();
-			System.out.println("3");
 			while(rs.next())
-				System.out.println("while");
 				list.add(new PlaylistVO(rs.getInt(1),rs.getString(2)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -40,7 +36,7 @@ public class PlaylistDAO {
 
 	public boolean addSongToPlaylist(int songId, String brand, int playlistId){
 		String sql="INSERT INTO SONGS_PLAYLISTS (song_id, brand, playlist_id) values (?, ?, ?)";
-		boolean result=false;	
+		boolean result=false;
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, songId);
@@ -161,7 +157,7 @@ public class PlaylistDAO {
 		return songNum;		
 	}
 	public Collection<PlaylistVO> getSongListInPlaylist(int playlistId){
-		String sql="SELECT song_id, brand from SONGS_PLAYLISTS where playlist_id = ?";
+		String sql="SELECT brand, song_id from SONGS_PLAYLISTS where playlist_id = ?";
 		Collection<PlaylistVO> list=new ArrayList<>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -176,21 +172,21 @@ public class PlaylistDAO {
 		return list;
 	}
 	
-	public Collection<SongVO> getSongInfo(int songId, String brand){
+	public SongVO getSongInfo(int songId, String brand){
 		String sql="SELECT singer, title FROM songs  WHERE song_id=? AND brand=?";
-		Collection<SongVO> list=new ArrayList<>();
+		SongVO vo=new SongVO();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1,songId);
 			pstmt.setString(2, brand);
 			ResultSet rs=pstmt.executeQuery();
-			while(rs.next())
-				list.add(new SongVO(rs.getString(1),rs.getString(2)));
+			if(rs.next())
+				vo=new SongVO(rs.getString(1),rs.getString(2));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list;
+		return vo;
 	}
 	public boolean updatePlaylistTitle(String playlistTitle, String userId,int playlistId){
 		String sql="update playlists set playlist_title=? where user_id=? and playlist_id=?";
