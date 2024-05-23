@@ -18,7 +18,7 @@ public class sendValidationNumber implements Action {
 	public Url execute(HttpServletRequest request) {
 		UserService service = new UserService();
 		String userId = request.getParameter("userId");
-		boolean isExistEmail =service.isExistEmail(userId); 
+		boolean isExistEmail =service.isExistEmail(userId);
 		if(isExistEmail){
 			HttpSession session = request.getSession();
 			int vNumber = (int)(1 + Math.random() * MAX_VNUMBER);

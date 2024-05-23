@@ -79,7 +79,7 @@
                 let result = false;
                 try {
                     console.log(userId.val());
-                    const res = await fetch("controller?cmd=sendValidationNumber&email=" + userId.val());
+                    const res = await fetch("controller?cmd=sendValidationNumber&userId=" + userId.val());
                     const data = await res.json();
                     result = data.result;
 

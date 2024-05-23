@@ -22,11 +22,14 @@ public class UserService {
 	private Connection getConnection(){
 		Connection conn = null;
 		Context context;
+		System.out.println(conn + ": UserService 생성자");
 		try {
+			System.out.println(conn + ": Context 접근 시작");
 			context = new InitialContext();
 			DataSource dataSource =
 					(DataSource) context.lookup("java:comp/env/jdbc/myoracle");
 			conn = dataSource.getConnection();
+			conn.setAutoCommit(false);
 		} catch (NamingException | SQLException e1) {
 			System.err.println("커넥션 풀  실패. 수동으로 전환");
 			try {

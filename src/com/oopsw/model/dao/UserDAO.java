@@ -2,33 +2,14 @@ package com.oopsw.model.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import com.oopsw.model.vo.UserVO;
 
 public class UserDAO {
 	private Connection conn;
-
-	public UserDAO() {
-		Context context;
-		try {
-			context = new InitialContext();
-			DataSource dataSource =
-					(DataSource) context.lookup("java:comp/env/jdbc/myoracle");
-			conn = dataSource.getConnection();
-		} catch (NamingException | SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	public UserDAO(Connection conn) {
 		this.conn = conn;
@@ -76,12 +57,15 @@ public class UserDAO {
 
 	public boolean isExistEmail(String userId) throws SQLException {
 		boolean result = false;
+		System.out.println(conn);
 		String sql = "SELECT nickname from users where user_id = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, userId);
 		ResultSet rs = pstmt.executeQuery();
-		if(rs.next())
+		if(rs.next()){
 			result = true;
+			
+		}
 		return result;
 	}
 
