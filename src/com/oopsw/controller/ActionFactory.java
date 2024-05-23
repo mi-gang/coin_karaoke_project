@@ -1,6 +1,7 @@
 package com.oopsw.controller;
 
 import com.oopsw.controller.action.Login;
+import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
@@ -11,7 +12,9 @@ public class ActionFactory {
 		case "login":
 			action = new Login();
 			break;
-
+		case "loginUI":
+			action = new LoginUI();
+			break;
 		default:
 			action = new wrongCmd();
 			break;
