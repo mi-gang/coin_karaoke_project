@@ -10,7 +10,7 @@ public class LoginUI implements Action{
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		Url url = new Url("html/loginUI.html", Url.REDIRECT);
+		Url url = new Url("html/loginUI.html", Url.FORWARD);
 		HttpSession session =request.getSession();
 		if(session.getAttribute("userId") != null){
 			url.setUrl("controller?cmd=mainUI");

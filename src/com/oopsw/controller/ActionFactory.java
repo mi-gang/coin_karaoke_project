@@ -4,6 +4,9 @@ import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
+import com.oopsw.controller.action.findPasswordUI;
+import com.oopsw.controller.action.isExistEmail;
+import com.oopsw.controller.action.sendValidationNumber;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
@@ -24,13 +27,13 @@ public class ActionFactory {
 			action = new addUser();
 			break;
 		case "isExistEmail":
-//			action = new isExistEmail();
+			action = new isExistEmail();
 			break;
 		case "findPasswordUI":
-//			action = new findPasswordUI();
+			action = new findPasswordUI();
 			break;
 		case "sendValidationNumber":
-//			action = new sendValidationNumber();
+			action = new sendValidationNumber();
 			break;
 		case "updateUserUI":
 //			action = new updateUserUI();
