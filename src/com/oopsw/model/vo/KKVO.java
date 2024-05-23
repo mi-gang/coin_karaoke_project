@@ -25,6 +25,13 @@ public class KKVO {
 		setRepresentativeKeywordList(representativeKeywordList);
 	}
 	
+	public KKVO(int kkId, String name, String address, float starRating) {
+		setKkId(kkId);
+		setName(name);
+		setAddress(address);
+		setStarRating(starRating);
+	}
+	
 	public KKVO(int kkId, String name, String address, Collection<String>representativeKeywordList) {
 		setKkId(kkId);
 		setName(name);

@@ -32,6 +32,22 @@ public class KKServiceTest {
 		// connection close 해주기
 		conn.close();
 	}
+	
+	// 근처 추천 노래방 목록 불러오기
+	@Test
+	public void getNearRecommendKKList() {
+		try {
+			System.out.println("----- 강남구 -----");
+			assertNotNull(new KKService().getNearRecommendKKList("강남구"));
+			System.out.println("\n----- 금천구 -----");
+			assertNotNull(new KKService().getNearRecommendKKList("금천구"));
+			System.out.println("\n----- 중구 -----");
+			assertNotNull(new KKService().getNearRecommendKKList("중구"));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/*// 노래방 별점 불러오기
 	@Test
@@ -42,7 +58,7 @@ public class KKServiceTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	// 검색 결과 목록 불러오기
 	@Test
@@ -63,6 +79,7 @@ public class KKServiceTest {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	/*// 해당 노래방 리뷰 불러오기
 	@Test
