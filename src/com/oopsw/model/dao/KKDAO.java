@@ -34,16 +34,21 @@ public class KKDAO {
 			ResultSet rs = pstmt.executeQuery();
 			System.out.println(rs);
 
-			// 상호명, 주소, 대표 키워드
-			if (rs.next()) {
+			// if (rs.next()) {
 				while (rs.next()) {
+					System.out.println("while rs.next()");
 					vo = new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3));
 					recommendKKList.add(vo);
+					System.out.println("recommendKKList.add 완");
 				}
-			} else {
+			/*} else {
 				System.out.println("검색 결과 없음"); // recommendKKList가 null이 아닌 size 0이다!
-			}
+			}*/
 
+			System.out.println("recommendKKList.size(): " + recommendKKList.size());
+			for(int i=0; i<recommendKKList.size(); i++) {
+				System.out.println(recommendKKList.get(i).getName() + " " + recommendKKList.get(i).getAddress() + " " + recommendKKList.get(i).getStarRating());
+			}
 			System.out.println("------------------------");
 
 		} catch (SQLException e) {

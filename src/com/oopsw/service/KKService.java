@@ -28,7 +28,18 @@ public class KKService {
 	}
 	
 	// 근처 추천 노래방 목록 불러오기 - KKDAO의 getNearRecommendKKList
-	// 해당 파일의 getKKList 메서드 재활용하면 될 듯함!
+	public List<KKVO> getNearRecommendKKList(String addressGu) {
+		List<KKVO> result = new ArrayList<KKVO>();
+		List<KKVO> getDataList = new KKDAO(conn).getNearRecommendKKList(addressGu);
+		for(int i=0; i<getDataList.size(); i++) {
+			int tmpId = getDataList.get(i).getKkId();
+			float tmpStarAvg = getStarAvgByKK(tmpId);
+			KKVO tmp = new KKVO(tmpId, getDataList.get(i).getName(), getDataList.get(i).getAddress(), tmpStarAvg);
+			result.add(tmp);
+		}
+		
+		return result;
+	}
 	
 	// 노래방 별점 불러오기 - reservationDAO의 getStarAvgByKKId
 	public float getStarAvgByKK(int KKId) {
@@ -67,7 +78,7 @@ public class KKService {
 			List<String[]> tmpKKList = new KKDAO(conn).getSearchKKList(addressGu);
 			System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
 			if(tmpKKList.size() > 1) {
-				System.out.println("if문!~~");
+				System.out.println("if문!");
 				System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
 				
 				// 검색 결과 2개 이상 있는 경우
@@ -91,13 +102,6 @@ public class KKService {
 					}
 				}
 				
-				System.out.println(">> SERVICE의 getKKList 테스트!");
-				System.out.println("result.size(): " + result.size());
-				for(int i=0; i<result.size(); i++) {
-					System.out.println(result.get(i).getName() + " " + result.get(i).getStarRating() + " " + result.get(i).getAddress() + " " + result.get(i).getRepresentativeKeywordList().size());
-					System.out.println("------------------------------------");
-				}
-				
 				return result;
 			} else if(tmpKKList.size() == 1) {
 				System.out.println("else if문!");
@@ -114,38 +118,21 @@ public class KKService {
 				// KKVO tmpVO = new KKVO(Integer.parseInt(tmpKKList.get(0)[0]), tmpKKList.get(0)[1], tmpKKList.get(0)[2], starRating)
 				result.add(tmpVO);
 				
-				System.out.println(">> SERVICE의 getKKList 테스트!");
-				for(int i=0; i<result.size(); i++) {
-					System.out.println(result.get(i).getName() + " " + result.get(i).getStarRating() + " " + result.get(i).getAddress() + " " + result.get(i).getRepresentativeKeywordList().size());
-					System.out.println("------------------------------------");
-				}
-				
 				return result;
 			} else {
 				System.out.println("else 문!");
 				System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
-				System.out.println(">> SERVICE의 getKKList 테스트!");
-				for(int i=0; i<result.size(); i++) {
-					System.out.println(result.get(i).getName() + " " + result.get(i).getStarRating() + " " + result.get(i).getAddress() + " " + result.get(i).getRepresentativeKeywordList().size());
-					System.out.println("------------------------------------");
-				}
+
 				// 검색 결과 없음
 				return result;
 			}
 		} else {
 			// 추가조건에 n개 조건 선택한 경우
-			System.out.println("추가조건 선택O로 노래방 검색!~~");
-			System.out.println("before");
+			System.out.println("추가조건 선택O로 노래방 검색!");
 			List<String[]> tmpKKList = new KKDAO(conn).getSearchKKList(tmp, countChkOption, addressGu);
-			System.out.println("after");
 			if(tmpKKList.size() > 1) {
 				System.out.println("if문!!!");
 				System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
-				System.out.println("ii");
-				for(int i=0; i<tmpKKList.size(); i++) {
-					System.out.println(i);
-					System.out.println(tmpKKList.get(i));
-				}
 				// 검색 결과 2개 이상 있는 경우
 				kkId = Integer.parseInt(tmpKKList.get(0)[0]);
 				name = tmpKKList.get(0)[1];
@@ -155,13 +142,13 @@ public class KKService {
 				keywordList.add(tmpKKList.get(0)[3]);
 				for(int i=1; i<tmpKKList.size(); i++) {
 					if(kkId == Integer.parseInt(tmpKKList.get(i)[0])) {
-						keywordList.add(tmpKKList.get(i)[3]);
-					} else if(i == tmpKKList.size()-1) {
-						System.out.println("-- else if문");
-						KKVO tmpVO = new KKVO(kkId, name, address, starRating, keywordList);
-						result.add(tmpVO);
-					}
-					else {
+						if(i == tmpKKList.size()-1) {
+							KKVO tmpVO = new KKVO(kkId, name, address, starRating, keywordList);
+							result.add(tmpVO);
+						} else {
+							keywordList.add(tmpKKList.get(i)[3]);
+						}
+					} else {
 						KKVO tmpVO = new KKVO(kkId, name, address, starRating, keywordList);
 						result.add(tmpVO);
 						kkId = Integer.parseInt(tmpKKList.get(i)[0]);
@@ -172,12 +159,6 @@ public class KKService {
 					}
 				}
 				
-				System.out.println(">> SERVICE의 getKKList 테스트!");
-				for(int i=0; i<result.size(); i++) {
-					System.out.println(result.get(i).getName() + " " + result.get(i).getStarRating() + " " + result.get(i).getAddress() + " " + result.get(i).getRepresentativeKeywordList().size());
-					System.out.println("------------------------------------");
-				}
-				
 				return result;
 			} else if(tmpKKList.size() == 1) {
 				System.out.println("else if문!");
@@ -192,39 +173,20 @@ public class KKService {
 				// KKVO tmpVO = new KKVO(Integer.parseInt(tmpKKList.get(0)[0]), tmpKKList.get(0)[1], tmpKKList.get(0)[2], starRating)
 				result.add(tmpVO);
 				
-				System.out.println(">> SERVICE의 getKKList 테스트!");
-				for(int i=0; i<result.size(); i++) {
-					System.out.println(result.get(i).getName() + " " + result.get(i).getStarRating() + " " + result.get(i).getAddress() + " " + result.get(i).getRepresentativeKeywordList().size());
-					System.out.println("------------------------------------");
-				}
-				
 				return result;
 			} else {
 				System.out.println("else 문!");
 				System.out.println(">> tmpKKList.size(): " + tmpKKList.size());
-				System.out.println(">> SERVICE의 getKKList 테스트!");
-				for(int i=0; i<result.size(); i++) {
-					System.out.println(result.get(i).getName() + " " + result.get(i).getStarRating() + " " + result.get(i).getAddress() + " " + result.get(i).getRepresentativeKeywordList().size());
-					System.out.println("------------------------------------");
-				}
 				// 검색 결과 없음
 				return result;
 			}
 		}
-		
-		/*KKVO temp = new KKVO(kkId, name, address, starRating, keywordList);
-		result.add(temp);
-		return result;*/
 	}
 	
 	// 해당 노래방 리뷰 불러오기 - ReviewDAO의 getReviewListByKKId
 	public Collection<ReviewVO> getReviewListByKK(int KKId) {
 		ArrayList<ReviewVO> reviewList =  (ArrayList<ReviewVO>) new ReviewDAO(conn).getReviewListByKKId(KKId);
-		
-		/*for(int i=0; i<reviewList.size(); i++) {
-			System.out.println(reviewList.get(i).getUserNickname());
-			System.out.println(reviewList.get(i).getContent());
-		}*/
+
 		return reviewList;
 	}
 
