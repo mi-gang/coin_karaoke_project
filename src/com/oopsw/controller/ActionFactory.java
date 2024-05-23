@@ -1,9 +1,26 @@
 package com.oopsw.controller;
 
+import com.oopsw.controller.action.AddInquireAction;
+import com.oopsw.controller.action.AddReservationUIAction;
+import com.oopsw.controller.action.AddReviewAction;
+import com.oopsw.controller.action.AdditionalTimeInfoAction;
+import com.oopsw.controller.action.CancelReservationAction;
+import com.oopsw.controller.action.CanceledReservationListAction;
+import com.oopsw.controller.action.CompletedReservationListAction;
+import com.oopsw.controller.action.DeleteReviewAction;
+import com.oopsw.controller.action.IsValidTimeForReservationAction;
 import com.oopsw.controller.action.Login;
-import com.oopsw.controller.action.ReservationListUIAction;
-import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.LoginUI;
+import com.oopsw.controller.action.Logout;
+import com.oopsw.controller.action.MyReviewListAction;
+import com.oopsw.controller.action.MyReviewListUIAction;
+import com.oopsw.controller.action.MypageUIAction;
+import com.oopsw.controller.action.PayAdditionalTimeAction;
+import com.oopsw.controller.action.PayReservationAction;
+import com.oopsw.controller.action.ReservationListUIAction;
+import com.oopsw.controller.action.RoomReservationStatusListAction;
+import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.UpcomingReservation;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
@@ -19,23 +36,17 @@ import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
 
-	public Action getAction(String cmd){
+	public Action getAction(String cmd) {
 		Action action = new wrongCmd();
 		switch (cmd) {
 		case "login":
 			action = new Login();
 			break;
-			
-		case "reservationListUI":
-			action = new ReservationListUIAction();
-			break;
-			
-		case "uncompletedReservationListAction":
-			action = new UncompletedReservationListAction();
-			break;
-
 		case "loginUI":
 			action = new LoginUI();
+			break;
+		case "logout":
+			action = new Logout();
 			break;
 		case "addUserUI":
 			action = new addUserUI();
@@ -70,11 +81,69 @@ public class ActionFactory {
 		case "isAdult":
 			action = new idAdult();
 			break;
+		case "mypageUIAction":
+			action = new MypageUIAction();		// 헤애하ㅣㅁ	
+			break;	
+		// reservation // 미강 - 해야함 이 아래로 다
+		case "upcomingReservation":
+			action = new UpcomingReservation();
+			break;	
+		case "addReservationUIAction":
+			action = new AddReservationUIAction();
+			break;		
+		case "roomReservationStatusListAction":
+			action = new RoomReservationStatusListAction();
+			break;	
+		case "isValidTimeForReservationAction":
+			action = new IsValidTimeForReservationAction();
+			break;	
+		case "payReservationAction":
+			action = new PayReservationAction();
+			break;	
+		case "reservationListUIAction":
+			action = new ReservationListUIAction();
+			break;
+		case "uncompletedReservationListAction":
+			action = new UncompletedReservationListAction();
+			break;
+		case "completedReservationListAction":
+			action = new CompletedReservationListAction();
+			break;
+		case "canceledReservationListAction":
+			action = new CanceledReservationListAction();
+			break;
+		case "additionalTimeInfoAction":
+			action = new AdditionalTimeInfoAction();
+			break;
+		case "payAdditionalTimeAction":
+			action = new PayAdditionalTimeAction();
+			break;
+		case "cancelReservationAction":
+			action = new CancelReservationAction();
+			break;	
+		// review
+		case "myReviewListUIAction":
+			action = new MyReviewListUIAction();
+			break;	
+		case "myReviewListAction":
+			action = new MyReviewListAction();
+			break;	
+		case "addReviewAction":
+			action = new AddReviewAction();
+			break;
+		case "deleteReviewAction":
+			action = new DeleteReviewAction();
+			break;
+		// inquire
+		case "addInquireAction":
+			action = new AddInquireAction();
+			break;		
+			
 		default:
 			action = new wrongCmd();
 			break;
 		}
-		
+
 		return action;
 	}
 }
