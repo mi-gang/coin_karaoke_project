@@ -6,6 +6,7 @@ import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
 import com.oopsw.controller.action.getNickname;
+import com.oopsw.controller.action.idAdult;
 import com.oopsw.controller.action.isExistEmail;
 import com.oopsw.controller.action.resetPassword;
 import com.oopsw.controller.action.sendValidationNumber;
@@ -56,7 +57,7 @@ public class ActionFactory {
 			action = new updatePassword();
 			break;
 		case "isAdult":
-//			action = new idAdult();
+			action = new idAdult();
 			break;
 		default:
 			action = new wrongCmd();

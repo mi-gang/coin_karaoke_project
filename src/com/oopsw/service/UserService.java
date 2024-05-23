@@ -180,4 +180,10 @@ public class UserService {
 		}
 		return result;
 	}
+
+	public boolean isAdult(String userId) throws SQLException {
+		boolean result = false;
+		result = new UserDAO().isAdult(userId);
+		return result;
+	}
 }
