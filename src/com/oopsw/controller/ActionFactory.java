@@ -5,8 +5,10 @@ import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
+import com.oopsw.controller.action.getNickname;
 import com.oopsw.controller.action.isExistEmail;
 import com.oopsw.controller.action.sendValidationNumber;
+import com.oopsw.controller.action.updateUserUI;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
@@ -36,10 +38,10 @@ public class ActionFactory {
 			action = new sendValidationNumber();
 			break;
 		case "updateUserUI":
-//			action = new updateUserUI();
+			action = new updateUserUI();
 			break;
 		case "getNickname":
-//			action = new getNickname();
+			action = new getNickname();
 			break;
 		case "updateNickname":
 //			action = new updateNickname();
