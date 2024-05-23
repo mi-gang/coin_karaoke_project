@@ -8,6 +8,7 @@ import com.oopsw.controller.action.findPasswordUI;
 import com.oopsw.controller.action.getNickname;
 import com.oopsw.controller.action.isExistEmail;
 import com.oopsw.controller.action.sendValidationNumber;
+import com.oopsw.controller.action.updateNickname;
 import com.oopsw.controller.action.updateUserUI;
 import com.oopsw.controller.action.wrongCmd;
 
@@ -44,7 +45,7 @@ public class ActionFactory {
 			action = new getNickname();
 			break;
 		case "updateNickname":
-//			action = new updateNickname();
+			action = new updateNickname();
 			break;
 		case "updatePassword":
 //			action = new updatePassword();
