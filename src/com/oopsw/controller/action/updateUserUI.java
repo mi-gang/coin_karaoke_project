@@ -10,6 +10,7 @@ public class updateUserUI implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 		request.getSession().setAttribute("userId", "test@test.com");
+		String a = "d";
 		return new Url("jsp/updateUserUI.jsp", Url.FORWARD);
 	}
 
