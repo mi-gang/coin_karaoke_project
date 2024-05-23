@@ -1,7 +1,11 @@
 package com.oopsw.controller;
 
+import com.oopsw.controller.action.KKDetailUI;
+import com.oopsw.controller.action.KKFilterUI;
+import com.oopsw.controller.action.KKSearchResultUI;
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.LoginUI;
+import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
@@ -58,6 +62,18 @@ public class ActionFactory {
 			break;
 		case "isAdult":
 			action = new idAdult();
+			break;
+		case "kkFilterUI":
+			action = new KKFilterUI();
+			break;
+		case "searchForKKWithOptions":
+			action = new SearchForKKWithOptions();
+			break;
+		case "kkSearchResultUI":
+			action = new KKSearchResultUI();
+			break;
+		case "kkDetailUI":
+			action = new KKDetailUI();
 			break;
 		default:
 			action = new wrongCmd();
