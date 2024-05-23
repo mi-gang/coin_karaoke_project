@@ -150,11 +150,15 @@ public class UserService {
 		return result;
 	}
 
-	public boolean updatePassword(String userId, String newPassword) {
+	public boolean updatePassword(String userId, String oldPassword, String newPassword) {
 		boolean result = false;
+		UserDAO dao = new UserDAO(conn);
 		try {
-			String encryptedPassword = getEncryptedPassword(userId, newPassword);
-			result = new UserDAO(conn).updatePassword(userId, encryptedPassword);
+			String encryptedOldPassword = getEncryptedPassword(userId, oldPassword);
+			String encryptedNewPassword = getEncryptedPassword(userId, newPassword);
+			if(dao.login(userId, encryptedOldPassword)){
+				result = dao.updatePassword(userId, encryptedNewPassword);
+			}
 			conn.commit();
 			conn.close();
 		} catch (SQLException e) {
