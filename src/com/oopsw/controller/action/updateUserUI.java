@@ -9,7 +9,7 @@ public class updateUserUI implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		// FIXME: updateUserUI jsp로 바꾸기
+		request.getSession().setAttribute("userId", "test@test.com");
 		return new Url("jsp/updateUserUI.jsp", Url.FORWARD);
 	}
 
