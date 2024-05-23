@@ -32,7 +32,7 @@ public class UserService {
 			conn.close();
 		} catch (SQLException e) {
 			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
-			//커넥션 연결 실패도 포함될듯?
+			// 커넥션 연결 실패도 포함될듯?
 		}
 		return result;
 	}
@@ -45,7 +45,7 @@ public class UserService {
 			conn.close();
 		} catch (SQLException e) {
 			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
-			//커넥션 연결 실패도 포함될듯?
+			// 커넥션 연결 실패도 포함될듯?
 		}
 		return result;
 
@@ -58,7 +58,7 @@ public class UserService {
 			conn.close();
 		} catch (SQLException e) {
 			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
-			//커넥션 연결 실패도 포함될듯?
+			// 커넥션 연결 실패도 포함될듯?
 		}
 		return result;
 
@@ -87,7 +87,7 @@ public class UserService {
 		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
+
 		// XXX: DB 샘플데이터 활용을 위해 평문비밀번호 사용중. 서비스 시 아래 줄 삭제.
 		encryptedPassword = password;
 		return encryptedPassword;
@@ -156,9 +156,23 @@ public class UserService {
 		try {
 			String encryptedOldPassword = getEncryptedPassword(userId, oldPassword);
 			String encryptedNewPassword = getEncryptedPassword(userId, newPassword);
-			if(dao.login(userId, encryptedOldPassword)){
+			if (dao.login(userId, encryptedOldPassword)) {
 				result = dao.updatePassword(userId, encryptedNewPassword);
 			}
+			conn.commit();
+			conn.close();
+		} catch (SQLException e) {
+			// result 기본값 default
+		}
+		return result;
+	}
+
+	public boolean resetPassword(String userId, String password) {
+		boolean result = false;
+		UserDAO dao = new UserDAO(conn);
+		try {
+			String encryptedPassword = getEncryptedPassword(userId, password);
+			result = dao.updatePassword(userId, encryptedPassword);
 			conn.commit();
 			conn.close();
 		} catch (SQLException e) {

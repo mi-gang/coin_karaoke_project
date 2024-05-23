@@ -7,6 +7,7 @@ import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
 import com.oopsw.controller.action.getNickname;
 import com.oopsw.controller.action.isExistEmail;
+import com.oopsw.controller.action.resetPassword;
 import com.oopsw.controller.action.sendValidationNumber;
 import com.oopsw.controller.action.updateNickname;
 import com.oopsw.controller.action.updatePassword;
@@ -38,6 +39,9 @@ public class ActionFactory {
 			break;
 		case "sendValidationNumber":
 			action = new sendValidationNumber();
+			break;
+		case "resetPassword":
+			action = new resetPassword();
 			break;
 		case "updateUserUI":
 			action = new updateUserUI();

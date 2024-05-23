@@ -22,7 +22,7 @@ public class sendValidationNumber implements Action {
 		if(isExistEmail){
 			HttpSession session = request.getSession();
 			int vNumber = (int)(1 + Math.random() * MAX_VNUMBER);
-			session.setAttribute("vNumber", vNumber);
+			session.setAttribute("vNumber", Integer.toString(vNumber));
 			session.setAttribute("vExpiredDate", LocalDateTime.now().plusMinutes(EXPIRED_MINUTE));
 			System.out.println("인증번호 " + vNumber + "의 유효기간: "+ session.getAttribute("vExpiredDate") + " (사용자는 " + userId + ")");
 		}
