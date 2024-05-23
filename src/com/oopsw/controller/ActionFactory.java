@@ -1,6 +1,8 @@
 package com.oopsw.controller;
 
 import com.oopsw.controller.action.Login;
+import com.oopsw.controller.action.ReservationListUIAction;
+import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
@@ -10,6 +12,14 @@ public class ActionFactory {
 		switch (cmd) {
 		case "login":
 			action = new Login();
+			break;
+			
+		case "reservationListUI":
+			action = new ReservationListUIAction();
+			break;
+			
+		case "uncompletedReservationListAction":
+			action = new UncompletedReservationListAction();
 			break;
 
 		default:

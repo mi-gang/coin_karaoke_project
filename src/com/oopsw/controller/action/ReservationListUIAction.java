@@ -9,7 +9,7 @@ public class ReservationListUIAction implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		Url url = new Url("/WebContent/html/reservation.html");
+		Url url = new Url("jsp/reservation.jsp", Url.REDIRECT);
 
 		return url;
 	}
