@@ -96,13 +96,10 @@
             async function resetPassword(e) {
                 e.preventDefault();
                 let result = false;
-                try {
-                    const res = await fetch("controller?cmd=resetPassword&password=" + password.val() + "&validationNumber=" + vNumber.val());
-                    const data = res.json();
-                    result = data.result;
-                } catch {
-                    console.log("todo");
-                }
+                const res = await fetch("controller?cmd=resetPassword&userId=" + userId.val() + "&password=" + password.val() + "&vNumber=" + vNumber.val());
+                const data = await res.json();
+                result = data.result;
+
                 if (result) {
                     alert("비밀번호가 재설정되었습니다.");
                     location.href = "controller?cmd=loginUI";

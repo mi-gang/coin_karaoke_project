@@ -22,9 +22,7 @@ public class UserService {
 	private Connection getConnection(){
 		Connection conn = null;
 		Context context;
-		System.out.println(conn + ": UserService 생성자");
 		try {
-			System.out.println(conn + ": Context 접근 시작");
 			context = new InitialContext();
 			DataSource dataSource =
 					(DataSource) context.lookup("java:comp/env/jdbc/myoracle");
@@ -60,7 +58,6 @@ public class UserService {
 	public boolean addKKBookmark(String userId, int KK_ID) {
 		Connection conn = getConnection();
 		boolean result = new KKDAO(conn).addKKBookmark(userId, KK_ID);
-		System.out.println(1);
 		try {
 			conn.commit();
 			conn.close();
