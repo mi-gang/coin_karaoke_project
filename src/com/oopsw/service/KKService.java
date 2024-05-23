@@ -27,8 +27,19 @@ public class KKService {
 			System.out.println("2 connection ok");
 	}
 	
-	// 근처 추천 노래방 목록 불러오기 - KKDAO의 getNearRecommendKKList
-	// 해당 파일의 getKKList 메서드 재활용하면 될 듯함!
+	// 근처 추천 노래방 목록 불러오기 -- KKDAO의 getNearRecommendKKList
+	public List<KKVO> getNearRecommendKKList(String addressGu) {
+		List<KKVO> result = new ArrayList<KKVO>();
+		List<KKVO> getDataList = new KKDAO(conn).getNearRecommendKKList(addressGu);
+		for(int i=0; i<getDataList.size(); i++) {
+			int tmpId = getDataList.get(i).getKkId();
+			float tmpStarAvg = getStarAvgByKK(tmpId);
+			KKVO tmp = new KKVO(tmpId, getDataList.get(i).getName(), getDataList.get(i).getAddress(), tmpStarAvg);
+			result.add(tmp);
+		}
+		
+		return result;
+	}
 	
 	// 노래방 별점 불러오기 - reservationDAO의 getStarAvgByKKId
 	public float getStarAvgByKK(int KKId) {
