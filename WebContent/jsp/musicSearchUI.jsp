@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,23 +15,24 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
   </head>
   <body>
-    <!-- ¸ğ¹ÙÀÏ ÄÁÅ×ÀÌ³Ê -->
+    <!-- ëª¨ë°”ì¼ ì»¨í…Œì´ë„ˆ -->
     <div id="mobileContainer">
-      <!--Çì´õ-->
+      <!--í—¤ë”-->
       <header>
-        <img src="img/left arrow.svg" alt="ÀÌÀü ÆäÀÌÁö ÀÌµ¿" />
-        <span>³ë·¡ °Ë»ö</span>
+        <img src="img/left arrow.svg" alt="ì´ì „ í˜ì´ì§€ ì´ë™" />
+        <span>ë…¸ë˜ ê²€ìƒ‰</span>
       </header>
-      <!-- ÄÁÅÙÃ÷ ÄÁÅ×ÀÌ³Ê -->
+      <!-- ì»¨í…ì¸  ì»¨í…Œì´ë„ˆ -->
       <div id="container">
         <div class="music_input_group">
           <input
             class="music_input"
             type="search"
             id="search"
-            placeholder="°î¸í, °¡¼ö·Î °Ë»öÇÏ¼¼¿ä"
+            placeholder="ê³¡ëª…, ê°€ìˆ˜ë¡œ ê²€ìƒ‰í•˜ì„¸ìš”"
           />
           <img
             class="music_search"
@@ -57,15 +58,15 @@
           </div>
         </div>
       </div>
-      <!-- ÇÏ´Ü ¸Ş´º¹Ù -->
+      <!-- í•˜ë‹¨ ë©”ë‰´ë°” -->
       <nav>
-        <div><img src="img/mainPageIcon.svg" alt="¸ŞÀÎ ÆäÀÌÁö" /></div>
-        <div><img src="img/searchIcon.svg" alt="³ë·¡¹æ °Ë»ö ÆäÀÌÁö" /></div>
-        <div><img src="img/musicIcon.svg" alt="³ë·¡ °Ë»ö ÆäÀÌÁö" /></div>
+        <div><img src="img/mainPageIcon.svg" alt="ë©”ì¸ í˜ì´ì§€" /></div>
+        <div><img src="img/searchIcon.svg" alt="ë…¸ë˜ë°© ê²€ìƒ‰ í˜ì´ì§€" /></div>
+        <div><img src="img/musicIcon.svg" alt="ë…¸ë˜ ê²€ìƒ‰ í˜ì´ì§€" /></div>
         <div>
-          <img src="img/reservationIcon.svg" alt="³ªÀÇ ¿¹¾à ³»¿ª ÆäÀÌÁö" />
+          <img src="img/reservationIcon.svg" alt="ë‚˜ì˜ ì˜ˆì•½ ë‚´ì—­ í˜ì´ì§€" />
         </div>
-        <div><img src="img/userIcon.svg" alt="¸¶ÀÌÆäÀÌÁö" /></div>
+        <div><img src="img/userIcon.svg" alt="ë§ˆì´í˜ì´ì§€" /></div>
       </nav>
     </div>
     <div class="modal_overlay">
@@ -74,7 +75,7 @@
           <div class="close_btn">
             <img class="close_img" src="img/close.svg" />
           </div>
-          <div class="modal_title">³» À½¾Ç¿¡ ÀúÀåÇÏ±â</div>
+          <div class="modal_title">ë‚´ ìŒì•…ì— ì €ì¥í•˜ê¸°</div>
           <div class="playlist_list">
             <span class="playlist">
               <img
@@ -82,52 +83,59 @@
                 id="music_saved"
                 src="img/folder_open.svg"
               />
-              <span class="list_title">À½¾Ç</span>
+              <span class="list_title">ìŒì•…</span>
             </span>
           </div>
         </div>
         <div class="create_music_list">
           <img class="plus_img" src="img/add_circle_outline.svg" />
-          <span class="create_title">½Å±Ô ÇÃ·¹ÀÌ¸®½ºÆ® »ı¼º</span>
+          <span class="create_title">ì‹ ê·œ í”Œë ˆì´ë¦¬ìŠ¤íŠ¸ ìƒì„±</span>
         </div>
-        <input class="confirm_btn" id="confirm" type="button" value="ÀúÀå" />
+        <input class="confirm_btn" id="confirm" type="button" value="ì €ì¥" />
       </div>
       <div class="modal_create" id="create_playlist" style="display: none">
         <div class="music_like_modal">
           <div class="close_btn2">
             <img class="close_img2" src="img/close.svg" />
           </div>
-          <div class="modal_title">»õ ÇÃ·¹ÀÌ ¸®½ºÆ®</div>
-          <div class="new_play_list_title">ÇÃ·¹ÀÌ ¸®½ºÆ® ¸í</div>
+          <div class="modal_title">ìƒˆ í”Œë ˆì´ ë¦¬ìŠ¤íŠ¸</div>
+          <div class="new_play_list_title">í”Œë ˆì´ ë¦¬ìŠ¤íŠ¸ ëª…</div>
         </div>
         <input
           class="new_play_list_title_input"
           type="text"
-          placeholder="ÇÃ·¹ÀÌ¸®½ºÆ® ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä"
+          placeholder="í”Œë ˆì´ë¦¬ìŠ¤íŠ¸ ëª…ì„ ì…ë ¥í•˜ì„¸ìš”"
         />
-        <input class="confirm_btn" id="confirm" type="button" value="ÀúÀå" />
+        <input class="confirm_btn" id="confirm" type="button" value="ì €ì¥" />
       </div>
       <div class="modal_isMember" id="modal_isMember">
         <div class="close_btn3">
           <img class="close_img3" src="img/close.svg" />
         </div>
-        <div class="modal_alert">·Î±×ÀÎ À¯Àú¸¸ »ç¿ëÇÒ ¼ö ÀÖ´Â ¼­ºñ½ºÀÔ´Ï´Ù</div>
+        <div class="modal_alert">ë¡œê·¸ì¸ ìœ ì €ë§Œ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤</div>
         <input
           class="login_btn"
           id="login_move"
           type="button"
-          value="·Î±×ÀÎÇÏ·¯ °¡±â"
+          value="ë¡œê·¸ì¸í•˜ëŸ¬ ê°€ê¸°"
         />
       </div>
     </div>
-    <script>
+        <script>
       var img = document.getElementById("music_saved");
       img.addEventListener("click", function () {
-        img.src = "img/song_notsave.svg";
+        img.src = "../img/song_notsave.svg";
       });
 
+      test();
+      async function test(){
+    	  console.log("test í•¨ìˆ˜ ì‹œì‘");
+    	  const res = await fetch("https://api.manana.kr/karaoke.json");
+    	  console.log(res);
+    	  console.log("test í•¨ìˆ˜ ì¢…ë£Œ");
+      }
       // function toggleSaved() {
-      //   document.getElementById("music_saved").src = "img/song_notsave.svg";
+      //   document.getElementById("music_saved").src = "../img/song_notsave.svg";
       // }
       // $(".like_btn").on("click", function toggleSaved() {});
       // const ent = document.querySelector(".button");
@@ -139,7 +147,7 @@
         $("#tj").click();
       });
       // const ent = document.querySelector(".button");
-      //Å¬¸¯ÇÑ ¹öÆ° °ª °¡Áö°í ¿À±â
+      //í´ë¦­í•œ ë²„íŠ¼ ê°’ ê°€ì§€ê³  ì˜¤ê¸°
       $(".button").on("click", function () {
         var entInput = this.id;
         // console.log(entInput);
@@ -206,15 +214,14 @@
             ".json",
           data: {},
           success: function (response) {
-            // ¼­¹ö¿¡¼­ ÁØ °á°ú¸¦ response¶ó´Â º¯¼ö¿¡ ´ãÀ½
+            // ì„œë²„ì—ì„œ ì¤€ ê²°ê³¼ë¥¼ responseë¼ëŠ” ë³€ìˆ˜ì— ë‹´ìŒ
             result_data = response; //JSON.parse()
-
             for (const value of result_data) {
               data += `<div class="music_output" id="music_output">
-            <div class="music_num">${value.no}</div>
+            <div class="music_num">` + value.no +`</div>
             <div class="music_info">
-              <span class="music_title">${value.title}</span>
-              <span class="music_singer">${value.singer}</span>
+              <span class="music_title">` +value.title+`</span>
+              <span class="music_singer">` +value.singer+`</span>
             </div>
             <div class="music_like">
              <img class="like_img" src="img/folder_open.svg"></div>
@@ -230,37 +237,27 @@
                 ".json",
               data: {},
               success: function (response) {
-                // ¼­¹ö¿¡¼­ ÁØ °á°ú¸¦ response¶ó´Â º¯¼ö¿¡ ´ãÀ½
+                // ì„œë²„ì—ì„œ ì¤€ ê²°ê³¼ë¥¼ responseë¼ëŠ” ë³€ìˆ˜ì— ë‹´ìŒ
                 result_data = response; //JSON.parse()
-
+				console.log(result_data);
                 for (const value of result_data) {
                   data += `<div class="music_output" id="music_output">
-            <div class="music_num">${value.no}</div>
+            <div class="music_num">` +value.no+`</div>
             <div class="music_info">
-              <span class="music_title">${value.title}</span>
-              <span class="music_singer">${value.singer}</span>
+              <span class="music_title">` +value.title+`</span>
+              <span class="music_singer">` +value.singer+`</span>
             </div>
             <div class="music_like">
-             <img class="like_img" src="img/folder_open.svg"></div>
+             <img class="like_img" src="../img/folder_open.svg"></div>
              </div>`;
                 }
                 $(".music_list_output").html(data);
               },
             });
-            // $(".music_list_output").html(data);
+            // $(".music_list_output").html(data); ë³µë¶™ì™„ë£Œ
           },
         });
-        $(".music_like").on("click",function(){
-        	$.ajax({url:"controller?cmd=checkMusicbymyPlaylist",    
-        		data : {brand : $(".on").attr("id")
-        			    songId : $(".music_num").value},
-        		success : function(responseText2){
-        			result_data=JSON.parse(responseText2),//Text=>Json parsing
-        			$("#OutputPW").text(result_data.result)
-        			$('#OutputPW').show();
-        		}});
-        });
-      });//data: {input : $('#input1').val()}
+      });
     </script>
   </body>
 </html>

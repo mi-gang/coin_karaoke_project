@@ -4,6 +4,7 @@ import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.LoginUI;
+import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
@@ -24,8 +25,7 @@ public class ActionFactory {
 		switch (cmd) {
 		case "login":
 			action = new Login();
-			break;
-			
+			break;	
 		case "reservationListUI":
 			action = new ReservationListUIAction();
 			break;
@@ -69,6 +69,9 @@ public class ActionFactory {
 			break;
 		case "isAdult":
 			action = new idAdult();
+			break;
+		case "musicListUI":
+			action = new MusicListUI();
 			break;
 		default:
 			action = new wrongCmd();
