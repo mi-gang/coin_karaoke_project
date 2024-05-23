@@ -4,6 +4,8 @@ import com.oopsw.controller.action.KKDetailUI;
 import com.oopsw.controller.action.KKFilterUI;
 import com.oopsw.controller.action.KKSearchResultUI;
 import com.oopsw.controller.action.Login;
+import com.oopsw.controller.action.ReservationListUIAction;
+import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.addUser;
@@ -27,6 +29,15 @@ public class ActionFactory {
 		case "login":
 			action = new Login();
 			break;
+			
+		case "reservationListUI":
+			action = new ReservationListUIAction();
+			break;
+			
+		case "uncompletedReservationListAction":
+			action = new UncompletedReservationListAction();
+			break;
+
 		case "loginUI":
 			action = new LoginUI();
 			break;

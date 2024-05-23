@@ -20,7 +20,7 @@ import com.oopsw.model.vo.SongVO;
 public class MusicService {
 	private static Connection conn;
 
-	public MusicService() throws SQLException{
+	public MusicService(){
 //		Context context;
 //		try {
 //			context = new InitialContext();
@@ -44,16 +44,17 @@ public class MusicService {
 
 	}
 
-
+//Song VO로 아래 변수 대체 가능
 
 	public boolean addMusic(int songId, String brand,String title, String singer,int playlistId){
 		boolean result=false;
-		result=new SongDAO(conn).isSongInDB(songId,brand);
+		result=new SongDAO(conn).isSongInDB(songId,brand);//API Data
+		//DAO에 있는 method를 통해서 
 		if(result==false){
-			result=new SongDAO(conn).addSong(songId, brand, title, singer);
+			result=new SongDAO(conn).addSong(songId, brand, title, singer);//API Data
 		}
 		if(result==true){
-			result=new PlaylistDAO(conn).addSongToPlaylist(songId, brand, playlistId);
+			result=new PlaylistDAO(conn).addSongToPlaylist(songId, brand, playlistId);//넘어오는 API Data
 		}
 		
 		try {
@@ -68,13 +69,13 @@ public class MusicService {
 
 	}
 
-	public Collection<MusicServiceVO> MyPlaylistCheckMusic(String userId, int songId, String brand){
+	public Collection<MusicServiceVO> myPlaylistCheckMusic(String userId, int songId, String brand){
 		Collection<MusicServiceVO> list=new ArrayList<>();
 		Collection<PlaylistVO> list2=new ArrayList<>();//PlaylistVO를 고치고 다시 보기
 		list2=new PlaylistDAO(conn).getPlaylistList(userId);
 		for(PlaylistVO vo :list2 ){
 			boolean isMusic = new PlaylistDAO(conn).isSongInPlaylist(songId, brand, vo.getPlayListId());
-			list.add(new MusicServiceVO(vo.getPlayListId(), vo.getPlayListTitle(), vo.getSongId(), brand, isMusic));
+			list.add(new MusicServiceVO(vo.getPlayListId(), vo.getPlayListTitle(), songId, brand, isMusic));
 		}
 //		try {
 ////			conn.commit();

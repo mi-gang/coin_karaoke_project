@@ -46,16 +46,16 @@ form {
     border: none;
   }
   img.default {
-    content: url("/img/default.svg");
+    content: url("img/default.svg");
   }
   img.check {
-    content: url("/img/validate.svg");
+    content: url("img/validate.svg");
   }
   img.fail {
-    content: url("/img/fail.svg");
+    content: url("img/fail.svg");
   }
   img.editPencil {
-    content: url("/img/editPencil.svg");
+    content: url("img/editPencil.svg");
   }
 
   input {
@@ -78,21 +78,21 @@ form {
   }
 
   #userId {
-    background-image: url("/img/email.svg");
+    background-image: url("img/email.svg");
     color: #979797;
   }
 
   input[type="password"],
   #passwordConfirm {
-    background-image: url("/img/password.svg");
+    background-image: url("img/password.svg");
   }
 
   #nickname {
-    background-image: url("/img/user.svg");
+    background-image: url("img/user.svg");
   }
 
   #birthDate {
-    background-image: url("/img/cake.svg");
+    background-image: url("img/cake.svg");
     width: 32.4rem;
     color: #979797;
   }
