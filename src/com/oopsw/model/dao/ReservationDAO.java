@@ -1,6 +1,7 @@
 package com.oopsw.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -132,8 +133,10 @@ public class ReservationDAO {
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setTimestamp(1, Timestamp.valueOf(startTime));
-			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
+//			pstmt.setTimestamp(1, Timestamp.valueOf(startTime));
+			pstmt.setDate(1, Date.valueOf(startTime.toLocalDate()));
+//			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
+			pstmt.setDate(2, Date.valueOf(endTime.toLocalDate()));
 			pstmt.setInt(3, roomId);
 
 			int num = pstmt.executeUpdate();
@@ -273,14 +276,18 @@ public class ReservationDAO {
 	public boolean addReservation(ReservationVO reservationVO) {
 
 		String sql = "Insert into RESERVATIONS (reservation_id, is_cancel, start_time, end_time, "
-				+ "user_id, room_id) values (reservation_id_seq.nextval, 0, " + "TO_DATE(?,'YYYY-MM-DD HH24:MI'), "
-				+ "TO_DATE(?,'YYYY-MM-DD HH24:MI'), ?, ?)";
+				+ "user_id, room_id) values (reservation_id_seq.nextval, 0, " + "TO_DATE(?,'YYYY-MM-DD HH24:MI:SS'), "
+				+ "TO_DATE(?,'YYYY-MM-DD HH24:MI:SS'), ?, ?)";
 
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getStartTime()));
-			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getEndTime()));
+//			pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getStartTime()));
+//			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getEndTime()));
+//			pstmt.setDate(1, reservationVO.getStartTime().toString());
+//			pstmt.setDate(2, Date.valueOf(reservationVO.getEndTime().toLocalDate()));
+			pstmt.setString(1, LDT2D(reservationVO.getStartTime()));
+			pstmt.setString(2, LDT2D(reservationVO.getEndTime()));
 			pstmt.setString(3, reservationVO.getUserId());
 			pstmt.setInt(4, reservationVO.getRoomId());
 
@@ -335,4 +342,11 @@ public class ReservationDAO {
 		return result;
 	}
 
+	private String LDT2D(LocalDateTime ldt){
+		String result = ldt.toString();
+		result = result.split("\\.")[0];
+		result = result.replace('T', ' ');
+		
+		return result;
+	}
 }
