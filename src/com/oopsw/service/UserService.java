@@ -126,10 +126,11 @@ public class UserService {
 		Connection conn = getConnection();
 		boolean result = false;
 		try {
-			result = new UserDAO(conn).isExistEmailTest(userId);
+			result = new UserDAO(conn).isExistEmail(userId);
 			conn.close();
 		} catch (SQLException e) {
 			// result 기본값 false
+			e.printStackTrace();
 		}
 
 		return result;

@@ -10,7 +10,7 @@ public class LoginUI implements Action{
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		Url url = new Url("html/loginUI.html", Url.FORWARD);
+		Url url = new Url("jsp/loginUI.jsp", Url.FORWARD);
 		HttpSession session =request.getSession();
 		
 		if(session.getAttribute("userId") != null){

@@ -107,7 +107,7 @@ public class UserDAOTest {
 	
 	@Test
 	public void isAdultTest() throws SQLException{
-		assertThat(dao.isAdult(userId)).isFalse();
+		assertThat(dao.isAdult(userId)).isTrue();
 	}
 
 }

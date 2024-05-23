@@ -74,7 +74,7 @@ public class UserDAO {
 		return user;
 	}
 
-	public boolean isExistEmailTest(String userId) throws SQLException {
+	public boolean isExistEmail(String userId) throws SQLException {
 		boolean result = false;
 		String sql = "SELECT nickname from users where user_id = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);

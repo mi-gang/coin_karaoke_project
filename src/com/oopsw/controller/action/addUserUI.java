@@ -10,7 +10,7 @@ public class addUserUI implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 
-		return new Url("html/addUserUI.html", Url.FORWARD);
+		return new Url("jsp/addUserUI.jsp", Url.FORWARD);
 	}
 
 }

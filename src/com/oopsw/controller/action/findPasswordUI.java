@@ -9,7 +9,7 @@ public class findPasswordUI implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		return new Url("html/findPasswordUI.html", Url.FORWARD);
+		return new Url("jsp/findPasswordUI.jsp", Url.FORWARD);
 	}
 
 }
