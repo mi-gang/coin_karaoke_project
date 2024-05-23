@@ -18,6 +18,7 @@ public class Login implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
+		Url url = new Url("controller?cmd=loginUI", Url.REDIRECT);
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		boolean loginSuccess = false;
@@ -26,15 +27,12 @@ public class Login implements Action {
 		if(loginSuccess){
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userId);
-			System.out.println("로그인 성공: " + userId);
+			System.out.println("Login.java: 로그인 성공: " + userId);
+			url.setUrl("controller?cmd=mainUI");
+			url.setFlag(Url.REDIRECT);
 		}
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		JsonObject json = new JsonObject();
-		json.addProperty("result", loginSuccess);
-		request.setAttribute("dataToSend", gson.toJson(json));
-		
-		return new Url("json/data.jsp", Url.FORWARD);
+		return url;
 	}
 
 }

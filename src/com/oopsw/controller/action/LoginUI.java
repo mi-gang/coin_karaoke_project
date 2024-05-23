@@ -14,7 +14,7 @@ public class LoginUI implements Action{
 		HttpSession session =request.getSession();
 		
 		if(session.getAttribute("userId") != null){
-			System.out.println(session.getAttribute("userId"));
+			System.out.println("LoginUI:이미 로그인된 상태: " + session.getAttribute("userId"));
 			url.setUrl("controller?cmd=mainUI");
 			url.setFlag(Url.REDIRECT);
 		}
