@@ -27,9 +27,11 @@ public class Login implements Action {
 		if(loginSuccess){
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userId);
-			System.out.println("Login.java: 로그인 성공: " + userId);
+			System.out.println("O 로그인 성공: " + userId + " : LoginAction");
 			url.setUrl("controller?cmd=mainUI");
 			url.setFlag(Url.REDIRECT);
+		}else{
+			System.out.println("X 로그인 실패: " + userId + " : LoginAction");
 		}
 		
 		return url;

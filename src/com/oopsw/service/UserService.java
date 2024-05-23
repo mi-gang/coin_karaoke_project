@@ -141,6 +141,7 @@ public class UserService {
 		boolean result = false;
 		user.setPassword(getEncryptedPassword(user.getEmail(), user.getPassword()));
 		result = new UserDAO(conn).addUser(user);
+		conn.commit();
 		conn.close();
 		return result;
 

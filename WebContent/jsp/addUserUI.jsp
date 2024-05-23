@@ -86,8 +86,8 @@
                 e.preventDefault();
                 let result = false;
                 try {
-                    const res = await fetch("controller?cmd=login&userId=" + userId + "&nickname=" + nickname + "&birthDate=" + birthDate + "&password=" + password);
-                    const data = res.json();
+                    const res = await fetch("controller?cmd=addUser&userId=" + userId.val() + "&nickname=" + nickname.val() + "&birthDate=" + birthDate.val() + "&password=" + password.val());
+                    const data = await res.json();
                     result = data.result;
                 } catch {
                     console.log("todo");
@@ -213,12 +213,11 @@
             async function isExistUserId(userId) {
                 let result = false;
                 try {
-                    const res = await fetch("controller?cmd=isExistUserId&userId=" + userId);
+                    const res = await fetch("controller?cmd=isExistEmail&userId=" + userId);
                     const data = await res.json();
                     result = data.result;
                 } catch {
                     console.log("아이디 검증 실패");
-                    result = false;
                 }
                 return result;
             }
