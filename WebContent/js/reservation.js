@@ -1,4 +1,4 @@
-// 예약 상태 탭 클릭 시
+6; // 예약 상태 탭 클릭 시
 
 $(".reservations-status-button").on("click", function () {
   $(".reservations-status-button").removeClass("active");
@@ -9,6 +9,30 @@ $(".reservations-status-button").on("click", function () {
   if ($(this).attr("id") == "status-1") {
     $(".status-1-1").show();
     $(".status-1-2").show();
+
+    $.ajax({
+      url: "controller?cmd=reservationListUI",
+      method: "POST",
+      success: function (response) {},
+    });
+
+    $.ajax({
+      url: "controller?cmd=idCheckAction",
+      data: { manager_id: $(this).val() },
+      success: function (responseText) {
+        console.log(responseText);
+        console.log(responseText == "N");
+        console.log(responseText.length);
+        if (responseText.charAt(responseText.length - 1) == "N") {
+          // document.querySelector('#id-check').innerText("존재하는 아이디입니다.");
+          $("#id-check").text("존재하는 아이디입니다.");
+        } else {
+          //document.querySelector('#id-check').innerText("존재하지 않는 아이디입니다.");
+          $("#id-check").text("존재하지 않는 아이디입니다.");
+        }
+      },
+    });
+
     return false;
   }
   if ($(this).attr("id") == "status-2") {
@@ -89,8 +113,8 @@ $("#add2-add-time-button").on("click", function (event) {
   }
 
   // 추가가능시간 미만 검사
-  let additionalHour = $(".additionalHourStatus").text();
-  let additionalMinute = $(".additionalMinuteStatus").text();
+  let additionalHour = $(".additional-hour-a-status").text();
+  let additionalMinute = $(".additional-minute-a-status").text();
 
   parseInt(additionalHour);
   parseInt(additionalMinute);
