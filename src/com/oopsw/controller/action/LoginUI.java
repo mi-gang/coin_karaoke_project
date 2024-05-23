@@ -12,7 +12,9 @@ public class LoginUI implements Action{
 	public Url execute(HttpServletRequest request) {
 		Url url = new Url("html/loginUI.html", Url.FORWARD);
 		HttpSession session =request.getSession();
+		
 		if(session.getAttribute("userId") != null){
+			System.out.println(session.getAttribute("userId"));
 			url.setUrl("controller?cmd=mainUI");
 			url.setFlag(Url.REDIRECT);
 		}

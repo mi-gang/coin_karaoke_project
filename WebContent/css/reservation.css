@@ -385,7 +385,7 @@
   border: none;
   background-color: transparent;
 
-  background-image: url("../img/down_arrow.svg");
+  background-image: url("img/down\ arrow.svg");
   background-repeat: no-repeat;
   background-size: 3rem;
   cursor: pointer;
