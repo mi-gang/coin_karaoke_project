@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>:: ³ë·¡¹æ °Ë»ö</title>
+    <title>:: ë…¸ëž˜ë°© ê²€ìƒ‰</title>
     <link
       rel="stylesheet"
       href="css/kkFilterUI.css"
@@ -33,88 +33,88 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
-    <!-- ¸ð¹ÙÀÏ ÄÁÅ×ÀÌ³Ê -->
+    <!-- ëª¨ë°”ì¼ ì»¨í…Œì´ë„ˆ -->
     <div id="mobileContainer">
-      <!--Çì´õ-->
+      <!--í—¤ë”-->
       <header>
         <img
           src="img/left arrow.svg"
-          alt="ÀÌÀü ÆäÀÌÁö ÀÌµ¿"
+          alt="ì´ì „ íŽ˜ì´ì§€ ì´ë™"
         />
-        <span>³ë·¡¹æ °Ë»ö</span>
+        <span>ë…¸ëž˜ë°© ê²€ìƒ‰</span>
       </header>
-      <!-- ÄÁÅÙÃ÷ ÄÁÅ×ÀÌ³Ê -->
+      <!-- ì»¨í…ì¸  ì»¨í…Œì´ë„ˆ -->
       <div id="container">
         <div id="regionWrapper">
-          <p class="subTitle">Áö¿ª</p>
+          <p class="subTitle">ì§€ì—­</p>
           <div class="regionBox">
-            <button class="label">ÀÌ¿ë Áö¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.</button>
+            <button class="label">ì´ìš© ì§€ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.</button>
             <img
               src="img/down arrow.svg"
-              alt="µå·Ó´Ù¿î"
+              alt="ë“œë¡­ë‹¤ìš´"
             />
             <ul class="regionList">
-              <li class="regionItem">¼­¿ï ÀüÃ¼</li>
-              <li class="regionItem">°­³²±¸</li>
-              <li class="regionItem">°­µ¿±¸</li>
-              <li class="regionItem">°­ºÏ±¸</li>
-              <li class="regionItem">°­¼­±¸</li>
-              <li class="regionItem">°ü¾Ç±¸</li>
-              <li class="regionItem">±¤Áø±¸</li>
-              <li class="regionItem">±¸·Î±¸</li>
-              <li class="regionItem">±ÝÃµ±¸</li>
-              <li class="regionItem">³ë¿ø±¸</li>
-              <li class="regionItem">µµºÀ±¸</li>
-              <li class="regionItem">µ¿´ë¹®±¸</li>
-              <li class="regionItem">µ¿ÀÛ±¸</li>
-              <li class="regionItem">¸¶Æ÷±¸</li>
-              <li class="regionItem">¼­´ë¹®±¸</li>
-              <li class="regionItem">¼­ÃÊ±¸</li>
-              <li class="regionItem">¼ºµ¿±¸</li>
-              <li class="regionItem">¼ººÏ±¸</li>
-              <li class="regionItem">¼ÛÆÄ±¸</li>
-              <li class="regionItem">¾çÃµ±¸</li>
-              <li class="regionItem">¿µµîÆ÷±¸</li>
-              <li class="regionItem">¿ë»ê±¸</li>
-              <li class="regionItem">ÀºÆò±¸</li>
-              <li class="regionItem">Á¾·Î±¸</li>
-              <li class="regionItem">Áß±¸</li>
-              <li class="regionItem">Áß¶û±¸</li>
+              <li class="regionItem">ì„œìš¸ ì „ì²´</li>
+              <li class="regionItem">ê°•ë‚¨êµ¬</li>
+              <li class="regionItem">ê°•ë™êµ¬</li>
+              <li class="regionItem">ê°•ë¶êµ¬</li>
+              <li class="regionItem">ê°•ì„œêµ¬</li>
+              <li class="regionItem">ê´€ì•…êµ¬</li>
+              <li class="regionItem">ê´‘ì§„êµ¬</li>
+              <li class="regionItem">êµ¬ë¡œêµ¬</li>
+              <li class="regionItem">ê¸ˆì²œêµ¬</li>
+              <li class="regionItem">ë…¸ì›êµ¬</li>
+              <li class="regionItem">ë„ë´‰êµ¬</li>
+              <li class="regionItem">ë™ëŒ€ë¬¸êµ¬</li>
+              <li class="regionItem">ë™ìž‘êµ¬</li>
+              <li class="regionItem">ë§ˆí¬êµ¬</li>
+              <li class="regionItem">ì„œëŒ€ë¬¸êµ¬</li>
+              <li class="regionItem">ì„œì´ˆêµ¬</li>
+              <li class="regionItem">ì„±ë™êµ¬</li>
+              <li class="regionItem">ì„±ë¶êµ¬</li>
+              <li class="regionItem">ì†¡íŒŒêµ¬</li>
+              <li class="regionItem">ì–‘ì²œêµ¬</li>
+              <li class="regionItem">ì˜ë“±í¬êµ¬</li>
+              <li class="regionItem">ìš©ì‚°êµ¬</li>
+              <li class="regionItem">ì€í‰êµ¬</li>
+              <li class="regionItem">ì¢…ë¡œêµ¬</li>
+              <li class="regionItem">ì¤‘êµ¬</li>
+              <li class="regionItem">ì¤‘ëž‘êµ¬</li>
             </ul>
           </div>
           <!-- <select id="region" name="region">
-                    <option value="">ÀÌ¿ë Áö¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.</option>
-                    <option value="°­³²±¸">°­³²±¸</option>
-                    <option value="°­µ¿±¸">°­µ¿±¸</option>
-                    <option value="°­ºÏ±¸">°­ºÏ±¸</option>
-                    <option value="°­¼­±¸">°­¼­±¸</option>
-                    <option value="°ü¾Ç±¸">°ü¾Ç±¸</option>
-                    <option value="±¤Áø±¸">±¤Áø±¸</option>
-                    <option value="±¸·Î±¸">±¸·Î±¸</option>
-                    <option value="±ÝÃµ±¸">±ÝÃµ±¸</option>
-                    <option value="³ë¿ø±¸">³ë¿ø±¸</option>
-                    <option value="µµºÀ±¸">µµºÀ±¸</option>
-                    <option value="µ¿´ë¹®±¸">µ¿´ë¹®±¸</option>
-                    <option value="µ¿ÀÛ±¸">µ¿ÀÛ±¸</option>
-                    <option value="¸¶Æ÷±¸">¸¶Æ÷±¸</option>
-                    <option value="¼­´ë¹®±¸">¼­´ë¹®±¸</option>
-                    <option value="¼­ÃÊ±¸">¼­ÃÊ±¸</option>
-                    <option value="¼ºµ¿±¸">¼ºµ¿±¸</option>
-                    <option value="¼ººÏ±¸">¼ººÏ±¸</option>
-                    <option value="¼ÛÆÄ±¸">¼ÛÆÄ±¸</option>
-                    <option value="¾çÃµ±¸">¾çÃµ±¸</option>
-                    <option value="¿µµîÆ÷±¸">¿µµîÆ÷±¸</option>
-                    <option value="¿ë»ê±¸">¿ë»ê±¸</option>
-                    <option value="ÀºÆò±¸">ÀºÆò±¸</option>
-                    <option value="Á¾·Î±¸">Á¾·Î±¸</option>
-                    <option value="Áß±¸">Áß±¸</option>
-                    <option value="Áß¶û±¸">Áß¶û±¸</option>
+                    <option value="">ì´ìš© ì§€ì—­ì„ ì„ íƒí•´ì£¼ì„¸ìš”.</option>
+                    <option value="ê°•ë‚¨êµ¬">ê°•ë‚¨êµ¬</option>
+                    <option value="ê°•ë™êµ¬">ê°•ë™êµ¬</option>
+                    <option value="ê°•ë¶êµ¬">ê°•ë¶êµ¬</option>
+                    <option value="ê°•ì„œêµ¬">ê°•ì„œêµ¬</option>
+                    <option value="ê´€ì•…êµ¬">ê´€ì•…êµ¬</option>
+                    <option value="ê´‘ì§„êµ¬">ê´‘ì§„êµ¬</option>
+                    <option value="êµ¬ë¡œêµ¬">êµ¬ë¡œêµ¬</option>
+                    <option value="ê¸ˆì²œêµ¬">ê¸ˆì²œêµ¬</option>
+                    <option value="ë…¸ì›êµ¬">ë…¸ì›êµ¬</option>
+                    <option value="ë„ë´‰êµ¬">ë„ë´‰êµ¬</option>
+                    <option value="ë™ëŒ€ë¬¸êµ¬">ë™ëŒ€ë¬¸êµ¬</option>
+                    <option value="ë™ìž‘êµ¬">ë™ìž‘êµ¬</option>
+                    <option value="ë§ˆí¬êµ¬">ë§ˆí¬êµ¬</option>
+                    <option value="ì„œëŒ€ë¬¸êµ¬">ì„œëŒ€ë¬¸êµ¬</option>
+                    <option value="ì„œì´ˆêµ¬">ì„œì´ˆêµ¬</option>
+                    <option value="ì„±ë™êµ¬">ì„±ë™êµ¬</option>
+                    <option value="ì„±ë¶êµ¬">ì„±ë¶êµ¬</option>
+                    <option value="ì†¡íŒŒêµ¬">ì†¡íŒŒêµ¬</option>
+                    <option value="ì–‘ì²œêµ¬">ì–‘ì²œêµ¬</option>
+                    <option value="ì˜ë“±í¬êµ¬">ì˜ë“±í¬êµ¬</option>
+                    <option value="ìš©ì‚°êµ¬">ìš©ì‚°êµ¬</option>
+                    <option value="ì€í‰êµ¬">ì€í‰êµ¬</option>
+                    <option value="ì¢…ë¡œêµ¬">ì¢…ë¡œêµ¬</option>
+                    <option value="ì¤‘êµ¬">ì¤‘êµ¬</option>
+                    <option value="ì¤‘ëž‘êµ¬">ì¤‘ëž‘êµ¬</option>
                 </select>  -->
         </div>
         <div id="timeWrapper">
-          <p class="subTitle">°Ë»ö ½Ã°£´ë ¹× ÀÌ¿ë½Ã°£</p>
+          <p class="subTitle">ê²€ìƒ‰ ì‹œê°„ëŒ€ ë° ì´ìš©ì‹œê°„</p>
           <div class="timeItemWrapper">
-            <p>°Ë»ö ½Ã°£´ë</p>
+            <p>ê²€ìƒ‰ ì‹œê°„ëŒ€</p>
             <div id="timeSettingWrapper">
               <div
                 id="startTime"
@@ -132,7 +132,7 @@
                 />
                 <img
                   src="img/down arrow.svg"
-                  alt="µå·Ó´Ù¿î"
+                  alt="ë“œë¡­ë‹¤ìš´"
                 />
               </div>
               <span>~</span>
@@ -151,7 +151,7 @@
                 />
                 <img
                   src="img/down arrow.svg"
-                  alt="µå·Ó´Ù¿î"
+                  alt="ë“œë¡­ë‹¤ìš´"
                 />
               </div>
               <div
@@ -159,7 +159,7 @@
                 class="modal searchTime"
               >
                 <div class="modalContent">
-                  <p id="startDate">2024.05.16(¸ñ)</p>
+                  <p id="startDate">2024.05.16(ëª©)</p>
                   <div class="timeSettingWrapper">
                     <div class="timeTypeWrapper">
                       <div class="timeType">AM</div>
@@ -170,7 +170,7 @@
                         id="hour"
                         class="time"
                       >
-                        <p>½Ã</p>
+                        <p>ì‹œ</p>
                         <input
                           name="hour"
                           type="number"
@@ -181,7 +181,7 @@
                         id="minute"
                         class="time"
                       >
-                        <p>ºÐ</p>
+                        <p>ë¶„</p>
                         <input
                           name="minute"
                           type="number"
@@ -191,15 +191,15 @@
                     </div>
                   </div>
                   <div class="btnWrapper">
-                    <div class="btn cancel">Ãë¼Ò</div>
-                    <div class="btn setting">¼³Á¤</div>
+                    <div class="btn cancel">ì·¨ì†Œ</div>
+                    <div class="btn setting">ì„¤ì •</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="timeItemWrapper item3">
-            <p>ÀÌ¿ë ½Ã°£</p>
+            <p>ì´ìš© ì‹œê°„</p>
             <div
               id="hoursOfUse"
               class="timeSettingItem item3"
@@ -214,7 +214,7 @@
               />
               <img
                 src="img/down arrow.svg"
-                alt="µå·Ó´Ù¿î"
+                alt="ë“œë¡­ë‹¤ìš´"
               />
             </div>
           </div>
@@ -226,17 +226,17 @@
                 <div class="closeIconWrapper">
                     <img
                     src="img/close.svg"
-                    alt="¸ð´ÞÃ¢ ´Ý±â"
+                    alt="ëª¨ë‹¬ì°½ ë‹«ê¸°"
                     class="closeBtn"
                     />
                 </div>
-              <p class="subTitle">ÀÌ¿ë ½Ã°£</p>
+              <p class="subTitle">ì´ìš© ì‹œê°„</p>
               <div class="timeWrapper">
                 <div
                   id="hour"
                   class="time"
                 >
-                  <p>½Ã</p>
+                  <p>ì‹œ</p>
                   <input
                     name="hour"
                     type="number"
@@ -247,7 +247,7 @@
                   id="minute"
                   class="time"
                 >
-                  <p>ºÐ</p>
+                  <p>ë¶„</p>
                   <input
                     name="minute"
                     type="number"
@@ -255,78 +255,74 @@
                   />
                 </div>
               </div>
-              <div id="usingTimeSettingBtn" class="btn">¼³Á¤</div>
+              <div id="usingTimeSettingBtn" class="btn">ì„¤ì •</div>
             </div>
           </div>
         </div>
         <div id="additionalOptionWrapper">
-          <p class="subTitle">Ãß°¡ Á¶°Ç</p>
+          <p class="subTitle">ì¶”ê°€ ì¡°ê±´</p>
           <div class="optionsWrapper">
             <div class="optionItem">
-              <!-- <img
-                src="img/Car.svg"
-                alt="ÁÖÂ÷ °¡´É ¾ÆÀÌÄÜ"
-              /> -->
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.0333 21.8C10.8264 21.8748 10.6386 21.9942 10.4831 22.1498C10.3275 22.3053 10.2081 22.4931 10.1333 22.7C10.012 23.0028 9.98234 23.3346 10.0479 23.6542C10.1135 23.9738 10.2714 24.2671 10.5021 24.4978C10.7327 24.7285 11.0261 24.8864 11.3457 24.952C11.6652 25.0175 11.997 24.9879 12.2999 24.8666C12.5019 24.7822 12.6879 24.6638 12.8499 24.5166C12.9971 24.3546 13.1155 24.1686 13.1999 23.9666C13.2932 23.7688 13.3389 23.5519 13.3333 23.3333C13.3271 22.892 13.1545 22.4693 12.8499 22.15C12.6155 21.9187 12.3179 21.762 11.9946 21.6997C11.6713 21.6375 11.3368 21.6723 11.0333 21.8ZM32.9333 15.1333L30.6666 8.41662C30.3208 7.43867 29.6795 6.59246 28.8314 5.99522C27.9833 5.39799 26.9705 5.07929 25.9333 5.08329H14.0666C13.0293 5.07929 12.0165 5.39799 11.1684 5.99522C10.3203 6.59246 9.679 7.43867 9.33325 8.41662L7.06659 15.1833C6.00046 15.4625 5.05645 16.0861 4.3813 16.9571C3.70616 17.8282 3.33771 18.8979 3.33325 20V26.6666C3.33615 27.6982 3.65805 28.7036 4.25482 29.5451C4.85158 30.3865 5.694 31.0228 6.66659 31.3666V33.3333C6.66659 33.7753 6.84218 34.1992 7.15474 34.5118C7.4673 34.8244 7.89122 35 8.33325 35C8.77528 35 9.1992 34.8244 9.51176 34.5118C9.82432 34.1992 9.99992 33.7753 9.99992 33.3333V31.6666H29.9999V33.3333C29.9999 33.7753 30.1755 34.1992 30.4881 34.5118C30.8006 34.8244 31.2246 35 31.6666 35C32.1086 35 32.5325 34.8244 32.8451 34.5118C33.1577 34.1992 33.3333 33.7753 33.3333 33.3333V31.3666C34.3058 31.0228 35.1483 30.3865 35.745 29.5451C36.3418 28.7036 36.6637 27.6982 36.6666 26.6666V20C36.6621 18.8979 36.2937 17.8282 35.6185 16.9571C34.9434 16.0861 33.9994 15.4625 32.9333 15.1833V15.1333ZM12.4833 9.46662C12.5951 9.13559 12.8081 8.84806 13.0922 8.64469C13.3763 8.44132 13.7172 8.33239 14.0666 8.33329H25.9333C26.2967 8.31432 26.6564 8.41483 26.9573 8.61948C27.2583 8.82413 27.484 9.12165 27.5999 9.46662L29.3499 15H10.6499L12.4833 9.46662ZM33.3333 26.6666C33.3333 27.1087 33.1577 27.5326 32.8451 27.8451C32.5325 28.1577 32.1086 28.3333 31.6666 28.3333H8.33325C7.89122 28.3333 7.4673 28.1577 7.15474 27.8451C6.84218 27.5326 6.66659 27.1087 6.66659 26.6666V20C6.66659 19.5579 6.84218 19.134 7.15474 18.8214C7.4673 18.5089 7.89122 18.3333 8.33325 18.3333H31.6666C32.1086 18.3333 32.5325 18.5089 32.8451 18.8214C33.1577 19.134 33.3333 19.5579 33.3333 20V26.6666ZM27.6999 21.8C27.4931 21.8748 27.3053 21.9942 27.1497 22.1498C26.9942 22.3053 26.8748 22.4931 26.7999 22.7C26.6787 23.0028 26.649 23.3346 26.7146 23.6542C26.7801 23.9738 26.938 24.2671 27.1687 24.4978C27.3994 24.7285 27.6927 24.8864 28.0123 24.952C28.3319 25.0175 28.6637 24.9879 28.9666 24.8666C29.1734 24.7918 29.3612 24.6723 29.5168 24.5168C29.6723 24.3613 29.7917 24.1735 29.8666 23.9666C29.9599 23.7688 30.0056 23.5519 29.9999 23.3333C29.9938 22.892 29.8211 22.4693 29.5166 22.15C29.2822 21.9187 28.9846 21.762 28.6613 21.6997C28.338 21.6375 28.0034 21.6723 27.6999 21.8ZM21.6666 21.6666H18.3333C17.8912 21.6666 17.4673 21.8422 17.1547 22.1548C16.8422 22.4673 16.6666 22.8913 16.6666 23.3333C16.6666 23.7753 16.8422 24.1992 17.1547 24.5118C17.4673 24.8244 17.8912 25 18.3333 25H21.6666C22.1086 25 22.5325 24.8244 22.8451 24.5118C23.1577 24.1992 23.3333 23.7753 23.3333 23.3333C23.3333 22.8913 23.1577 22.4673 22.8451 22.1548C22.5325 21.8422 22.1086 21.6666 21.6666 21.6666Z" fill="#B6B6B6"/>
                 </svg>
-              <p class="optionName">ÁÖÂ÷ °¡´É</p>
+              <p class="optionName">ì£¼ì°¨ ê°€ëŠ¥</p>
             </div>
             <div class="optionItem">
               <img
                 src="img/up.svg"
-                alt="Áö»óÃþ ¾ÆÀÌÄÜ"
+                alt="ì§€ìƒì¸µ ì•„ì´ì½˜"
               />
-              <p class="optionName">Áö»óÃþ</p>
+              <p class="optionName">ì§€ìƒì¸µ</p>
             </div>
             <div class="optionItem">
               <img
                 src="img/ThermometerHalf.svg"
-                alt="³Ã³­¹æ ¾ÆÀÌÄÜ"
+                alt="ëƒ‰ë‚œë°© ì•„ì´ì½˜"
               />
-              <p class="optionName">³Ã³­¹æ</p>
+              <p class="optionName">ëƒ‰ë‚œë°©</p>
             </div>
             <div class="optionItem">
               <img
                 src="img/users.svg"
-                alt="´ÜÃ¼ ¾ÆÀÌÄÜ"
+                alt="ë‹¨ì²´ ì•„ì´ì½˜"
               />
-              <p class="optionName">´ÜÃ¼ °¡´É</p>
+              <p class="optionName">ë‹¨ì²´ ê°€ëŠ¥</p>
             </div>
           </div>
         </div>
-        <button>°Ë»ö</button>
+        <button>ê²€ìƒ‰</button>
       </div>
-      <!-- ÇÏ´Ü ¸Þ´º¹Ù -->
+      <!-- í•˜ë‹¨ ë©”ë‰´ë°” -->
       <nav>
         <div>
           <img
             src="img/mainPageIcon.svg"
-            alt="¸ÞÀÎ ÆäÀÌÁö"
+            alt="ë©”ì¸ íŽ˜ì´ì§€"
           />
         </div>
         <div>
           <img
             src="img/searchIcon.svg"
-            alt="³ë·¡¹æ °Ë»ö ÆäÀÌÁö"
+            alt="ë…¸ëž˜ë°© ê²€ìƒ‰ íŽ˜ì´ì§€"
           />
         </div>
         <div>
           <img
             src="img/musicIcon.svg"
-            alt="³ë·¡ °Ë»ö ÆäÀÌÁö"
+            alt="ë…¸ëž˜ ê²€ìƒ‰ íŽ˜ì´ì§€"
           />
         </div>
         <div>
           <img
             src="img/reservationIcon.svg"
-            alt="³ªÀÇ ¿¹¾à ³»¿ª ÆäÀÌÁö"
+            alt="ë‚˜ì˜ ì˜ˆì•½ ë‚´ì—­ íŽ˜ì´ì§€"
           />
         </div>
         <div>
           <img
             src="img/userIcon.svg"
-            alt="¸¶ÀÌÆäÀÌÁö"
+            alt="ë§ˆì´íŽ˜ì´ì§€"
           />
         </div>
       </nav>
@@ -338,18 +334,19 @@
       // const timeTypes = document.querySelectorAll(".timeType");
       // let timeType = "";
 
-      // Å¬¸¯ÇÑ ¿É¼ÇÀÇ ÅØ½ºÆ®¸¦ ¶óº§ ¾È¿¡ ³ÖÀ½
+      // í´ë¦­í•œ ì˜µì…˜ì˜ í…ìŠ¤íŠ¸ë¥¼ ë¼ë²¨ ì•ˆì— ë„£ìŒ
       const handleSelect = function (item) {
         label.innerHTML = item.textContent;
         label.parentNode.classList.remove("active");
       };
-      // ¿É¼Ç Å¬¸¯½Ã Å¬¸¯ÇÑ ¿É¼ÇÀ» ³Ñ±è
+
+      // ì˜µì…˜ í´ë¦­ì‹œ í´ë¦­í•œ ì˜µì…˜ì„ ë„˜ê¹€
       options.forEach(function (option) {
         option.addEventListener("click", function () {
           handleSelect(option);
         });
       });
-      // ¶óº§À» Å¬¸¯½Ã ¿É¼Ç ¸ñ·ÏÀÌ ¿­¸²/´ÝÈû
+      // ë¼ë²¨ì„ í´ë¦­ì‹œ ì˜µì…˜ ëª©ë¡ì´ ì—´ë¦¼/ë‹«íž˜
       label.addEventListener("click", function () {
         if (label.parentNode.classList.contains("active")) {
           label.parentNode.classList.remove("active");
@@ -357,10 +354,10 @@
           label.parentNode.classList.add("active");
         }
       });
-      // ¿É¼Ç ¾ÆÀÌÅÛ Å¬¸¯½Ã Å×µÎ¸® »ö»ó º¯°æ
+      // ì˜µì…˜ ì•„ì´í…œ í´ë¦­ì‹œ í…Œë‘ë¦¬ ìƒ‰ìƒ ë³€ê²½
       searchOptions.forEach(function (option) {
         option.addEventListener("click", function () {
-          // Å¬¸¯ÇÑ ¿É¼Ç ¾ÆÀÌÅÛ¿¡¸¸ active Å¬·¡½º Ãß°¡
+          // í´ë¦­í•œ ì˜µì…˜ ì•„ì´í…œì—ë§Œ active í´ëž˜ìŠ¤ ì¶”ê°€
           option.classList.toggle("active");
           const svg = option.querySelector("img");
           svg.style.fill = option.classList.contains("active")
@@ -369,13 +366,14 @@
         });
       });
 
-      // ¸ð´Þ
-      // ¸ð´Þ °¡Á®¿À±â
+      // ëª¨ë‹¬
+      // ëª¨ë‹¬ ê°€ì ¸ì˜¤ê¸°
       var modal = document.getElementById("searchTimeModal");
       // var timeSettingItems = document.querySelectorAll(".timeSettingItem");
       // var startTimeBtn = document.getElementById("startTime");
       // var entTimeBtn = document.getElementById("endTime");
-      // ¸ð´Þ ´Ý±â ¹öÆ°(Ãë¼Ò) °¡Á®¿À±â
+
+      // ëª¨ë‹¬ ë‹«ê¸° ë²„íŠ¼(ì·¨ì†Œ) ê°€ì ¸ì˜¤ê¸°
       var cancelBtn = document.querySelector(".btn.cancel");
 
     //   startTimeBtn.addEventListener("click", function () {
@@ -383,13 +381,15 @@
     //   });
 
       cancelBtn.addEventListener("click", function () {
-        console.log("Ãë¼Ò ¹öÆ° Å¬¸¯");
+
+        console.log("ì·¨ì†Œ ë²„íŠ¼ í´ë¦­");
         modal.style.display = "none";
       });
 
       $(document).ready(function () {
         const modal = $("#searchTimeModal1");
-        let searchType = 0;  // 0: ½ÃÀÛ ½Ã°£´ë, 1: Á¾·á ½Ã°£´ë
+
+        let searchType = 0;  // 0: ì‹œìž‘ ì‹œê°„ëŒ€, 1: ì¢…ë£Œ ì‹œê°„ëŒ€
         let startTimeInput = $("#startTime input");
         let endTimeInput = $("#endTime input");
         let startModalHourInput = $("#searchTimeModal1 #hour input");
@@ -405,7 +405,7 @@
         let usingModalMinuteInput = $("#usingTimeModal #minute input");
         const usingTimeSettingBtn = $("#usingTimeSettingBtn");
 
-        // °Ë»ö½Ã°£´ë - ½ÃÀÛ ¸ð´Þ ¿­±â
+        // ê²€ìƒ‰ì‹œê°„ëŒ€ - ì‹œìž‘ ëª¨ë‹¬ ì—´ê¸°
         $("#startTime").on("click", function () {
             searchType = 0;
             let tmp1 = $("#hiddenTime1").val().split(":");
@@ -429,7 +429,8 @@
             }
           modal.css("display", "flex");
         });
-        // °Ë»ö½Ã°£´ë - Á¾·á ¸ð´Þ ¿­±â
+
+        // ê²€ìƒ‰ì‹œê°„ëŒ€ - ì¢…ë£Œ ëª¨ë‹¬ ì—´ê¸°
         $("#endTime").on("click", function () {
             searchType = 1;
             let tmp2 = $("#hiddenTime2").val().split(" : ");
@@ -449,7 +450,8 @@
           modal.css("display", "none");
         });
 
-        // AM, PM ¼±ÅÃÇÑ div¿¡ Å×µÎ¸® »ö º¯°æ
+
+        // AM, PM ì„ íƒí•œ divì— í…Œë‘ë¦¬ ìƒ‰ ë³€ê²½
         timeTypes.forEach(function (option) {
             option.addEventListener("click", function () {
             timeTypes.forEach(function (item) {
@@ -465,17 +467,17 @@
           let minute = startMinuteHourInput.val();
 
           if(timeType == "") {
-            alert("AM ¶Ç´Â PM ½Ã°£´ë¸¦ ¼³Á¤ÇØÁÖ¼¼¿ä!");
+            alert("AM ë˜ëŠ” PM ì‹œê°„ëŒ€ë¥¼ ì„¤ì •í•´ì£¼ì„¸ìš”!");
           }
           if (startModalHourInput.val() === "" || startMinuteHourInput.val() === "") {
-            alert("½Ã, ºÐ ¸ðµÎ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+            alert("ì‹œ, ë¶„ ëª¨ë‘ ìž…ë ¥í•´ì£¼ì„¸ìš”!");
             return;
           } else {
             if(hour > 12) {
-                alert("'½Ã'´Â 0~12 »çÀÌÀÇ °ªÀ¸·Î ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+                alert("'ì‹œ'ëŠ” 0~12 ì‚¬ì´ì˜ ê°’ìœ¼ë¡œ ìž…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
             }
             if(minute > 59) {
-                alert("'ºÐ'Àº 0~59»çÀÌÀÇ °ªÀ¸·Î ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+                alert("'ë¶„'ì€ 0~59ì‚¬ì´ì˜ ê°’ìœ¼ë¡œ ìž…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
             }
             if(timeType === "PM") {
                 hour = parseInt(hour) + 12;
@@ -494,12 +496,12 @@
           modal.css("display", "none");
         });
 
-        // ÀÌ¿ë½Ã°£ ¼³Á¤ ¸ð´Þ ¿­±â
+        // ì´ìš©ì‹œê°„ ì„¤ì • ëª¨ë‹¬ ì—´ê¸°
         $("#hoursOfUse").on("click", function () {
           $("#usingTimeModal").css("display", "flex");
         });
 
-        // ÀÌ¿ë½Ã°£ ¸ð´Þ ´Ý±â
+        // ì´ìš©ì‹œê°„ ëª¨ë‹¬ ë‹«ê¸°
         $("#usingTimeModal .closeBtn").on("click", function () {
           $("#usingTimeModal").css("display", "none");
         });
@@ -515,15 +517,15 @@
             let minute = usingModalMinuteInput.val();
 
             if(hour === "" && minute === "") {
-                alert("ÀÌ¿ëÇÏ½Ç ½Ã°£À» ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+                alert("ì´ìš©í•˜ì‹¤ ì‹œê°„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”!");
                 return;
             } else {
                 if(hour === "" && minute !== "" && minute < 10) {
-                    alert("ÃÖ¼Ò ÀÌ¿ë ½Ã°£Àº 10ºÐÀÔ´Ï´Ù :)");
+                    alert("ìµœì†Œ ì´ìš© ì‹œê°„ì€ 10ë¶„ìž…ë‹ˆë‹¤ :)");
                     return;
                 }
                 if(minute > 59) {
-                    alert("'ºÐ'Àº 0~59 »çÀÌÀÇ °ªÀ¸·Î ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+                    alert("'ë¶„'ì€ 0~59 ì‚¬ì´ì˜ ê°’ìœ¼ë¡œ ìž…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
                     return;
                 }
                 if(hour === "" && minute !== "" && minute > 10) {
