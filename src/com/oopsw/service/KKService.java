@@ -56,7 +56,7 @@ public class KKService {
 	
 	
 	// 검색 결과 목록 불러오기 - KKDAO의 getSearchKKList
-	public List<KKVO> getKKList(int[] tmp, int countChkOption, String addressGu) {
+	public List<KKVO> getKKList(String[] tmp, int countChkOption, String addressGu) {
 		// 구현
 		List<KKVO> result = new ArrayList<KKVO>();
 		// KKVO temp = new KKVO();
