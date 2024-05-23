@@ -8,36 +8,54 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.oopsw.model.dao.KKDAO;
 import com.oopsw.model.dao.UserDAO;
 import com.oopsw.model.vo.UserVO;
 
 public class UserService {
-	private Connection conn;
-
-	public UserService() {
+	
+	private Connection getConnection(){
+		Connection conn = null;
+		Context context;
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
-			conn = DriverManager.getConnection(url, "hr", "hr");
-			conn.setAutoCommit(false);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			context = new InitialContext();
+			DataSource dataSource =
+					(DataSource) context.lookup("java:comp/env/jdbc/myoracle");
+			conn = dataSource.getConnection();
+		} catch (NamingException | SQLException e1) {
+			System.err.println("커넥션 풀  실패. 수동으로 전환");
+			try {
+				Class.forName("oracle.jdbc.OracleDriver");
+				String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
+				conn = DriverManager.getConnection(url, "hr", "hr");
+				conn.setAutoCommit(false);
+			} catch (ClassNotFoundException | SQLException e) {
+				System.err.println("수동 커넥션 생성 실패. 서비스 종료.");
+				System.exit(404);
+			}
+			
 		}
+		
+		return conn;
 	}
 
 	public boolean isKKBookmark(String userId, int KK_ID) {
+		Connection conn = getConnection();
 		boolean result = new KKDAO(conn).isKKBookmark(userId, KK_ID);
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			// 서버-DB 네트워크 통신 문제로 커밋 실패한경우.
-			// 커넥션 연결 실패도 포함될듯?
 		}
 		return result;
 	}
 
 	public boolean addKKBookmark(String userId, int KK_ID) {
+		Connection conn = getConnection();
 		boolean result = new KKDAO(conn).addKKBookmark(userId, KK_ID);
 		System.out.println(1);
 		try {
@@ -52,6 +70,7 @@ public class UserService {
 	}
 
 	public boolean deleteKKBookmark(String userId, int KK_ID) {
+		Connection conn = getConnection();
 		boolean result = new KKDAO(conn).deleteKKBookmark(userId, KK_ID);
 		try {
 			conn.commit();
@@ -65,6 +84,7 @@ public class UserService {
 	}
 
 	public boolean login(String userId, String password) {
+		Connection conn = getConnection();
 		boolean result = false;
 		try {
 			String encryptedPassword = getEncryptedPassword(userId, password);
@@ -103,6 +123,7 @@ public class UserService {
 	}
 
 	public boolean isExistEmail(String userId) {
+		Connection conn = getConnection();
 		boolean result = false;
 		try {
 			result = new UserDAO(conn).isExistEmailTest(userId);
@@ -115,6 +136,7 @@ public class UserService {
 	}
 
 	public boolean addUser(UserVO user) throws SQLException {
+		Connection conn = getConnection();
 		boolean result = false;
 		user.setPassword(getEncryptedPassword(user.getEmail(), user.getPassword()));
 		result = new UserDAO(conn).addUser(user);
@@ -124,6 +146,7 @@ public class UserService {
 	}
 
 	public UserVO getUser(String userId) throws SQLException {
+		Connection conn = getConnection();
 		UserVO user = null;
 		user = new UserDAO(conn).getUser(userId);
 		conn.close();
@@ -132,6 +155,7 @@ public class UserService {
 	}
 
 	public String getNickname(String userId) throws SQLException {
+		Connection conn = getConnection();
 		String result = new UserDAO(conn).getNickname(userId);
 		conn.close();
 		return result;
@@ -139,6 +163,7 @@ public class UserService {
 	}
 
 	public boolean updateNickname(String userId, String newNickname) {
+		Connection conn = getConnection();
 		boolean result = false;
 		try {
 			result = new UserDAO(conn).updateNickname(userId, newNickname);
@@ -151,6 +176,7 @@ public class UserService {
 	}
 
 	public boolean updatePassword(String userId, String oldPassword, String newPassword) {
+		Connection conn = getConnection();
 		boolean result = false;
 		UserDAO dao = new UserDAO(conn);
 		try {
@@ -168,6 +194,7 @@ public class UserService {
 	}
 
 	public boolean resetPassword(String userId, String password) {
+		Connection conn = getConnection();
 		boolean result = false;
 		UserDAO dao = new UserDAO(conn);
 		try {
@@ -182,8 +209,11 @@ public class UserService {
 	}
 
 	public boolean isAdult(String userId) throws SQLException {
+		Connection conn = getConnection();
 		boolean result = false;
-		result = new UserDAO().isAdult(userId);
+		result = new UserDAO(conn).isAdult(userId);
+		conn.commit();
+		conn.close();
 		return result;
 	}
 }
