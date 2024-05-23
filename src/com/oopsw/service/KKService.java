@@ -27,7 +27,7 @@ public class KKService {
 			System.out.println("2 connection ok");
 	}
 	
-	// 근처 추천 노래방 목록 불러오기 - KKDAO의 getNearRecommendKKList
+	// 근처 추천 노래방 목록 불러오기 -- KKDAO의 getNearRecommendKKList
 	public List<KKVO> getNearRecommendKKList(String addressGu) {
 		List<KKVO> result = new ArrayList<KKVO>();
 		List<KKVO> getDataList = new KKDAO(conn).getNearRecommendKKList(addressGu);
