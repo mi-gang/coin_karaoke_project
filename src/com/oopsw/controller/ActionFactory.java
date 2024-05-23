@@ -1,5 +1,6 @@
 package com.oopsw.controller;
 
+import com.oopsw.controller.action.KKFilterUI;
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.wrongCmd;
 
@@ -12,6 +13,19 @@ public class ActionFactory {
 			action = new Login();
 			break;
 
+		case "musicListUI":
+			action = new MusicListUI();
+			break;
+		
+		case "checkMusicbymyPlaylist":
+			action=new CheckMusicbymyplaylist();
+			break;
+		
+		case "addMusic":
+		action=new AddMusic();
+		break;
+		
+		
 		default:
 			action = new wrongCmd();
 			break;
