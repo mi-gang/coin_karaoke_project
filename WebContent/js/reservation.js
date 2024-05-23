@@ -9,6 +9,30 @@ $(".reservations-status-button").on("click", function () {
   if ($(this).attr("id") == "status-1") {
     $(".status-1-1").show();
     $(".status-1-2").show();
+
+    $.ajax({
+      url: "controller?cmd=reservationListUI",
+      method: "POST",
+      success: function (response) {},
+    });
+
+    $.ajax({
+      url: "controller?cmd=idCheckAction",
+      data: { manager_id: $(this).val() },
+      success: function (responseText) {
+        console.log(responseText);
+        console.log(responseText == "N");
+        console.log(responseText.length);
+        if (responseText.charAt(responseText.length - 1) == "N") {
+          // document.querySelector('#id-check').innerText("존재하는 아이디입니다.");
+          $("#id-check").text("존재하는 아이디입니다.");
+        } else {
+          //document.querySelector('#id-check').innerText("존재하지 않는 아이디입니다.");
+          $("#id-check").text("존재하지 않는 아이디입니다.");
+        }
+      },
+    });
+
     return false;
   }
   if ($(this).attr("id") == "status-2") {

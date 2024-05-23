@@ -62,19 +62,19 @@ public class DAOTest {
 	public void getSearchKKList() {
 		int[] tmp = {1,0,0,1};
 		System.out.println("test 1");
-		assertNotNull(new KKDAO(conn).getSearchKKList("금천구"));
+		assertNotNull(new KKDAO(conn).getSearchKKList("湲덉쿇援�"));
 		System.out.println("test 2");
-		assertNotNull(new KKDAO(conn).getSearchKKList(tmp, 2, "금천구"));
+		assertNotNull(new KKDAO(conn).getSearchKKList(tmp, 2, "湲덉쿇援�"));
 		System.out.println("test 3");
-		assertNotNull(new KKDAO(conn).getSearchKKList("강남구"));
+		assertNotNull(new KKDAO(conn).getSearchKKList("媛뺣궓援�"));
 	}
 
 	
 	@Test
 	public void getNearRecommendKKList() {
-		assertNotNull(new KKDAO(conn).getNearRecommendKKList("용산구"));
-		// assertThat(new KKDAO(conn).getNearRecommendKKList("용산구"), is(nullValue()));
-		assertNotNull(new KKDAO(conn).getNearRecommendKKList("금천구"));
+		assertNotNull(new KKDAO(conn).getNearRecommendKKList("�슜�궛援�"));
+		// assertThat(new KKDAO(conn).getNearRecommendKKList("�슜�궛援�"), is(nullValue()));
+		assertNotNull(new KKDAO(conn).getNearRecommendKKList("湲덉쿇援�"));
 	}
 	
 	
@@ -131,7 +131,7 @@ public class DAOTest {
 	}
 	//@Test
 	public void addPlaylist(){
-		assertTrue(new PlaylistDAO(conn).addPlaylist("에스파는 나야","test@test.com" ));
+		assertTrue(new PlaylistDAO(conn).addPlaylist("�뿉�뒪�뙆�뒗 �굹�빞","test@test.com" ));
 	}
 	//@Test
 	public void  deletePlaylist(){
@@ -153,7 +153,7 @@ public class DAOTest {
 	}
 	//@Test
 	public void updatePlaylistTitle(){
-		assertTrue(new PlaylistDAO(conn).updatePlaylistTitle("에스파는 나야", "test@test.com", 1));
+		assertTrue(new PlaylistDAO(conn).updatePlaylistTitle("�뿉�뒪�뙆�뒗 �굹�빞", "test@test.com", 1));
 	}
 	//@Test
 	public void deletePlayList(){

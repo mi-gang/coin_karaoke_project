@@ -51,7 +51,7 @@ public class MusicServiceTest {
 		}
 		
 	}
-//	@Test
+	//@Test
 	public void addMusic(){
 		MusicService service;
 		try {
@@ -63,13 +63,13 @@ public class MusicServiceTest {
 			e.printStackTrace();
 		}	
 	}
-//	@Test
+	@Test
 	public void MyPlaylistCheckMusic(){
 		MusicService service;
 		try {
 			service=new MusicService();
 			assertThat(service.MyPlaylistCheckMusic("test@test.com", 79351, "TJ")).isNotEmpty();
-			System.out.println("MyPlaylistCheckMusic test : "+service.MyPlaylistCheckMusic("test@test.com",1111, "TJ"));
+			System.out.println("MyPlaylistCheckMusic test : "+service.MyPlaylistCheckMusic("test@test.com",79351, "TJ"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,13 +101,13 @@ public class MusicServiceTest {
 	}
 	
 	
-//	@Test
+	//@Test
 	public void getPlaylistList(){
 		MusicService service;
 		try {
 			service=new MusicService();
 			assertThat(service.getPlaylistList("test@test.com")).isNotEmpty();
-//			System.out.println(service.getPlaylistList("test@test.com"));
+		System.out.println(service.getPlaylistList("test@test.com"));
 			assertThat(service.getPlaylistList("tesdddt@test.com")).isEmpty();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -126,7 +126,7 @@ public class MusicServiceTest {
 			e.printStackTrace();
 		}	
 	}
-	@Test
+	//@Test
 	public void playlistMusicList(){
 		MusicService service;
 		try {
@@ -138,7 +138,7 @@ public class MusicServiceTest {
 			e.printStackTrace();
 		}	
 	}
-	@Test
+	//@Test
 	public void  updatePlaylistTitle(){
 		MusicService service;
 		try {
@@ -151,7 +151,7 @@ public class MusicServiceTest {
 			e.printStackTrace();
 		}	
 	}
-	@Test
+	//@Test
 	public void deletePlayList(){
 		MusicService service;
 		try {

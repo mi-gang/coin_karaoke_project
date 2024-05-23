@@ -8,20 +8,22 @@ public class ReservationVO {
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 	private String userId;
-	private int roomId;
 	private int KKId;
 	private String KKname;
+	private int roomId;
+	private String roomName;
 
 	public ReservationVO(int reservationId, int isCancel, LocalDateTime startTime, LocalDateTime endTime,
-			String userId, int roomId, int KKId, String KKname) {
+			String userId, int KKId, String KKname, int roomId, String roomName) {
 		setReservationId(reservationId);
 		setIsCancel(isCancel);
 		setStartTime(startTime);
 		setEndTime(endTime);
 		setUserId(userId);
-		setRoomId(roomId);
 		setKKId(KKId);
-		setKKName(KKname);
+		setKKname(KKname);
+		setRoomId(roomId);
+		setRoomName(roomName);
 	}
 
 	public ReservationVO(){};
@@ -51,7 +53,6 @@ public class ReservationVO {
 		setRoomId(roomId);
 	}
 
-	
 	public int getReservationId() {
 		return reservationId;
 	}
@@ -92,14 +93,6 @@ public class ReservationVO {
 		this.userId = userId;
 	}
 
-	public int getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
-	}
-
 	public int getKKId() {
 		return KKId;
 	}
@@ -108,12 +101,28 @@ public class ReservationVO {
 		KKId = kKId;
 	}
 
-	public String getKKName() {
+	public String getKKname() {
 		return KKname;
 	}
 
-	public void setKKName(String KKname) {
-		this.KKname = KKname;
+	public void setKKname(String kKname) {
+		KKname = kKname;
+	}
+
+	public int getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 
 	@Override
@@ -121,11 +130,12 @@ public class ReservationVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + KKId;
+		result = prime * result + ((KKname == null) ? 0 : KKname.hashCode());
 		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
 		result = prime * result + isCancel;
-		result = prime * result + ((KKname == null) ? 0 : KKname.hashCode());
 		result = prime * result + reservationId;
 		result = prime * result + roomId;
+		result = prime * result + ((roomName == null) ? 0 : roomName.hashCode());
 		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
@@ -142,6 +152,11 @@ public class ReservationVO {
 		ReservationVO other = (ReservationVO) obj;
 		if (KKId != other.KKId)
 			return false;
+		if (KKname == null) {
+			if (other.KKname != null)
+				return false;
+		} else if (!KKname.equals(other.KKname))
+			return false;
 		if (endTime == null) {
 			if (other.endTime != null)
 				return false;
@@ -149,14 +164,14 @@ public class ReservationVO {
 			return false;
 		if (isCancel != other.isCancel)
 			return false;
-		if (KKname == null) {
-			if (other.KKname != null)
-				return false;
-		} else if (!KKname.equals(other.KKname))
-			return false;
 		if (reservationId != other.reservationId)
 			return false;
 		if (roomId != other.roomId)
+			return false;
+		if (roomName == null) {
+			if (other.roomName != null)
+				return false;
+		} else if (!roomName.equals(other.roomName))
 			return false;
 		if (startTime == null) {
 			if (other.startTime != null)
@@ -174,10 +189,10 @@ public class ReservationVO {
 	@Override
 	public String toString() {
 		return "ReservationVO [reservationId=" + reservationId + ", isCancel=" + isCancel + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", userId=" + userId + ", roomId=" + roomId + ", KKId=" + KKId + ", KKname="
-				+ KKname + "]";
+				+ ", endTime=" + endTime + ", userId=" + userId + ", KKId=" + KKId + ", KKname=" + KKname + ", roomId="
+				+ roomId + ", roomName=" + roomName + "]";
 	}
-	
+
 
 
 }

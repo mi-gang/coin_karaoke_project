@@ -1,0 +1,388 @@
+/* 
+  테마 컬러
+    color: #9747FF;  // 찐보라색
+    color: #E3CDFF;  // 연보라색
+    color: #E4E4E4;  // 옅은회색
+ */
+p {
+  margin: 0;
+}
+
+#container {
+  height: calc(100vh - 15rem);
+}
+
+#representativeKKImg {
+  width: 100%;
+  height: 28.8rem;
+}
+
+.wrapper {
+  height: calc(100% - 28.8rem);
+  font-size: 2rem;
+}
+
+.tabWrapper {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: 6.4rem;
+  border-bottom: 0.2rem solid #b6b6b6;
+}
+
+.tapMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 21.5rem;
+  height: inherit;
+  cursor: pointer;
+}
+
+.tapMenu:hover {
+  font-weight: 700;
+}
+
+.tapMenu.active {
+  font-weight: 700;
+  border-bottom: 0.3rem solid #737373;
+}
+
+.contentsContainer {
+  /* height: calc(100% - 6.4rem); */
+  height: 42.7rem;
+}
+
+#defaultInfoContainer {
+  /* display: flex; */
+  display: none;
+  flex-wrap: wrap;
+  gap: 5.6rem;
+  justify-content: center;
+}
+
+#defaultInfoContainer.selected {
+  display: flex;
+}
+
+.infoList:first-child {
+  margin-top: 5.6rem;
+}
+
+.infoList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 37rem;
+  min-height: 5.6rem;
+}
+
+.infoTitle {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.kkAddress {
+  width: 19.5rem;
+  word-break: keep-all;
+  font-size: 1.5rem;
+}
+
+#distance {
+  max-width: 9rem;
+  margin-left: 1.5rem;
+  margin-right: 1.1rem;
+  font-size: 1.2rem;
+  color: #9747ff;
+}
+
+.toMapBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #808080;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: #e4e4e4;
+}
+
+.infoList:nth-child(2) p:nth-child(2) {
+  font-size: 1.5rem;
+}
+
+.keywordsWrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.keywordItem {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  background-color: #f2f2f2;
+}
+
+#reviewContainer {
+    position: relative;
+  display: none;
+  flex-wrap: wrap;
+  /* gap: 5.6rem; */
+  justify-content: center;
+  /* height: calc(inherit - 6.6rem); */
+  height: 42.7rem;
+  overflow-y: scroll;
+}
+
+#reviewContainer.selected {
+  display: flex;
+}
+
+.starScoreContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  width: 100%;
+  height: 15.8rem;
+  border-bottom: 0.1rem solid #b6b6b6;
+}
+
+.avgStarScoresWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 11.7rem;
+  height: 12.3rem;
+}
+
+#avgStarScore {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.countReviews {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.starsWrapper {
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+}
+
+/* .starsWrapper img {
+  width: 2.5rem;
+  height: 2.5rem;
+} */
+
+/* .starsWrapper:last-child {
+  width: 2.5rem;
+  height: 2.5rem;
+} */
+
+.starScoreGraphWrapper {
+  width: 25.1rem;
+  height: 12.3rem;
+  margin-top: -1rem;
+}
+
+.graphItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 100%;
+  height: 2.7rem;
+  font-size: 1.5rem;
+}
+
+.graphWrapper {
+  position: relative;
+  height: 0.5rem;
+  margin-left: 1rem;
+}
+
+.graph {
+  position: absolute;
+  z-index: 999;
+  border: 0.5rem solid #5e5e5e;
+}
+
+.graphBackground {
+  position: absolute;
+  width: 19.1rem;
+  border: 0.5rem solid #b6b6b6;
+}
+
+.scoreCount {
+  position: absolute;
+  right: 0;
+}
+
+.textReviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  /* height: calc(100% - 15.8rem); */
+  height: 26.8rem;
+  /* overflow-y: scroll;
+  /* 스크롤바 숨기기 
+  -ms-overflow-style: none; */
+}
+
+/* 비로그인 회원 리뷰 가림 */
+.invisibleUnLoginUser {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 42.7rem;
+    font-size: 2rem;
+    background-color: rgba(246,246,246,0.94);
+}
+
+.invisibleUnLoginUser.on {
+    display: flex;
+}
+
+.invisibleWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 21.1rem;
+    text-align: center;
+}
+
+.reviewLoginBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16.4rem;
+    height: 1.5rem;
+    padding: 2rem 2.7rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #9747ff;
+    border-radius: 1rem;
+    border: 0.3rem solid #9747ff;
+    cursor: pointer;
+}
+
+/* 상세리뷰 없는 경우 */
+/* .textReviewContainer.noReview {
+    display: none;
+} */
+
+.guideWordsNoReview {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    background-color: #fff;
+}
+.guideWordsNoReview.on {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height:100%;
+    margin-top: 2rem;
+    font-size: 2rem;
+    color: #9747ff;
+}
+
+
+/* 각각의 상세리뷰 */
+.reviewItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.3rem;
+  /* width: 100%; */
+  width: calc(100% - 5.9rem);
+  padding: 2.2rem 2.7rem;
+  /* height: 18.4rem; */
+  border-top: 0.1rem solid #b6b6b6;
+  border-bottom: 0.1rem solid #b6b6b6;
+}
+
+.writerInfo {
+  display: flex;
+  align-items: center;
+  width: 37.5rem;
+  height: 5.9rem;
+}
+
+.writerNickname {
+  margin-left: 0.8rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.reviewContents {
+  display: flex;
+  align-items: center;
+  width: 37.5rem;
+  height: 6.1rem;
+  padding-left: 1.6rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  overflow-y: scroll;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none;
+  background-color: #f2f2f2;
+}
+
+.reviewContents::-webkit-scrollbar {
+  display: none;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.3rem;
+  width: 100%;
+  height: 7.4rem;
+}
+
+.bookmark {
+  width: 2.5rem;
+  height: 3rem;
+  cursor: pointer;
+  background-image: url("../img/bookmarkOutline.svg");
+}
+
+.bookmark.add {
+  cursor: pointer;
+  background-image: url("../img/bookmarkFill.svg");
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30.6rem;
+  height: 5.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: #9747ff;
+}
+
