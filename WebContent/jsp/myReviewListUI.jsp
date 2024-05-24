@@ -36,10 +36,11 @@ pageEncoding="UTF-8"%>
         <div id="myRiview_wrapper">
           <div id="total_reservation">
             <span>총 </span>
-            <span>2</span>
+            <span></span>
             <span>건</span>
           </div>
           <div id="review-items">
+          
             <div id="review-item">
               <div id="review-content1">
                 <div class="KK-title">
@@ -62,72 +63,7 @@ pageEncoding="UTF-8"%>
                 >
               </div>
             </div>
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/filledStar.svg" alt="채워진 별" />
-                  <img src="img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
