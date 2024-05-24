@@ -170,7 +170,7 @@ public class KKDAO {
 	 */
 
 	// 완료 - 추가조건O인 경우
-	public List<String[]> getSearchKKList(int[] chkAdditionalOptions, int countChkOption, String addressGu) {
+	public List<String[]> getSearchKKList(String[] chkAdditionalOptions, int countChkOption, String addressGu) {
 		String sql = "SELECT kks.kk_id, kks.name, kks.address, kw.content "
 				+ "FROM kks, keywords kw, kk_keywords kkw "
 				+ "WHERE kks.kk_id IN ("
@@ -189,10 +189,10 @@ public class KKDAO {
 		List<String[]> resultList = new ArrayList<String[]>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, chkAdditionalOptions[0]);
-			pstmt.setInt(2, chkAdditionalOptions[1]);
-			pstmt.setInt(3, chkAdditionalOptions[2]);
-			pstmt.setInt(4, chkAdditionalOptions[3]);
+			pstmt.setString(1, chkAdditionalOptions[0]);
+			pstmt.setString(2, chkAdditionalOptions[1]);
+			pstmt.setString(3, chkAdditionalOptions[2]);
+			pstmt.setString(4, chkAdditionalOptions[3]);
 			pstmt.setInt(5, countChkOption);
 			pstmt.setString(6, addressGu);
 			System.out.println("pstmt");
@@ -221,8 +221,6 @@ public class KKDAO {
 			e.printStackTrace();
 		}
 		
-		
-
 		return resultList;
 	}
 	/*

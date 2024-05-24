@@ -9,6 +9,7 @@
       content="width=device-width, initial-scale=1.0"
     />
     <title>:: 노래방 검색</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="css/kkFilterUI.css"
@@ -50,7 +51,7 @@
           <div class="regionBox">
             <button class="label">이용 지역을 선택해주세요.</button>
             <img
-              src="img/down arrow.svg"
+              src="img/down_arrow.svg"
               alt="드롭다운"
             />
             <ul class="regionList">
@@ -131,7 +132,7 @@
                   value=""
                 />
                 <img
-                  src="img/down arrow.svg"
+                  src="img/down_arrow.svg"
                   alt="드롭다운"
                 />
               </div>
@@ -150,7 +151,7 @@
                   value=""
                 />
                 <img
-                  src="img/down arrow.svg"
+                  src="img/down_arrow.svg"
                   alt="드롭다운"
                 />
               </div>
@@ -213,7 +214,7 @@
                 placeholder="-- : --"
               />
               <img
-                src="img/down arrow.svg"
+                src="img/down_arrow.svg"
                 alt="드롭다운"
               />
             </div>
@@ -291,7 +292,7 @@
             </div>
           </div>
         </div>
-        <button>검색</button>
+        <button id="searchKKBtn">검색</button>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
@@ -536,10 +537,79 @@
             }
 
             modal2.css("display", "none");
-        })
-
-        
+        })        
       });
+      
+      // 선택한 추가 조건 배열로 임시 저장
+      let chkAdditionalOptions = ["0", "0", "0", "0"];
+      searchOptions.forEach(function (option) {
+        option.addEventListener("click", function () {
+        	const clickedOptionName = this.querySelector(".optionName").textContent;
+            // console.log(clickedOptionName);
+            switch(clickedOptionName) {
+            case "주차 가능":
+            	if(chkAdditionalOptions[0] === "1") {
+            		chkAdditionalOptions[0] = "0";
+            	} else {
+            		chkAdditionalOptions[0] = "1";
+            	}
+            	break;
+            case "지상층":
+            	if(chkAdditionalOptions[1] === "1") {
+            		chkAdditionalOptions[1] = "0";
+            	} else {
+            		chkAdditionalOptions[1] = "1";
+            	}
+            	break;
+            case "냉난방":
+            	if(chkAdditionalOptions[2] === "1") {
+            		chkAdditionalOptions[2] = "0";
+            	} else {
+            		chkAdditionalOptions[2] = "1";
+            	}
+            	break;
+            case "단체 가능":
+            	if(chkAdditionalOptions[3] === "1") {
+            		chkAdditionalOptions[3] = "0";
+            	} else {
+            		chkAdditionalOptions[3] = "1";
+            	}
+            	break;
+            }
+        });
+      });
+     
+      
+      // 검색 버튼 클릭하여 선택한 조건의 노래방 검색하기
+      $("#searchKKBtn").click(function() {
+    	  let searchGu = $(".label").text();
+    	  let chkCount = 0;
+    	  for(let t=0; t<chkAdditionalOptions.length; t++) {
+    		  if(chkAdditionalOptions[t] === "1") {
+    			  chkCount ++;
+    		  }
+    	  }
+    	  console.log(chkCount);
+    	  // console.log(searchGu);
+    	  // 검색 시간대 및 이용 시간에 대한 검색 필터링은 추후 작업 예정
+    	  // jQuery.ajaxSettings.traditional = true;
+    	  // 참고) chkAdditionalOptions는 ["1", "0", "1", "1"] 문자열 배열이다.
+    	  $.ajax({
+    		  url: "controller?cmd=searchForKKWithOptions",
+    		  data: {searchGu: searchGu, 
+    			  chkAdditionalOptions: chkAdditionalOptions,
+    			  chkCount: chkCount},
+    		  traditional: true,
+    		  success: function(result) {
+    			  console.log(result);
+    			  if(result == 0) {
+    				  console.log("필터링 검색 성공");
+    			  } else {
+    				  console.log("필터링 검색 실패");
+    			  }
+    		  }
+    	  })
+      })
     </script>
   </body>
 </html>
