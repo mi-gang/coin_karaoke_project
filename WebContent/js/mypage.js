@@ -57,10 +57,10 @@ $(document).ready(function () {
   var reviewItem =
     '<div class="review-item"><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
     "777 노래연습장" +
-    '</span><img src="/img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
+    '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
     '<div class="review-content2"><span class="review-date">' +
     "2024.05.04" +
-    '</span><div class="stars"><img src="../img/filledStar.svg" alt="채워진 별" /><img src="../img/filledStar.svg" alt="채워진 별" /><img src="../img/filledStar.svg" alt="채워진 별" /><img src="../img/filledStar.svg" alt="채워진 별" /><img src="../img/star_half.svg" alt="0.5점 별" /></div>' +
+    '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
     '<span class="review-description">' +
     "사운드가 좋아요 재방문 의사 있어요 😍" +
     "</span></div></div>";
