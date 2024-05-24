@@ -24,7 +24,7 @@ public class FrontController extends HttpServlet {
 		
 		Action action = new ActionFactory().getAction(cmd);
 		Url url = action.execute(request);
-		
+		System.out.println(url.getUrl());
 		//url에 따라 forward or sendRedirect
 		if(url.getFlag() == Url.FORWARD){
 			request.getRequestDispatcher(url.getUrl()).forward(request, response);

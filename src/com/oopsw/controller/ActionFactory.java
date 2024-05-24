@@ -1,5 +1,7 @@
 package com.oopsw.controller;
 
+import com.oopsw.controller.action.AddPlaylist;
+import com.oopsw.controller.action.CheckMusicbymyplaylist;
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
@@ -72,6 +74,12 @@ public class ActionFactory {
 			break;
 		case "musicListUI":
 			action = new MusicListUI();
+			break;
+		case "checkMusicbymyplaylist":
+			action = new CheckMusicbymyplaylist();
+			break;
+		case "addPlaylist":
+			action=new AddPlaylist();
 			break;
 		default:
 			action = new wrongCmd();

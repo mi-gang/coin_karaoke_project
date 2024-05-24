@@ -252,10 +252,11 @@
         	$.ajax({url:"controller?cmd=checkMusicbymyPlaylist",    
         		data : {brand : $(".on").attr("id")
         			    songId : $(".music_num").value},
-        		success : function(responseText2){
-        			result_data=JSON.parse(responseText2),//Text=>Json parsing
-        			$("#OutputPW").text(result_data.result)
-        			$('#OutputPW').show();
+        		success : function(list){
+        			result_data=JSON.parse(list),//Text=>Json parsing
+        			console.log(result_data);
+        			//$("#OutputPW").text(result_data.result)
+        			//$('#OutputPW').show();
         		}});
         });
       });//data: {input : $('#input1').val()}
