@@ -14,7 +14,7 @@ pageEncoding="UTF-8"%>
     />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/mypage.css" />
-
+    <link rel="stylesheet" href="css/kkDetailUI.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -51,11 +51,11 @@ pageEncoding="UTF-8"%>
               <div id="review-content2">
                 <span class="review-date">2024.05.04</span>
                 <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/star_half.svg" alt="0.5점 별" />
                 </div>
                 <span class="review-description"
                   >사운드가 좋아요 재방문 의사 있어요 😍</span
@@ -73,11 +73,11 @@ pageEncoding="UTF-8"%>
               <div id="review-content2">
                 <span class="review-date">2024.05.04</span>
                 <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/star_half.svg" alt="0.5점 별" />
                 </div>
                 <span class="review-description"
                   >사운드가 좋아요 재방문 의사 있어요 😍</span
@@ -95,11 +95,11 @@ pageEncoding="UTF-8"%>
               <div id="review-content2">
                 <span class="review-date">2024.05.04</span>
                 <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/star_half.svg" alt="0.5점 별" />
                 </div>
                 <span class="review-description"
                   >사운드가 좋아요 재방문 의사 있어요 😍</span
@@ -117,11 +117,11 @@ pageEncoding="UTF-8"%>
               <div id="review-content2">
                 <span class="review-date">2024.05.04</span>
                 <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/filledStar.svg" alt="채워진 별" />
+                  <img src="img/star_half.svg" alt="0.5점 별" />
                 </div>
                 <span class="review-description"
                   >사운드가 좋아요 재방문 의사 있어요 😍</span
@@ -133,13 +133,13 @@ pageEncoding="UTF-8"%>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
-        <div><img src="../img/mainPageIcon.svg" alt="메인 페이지" /></div>
-        <div><img src="../img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
-        <div><img src="../img/musicIcon.svg" alt="노래 검색 페이지" /></div>
+        <div><img src="img/mainPageIcon.svg" alt="메인 페이지" /></div>
+        <div><img src="img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
+        <div><img src="img/musicIcon.svg" alt="노래 검색 페이지" /></div>
         <div>
-          <img src="../img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
+          <img src="img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
         </div>
-        <div><img src="../img/userIcon.svg" alt="마이페이지" /></div>
+        <div><img src="img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
     <!-- 부트스트랩 -->
