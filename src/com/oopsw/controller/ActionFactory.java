@@ -25,6 +25,8 @@ public class ActionFactory {
 
 	public Action getAction(String cmd){
 		Action action = new wrongCmd();
+		System.out.println("ActionFactory cmd");
+		System.out.println(cmd);
 		switch (cmd) {
 		case "login":
 			action = new Login();

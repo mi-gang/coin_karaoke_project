@@ -187,17 +187,86 @@ public class KKDAO {
 				+ "AND (kks.note NOT IN('금일휴업', '임시휴무')) "
 				+ "ORDER BY kks.kk_id";
 		List<String[]> resultList = new ArrayList<String[]>();
+		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, chkAdditionalOptions[0]);
-			pstmt.setString(2, chkAdditionalOptions[1]);
-			pstmt.setString(3, chkAdditionalOptions[2]);
-			pstmt.setString(4, chkAdditionalOptions[3]);
+			// System.out.println("추가조건 배열 크기: " + chkAdditionalOptions.length);
+			System.out.println("===== KKDAO chkAdditionalOptions =====");
+			 System.out.println(chkAdditionalOptions.length);
+			// String[] tmpArr = chkAdditionalOptions[0].split(",");
+			if(chkAdditionalOptions.length == 1) {
+				System.out.println("chkOptions 길이 1 if문");
+				System.out.println(">> chkOptions[0]");
+				System.out.println(chkAdditionalOptions[0]);
+				String[] tmpArr = chkAdditionalOptions[0].split(",");
+				for(int i=0; i < tmpArr.length; i++) {
+					// System.out.println(chkAdditionalOptions[i]);
+					System.out.println(tmpArr[i]);
+					/*pstmt.setString(1, tmpArr[0]);
+					pstmt.setString(2, tmpArr[1]);
+					pstmt.setString(3, tmpArr[2]);
+					pstmt.setString(4, tmpArr[3]);*/
+					pstmt.setInt(1, Integer.parseInt(tmpArr[0]));
+					/*pstmt.setInt(2, Integer.parseInt(tmpArr[1]));
+					pstmt.setInt(3, Integer.parseInt(tmpArr[2]));
+					pstmt.setInt(4, Integer.parseInt(tmpArr[3]));*/
+				}
+			} else {
+				System.out.println("chkOptions 길이 1 아님 else 문");
+				System.out.println(chkAdditionalOptions.length);
+				for(int i=0; i<chkAdditionalOptions.length; i++) {
+					System.out.println(chkAdditionalOptions[i]);
+				}
+				System.out.println("------------");
+				/*pstmt.setString(1, chkAdditionalOptions[0]);
+				pstmt.setString(2, chkAdditionalOptions[1]);
+				pstmt.setString(3, chkAdditionalOptions[2]);
+				pstmt.setString(4, chkAdditionalOptions[3]);*/
+				pstmt.setInt(1, Integer.parseInt(chkAdditionalOptions[0]));
+				pstmt.setInt(2, Integer.parseInt(chkAdditionalOptions[1]));
+				pstmt.setInt(3, Integer.parseInt(chkAdditionalOptions[2]));
+				pstmt.setInt(4, Integer.parseInt(chkAdditionalOptions[3]));
+			}
+			
+			/*System.out.println("tmpArr 크기: " + tmpArr.length);
+			for(int i=0; i < tmpArr.length; i++) {
+				System.out.println(tmpArr[i]);
+			}
+			chkAdditionalOptions[0] = tmpArr[0];
+			/*
+			
+			// System.out.println("===== chkAdditionalOptions 0 1 2 3 출력 =====");
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			for(int i=0; i<tmpArr.length; i++) {
+				pstmt.setInt((i+1), Integer.parseInt(tmpArr[i]));
+			}
+			
+			/*pstmt.setString(1, tmpArr[0]);
+			pstmt.setString(2, tmpArr[1]);
+			pstmt.setString(3, tmpArr[2]);
+			pstmt.setString(4, tmpArr[3]);*/
+			
+			/*System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println(chkAdditionalOptions[0]);
+			System.out.println(chkAdditionalOptions[1]);
+			System.out.println(chkAdditionalOptions[2]);
+			System.out.println(chkAdditionalOptions[3]);
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
+			pstmt.setInt(1, Integer.parseInt(chkAdditionalOptions[0]));
+			pstmt.setInt(2, Integer.parseInt(chkAdditionalOptions[1]));
+			pstmt.setInt(3, Integer.parseInt(chkAdditionalOptions[2]));
+			pstmt.setInt(4, Integer.parseInt(chkAdditionalOptions[3]));*/
+			/*pstmt.setInt(1, Integer.parseInt(tmpArr[0]));
+			pstmt.setInt(2, Integer.parseInt(tmpArr[1]));
+			pstmt.setInt(3, Integer.parseInt(tmpArr[2]));
+			pstmt.setInt(4, Integer.parseInt(tmpArr[3]));*/
 			pstmt.setInt(5, countChkOption);
 			pstmt.setString(6, addressGu);
-			System.out.println("pstmt");
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(rs);
+			/*System.out.println("pstmt");
+			System.out.println(pstmt);
+			ResultSet rs = pstmt.executeQuery();
+			System.out.println(rs);*/
 
 			while (rs.next()) {
 				System.out.println("while문");
@@ -208,14 +277,14 @@ public class KKDAO {
 				tmp[3] = rs.getString(4);
 				resultList.add(tmp);
 			}
-
-			for (int i = 0; i < resultList.size(); i++) {
+			
+			/*for (int i = 0; i < resultList.size(); i++) {
 				for (int j = 0; j < resultList.get(0).length; j++) {
 					System.out.println(resultList.get(i)[j]);
 				}
 				System.out.println("----------------");
 			}
-			System.out.println("KKDAO 메서드 종료");
+			System.out.println("KKDAO 메서드 종료");*/
 
 		} catch (SQLException e) {
 			e.printStackTrace();
