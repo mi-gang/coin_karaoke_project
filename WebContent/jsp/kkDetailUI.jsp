@@ -39,7 +39,8 @@
         src="img/left arrow.svg"
         alt="이전 페이지 이동"
       />
-      <span>스타버스 코인노래방</span>
+      <!-- <span>스타버스 코인노래방</span> -->
+      <span>${KKVO.getName()}</span>
       <!-- 목록에서 클릭한 노래방명이 들어갈 자리 !-->
     </header>
     <!-- 컨텐츠 컨테이너 -->
@@ -71,27 +72,24 @@
           >
             <div class="infoList">
               <p class="infoTitle">주소</p>
-              <p class="kkAddress">서울 금천구 가산디지털1로 15</p>
+              <p class="kkAddress">${KKVO.getAddress()}</p>
               <p id="distance">현재 위치: 800m</p>
               <div class="toMapBtn">길찾기</div>
             </div>
             <div class="infoList">
               <p class="infoTitle">영업시간</p>
-              <p>00:00 ~ 24:00 연중무휴</p>
+              <p><span id="opTimeInfo"></span>~<span id="csTimeInfo"></span> <span id="infoNote"></span></p>
             </div>
             <div class="infoList">
               <p class="infoTitle">대표 키워드</p>
-              <div class="keywordsWrapper">
-                <span class="keywordItem">단체 이용 가능</span>
-                <span class="keywordItem">코인노래방</span>
-                <span class="keywordItem">24시</span>
-              </div>
+              <div class="keywordsWrapper"></div>
             </div>
           </div>
           <div id="reviewContainer">
             <div class="starScoreContainer">
               <div class="avgStarScoresWrapper">
-                <p id="avgStarScore">4.6</p>
+                <!-- <p id="avgStarScore">4.6</p> -->
+                <p id="avgStarScore">${starRating}</p>
                 <p class="countReviews">
                   (총 <span id="countReviewsValue"></span>개 리뷰)
                 </p>
@@ -379,7 +377,30 @@
     <script>
       $(document).ready(function () {
         let isLogin = true;
-
+        
+        // 불러온 영업시간 넣기
+        let timeInfo = "${KKVO.getOpeningHour()}";
+        let opTimeInfo = timeInfo.substring(11);
+        timeInfo = "${KKVO.getClosingHour()}";
+        let csTimeInfo = timeInfo.substring(11);
+        timeInfo = "${KKVO.getNote()}";
+        $("#opTimeInfo").text(opTimeInfo);
+        $("#csTimeInfo").text(csTimeInfo);
+        $("#infoNote").text(timeInfo);
+        
+        // 불러온 대표 키워드 목록 넣기
+        let test = "${KKVO.getRepresentativeKeywordList()}";
+        let keywordsArr = test.split(", ");
+        keywordsArr[0] = keywordsArr[0].substring(1);
+        keywordsArr[keywordsArr.length-1] = keywordsArr[keywordsArr.length - 1].replace(/\]$/, '');
+        
+        var keywordsWrapper = $(".keywordsWrapper");
+        $.each(keywordsArr, function(index, keyword) {
+        	var spanElement = $('<span class="keywordItem"></span>');
+        	spanElement.text(keyword);
+        	keywordsWrapper.append(spanElement);
+        })
+        
         // tapMenu에 따라 상세정보 변경하기
         $(".tapMenu").click(function () {
 

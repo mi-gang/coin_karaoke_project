@@ -66,6 +66,7 @@
 	                <c:forEach items="${resultList}" var="result">
 		                <div class="resultItem">
 		                    <div class="leftSide">
+		                    	<span id="resultKKId" style="display: none;">${result.getKkId()}</span>
 		                        <p class="resultKKTitle">${result.getName()}</p>
 		                        <div class="starScoreWrapper">
 		                            <span id="starAvgScore">${result.getStarRating()}</span>
@@ -141,9 +142,14 @@
             kkList.forEach(function(item) {
             	item.addEventListener("click", function() {
             		console.log(item);
+            		const clickedItem = this;
+            		const clickedKKId = clickedItem.querySelector("#resultKKId").textContent;
+            		console.log(clickedKKId);
+            		/* let kkId = $(this).children(0).childNodes(1);
+            		console.log(kkId); */
             		$.ajax({
             			url: "controller?cmd=kkDetailUI",
-       					data:{},
+       					data:{selectedKKId: clickedKKId},
        					success: function(result) {
             				if(result==0) {
             					console.log("성공");
@@ -152,6 +158,8 @@
             				}
             			}
             		})
+            		// location.replace("controller?cmd=searchForKKWithOptions&searchGu="+searchGu);
+            		location.replace("controller?cmd=kkDetailUI&clickedKKId="+clickedKKId);
             	});
             });
         </script>

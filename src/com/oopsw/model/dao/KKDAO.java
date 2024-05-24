@@ -5,12 +5,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+// import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 import com.oopsw.model.vo.KKVO;
 
@@ -19,6 +26,57 @@ public class KKDAO {
 
 	public KKDAO(Connection conn) {
 		this.conn = conn;
+	}
+	
+	// 추가 메서드 - 노래방 상세정보 페이지의 기본 정보 불러오기
+	public KKVO getSelectedKKBasicInfo(String kkId) {
+		String sql = "SELECT kk_id, name, opening_hour, closing_hour, note, address "
+				+ "FROM kks WHERE kk_id=?";
+		String sql2 = "SELECT k.kk_id, kw.content FROM kks k, keywords kw, kk_keywords kkw "
+				+ "WHERE k.kk_id=? AND k.kk_id = kkw.kk_id "
+				+ "AND kw.keyword_id=kkw.keyword_id ORDER BY k.kk_id";
+		KKVO vo = null;
+		Collection<String> tmpKeywordList = new ArrayList<String>();
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(kkId));
+			System.out.println("pstmt");
+			ResultSet rs = pstmt.executeQuery();
+			PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+			pstmt2.setInt(1, Integer.parseInt(kkId));
+			ResultSet rs2 = pstmt2.executeQuery();
+			System.out.println(rs);
+
+			// kkId, name, opHour, clHour, note, address + keywords
+			if (rs.next()) {
+				Date opHour = rs.getDate(3);
+				LocalDate localOpHour = opHour.toLocalDate();
+				Date csHour = rs.getDate(4);
+				LocalDate localCsHour = csHour.toLocalDate();
+				LocalTime localTime = LocalTime.of(0, 0,0);
+				LocalDateTime opDateTime = localOpHour.atTime(localTime);
+				LocalDateTime csDateTime = localCsHour.atTime(localTime);
+				/*//
+				SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+				String formattedOpeningHour = formatter.format(opDateTime);
+				String formattedClosingHour = formatter.format(csDateTime);	*/			
+				
+				vo = new KKVO(rs.getInt(1), rs.getString(2), opDateTime, csDateTime,
+						rs.getString(5), rs.getString(6));
+				while(rs2.next()) {
+					tmpKeywordList.add(rs2.getString(2));					
+				}
+				vo.setRepresentativeKeywordList(tmpKeywordList);
+			} else {
+				System.out.println("검색 결과 없음"); // recommendKKList가 null이 아닌 size 0이다!
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return vo;
 	}
 
 	// 완료 - 근처 추천 노래방 목록 불러오기 - getNearRecommendKKList
