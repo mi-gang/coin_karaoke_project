@@ -14,6 +14,7 @@ $(".reservations-status-button").on("click", function () {
       url: "controller?cmd=uncompletedReservationListAction",
       method: "POST",
       success: function (response) {
+    	  console.log(response);
     	  for (var i = 0; i < response.length; i++) {
 			reselt = '<div class="reservation_content_wrapper status-1-2"><div id="reservation_status_wrapper">'
 				+ '<span id="reservation_status">이용 중</span></div>'
@@ -36,7 +37,7 @@ $(".reservations-status-button").on("click", function () {
 		}
     	  $("#reservation-contents-wrapper").html(response);
       },
-    });s
+    });
   }
 /*    $.ajax({
       url: "controller?cmd=idCheckAction",

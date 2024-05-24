@@ -53,24 +53,67 @@ $(".login-button").on("click", function () {
 // 나의 리뷰 ajax
 
 $(document).ready(function () {
-  // alert("엥");
-  var reviewItem =
-    '<div class="review-item"><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
-    "777 노래연습장" +
-    '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
-    '<div class="review-content2"><span class="review-date">' +
-    "2024.05.04" +
-    '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
-    '<span class="review-description">' +
-    "사운드가 좋아요 재방문 의사 있어요 😍" +
-    "</span></div></div>";
-  $("#review-items").append(reviewItem); // 생성된 div를 문서에 추가합니다.
+	 $.ajax({
+		 url: "controller?cmd=myReviewListAction",
+		 type: "GET",
+		 dataType: "json",
+		 success: function (data) {
+			 console.log(data);
+		     // data는 서버로부터 받은 리뷰 리스트입니다.
+		     // 여기서는 data가 객체 배열이라고 가정합니다.
+			 for (var i = 0; i < data.length; i++) {
+				 var reviewItem =
+					 '<div class="review-item"><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
+					 + data[i].KKname 
+		    		 + '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete id=' + data[i].reviewId
+		    		 + '">삭제</button></div>'
+		    		 + '<div class="review-content2"><span class="review-date">'
+		    		 + data[i].startTime.date.year+" ." + data[i].startTime.date.month +" ."+data[i].startTime.date.day
+		    		 + '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
+		    		 + '<span class="review-description">'
+		    		 + data[i].content
+		    		 + "</span></div></div>";
+				 $("#review-items").append(reviewItem); // 생성된 div를 문서에 추가합니다.
+				 }
+			 },
+			 });
 });
 
 // 리뷰 삭제 모달
 $("#review-items").on("click", ".review-delete", function () {
   $("#deleteReviewModal1").modal("show");
 });
+
+$("#review-items").on("click", ".delete-button", function () {
+	let reviewId = $(this).attr("id");
+	console.log(reviewId);
+	 $.ajax({
+		 url: "controller?cmd=deleteReviewAction",
+		 type: "GET",
+		 data: { "reviewId": reviewId },
+		 dataType: "json",
+		 success: function (data) {
+			 console.log(data);
+		     // data는 서버로부터 받은 리뷰 리스트입니다.
+		     // 여기서는 data가 객체 배열이라고 가정합니다.
+			 for (var i = 0; i < data.length; i++) {
+				 var reviewItem =
+					 '<div class="review-item"><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
+					 + data[i].KKname 
+		    		 + '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>'
+		    		 + '<div class="review-content2"><span class="review-date">'
+		    		 + data[i].startTime.date.year+" ." + data[i].startTime.date.month +" ."+data[i].startTime.date.day
+		    		 + '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
+		    		 + '<span class="review-description">'
+		    		 + data[i].content
+		    		 + "</span></div></div>";
+				 $("#review-items").append(reviewItem); // 생성된 div를 문서에 추가합니다.
+				 }
+			 },
+			 });
+	 });
+	  
+
 
 // $.ajax({
 //   url: "/html/myPage-myReviewListUI.html", // 서버의 URL로 변경해주세요
