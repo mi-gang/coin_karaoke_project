@@ -13,12 +13,22 @@ public class UpcomingReservation implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-
 		
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
-		
-		
-		return null;
+		ReservationService service = new ReservationService();
+
+		HttpSession session = request.getSession();
+		Object userId = session.getAttribute("userId");
+
+		String page = "controller?cmd=login";
+
+		if (userId != null) {
+			reservationVOs = service.getUpcomingReservation((String) userId);
+			request.setAttribute("reservationVOs", reservationVOs);
+			page = "jsp/UpcomingReservation.jsp";
+		}
+
+		return new Url(page, URL.FORWARD);
 	}
 
 }
