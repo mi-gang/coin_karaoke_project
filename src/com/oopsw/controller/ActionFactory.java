@@ -1,10 +1,8 @@
 package com.oopsw.controller;
 
-<<<<<<< HEAD
 import com.oopsw.controller.action.KKDetailUI;
 import com.oopsw.controller.action.KKFilterUI;
 import com.oopsw.controller.action.KKSearchResultUI;
-=======
 import com.oopsw.controller.action.AddInquireAction;
 import com.oopsw.controller.action.AddReservationUIAction;
 import com.oopsw.controller.action.AddReviewAction;
@@ -14,7 +12,6 @@ import com.oopsw.controller.action.CanceledReservationListAction;
 import com.oopsw.controller.action.CompletedReservationListAction;
 import com.oopsw.controller.action.DeleteReviewAction;
 import com.oopsw.controller.action.IsValidTimeForReservationAction;
->>>>>>> reservationBE
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.Logout;
@@ -26,12 +23,8 @@ import com.oopsw.controller.action.PayReservationAction;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
-<<<<<<< HEAD
-import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
-=======
 import com.oopsw.controller.action.UpcomingReservation;
->>>>>>> reservationBE
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
@@ -92,7 +85,6 @@ public class ActionFactory {
 		case "isAdult":
 			action = new idAdult();
 			break;
-<<<<<<< HEAD
 		case "kkFilterUI":
 			action = new KKFilterUI();
 			break;
@@ -105,7 +97,6 @@ public class ActionFactory {
 		case "kkDetailUI":
 			action = new KKDetailUI();
 			break;
-=======
 		case "mypageUIAction":
 			action = new MypageUIAction();		// 헤애하ㅣㅁ	
 			break;	
@@ -164,7 +155,6 @@ public class ActionFactory {
 			action = new AddInquireAction();
 			break;		
 			
->>>>>>> reservationBE
 		default:
 			action = new wrongCmd();
 			break;

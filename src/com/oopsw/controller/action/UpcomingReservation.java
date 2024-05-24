@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.model.vo.ReservationVO;
+import com.oopsw.service.ReservationService;
 
 public class UpcomingReservation implements Action {
 
@@ -28,7 +30,7 @@ public class UpcomingReservation implements Action {
 			page = "jsp/UpcomingReservation.jsp";
 		}
 
-		return new Url(page, URL.FORWARD);
+		return new Url(page, Url.FORWARD);
 	}
 
 }
