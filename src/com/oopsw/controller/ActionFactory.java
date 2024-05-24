@@ -98,9 +98,9 @@ public class ActionFactory {
 			action = new KKDetailUI();
 			break;
 		case "mypageUIAction":
-			action = new MypageUIAction();		// 헤애하ㅣㅁ	
+			action = new MypageUIAction();
 			break;	
-		// reservation // 미강 - 해야함 이 아래로 다
+		// reservation
 		case "upcomingReservation":
 			action = new UpcomingReservation();
 			break;	
