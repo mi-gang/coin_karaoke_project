@@ -14,7 +14,7 @@ pageEncoding="UTF-8"%>
     />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/mypage.css" />
-    <link rel="stylesheet" href="css/kkDetailUI.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,21 +33,23 @@ pageEncoding="UTF-8"%>
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
-        <div id="myRiview_wrapper">
+        <!-- <div class="empty-page">
+          <span>등록된 리뷰가 없습니다.</span>
+        </div> -->
+        <div id="myReview-wrapper">
           <div id="total_reservation">
             <span>총 </span>
-            <span></span>
+            <span>4</span>
             <span>건</span>
           </div>
           <div id="review-items">
-          
-            <div id="review-item">
-              <div id="review-content1">
+            <div class="review-item">
+              <div class="review-content1">
                 <div class="KK-title">
                   <span class="resultKKTitle">777 노래연습장</span>
                   <img src="img/arrow_right.svg" />
                 </div>
-                <button class="delete-button">삭제</button>
+                <button class="delete-button review-delete">삭제</button>
               </div>
               <div id="review-content2">
                 <span class="review-date">2024.05.04</span>
@@ -63,7 +65,6 @@ pageEncoding="UTF-8"%>
                 >
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -78,11 +79,97 @@ pageEncoding="UTF-8"%>
         <div><img src="img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
+
     <!-- 부트스트랩 -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <!-- 모달 -->
+
+    <!-- 리뷰 삭제 모달 1 -->
+    <div class="modal" id="deleteReviewModal1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <!-- <h4 class="modal-title">이용시간</h4> -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="cancle-modal-body-wrapper">
+              <span class="cancle-modal-title">리뷰를 삭제하시겠습니까?</span>
+              <!-- <span class="cancle-modal-content"
+                >노래방 이용 시작 시간 기준 <b>20분</b> 내 취소 시 <br />취소
+                수수료가 부과됩니다.</span
+              > -->
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button add-button"
+              id="add2-add-time-button"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+              data-bs-target="#deleteReviewModal2"
+            >
+              삭제하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 리뷰 삭제 모달 2 -->
+    <div class="modal" id="deleteReviewModal2">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <!-- <h4 class="modal-title">이용시간</h4> -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="cancle-modal-body-wrapper">
+              <span class="cancle-modal-title">삭제 완료</span>
+              <span class="cancle-modal-content">리뷰가 삭제되었습니다.</span>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button add-button"
+              id="add2-add-time-button"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/mypage.js"></script>
   </body>
 </html>
+
