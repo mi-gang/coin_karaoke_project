@@ -33,7 +33,7 @@ public class ReservationService {
 
 	// ReservationDAO reservationDAO = null;
 	KKDAO kkDAO = null;
-	UserDAO dao = new UserDAO();
+	UserDAO dao = new UserDAO(conn);
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 */
 	public Collection<ReservationVO> getUpcomingReservation(String userId) {

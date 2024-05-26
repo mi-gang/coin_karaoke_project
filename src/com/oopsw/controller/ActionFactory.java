@@ -3,6 +3,7 @@ package com.oopsw.controller;
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.addReservationUI;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
@@ -69,6 +70,9 @@ public class ActionFactory {
 			break;
 		case "isAdult":
 			action = new idAdult();
+			break;
+		case "addReservationUI":
+			action = new addReservationUI();
 			break;
 		default:
 			action = new wrongCmd();
