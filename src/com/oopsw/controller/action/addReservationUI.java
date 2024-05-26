@@ -10,7 +10,7 @@ public class addReservationUI implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 		
-		return new Url("html/kkReservationUI.html", Url.FORWARD);
+		return new Url("html/kkReservationUI.jsp", Url.FORWARD);
 	}
 
 }
