@@ -752,8 +752,23 @@
     $("#modal4 .btn.submit").on("click", payForReservation);
 
     async function payForReservation(){
-      fetch("controller?cmd=")
-      showModal5();
+      const startDateTime = getStartTime();
+      const endDateTime = getEndTime();
+      const kkRoomNumber = $("#modal1 .roomBox .label").data("roomId");
+
+      try{
+
+        const res = await fetch("controller?cmd=isValidTimeForReservation&startTime=" + startDateTime + "&endTime=" + endDateTime + "&KKRoomNumber=" + kkRoomNumber);
+        const data = await res.json();
+        if(data.result){
+          showModal5();
+        }else{
+          alert("예상치 못한 이유로 예약이 취소되었습니다. 예약 가능한 시간인지 확인한 후 다시 시도해주세요.");
+          location.href="controller?cmd=addReservationUI";
+        }
+      }catch(err){
+        showModal5();
+      }
     }
 
 
@@ -762,7 +777,11 @@
     }
     function showModal5() {
       $("#modal5").css("display", "flex");
+      $("#modal5").css("justify-content", "center");
+      $("#modal5").css("align-items", "center");
+      $("#modal5>.modal").css("position", "relative");
     }
+
   </script>
 </body>
 
