@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
         <div id="myReview-wrapper">
           <div id="total_reservation">
             <span>총 </span>
-            <span>4</span>
+            <span></span>
             <span>건</span>
           </div>
           <div id="review-items">
@@ -99,7 +99,6 @@ pageEncoding="UTF-8"%>
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
-              data-bs-target="#deleteReviewModal2"
             >
               삭제하기
             </button>

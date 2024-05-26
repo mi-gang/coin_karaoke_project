@@ -65,7 +65,7 @@ $(document).ready(function () {
 				 var reviewItem =
 					 '<div class="review-item"><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
 					 + data[i].KKname 
-		    		 + '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete id=' + data[i].reviewId
+		    		 + '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete" id="' + data[i].reviewId
 		    		 + '">삭제</button></div>'
 		    		 + '<div class="review-content2"><span class="review-date">'
 		    		 + data[i].startTime.date.year+" ." + data[i].startTime.date.month +" ."+data[i].startTime.date.day
@@ -108,7 +108,10 @@ $("#review-items").on("click", ".delete-button", function () {
 		    		 + data[i].content
 		    		 + "</span></div></div>";
 				 $("#review-items").append(reviewItem); // 생성된 div를 문서에 추가합니다.
-				 }
+				 // $("#deleteReviewModal1").modal("show");
+				 $("#deleteReviewModal2").modal("show");
+	 
+			 }
 			 },
 			 });
 	 });

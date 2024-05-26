@@ -98,7 +98,7 @@ public class ActionFactory {
 			action = new KKDetailUI();
 			break;
 		case "mypageUIAction":
-			action = new MypageUIAction();
+			action = new MyPageUIAction();
 			break;	
 		// reservation
 		case "upcomingReservation":
