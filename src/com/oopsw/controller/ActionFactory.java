@@ -1,23 +1,24 @@
 package com.oopsw.controller;
 
-import com.oopsw.controller.action.AddPlaylist;
-import com.oopsw.controller.action.CheckMusicbymyplaylist;
-import com.oopsw.controller.action.KKDetailUI;
-import com.oopsw.controller.action.KKFilterUI;
-import com.oopsw.controller.action.KKSearchResultUI;
 import com.oopsw.controller.action.AddInquireAction;
+import com.oopsw.controller.action.AddPlaylist;
 import com.oopsw.controller.action.AddReservationUIAction;
 import com.oopsw.controller.action.AddReviewAction;
 import com.oopsw.controller.action.AdditionalTimeInfoAction;
 import com.oopsw.controller.action.CancelReservationAction;
 import com.oopsw.controller.action.CanceledReservationListAction;
+import com.oopsw.controller.action.CheckMusicbymyplaylist;
 import com.oopsw.controller.action.CompletedReservationListAction;
 import com.oopsw.controller.action.DeleteReviewAction;
 import com.oopsw.controller.action.IsValidTimeForReservationAction;
+import com.oopsw.controller.action.KKDetailUI;
+import com.oopsw.controller.action.KKFilterUI;
+import com.oopsw.controller.action.KKSearchResultUI;
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.AddReservationUI;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.Logout;
+import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.MyPageUIAction;
 import com.oopsw.controller.action.MyReviewListAction;
 import com.oopsw.controller.action.MyReviewListUIAction;
@@ -25,7 +26,20 @@ import com.oopsw.controller.action.PayAdditionalTimeAction;
 import com.oopsw.controller.action.PayReservationAction;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
+import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.addReservationUI;
+import com.oopsw.controller.action.addUser;
+import com.oopsw.controller.action.addUserUI;
+import com.oopsw.controller.action.findPasswordUI;
+import com.oopsw.controller.action.getNickname;
+import com.oopsw.controller.action.idAdult;
+import com.oopsw.controller.action.isExistEmail;
+import com.oopsw.controller.action.resetPassword;
+import com.oopsw.controller.action.sendValidationNumber;
+import com.oopsw.controller.action.updateNickname;
+import com.oopsw.controller.action.updatePassword;
+import com.oopsw.controller.action.updateUserUI;
 import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.AddUser;
@@ -119,7 +133,7 @@ public class ActionFactory {
 			case "kkDetailUI":
 				action = new KKDetailUI();
 				break;
-			case "myPageUIAction":
+			case "mypageUIAction":
 				action = new MyPageUIAction();
 				break;
 			// reservation

@@ -2,6 +2,8 @@ package com.oopsw.controller.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.ReviewService;
@@ -13,14 +15,13 @@ public class DeleteReviewAction implements Action {
 
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 		ReviewService service = new ReviewService();
-		String page = null;
-		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
 		boolean result = service.deleteReview(reviewId);
-		if (result) {
-			page = "json/data.jsp";			
-		}
-		
-		return new Url(page, Url.FORWARD);
+
+		request.setAttribute("result", gson.toJson(result));
+
+		return new Url("json/data.jsp", Url.FORWARD);
 	}
 
 }

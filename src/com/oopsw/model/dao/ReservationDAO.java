@@ -81,7 +81,7 @@ public class ReservationDAO {
 				+ "user_id = ? and start_time > sysdate and is_cancel = 0 order by start_time asc) "
 				+ "temp, room_infos r, KKs k where temp.room_id = r.room_id and r.KK_id = k.KK_id and rownum = 1";
 
-		ReservationVO reservationVO = null;
+		ReservationVO reservationVO = new ReservationVO();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, userId);
