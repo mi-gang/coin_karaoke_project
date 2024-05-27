@@ -5,12 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 
-public class addReservationUI implements Action {
+public class FindPasswordUI implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		
-		return new Url("html/kkReservationUI.jsp", Url.FORWARD);
+		return new Url("jsp/findPasswordUI.jsp", Url.FORWARD);
 	}
 
 }

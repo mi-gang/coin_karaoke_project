@@ -5,13 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 
-public class updateUserUI implements Action {
+public class MainUI implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		request.getSession().setAttribute("userId", "test@test.com");
-		String a = "d";
-		return new Url("jsp/updateUserUI.jsp", Url.FORWARD);
+		return new Url("html/mainUI.html", Url.FORWARD);
 	}
 
 }

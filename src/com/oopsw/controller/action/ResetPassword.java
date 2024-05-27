@@ -11,7 +11,7 @@ import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.UserService;
 
-public class resetPassword implements Action {
+public class ResetPassword implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {

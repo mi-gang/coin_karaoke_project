@@ -15,7 +15,7 @@ import com.oopsw.controller.action.CompletedReservationListAction;
 import com.oopsw.controller.action.DeleteReviewAction;
 import com.oopsw.controller.action.IsValidTimeForReservationAction;
 import com.oopsw.controller.action.Login;
-import com.oopsw.controller.action.addReservationUI;
+import com.oopsw.controller.action.AddReservationUI;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.Logout;
 import com.oopsw.controller.action.MyPageUIAction;
@@ -29,26 +29,24 @@ import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.UpcomingReservation;
-import com.oopsw.controller.action.addUser;
-import com.oopsw.controller.action.addUserUI;
-import com.oopsw.controller.action.findPasswordUI;
-import com.oopsw.controller.action.getNickname;
-import com.oopsw.controller.action.idAdult;
-import com.oopsw.controller.action.isExistEmail;
-import com.oopsw.controller.action.mainUI;
-import com.oopsw.controller.action.resetPassword;
-import com.oopsw.controller.action.sendValidationNumber;
-import com.oopsw.controller.action.updateNickname;
-import com.oopsw.controller.action.updatePassword;
-import com.oopsw.controller.action.updateUserUI;
+import com.oopsw.controller.action.AddUser;
+import com.oopsw.controller.action.AddUserUI;
+import com.oopsw.controller.action.FindPasswordUI;
+import com.oopsw.controller.action.GetNickname;
+import com.oopsw.controller.action.IsAdult;
+import com.oopsw.controller.action.IsExistEmail;
+import com.oopsw.controller.action.MainUI;
+import com.oopsw.controller.action.ResetPassword;
+import com.oopsw.controller.action.SendValidationNumber;
+import com.oopsw.controller.action.UpdateNickname;
+import com.oopsw.controller.action.UpdatePassword;
+import com.oopsw.controller.action.UpdateUserUI;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
 
 	public Action getAction(String cmd) {
 		Action action = new wrongCmd();
-		System.out.println("ActionFactory cmd");
-		System.out.println(cmd);
 		switch (cmd) {
 			case "login":
 				action = new Login();
@@ -63,43 +61,43 @@ public class ActionFactory {
 				action = new Logout();
 				break;
 			case "addUserUI":
-				action = new addUserUI();
+				action = new AddUserUI();
 				break;
 			case "addUser":
-				action = new addUser();
+				action = new AddUser();
 				break;
 			case "isExistEmail":
-				action = new isExistEmail();
+				action = new IsExistEmail();
 				break;
 			case "findPasswordUI":
-				action = new findPasswordUI();
+				action = new FindPasswordUI();
 				break;
 			case "sendValidationNumber":
-				action = new sendValidationNumber();
+				action = new SendValidationNumber();
 				break;
 			case "resetPassword":
-				action = new resetPassword();
+				action = new ResetPassword();
 				break;
 			case "updateUserUI":
-				action = new updateUserUI();
+				action = new UpdateUserUI();
 				break;
 			case "getNickname":
-				action = new getNickname();
+				action = new GetNickname();
 				break;
 			case "updateNickname":
-				action = new updateNickname();
+				action = new UpdateNickname();
 				break;
 			case "updatePassword":
-				action = new updatePassword();
+				action = new UpdatePassword();
 				break;
 			case "isAdult":
-				action = new idAdult();
+				action = new IsAdult();
 				break;
 			case "mainUI":
-				action = new mainUI();
+				action = new MainUI();
 				break;
 			case "addReservationUI":
-				action = new addReservationUI();
+				action = new AddReservationUI();
 				break;
 			case "musicListUI":
 				action = new MusicListUI();

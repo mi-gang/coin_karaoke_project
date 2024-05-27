@@ -3,28 +3,30 @@ package com.oopsw.controller.action;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.UserService;
 
-public class getNickname implements Action {
+public class IsAdult implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		String userId = request.getParameter("userId");
-		String nickname = null;
-		
+		boolean result = false;
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
 		try {
-			nickname = new UserService().getNickname(userId);
+			result = new UserService().isAdult(userId);
 		} catch (SQLException e) {
-			//해당 userId 존재하지 않는 경우
+			// userId가 없을 때
 		}
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("nickname", nickname);
+		json.addProperty("result", result);
 		request.setAttribute("dataToSend", json.toString());
+		
 		return new Url("json/data.jsp", Url.FORWARD);
 	}
 

@@ -11,7 +11,7 @@ import com.oopsw.controller.Url;
 import com.oopsw.model.vo.UserVO;
 import com.oopsw.service.UserService;
 
-public class addUser implements Action {
+public class AddUser implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
