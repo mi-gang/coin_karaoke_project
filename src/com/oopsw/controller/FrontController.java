@@ -24,11 +24,15 @@ public class FrontController extends HttpServlet {
 		String cmd = request.getParameter("cmd");
 		
 		Action action = new ActionFactory().getAction(cmd);
+		System.out.println("action");
+		System.out.println(action);
 		Url url = action.execute(request);
+		System.out.println("url");
+		System.out.println(url);
 		
 		//url에 따라 forward or sendRedirect
 		if(url.getFlag() == Url.FORWARD){
-			request.getRequestDispatcher(url.getUrl()).forward(request, response);
+			request.getRequestDispatcher("/"+url.getUrl()).forward(request, response);
 		}else{
 			response.sendRedirect(url.getUrl());
 		}

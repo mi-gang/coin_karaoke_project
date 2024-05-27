@@ -545,7 +545,7 @@
       searchOptions.forEach(function (option) {
         option.addEventListener("click", function () {
         	const clickedOptionName = this.querySelector(".optionName").textContent;
-            // console.log(clickedOptionName);
+            console.log(clickedOptionName);
             switch(clickedOptionName) {
             case "주차 가능":
             	if(chkAdditionalOptions[0] === "1") {
@@ -590,7 +590,6 @@
     		  }
     	  }
     	  console.log(chkCount);
-    	  // console.log(searchGu);
     	  // 검색 시간대 및 이용 시간에 대한 검색 필터링은 추후 작업 예정
     	  // jQuery.ajaxSettings.traditional = true;
     	  // 참고) chkAdditionalOptions는 ["1", "0", "1", "1"] 문자열 배열이다.
@@ -607,9 +606,13 @@
     			  } else {
     				  console.log("필터링 검색 실패");
     			  }
+    			  /* console.log(data);
+    			  console.log(status); */
     		  }
     	  })
+    	  location.replace("controller?cmd=searchForKKWithOptions&searchGu="+searchGu+"&chkAdditionalOptions="+chkAdditionalOptions+"&chkCount="+chkCount);
       })
     </script>
   </body>
 </html>
+${result}
