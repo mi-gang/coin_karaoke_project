@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.google.gson.GsonBuilder"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="com.google.gson.Gson"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -90,9 +95,7 @@
               <div class="avgStarScoresWrapper">
                 <!-- <p id="avgStarScore">4.6</p> -->
                 <p id="avgStarScore">${starRating}</p>
-                <p class="countReviews">
-                  (총 <span id="countReviewsValue"></span>개 리뷰)
-                </p>
+                <p class="countReviews">총 <span id="countReviewsValue"></span>개 리뷰</p>
                 <div class="starsWrapper">
                   <svg
                     width="25"
@@ -209,26 +212,6 @@
                       </clipPath>
                     </defs>
                   </svg>
-                  <!-- <img
-                    src="img/halfPurpleStar.png"
-                    alt="0.5점 별"
-                  /> -->
-                  <!-- <svg
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M242.031 2.53323C239.097 3.86656 235.097 6.66656 233.097 8.79989C231.097 10.9332 216.297 39.4666 200.164 72.1332C168.164 136.933 166.697 139.2 154.297 142.533C151.231 143.333 121.097 147.867 87.3639 152.667C53.6305 157.467 22.9639 162.267 19.0972 163.333C11.8972 165.467 3.8972 172.8 1.36386 179.467C-0.902805 185.2 -0.236138 196.933 2.56386 202.4C4.03053 205.2 25.8972 227.467 54.0305 254.533C83.0972 282.667 103.897 303.867 105.497 306.8C106.964 309.867 108.031 314.667 108.031 318.8C108.031 322.667 103.231 353.6 97.3639 387.6C91.4972 421.733 86.6972 451.467 86.6972 453.733C86.6972 458.8 91.0972 468.8 95.0972 473.067C101.497 480 113.364 483.6 122.564 481.467C125.631 480.8 154.431 466.4 186.564 449.6C218.697 432.667 247.231 418.4 249.897 418L254.697 417.067V208.533V-0.000106523H251.097C248.964 -0.000106523 244.964 1.19989 242.031 2.53323Z"
-                      fill="#9747FF"
-                    />
-                    <path
-                      d="M267.697 2.86672C270.631 4.20006 274.631 7.00006 276.631 9.13339C278.631 11.2667 293.431 39.8001 309.564 72.4667C341.564 137.267 343.031 139.533 355.431 142.867C358.497 143.667 388.631 148.2 422.364 153C456.097 157.8 486.764 162.6 490.631 163.667C497.831 165.8 505.831 173.133 508.364 179.8C510.631 185.533 509.964 197.267 507.164 202.733C505.697 205.533 483.831 227.8 455.697 254.867C426.631 283 405.831 304.2 404.231 307.133C402.764 310.2 401.697 315 401.697 319.133C401.697 323 406.497 353.933 412.364 387.933C418.231 422.067 423.031 451.8 423.031 454.067C423.031 459.133 418.631 469.133 414.631 473.4C408.231 480.333 396.364 483.933 387.164 481.8C384.097 481.133 355.297 466.733 323.164 449.933C291.031 433 262.497 418.733 259.831 418.333L255.031 417.4V208.867V0.33339H258.631C260.764 0.33339 264.764 1.53339 267.697 2.86672Z"
-                      fill="#E3CDFF"
-                    />
-                  </svg> -->
                 </div>
               </div>
               <div class="starScoreGraphWrapper">
@@ -315,51 +298,14 @@
               </div>
             </div>
             <div class="textReviewContainer">
-              <div class="guideWordsNoReview">
-                <p>아직 작성된 상세리뷰가 없습니다</p>
-              </div>
-              <div id="invisibleUnLoginUser" class="invisibleUnLoginUser">
+              <!-- <div id="invisibleUnLoginUser" class="invisibleUnLoginUser">
                 <div class="invisibleWrapper">
                   <p>이 노래방의 상세 리뷰가 궁금하신가요?</p>
                   <div id="reviewLoginBtn" class="reviewLoginBtn">
                     로그인하고 리얼 리뷰 보기
                   </div>
                 </div>
-              </div>
-              <div class="reviewItem">
-                <div class="writerInfo">
-                  <img
-                    src="img/profile.svg"
-                    alt="작성자 아이콘"
-                  />
-                  <p class="writerNickname">소리꾼1</p>
-                </div>
-                <div class="reviewContents">
-                  깔끔하고 관리가 잘 되는 곳이네여
-                </div>
-              </div>
-              <div class="reviewItem">
-                <div class="writerInfo">
-                  <img
-                    src="img/profile.svg"
-                    alt="작성자 아이콘"
-                  />
-                  <p class="writerNickname">음악대장</p>
-                </div>
-                <div class="reviewContents">
-                  깔끔하고 관리가 잘 되는 곳이네여~~
-                </div>
-              </div>
-              <div class="reviewItem">
-                <div class="writerInfo">
-                  <img
-                    src="img/profile.svg"
-                    alt="작성자 아이콘"
-                  />
-                  <p class="writerNickname">소리꾼2</p>
-                </div>
-                <div class="reviewContents">깨끗해요!!</div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -376,7 +322,76 @@
 
     <script>
       $(document).ready(function () {
-        let isLogin = true;
+        const kkId = "${KKVO.getKkId()}";
+        console.log(kkId);
+        console.log("1 ajax success data: ");
+        // 로그인 여부에 따라 북마크
+        $.ajax({
+        	url: "controller?cmd=checkKKBookmarkAction",
+        	data: {kkId: kkId},
+        	dataType: "json",
+        	success: function(data) {
+        		console.log(data.isLogin);
+        		// 로그인 O + 북마크 여부 확인
+        		if(data.isLogin === true) {
+        			console.log("로그인 O");
+        			// 북마크 여부 확인
+        			console.log(data.result);
+        			if(data.result === true) {
+        				$(".bookmark").addClass(".add");
+        				$(".bookmark").css("backgroundImage", "url(img/bookmarkFill.svg)");
+        			} else {
+        				$(".bookmark").removeClass(".add");
+        				$(".bookmark").css("backgroundImage", "url(img/bookmarkOutline.svg)");
+        			}
+        			// 북마크 On/Off
+        			$("#bookmark").on("click", function() {
+        				if($(".bookmark").hasClass(".add")) {
+        					console.log("북마크  OFF");
+        					$(".bookmark").removeClass(".add");
+            				$(".bookmark").css("backgroundImage", "url(img/bookmarkOutline.svg)");
+             				$.ajax({
+             					url: "controller?cmd=deleteBookmarkAction",
+             					data: {kkId: kkId},
+             					dataType:"json",
+             					success: function(data){
+             						if(data.result == true) {
+             							console.log("북마크 제거 완료");
+             						} else {
+             							console.log("북마크 제거 실패");
+             						}
+             					}
+             				});
+        				} else {
+        					console.log("북마크 ON");
+        					$(".bookmark").addClass(".add");
+            				$(".bookmark").css("backgroundImage", "url(img/bookmarkFill.svg)");
+             				$.ajax({
+             					url: "controller?cmd=addBookmarkAction",
+             					data: {kkId: kkId},
+             					dataType:"json",
+             					success: function(data){
+             						if(data.result == true) {
+             							console.log("북마크 추가 완료");
+             						} else {
+             							console.log("북마크 추가 실패");
+             						}
+             					}
+             				});
+        				}
+        			});
+        		} else {
+        			// 로그인 X
+        			// 북마크 on/off 시도 -> 로그인 페이지로 이동
+        			$("#bookmark").on("click", function()  {
+        				console.log("로그인해야 북마크 가능!");
+        				alert("로그인한 유저만 북마크 가능합니다. 로그인 페이지로 이동합니다 :)");
+        				location.replace("controller?cmd=loginUI");
+        			});
+        		}
+        	}
+        });
+      	      
         
         // 불러온 영업시간 넣기
         let timeInfo = "${KKVO.getOpeningHour()}";
@@ -399,52 +414,160 @@
         	var spanElement = $('<span class="keywordItem"></span>');
         	spanElement.text(keyword);
         	keywordsWrapper.append(spanElement);
+        });
+        
+        
+        let reviewList = "${reviewList}";
+        console.log("--> reviewList")
+        console.log(reviewList);
+        // 로그인 여부에 따라 리뷰 가림막 On/Off
+      	$.ajax({
+      		url: "controller?cmd=reviewListAction",
+      		data: {kkId: kkId},
+      		dataType: "json",
+      		success: function(data) {
+      			// 로그인 X
+      			console.log("로그인 여부 따라 가림막  on/off의 data..........");
+      			console.log(data);
+      			console.log(data.isLogin);
+      			if(data.isLogin === false) {
+      				$(".tapMenu").click(function() {
+      					$(".tapMenu").removeClass("active");
+      					$(this).addClass("active");
+      					let menuType = $(this).data("menu");
+      					if(menuType === "defaultInfo") {
+      						$("#defaultInfoContainer").addClass("selected");
+      			            $("#reviewContainer").removeClass("selected");
+      					} else if(menuType === "review") {
+      						//
+      						console.log("로그인 여부 따라 가림막  on/off");
+      						let invisibleDiv = "<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>";
+      						$("#textReviewContainer").append("<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>");
+      						//
+      						$(".reviewItem").css("background-color", "rgba(246,246,246,0.94)");
+	      		              $(".reviewItem").css("color", "rgba(246,246,246,0.94)");
+	      		              $(".reviewContents").css("background-color", "rgba(246,246,246,0.94)");
+	      		              $("#defaultInfoContainer").removeClass("selected");
+	      		              $("#reviewContainer").addClass("selected notLogin");
+	      		              $("#invisibleUnLoginUser").addClass("on");
+      					}
+      				});	
+      			} else {
+      			// 로그인 O
+      				$(".tapMenu").click(function() {
+      					$(".tapMenu").removeClass("active");
+      					$(this).addClass("active");
+      					let menuType = $(this).data("menu");
+      					if(menuType === "defaultInfo") {
+      						$("#defaultInfoContainer").addClass("selected");
+      			            $("#reviewContainer").removeClass("selected");
+      					} else if(menuType === "review") {
+      						$("#defaultInfoContainer").removeClass("selected");
+      						$("#invisibleLoginUser").removeClass("on");
+      						$("#reviewContainer").addClass("selected");
+      						let detailTxtReviewCnt = 3;  // 임의로 작성한 값
+      		              if(detailTxtReviewCnt < 1) {
+      		                $(".textReviewContainer").addClass("noReview");
+      		                $(".guideWordsNoReview").addClass("on");
+      		              } else {
+      		                $(".guideWordsNoReview").removeClass("on");
+      		              }
+      		              $("#defaultInfoContainer").removeClass("selected");
+      		              $("#reviewContainer").addClass("selected");
+   						}
+   					});
+      			}
+      		}
+      	});
+        
+
+        // 리뷰 개수만큼 item 생성
+        $.ajax({
+        	url:"controller?cmd=reviewListAction",
+        	data: {kkId: kkId},
+        	dataType: "json",
+        	success: function(data) {
+        		console.log(data);
+        		console.log("총 리뷰 개수")
+        		let totalReviewCount = data.reviewList.length;
+        		console.log(totalReviewCount);
+        		$("#countReviewsValue").text(totalReviewCount);
+        		if(totalReviewCount == 0) {
+        			console.log("작성된 텍스트 리뷰 없음!")
+        			$(".textReviewContainer").append("<div class='guideWordsNoReview'><p>아직 작성된 상세리뷰가 없습니다</p></div>");
+        		} else {
+        			for(let i=0; i<totalReviewCount; i++) {
+        				let reviewItem = "<div class='reviewItem'><div class='writerInfo'><img src='img/profile.svg' alt='작성자 아이콘'/><p class='writerNickname'></p></div><div class='reviewContents'></div></div>";
+        				$(".textReviewContainer").append(reviewItem);
+        				$(".writerNickname").eq(i).text(data.reviewList[i].nickName);
+        				$(".reviewContents").eq(i).text(data.reviewList[i].content);
+        			}
+        		}
+        	}
+        });
+        
+        $.ajax({
+        	url:"controller?cmd=amountStarReviewListByType",
+   			data: {kkId: kkId},
+   			dataType: "json",
+   			success: function(data) {
+   				let score5Cnt = parseInt(data.cnt5);
+   				let score4Cnt = parseInt(data.cnt4);
+   				let score3Cnt = parseInt(data.cnt3);
+   				let score2Cnt = parseInt(data.cnt2);
+   				let score1Cnt = parseInt(data.cnt1);
+   				let totalReviewCount = score5Cnt + score4Cnt + score3Cnt + score2Cnt + score1Cnt;
+   				$("#countReviewsValue").text(totalReviewCount);
+   				
+   				$("#score5Cnt").text(score5Cnt);
+   				$("#score4Cnt").text(score4Cnt);
+   				$("#score3Cnt").text(score3Cnt);
+   				$("#score2Cnt").text(score2Cnt);
+   				$("#score1Cnt").text(score1Cnt);
+   				
+   				// 점수별 리뷰 개수를 전체 리뷰 개수로 나눈 비율 & 그래프 넓이 구하기
+   		        let ratio5 = (score5Cnt / totalReviewCount) * 191;
+   		        let ratio4 = (score4Cnt / totalReviewCount) * 191;
+   		        let ratio3 = (score3Cnt / totalReviewCount) * 191;
+   		        let ratio2 = (score2Cnt / totalReviewCount) * 191;
+   		        let ratio1 = (score1Cnt / totalReviewCount) * 191;
+   		        
+   		  		// 리뷰 그래프 채우기
+   		        if (ratio5 == 0) {
+   		          $("#graph5Score").css("display", "none");
+   		        } else {
+   		          $("#graph5Score").css("width", ratio5);
+   		        }
+   		        if (ratio4 == 0) {
+   		          $("#graph4Score").css("display", "none");
+   		        } else {
+   		          $("#graph4Score").css("width", ratio4);
+   		        }
+   		        if (ratio3 == 0) {
+   		          $("#graph3Score").css("display", "none");
+   		        } else {
+   		          $("#graph3Score").css("width", ratio3);
+   		        }
+   		        if (ratio2 == 0) {
+   		          $("#graph2Score").css("display", "none");
+   		        } else {
+   		          $("#graph2Score").css("width", ratio2);
+   		        }
+   		        if (ratio1 == 0) {
+   		          $("#graph1Score").css("display", "none");
+   		        } else {
+   		          $("#graph1Score").css("width", ratio1);
+   		        }
+   			}
         })
         
-        // tapMenu에 따라 상세정보 변경하기
-        $(".tapMenu").click(function () {
-
-          $(".tapMenu").removeClass("active");
-          $(this).addClass("active");
-          let menuType = $(this).data("menu");
-          console.log(menuType);
-          if (menuType === "defaultInfo") {
-            $("#defaultInfoContainer").addClass("selected");
-            $("#reviewContainer").removeClass("selected");
-          } else if (menuType === "review") {
-            if(isLogin === false) {
-              // 로그인한 유저만 리뷰 볼 수 있도록 가림판
-              $(".reviewItem").css("background-color", "rgba(246,246,246,0.94)");
-              $(".reviewItem").css("color", "rgba(246,246,246,0.94)");
-              $(".reviewContents").css("background-color", "rgba(246,246,246,0.94)");
-              $("#defaultInfoContainer").removeClass("selected");
-              $("#reviewContainer").addClass("selected notLogin");
-              $("#invisibleUnLoginUser").addClass("on");
-            } else {
-              // 가림판 해제
-              $("#invisibleLoginUser").removeClass("on");
-              let detailTxtReviewCnt = 3;  // 임의로 작성한 값
-              if(detailTxtReviewCnt < 1) {
-                $(".textReviewContainer").addClass("noReview");
-                $(".guideWordsNoReview").addClass("on");
-              } else {
-                // $(".invisibleLoginUser").css("display", "none");
-                $(".guideWordsNoReview").removeClass("on");
-                // $("#defaultInfoContainer").removeClass("selected");
-                // $("#reviewContainer").addClass("selected");
-              }
-              $("#defaultInfoContainer").removeClass("selected");
-              $("#reviewContainer").addClass("selected");
-            }
-          }
-        });
-
-        let totalReviewCount = $("#countReviewsValue").text();
+        
+        /* let totalReviewCount = $("#countReviewsValue").text();
         // 총 리뷰 개수 설정
         totalReviewCount = 8;
-        $("#countReviewsValue").text(totalReviewCount);
+        $("#countReviewsValue").text(totalReviewCount); */
 
-        let score5Cnt = parseInt($("#score5Cnt").text());
+        /* let score5Cnt = parseInt($("#score5Cnt").text());
         let score4Cnt = parseInt($("#score4Cnt").text());
         let score3Cnt = parseInt($("#score3Cnt").text());
         let score2Cnt = parseInt($("#score2Cnt").text());
@@ -482,9 +605,9 @@
           $("#graph1Score").css("display", "none");
         } else {
           $("#graph1Score").css("width", ratio1);
-        }
+        } */
 
-        // 북마크 아이콘 클릭해서 추가/취소
+        /* // 북마크 아이콘 클릭해서 추가/취소
         $("#bookmark").click(function () {
           console.log(this.className);
           if (this.className === "bookmark") {
@@ -492,7 +615,7 @@
           } else {
             $(this).removeClass("add");
           }
-        });
+        }); */
         // 예약하기 버튼 클릭시, 예약하기 페이지로 이동 (현재는 alert)
         $(".btn").click(function () {
           alert("예약 페이지로 이동!");
@@ -501,7 +624,8 @@
 
         // 로그인하고 텍스트 리뷰 보기 버튼 클릭시, 로그인 페이지로 이동 (현재는 alert)
         $("#reviewLoginBtn").click(function() {
-          alert("로그인 페이지로 이동!");
+          // alert("로그인 페이지로 이동!");
+          location.replace("controller?cmd=loginUI");
           return;
         })
       });
