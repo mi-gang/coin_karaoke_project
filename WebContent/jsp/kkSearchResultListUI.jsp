@@ -159,9 +159,22 @@
             			}
             		})
             		// location.replace("controller?cmd=searchForKKWithOptions&searchGu="+searchGu);
-            		location.replace("controller?cmd=kkDetailUI&clickedKKId="+clickedKKId);
+            		// location.replace("controller?cmd=kkDetailUI&clickedKKId="+clickedKKId);
             	});
             });
+            
+            // 내가 북마크한 노래방이면 아이콘 fill으로 페이지 노출
+            const bookmarkList = document.querySelectorAll(".resultItem");
+            bookmarkList.forEach(function(item){
+            	console.log("----- 북마크 -----");
+            	console.log(item);
+            	const kkId = item.querySelector("#resultKKId").textContent;
+            	console.log(kkId);
+            	console.log("-----------------");
+            	$.ajax({
+            		url: "controller?cmd="
+            	})
+            }) 
         </script>
   </body>
   </html>

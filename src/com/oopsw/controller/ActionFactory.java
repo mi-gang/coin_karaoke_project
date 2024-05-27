@@ -139,9 +139,9 @@ public class ActionFactory {
 		case "reservationListUIAction":
 			action = new ReservationListUIAction();
 			break;
-		case "uncompletedReservationListAction":
+		/*case "uncompletedReservationListAction":
 			action = new UncompletedReservationListAction();
-			break;
+			break;*/
 		case "completedReservationListAction":
 			action = new CompletedReservationListAction();
 			break;
