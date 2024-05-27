@@ -55,9 +55,6 @@ public class ActionFactory {
 			case "reservationListUI":
 				action = new ReservationListUIAction();
 				break;
-			case "uncompletedReservationListAction":
-				action = new UncompletedReservationListAction();
-				break;
 			case "loginUI":
 				action = new LoginUI();
 				break;
