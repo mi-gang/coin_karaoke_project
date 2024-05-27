@@ -1,3 +1,9 @@
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.oopsw.model.vo.KKVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.oopsw.service.KKService"%>
+<%@page import="com.oopsw.model.vo.ReservationVO"%>
 <%@page import="com.oopsw.service.ReservationService"%>
 <%@page import="com.oopsw.service.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -47,6 +53,7 @@
 		<!-- 컨텐츠 컨테이너 -->
 		<div id="container">
 			<section id="recommend-wrapper" class="wrapper">
+
 				<div id="recommend-header" class="wrapper-header">
 					<span class="header-title">근처 추천 노래방</span>
 					<div id="regionWrapper">
@@ -87,84 +94,37 @@
 					</div>
 				</div>
 				<div id="KK-container">
-					<div class="card">
-						<img src="img/representativeKKImg1.png" class="card-img-top"
-							alt="777 노래연습장">
-						<div class="card-body">
-							<div class="card-title">777 노래연습장</div>
-							<div class="starContainer">
-								<span class="starRate" data-star-rate="4.8">4.8</span>
-								<div class="rating-wrap">
-									<div class="rating">
-										<div class="overlay"></div>
-									</div>
-								</div>
-							</div>
-							<div class="KK-usability">
-								<span>777m</span> <span>혼잡도: <span class="normal"
-									data-crowded="0.5">보통</span></span>
-							</div>
-						</div>
-					</div>
-					<div class="card">
-						<img src="img/representativeKKImg1.png" class="card-img-top"
-							alt="777 노래연습장">
-						<div class="card-body">
-							<div class="card-title">777 노래연습장</div>
-							<div class="starContainer">
-								<span class="starRate" data-star-rate="2">2</span>
-								<div class="rating-wrap">
-									<div class="rating">
-										<div class="overlay"></div>
-									</div>
-								</div>
-							</div>
-							<div class="KK-usability">
-								<span>777m</span> <span>혼잡도: <span class="bad"
-									data-crowded="1">혼잡</span></span>
-							</div>
-						</div>
-					</div>
-					<div class="card">
-						<img src="img/representativeKKImg1.png" class="card-img-top"
-							alt="777 노래연습장">
-						<div class="card-body">
-							<div class="card-title">777 노래연습장</div>
-							<div class="starContainer">
-								<span class="starRate" data-star-rate="5">5</span>
-								<div class="rating-wrap">
-									<div class="rating">
-										<div class="overlay"></div>
-									</div>
-								</div>
-							</div>
-							<div class="KK-usability">
-								<span>777m</span> <span>혼잡도: <span class="good"
-									data-crowded="0">원활</span></span>
-							</div>
-						</div>
-					</div>
-					<div class="card">
-						<img src="img/representativeKKImg1.png" class="card-img-top"
-							alt="777 노래연습장">
-						<div class="card-body">
-							<div class="card-title">777 노래연습장</div>
-							<div class="starContainer">
-								<span class="starRate" data-star-rate="3.5">3.5</span>
-								<div class="rating-wrap">
-									<div class="rating">
-										<div class="overlay"></div>
-									</div>
-								</div>
-							</div>
-							<div class="KK-usability">
-								<span>777m</span> <span>혼잡도: <span class="normal"
-									data-crowded="0.5">보통</span></span>
-							</div>
-						</div>
-					</div>
+					<%
+						KKService kkService = new KKService();
+						List<KKVO> kks = kkService.getNearRecommendKKList("금천구");
+						if (kks.size() > 10) {
+							kks = kks.subList(0, 11);
+						}
 
+						request.setAttribute("recommendKKList", kks);
+					%>
+					<c:forEach var="kk" items="${recommendKKList}">
+						<div class="card">
+							<img src="img/representativeKKImg1.png" class="card-img-top"
+								alt="${kk.getName()}">
+							<div class="card-body">
+								<div class="card-title">${kk.getName()}</div>
+								<div class="starContainer">
+									<span class="starRate" data-star-rate="${kk.getStarRating() }">${kk.getStarRating() }</span>
+									<div class="rating-wrap">
+										<div class="rating">
+											<div class="overlay"></div>
+										</div>
+									</div>
+								</div>
+								<div class="KK-usability">
+									<span>777m</span> <span>혼잡도: <span class="normal"
+										data-crowded="0.5">보통</span></span>
+								</div>
+							</div>
+						</div>
 
+					</c:forEach>
 				</div>
 			</section>
 			<section id="upcoming-wrapper" class="wrapper">
@@ -173,33 +133,78 @@
 						href="controller?cmd=reservationListUI">전체보기 <img
 						src="img/arrow_right.svg" alt=""></a>
 				</div>
-				<c:if test="${not empty userId}">
-				<% 
-			    String userId = (String) request.getSession().getAttribute("userId");
-			    new ReservationService().getUpcomingReservation(userId); %>
+				<%
+					String userId = (String) request.getSession().getAttribute("userId");
+					ReservationVO upcomingReservation = new ReservationService().getUpcomingReservation(userId);
+					request.setAttribute("upR", upcomingReservation);
+				%>
+				<c:choose>
+					<c:when test="${empty userId}">
+						<span>로그인하세요</span>]
+				</c:when>
+					<c:when test="${empty upR}">
+						<div id="reservation_content_wrapper">
+                        <div id="reservation_status_wrapper">
+                        
+                            <span id="reservation_status"></span>
+                        </div>
+                        <div id="reservation_content"
+                            data-reservation-id="">
+                            <div id="KK_img">
+                                <img src="img/KK_img.svg" />
+                            </div>
+                            <div id="reservation_detail_wrapper">
+                                <div id="reservation_detail">
+                                    <div id="reservation_detail_row">
+                                        <span id="karaoke_name">대기중인 예약이 없습니다.</span>
+                                        <!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
+                                    </div>
+                                    <div id="reservation-time">
+                                        <div id="reservation-start-time">
+                                            <span id="reservation-start-hour"></span>
+                                            <span>:</span> <span id="reservation-start-minute"></span>
+                                        </div>
+                                        <span>-</span>
+                                        <div id="reservation-end-time">
+                                            <span id="reservation-end-hour"></span>
+                                            <span>:</span> <span id="reservation-end-minute"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="button_wrapper">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					</c:when>
+					<c:otherwise>
+					
 					<div id="reservation_content_wrapper">
 						<div id="reservation_status_wrapper">
-							<span id="reservation_status">예약</span>
+						
+							<span id="reservation_status"><%= upcomingReservation.getStartTime().isAfter(LocalDateTime.now()) ? "이용중" : "예약" %></span>
 						</div>
-						<div id="reservation_content">
+						<div id="reservation_content"
+							data-reservation-id="<%=upcomingReservation.getReservationId()%>">
 							<div id="KK_img">
 								<img src="img/KK_img.svg" />
 							</div>
 							<div id="reservation_detail_wrapper">
 								<div id="reservation_detail">
 									<div id="reservation_detail_row">
-										<span id="karaoke_name">세븐스타코인노래연습장 철산역점</span>
+										<span id="karaoke_name"><%=upcomingReservation.getKKname()%></span>
 										<!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
 									</div>
 									<div id="reservation-time">
 										<div id="reservation-start-time">
-											<span id="reservation-start-hour">16</span> <span>:</span> <span
-												id="reservation-start-minute">00</span>
+											<span id="reservation-start-hour"><%=String.format("%02d", upcomingReservation.getStartTime().getHour())%></span>
+											<span>:</span> <span id="reservation-start-minute"><%=String.format("%02d", upcomingReservation.getStartTime().getMinute())%></span>
 										</div>
 										<span>-</span>
 										<div id="reservation-end-time">
-											<span id="reservation-end-hour">18</span> <span>:</span> <span
-												id="reservation-end-minute">00</span>
+											<span id="reservation-end-hour"><%=String.format("%02d", upcomingReservation.getEndTime().getHour())%></span>
+											<span>:</span> <span id="reservation-end-minute"><%=String.format("%02d", upcomingReservation.getEndTime().getMinute())%></span>
 										</div>
 									</div>
 								</div>
@@ -213,8 +218,9 @@
 							</div>
 						</div>
 					</div>
+					</c:otherwise>
+				</c:choose>
 
-				</c:if>
 			</section>
 			<section id="chart-wrapper" class="wrapper">
 				<div id="chart-header" class="wrapper-header">

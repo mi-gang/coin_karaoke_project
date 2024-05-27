@@ -74,7 +74,7 @@ public class ReservationDAO {
 		return num;
 	}
 
-	/** 사용자의 가장 최근 예약 일정 불러오기 0*/
+	/** 사용자의 가장 최근 예약 일정 불러오기 0 */
 	public ReservationVO getUpcomingReservation(String userId) {
 
 		String sql = "select reservation_id, is_cancel, start_time, end_time, k.KK_id, k.name, r.room_id, r.name from (select * from RESERVATIONS where "
@@ -86,21 +86,20 @@ public class ReservationDAO {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					reservationVO = new ReservationVO(rs.getInt(1), rs.getInt(2),
-							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8));
+				if (rs.next()) {
+					reservationVO = new ReservationVO(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3).toLocalDateTime(),
+							rs.getTimestamp(4).toLocalDateTime(), userId, rs.getInt(5), rs.getString(6), rs.getInt(7),
+							rs.getString(8));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return reservationVO;
 	}
 
 	// 예약하기
-	/** 예약 현황 정보 불러오기 0*/
+	/** 예약 현황 정보 불러오기 0 */
 	public Collection<ReservationVO> getReservationListByRoomId(int roomId) {
 
 		String sql = "select s.reservation_id, s.start_time, s.end_time from reservations s, room_infos r "
@@ -133,9 +132,9 @@ public class ReservationDAO {
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//			pstmt.setTimestamp(1, Timestamp.valueOf(startTime));
+			// pstmt.setTimestamp(1, Timestamp.valueOf(startTime));
 			pstmt.setDate(1, Date.valueOf(startTime.toLocalDate()));
-//			pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
+			// pstmt.setTimestamp(2, Timestamp.valueOf(endTime));
 			pstmt.setDate(2, Date.valueOf(endTime.toLocalDate()));
 			pstmt.setInt(3, roomId);
 
@@ -164,7 +163,7 @@ public class ReservationDAO {
 				while (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8)));
+							rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
 				}
 			}
 		} catch (SQLException e) {
@@ -189,7 +188,7 @@ public class ReservationDAO {
 				while (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8)));
+							rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
 				}
 			}
 		} catch (SQLException e) {
@@ -214,7 +213,7 @@ public class ReservationDAO {
 				while (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8)));
+							rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
 				}
 			}
 		} catch (SQLException e) {
@@ -227,7 +226,8 @@ public class ReservationDAO {
 	/** 기존 이용 시간 불러오기 */
 	public ReservationVO getOriginalReservationTime(String userId, int reservationId) {
 
-		String sql = "SELECT start_time, end_time, room_id FROM reservations r " + "WHERE r.user_id=? AND r.reservation_id=?";
+		String sql = "SELECT start_time, end_time, room_id FROM reservations r "
+				+ "WHERE r.user_id=? AND r.reservation_id=?";
 
 		ReservationVO reservationVO = null;
 
@@ -282,10 +282,13 @@ public class ReservationDAO {
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//			pstmt.setTimestamp(1, Timestamp.valueOf(reservationVO.getStartTime()));
-//			pstmt.setTimestamp(2, Timestamp.valueOf(reservationVO.getEndTime()));
-//			pstmt.setDate(1, reservationVO.getStartTime().toString());
-//			pstmt.setDate(2, Date.valueOf(reservationVO.getEndTime().toLocalDate()));
+			// pstmt.setTimestamp(1,
+			// Timestamp.valueOf(reservationVO.getStartTime()));
+			// pstmt.setTimestamp(2,
+			// Timestamp.valueOf(reservationVO.getEndTime()));
+			// pstmt.setDate(1, reservationVO.getStartTime().toString());
+			// pstmt.setDate(2,
+			// Date.valueOf(reservationVO.getEndTime().toLocalDate()));
 			pstmt.setString(1, LDT2D(reservationVO.getStartTime()));
 			pstmt.setString(2, LDT2D(reservationVO.getEndTime()));
 			pstmt.setString(3, reservationVO.getUserId());
@@ -342,11 +345,11 @@ public class ReservationDAO {
 		return result;
 	}
 
-	private String LDT2D(LocalDateTime ldt){
+	private String LDT2D(LocalDateTime ldt) {
 		String result = ldt.toString();
 		result = result.split("\\.")[0];
 		result = result.replace('T', ' ');
-		
+
 		return result;
 	}
 }
