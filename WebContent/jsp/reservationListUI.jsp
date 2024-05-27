@@ -51,65 +51,6 @@
               <span>건</span>
             </div>
             <div id="reservation-contents-wrapper">
-            
-              <!-- 이용 예정 -->
-              <div class="reservation_content_wrapper status-1-1">
-                <div id="reservation_status_wrapper">
-                  <span id="reservation_status">예약</span>
-                </div>
-                <div id="reservation_content">
-                  <div id="KK_img">
-                    <img src="img/KK_img.svg" />
-                  </div>
-                  <div id="reservation_detail_wrapper">
-                    <div id="reservation_detail">
-                      <div id="reservation_detail_row">
-                        <span id="karaoke_name"
-                          >세븐스타코인노래연습장 철산역점</span
-                        >
-                        <img
-                          src="img/arrow_right.svg"
-                          id="arrow_right"
-                        />
-                      </div>
-                      <div id="reservation-time">
-                        <div>2024.05.09 (목)</div>
-                        <div id="reservation-start-time">
-                          <span id="reservation-start-hour">16</span>
-                          <span>:</span>
-                          <span id="reservation-start-minute">00</span>
-                        </div>
-                        <span>-</span>
-                        <div id="reservation-end-time">
-                          <span id="reservation-end-hour">18</span>
-                          <span>:</span>
-                          <span id="reservation-end-minute">00</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="button_wrapper">
-                      <button
-                        type="button"
-                        class="submit_button"
-                        id="add-time-button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addTimeModal"
-                      >
-                        시간 추가
-                      </button>
-                      <button
-                        class="cancle_button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#cancleReservationModal1"
-                      >
-                        예약 취소
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 이용 예정 종료 -->
-              
             </div>
           </div>
         </div>

@@ -9,8 +9,7 @@ public class MyReviewListUIAction implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new Url("jsp/myReviewListUI.jsp", Url.FORWARD);
 	}
-
 }
