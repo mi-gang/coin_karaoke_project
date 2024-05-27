@@ -15,9 +15,9 @@ import com.oopsw.controller.action.IsValidTimeForReservationAction;
 import com.oopsw.controller.action.Login;
 import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.Logout;
+import com.oopsw.controller.action.MyPageUIAction;
 import com.oopsw.controller.action.MyReviewListAction;
 import com.oopsw.controller.action.MyReviewListUIAction;
-import com.oopsw.controller.action.MypageUIAction;
 import com.oopsw.controller.action.PayAdditionalTimeAction;
 import com.oopsw.controller.action.PayReservationAction;
 import com.oopsw.controller.action.ReservationListUIAction;
@@ -97,7 +97,7 @@ public class ActionFactory {
 		case "kkDetailUI":
 			action = new KKDetailUI();
 			break;
-		case "mypageUIAction":
+		case "myPageUIAction":
 			action = new MyPageUIAction();
 			break;	
 		// reservation
