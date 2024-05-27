@@ -316,7 +316,7 @@
     	  const playListId= musicPlaylistId.text();
     	  console.log(playListId);
     	  //const playListIdElement = $(this).closest(".playlist").find(".music_singer");
-    	  //const musicSinger = musicSingerElement.text();  
+    	  //const musicSinger = musicSingerElement.text();     
     	  	$.ajax({
     	  	   	url: "controller?cmd=addMusic",
     	  		    data: { 	
