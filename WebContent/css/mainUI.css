@@ -66,6 +66,9 @@
   /* border-bottom: 1px dash rgb(170, 72, 72); */
   padding: 0.7rem 1.5rem 0.8rem;
   transition: 0.1s;
+  position: relative;
+  z-index: 10;
+  background-color: white;
 }
 
 .regionBox .regionItem:hover {

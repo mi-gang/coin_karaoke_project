@@ -35,6 +35,7 @@ import com.oopsw.controller.action.findPasswordUI;
 import com.oopsw.controller.action.getNickname;
 import com.oopsw.controller.action.idAdult;
 import com.oopsw.controller.action.isExistEmail;
+import com.oopsw.controller.action.mainUI;
 import com.oopsw.controller.action.resetPassword;
 import com.oopsw.controller.action.sendValidationNumber;
 import com.oopsw.controller.action.updateNickname;
@@ -93,6 +94,9 @@ public class ActionFactory {
 				break;
 			case "isAdult":
 				action = new idAdult();
+				break;
+			case "mainUI":
+				action = new mainUI();
 				break;
 			case "addReservationUI":
 				action = new addReservationUI();
