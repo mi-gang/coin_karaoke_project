@@ -5,13 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 
-public class ReservationListUIAction implements Action {
+public class CancelReservationAction implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		Url url = new Url("jsp/reservationListUI.jsp", Url.FORWARD);
-
-		return url;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

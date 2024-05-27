@@ -5,13 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 
-public class ReservationListUIAction implements Action {
+public class KKSearchResultUI implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		Url url = new Url("jsp/reservationListUI.jsp", Url.FORWARD);
-
-		return url;
+		return new Url("jsp/kkSearchResultListUI.jsp", Url.FORWARD);
 	}
 
 }
