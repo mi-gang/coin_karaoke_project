@@ -99,6 +99,7 @@ public class UserService {
 	private String getEncryptedPassword(String userId, String password) {
 		MessageDigest md = null;
 		String saltedPassword = userId + password + "salted";
+		
 		String encryptedPassword = bytesToHex(saltedPassword.getBytes());
 		try {
 			md = MessageDigest.getInstance("SHA-256");
@@ -109,6 +110,7 @@ public class UserService {
 		}
 
 		// XXX: DB 샘플데이터 활용을 위해 평문비밀번호 사용중. 서비스 시 아래 줄 삭제.
+		System.out.println(encryptedPassword);
 		encryptedPassword = password;
 		return encryptedPassword;
 	}

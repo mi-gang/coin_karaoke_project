@@ -15,6 +15,8 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
         <link rel="stylesheet" href="css/loginUI.css">
 
     </head>
@@ -22,7 +24,7 @@
     <body>
         <div id="container">
             <img id="logo" src="img/logo.svg" style="width:21.6rem;height:21.6rem;">
-            <form action="controller?cmd=login" method="post">
+            <form action="" method="post">
                 <div id="inputField">
                     <input name="userId" id="userId" placeholder="이메일 입력">
                     <input name="password" type="password" id="password" placeholder="비밀번호 입력">
@@ -36,11 +38,11 @@
                 <a href="controller?cmd=addUserUI">아직 계정이 없으신가요?</a>
             </div>
 
-            <div id="socialLoginBox">
+            <!-- <div id="socialLoginBox">
                 <img src="img/naver_btn.png"></a>
                 <img src="img/google_btn.svg"></a>
                 <img src="img/kakao_btn.svg"></a>
-            </div>
+            </div> -->
         </div>
         <script>
             const userId = $("#userId");
@@ -76,6 +78,17 @@
             function checkPassword(password) {
                 // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
                 return password.length > 0;
+            }
+
+            $("form").on("submit", login);
+            function login(e) {
+                e.preventDefault();
+                const userId = $("#userId").val();
+                const pw = $("#password").val();
+                const hash = CryptoJS.SHA256(password);
+                let encryptedPw = hash.toString(CryptoJS.enc.Hex);
+                encryptedPw = pw;
+                location.href = "controller?cmd=login&userId=" + userId + "&password=" + encryptedPw;
             }
         </script>
     </body>

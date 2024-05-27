@@ -19,6 +19,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/addUserUI.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
 
     </head>
 
@@ -86,7 +88,7 @@
                 e.preventDefault();
                 let result = false;
                 try {
-                    const res = await fetch("controller?cmd=addUser&userId=" + userId.val() + "&nickname=" + nickname.val() + "&birthDate=" + birthDate.val() + "&password=" + password.val());
+                    const res = await fetch("controller?cmd=addUser&userId=" + userId.val() + "&nickname=" + nickname.val() + "&birthDate=" + birthDate.val() + "&password=" + getEncryptedPw(password.val()));
                     const data = await res.json();
                     result = data.result;
                 } catch {
@@ -97,6 +99,13 @@
                 else
                     alert("회원가입에 실패했습니다. 같은 현상이 반복될 시 관리자에게 문의해주세요!");
 
+            }
+
+            function getEncryptedPw(password) {
+                const hash = CryptoJS.SHA256(password);
+                let encryptedPw = hash.toString(CryptoJS.enc.Hex);
+                encryptedPw = password;
+                return encryptedPw;
             }
 
 
@@ -231,6 +240,8 @@
                 // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
                 return password.length > 0;
             }
+
+
         </script>
     </body>
 
