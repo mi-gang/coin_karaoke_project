@@ -23,7 +23,7 @@ public class RoomReservationStatusListAction implements Action {
 		Collection<ReservationRoomInfoVO> infoVOs = new ArrayList<>();
 
 		infoVOs = service.getroomReservationStatusList(kkId);
-		request.setAttribute("infoVOs", gson.toJson(infoVOs));
+		request.setAttribute("dataToSend", gson.toJson(infoVOs));
 
 		return new Url("json/data.jsp", Url.FORWARD);
 	}

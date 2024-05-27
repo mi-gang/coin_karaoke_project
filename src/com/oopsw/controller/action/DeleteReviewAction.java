@@ -19,7 +19,7 @@ public class DeleteReviewAction implements Action {
 
 		boolean result = service.deleteReview(reviewId);
 
-		request.setAttribute("result", gson.toJson(result));
+		request.setAttribute("dataToSend", gson.toJson(result));
 
 		return new Url("json/data.jsp", Url.FORWARD);
 	}

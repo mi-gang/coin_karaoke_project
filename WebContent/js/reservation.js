@@ -31,7 +31,7 @@ $(".reservations-status-button").on("click", function () {
 				+'<span id="reservation-end-hour">'
 				+response[i].startTime
 				+'</span> <span>:</span> <span id="reservation-end-minute">00</span>'
-				+'</div></div></div><div id="button_wrapper"><button type="button" class="submit_button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>'
+				+'</div></div></div><div id="button_wrapper"><button type="button" class="submit_button add-time-button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>'
 				+'<button class="cancle_button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>'
 				+'</div></div></div></div>';
 		}
@@ -77,7 +77,7 @@ $(".reservations-status-button").on("click", function () {
 // }
 
 // 시간 추가 버튼 클릭 시 - 시간 추가 모달 설정
-$("#add-time-button").on("click", function () {
+$(".add-time-button").on("click", function () {
   // 초기화
   // $(".set-hour").text("");
   // $(".set-minute").text("");
