@@ -152,7 +152,8 @@
   
       const modal = document.querySelector(".modal_overlay");
       const modalOpen = document.querySelector(".like_img");
-    let PLdata;
+      var PLdata;
+      console.log(PLdata);
       //플레이리스트 목록 불러오기
       $(".music_list_output").on("click", ".music_output .like_img", function() {
     	  modal.classList.add("on"); 
@@ -172,12 +173,13 @@
     	      brand: entInput,//brand
     	      songId: musicNum //musicNum
     	    },
+    	    async:false,
     	    error: function(jqXHR, textStatus, errorThrown) {
     	        alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
     	      },
     	    success: function(list) {
     	    	PLdata=list;
-    	    	//console.log(JSON.parse(list));
+    	    //	console.log(JSON.parse(list));
     	    	let musicbymyplaylistData=JSON.parse(list);
     	    	for(i in musicbymyplaylistData){
     	    playListTitle+=`<span class="playlist"> <img class="like_btn"
@@ -188,10 +190,10 @@
     	    	}
     	    	 $(".playlist_list").html(playListTitle);
     	     // const result_data = list;
-    	    }
-    	      
+    	    }    
     	  })  	 
     	});
+      console.log(PLdata);
       //플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
       $(".playlist_list").on("click", ".like_btn", function() {
    	  const musicPlaylistId=$(this).closest(".playlist").find("playlistId");
