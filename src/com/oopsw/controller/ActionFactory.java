@@ -28,7 +28,6 @@ import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
-import com.oopsw.controller.action.UpcomingReservation;
 import com.oopsw.controller.action.AddUser;
 import com.oopsw.controller.action.AddUserUI;
 import com.oopsw.controller.action.FindPasswordUI;
@@ -124,9 +123,6 @@ public class ActionFactory {
 				action = new MyPageUIAction();
 				break;
 			// reservation
-			case "upcomingReservation":
-				action = new UpcomingReservation();
-				break;
 			case "addReservationUIAction":
 				action = new AddReservationUIAction();
 				break;

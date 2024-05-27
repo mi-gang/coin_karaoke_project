@@ -9,7 +9,7 @@ public class MainUI implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		return new Url("html/mainUI.html", Url.FORWARD);
+		return new Url("jsp/mainUI.jsp", Url.FORWARD);
 	}
 
 }

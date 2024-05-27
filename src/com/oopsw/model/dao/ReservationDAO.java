@@ -75,28 +75,28 @@ public class ReservationDAO {
 	}
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 0*/
-	public Collection<ReservationVO> getUpcomingReservation(String userId) {
+	public ReservationVO getUpcomingReservation(String userId) {
 
 		String sql = "select reservation_id, is_cancel, start_time, end_time, k.KK_id, k.name, r.room_id, r.name from (select * from RESERVATIONS where "
 				+ "user_id = ? and start_time > sysdate and is_cancel = 0 order by start_time asc) "
 				+ "temp, room_infos r, KKs k where temp.room_id = r.room_id and r.KK_id = k.KK_id and rownum = 1";
 
-		Collection<ReservationVO> reservationVOs = new ArrayList<>();
+		ReservationVO reservationVO = null;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, userId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
+					reservationVO = new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8)));
+							rs.getInt(5), rs.getString(6),rs.getInt(7), rs.getString(8));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return reservationVOs;
+		return reservationVO;
 	}
 
 	// 예약하기

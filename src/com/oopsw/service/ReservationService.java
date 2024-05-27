@@ -36,11 +36,10 @@ public class ReservationService {
 	UserDAO dao = new UserDAO(conn);
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 */
-	public Collection<ReservationVO> getUpcomingReservation(String userId) {
+	public ReservationVO getUpcomingReservation(String userId) {
 
-		Collection<ReservationVO> reservationVOs = new ArrayList<>();
-		reservationVOs = new ReservationDAO(conn).getUpcomingReservation(userId);
-		return reservationVOs;
+		ReservationVO reservationVO = new ReservationDAO(conn).getUpcomingReservation(userId);
+		return reservationVO;
 	}
 
 	/** 해당 노래방의 방, 예약 현황 정보 불러오기 */
