@@ -15,20 +15,22 @@ import com.oopsw.service.MusicServiceVO;
 
 
 public class CheckMusicbymyplaylist implements Action {
-
+//일단 폴더에 내 음악이 담겼는지 표시하지 않고, 그냥 일단 내 플레이리스트를 출력하는 Action
 	//비동기임
-	@Override
 	public Url execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		Object userId = session.getAttribute("userId");
+//		Object userId = session.getAttribute("userId");
+		String userId="test@test.com";
 		String brand=request.getParameter("brand");
 		int songId=Integer.parseInt(request.getParameter("songId")) ;
-		String page="login";
-		Collection<MusicServiceVO> list=new MusicService().myPlaylistCheckMusic(userId.toString(), songId, brand);
-		if(list.size()!=0){
+//		Url url= new Url("html/loginUI.html", Url.FORWARD);
+		Collection<MusicServiceVO> list=new MusicService().myPlaylistCheckMusic(userId, songId, brand); //userId.toString()로 교체예정
+//		if(session.getAttribute("userId") != null){
 			request.setAttribute("playLists", list);
-		}
-		return null;
+			System.out.println(list);
+		 Url url=new Url("jsp/checkMusicbymyplaylist.jsp", Url.FORWARD);
+//		}
+		return url;
 
 		//		}
 		//

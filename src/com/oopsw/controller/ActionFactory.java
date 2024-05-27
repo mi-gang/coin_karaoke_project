@@ -1,5 +1,7 @@
 package com.oopsw.controller;
 
+import com.oopsw.controller.action.AddPlaylist;
+import com.oopsw.controller.action.CheckMusicbymyplaylist;
 import com.oopsw.controller.action.KKDetailUI;
 import com.oopsw.controller.action.KKFilterUI;
 import com.oopsw.controller.action.KKSearchResultUI;
@@ -23,6 +25,7 @@ import com.oopsw.controller.action.PayReservationAction;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.UpcomingReservation;
 import com.oopsw.controller.action.addUser;
@@ -47,6 +50,12 @@ public class ActionFactory {
 		switch (cmd) {
 		case "login":
 			action = new Login();
+			break;	
+		case "reservationListUI":
+			action = new ReservationListUIAction();
+			break;
+		case "uncompletedReservationListAction":
+			action = new UncompletedReservationListAction();
 			break;
 		case "loginUI":
 			action = new LoginUI();
@@ -86,6 +95,15 @@ public class ActionFactory {
 			break;
 		case "isAdult":
 			action = new idAdult();
+			break;
+		case "musicListUI":
+			action = new MusicListUI();
+			break;
+		case "checkMusicbymyplaylist":
+			action = new CheckMusicbymyplaylist();
+			break;
+		case "addPlaylist":
+			action=new AddPlaylist();
 			break;
 		case "kkFilterUI":
 			action = new KKFilterUI();
@@ -156,7 +174,6 @@ public class ActionFactory {
 		case "addInquireAction":
 			action = new AddInquireAction();
 			break;		
-			
 		default:
 			action = new wrongCmd();
 			break;
