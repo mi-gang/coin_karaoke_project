@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
         <div id="myReview-wrapper">
           <div id="total_reservation">
             <span>총 </span>
-            <span></span>
+            <span id = review-count></span>
             <span>건</span>
           </div>
           <div id="review-items">
@@ -68,7 +68,7 @@ pageEncoding="UTF-8"%>
     <!-- 모달 -->
 
     <!-- 리뷰 삭제 모달 1 -->
-    <div class="modal" id="deleteReviewModal1">
+    <div class="modal" id="deleteReviewModal1" data-review-id="">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <!-- Modal Header -->
@@ -95,7 +95,7 @@ pageEncoding="UTF-8"%>
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button delete-button"
+              class="submit_button delete-button delete-action"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
