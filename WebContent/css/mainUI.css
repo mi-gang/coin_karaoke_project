@@ -594,3 +594,43 @@
   font-weight: bold;
   font-size: 2.8rem;
 }
+
+/* 비로그인 회원 리뷰 가림 */
+.invisibleUnLoginUser {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 39.1rem;
+    height: 16.3rem;
+    font-size: 2rem;
+    background-color: rgba(246,246,246,0.94);
+}
+
+.invisibleUnLoginUser.on {
+    display: flex;
+}
+
+.invisibleWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 34.2rem;
+    text-align: center;
+}
+
+.reviewLoginBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34.2rem;
+    height: 3.3rem;
+    padding: 2rem 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #9747ff;
+    border-radius: 1rem;
+    border: 0.3rem solid #9747ff;
+    cursor: pointer;
+}

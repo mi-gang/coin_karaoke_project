@@ -140,84 +140,88 @@
 				%>
 				<c:choose>
 					<c:when test="${empty userId}">
-						<span>로그인하세요</span>]
-				</c:when>
+						<div id="invisibleUnLoginUser" class="invisibleUnLoginUser on">
+							<div class="invisibleWrapper">
+								<p>최근에 예약한 노래방이 어디더라?</p>
+								<a href="controller?cmd=loginUI" style="text-decoration:none">
+								<div id="reviewLoginBtn" class="reviewLoginBtn">로그인하고 최근에 예약한 노래방 보기</div>
+								</a>
+							</div>
+						</div>
+					</c:when>
 					<c:when test="${empty upR}">
 						<div id="reservation_content_wrapper">
-                        <div id="reservation_status_wrapper">
-                        
-                            <span id="reservation_status"></span>
-                        </div>
-                        <div id="reservation_content"
-                            data-reservation-id="">
-                            <div id="KK_img">
-                                <img src="img/KK_img.svg" />
-                            </div>
-                            <div id="reservation_detail_wrapper">
-                                <div id="reservation_detail">
-                                    <div id="reservation_detail_row">
-                                        <span id="karaoke_name">대기중인 예약이 없습니다.</span>
-                                        <!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
-                                    </div>
-                                    <div id="reservation-time">
-                                        <div id="reservation-start-time">
-                                            <span id="reservation-start-hour"></span>
-                                            <span>:</span> <span id="reservation-start-minute"></span>
-                                        </div>
-                                        <span>-</span>
-                                        <div id="reservation-end-time">
-                                            <span id="reservation-end-hour"></span>
-                                            <span>:</span> <span id="reservation-end-minute"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="button_wrapper">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+							<div id="reservation_status_wrapper">
+
+								<span id="reservation_status"></span>
+							</div>
+							<div id="reservation_content" data-reservation-id="">
+								<div id="KK_img">
+									<img src="img/KK_img.svg" />
+								</div>
+								<div id="reservation_detail_wrapper">
+									<div id="reservation_detail">
+										<div id="reservation_detail_row">
+											<span id="karaoke_name">대기중인 예약이 없습니다.</span>
+											<!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
+										</div>
+										<div id="reservation-time">
+											<div id="reservation-start-time">
+												<span id="reservation-start-hour"></span> <span>:</span> <span
+													id="reservation-start-minute"></span>
+											</div>
+											<span>-</span>
+											<div id="reservation-end-time">
+												<span id="reservation-end-hour"></span> <span>:</span> <span
+													id="reservation-end-minute"></span>
+											</div>
+										</div>
+									</div>
+									<div id="button_wrapper"></div>
+								</div>
+							</div>
+						</div>
 					</c:when>
 					<c:otherwise>
-					
-					<div id="reservation_content_wrapper">
-						<div id="reservation_status_wrapper">
-						
-							<span id="reservation_status"><%= upcomingReservation.getStartTime().isAfter(LocalDateTime.now()) ? "이용중" : "예약" %></span>
-						</div>
-						<div id="reservation_content"
-							data-reservation-id="<%=upcomingReservation.getReservationId()%>">
-							<div id="KK_img">
-								<img src="img/KK_img.svg" />
+
+						<div id="reservation_content_wrapper">
+							<div id="reservation_status_wrapper">
+
+								<span id="reservation_status"><%=upcomingReservation.getStartTime().isAfter(LocalDateTime.now()) ? "이용중" : "예약"%></span>
 							</div>
-							<div id="reservation_detail_wrapper">
-								<div id="reservation_detail">
-									<div id="reservation_detail_row">
-										<span id="karaoke_name"><%=upcomingReservation.getKKname()%></span>
-										<!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
+							<div id="reservation_content"
+								data-reservation-id="<%=upcomingReservation.getReservationId()%>">
+								<div id="KK_img">
+									<img src="img/KK_img.svg" />
+								</div>
+								<div id="reservation_detail_wrapper">
+									<div id="reservation_detail">
+										<div id="reservation_detail_row">
+											<span id="karaoke_name"><%=upcomingReservation.getKKname()%></span>
+											<!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
+										</div>
+										<div id="reservation-time">
+											<div id="reservation-start-time">
+												<span id="reservation-start-hour"><%=String.format("%02d", upcomingReservation.getStartTime().getHour())%></span>
+												<span>:</span> <span id="reservation-start-minute"><%=String.format("%02d", upcomingReservation.getStartTime().getMinute())%></span>
+											</div>
+											<span>-</span>
+											<div id="reservation-end-time">
+												<span id="reservation-end-hour"><%=String.format("%02d", upcomingReservation.getEndTime().getHour())%></span>
+												<span>:</span> <span id="reservation-end-minute"><%=String.format("%02d", upcomingReservation.getEndTime().getMinute())%></span>
+											</div>
+										</div>
 									</div>
-									<div id="reservation-time">
-										<div id="reservation-start-time">
-											<span id="reservation-start-hour"><%=String.format("%02d", upcomingReservation.getStartTime().getHour())%></span>
-											<span>:</span> <span id="reservation-start-minute"><%=String.format("%02d", upcomingReservation.getStartTime().getMinute())%></span>
-										</div>
-										<span>-</span>
-										<div id="reservation-end-time">
-											<span id="reservation-end-hour"><%=String.format("%02d", upcomingReservation.getEndTime().getHour())%></span>
-											<span>:</span> <span id="reservation-end-minute"><%=String.format("%02d", upcomingReservation.getEndTime().getMinute())%></span>
-										</div>
+									<div id="button_wrapper">
+										<button type="button" class="submit_button"
+											data-bs-toggle="modal" data-bs-target="#addTimeModal">
+											시간 추가</button>
+										<button class="cancle_button" data-bs-toggle="modal"
+											data-bs-target="#cancleReservationModal1">예약 취소</button>
 									</div>
 								</div>
-								<div id="button_wrapper">
-									<button type="button" class="submit_button"
-										data-bs-toggle="modal" data-bs-target="#addTimeModal">
-										시간 추가</button>
-									<button class="cancle_button" data-bs-toggle="modal"
-										data-bs-target="#cancleReservationModal1">예약 취소</button>
-								</div>
 							</div>
 						</div>
-					</div>
 					</c:otherwise>
 				</c:choose>
 
