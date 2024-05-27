@@ -33,7 +33,7 @@ public class KKServiceTest {
 		conn.close();
 	}
 	
-	// 근처 추천 노래방 목록 불러오기
+	/*// 근처 추천 노래방 목록 불러오기
 	@Test
 	public void getNearRecommendKKList() {
 		try {
@@ -49,7 +49,7 @@ public class KKServiceTest {
 		}
 	}
 
-	/*// 노래방 별점 불러오기
+	// 노래방 별점 불러오기
 	@Test
 	public void getStarAvgByKK() {
 		try {
@@ -58,14 +58,16 @@ public class KKServiceTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	// 검색 결과 목록 불러오기
 	@Test
 	public void getKKList() {
-		int[] tmp = {0,0,0,0};
+		// int[] tmp = {0,0,0,0};
+		String[] tmp = {"0", "0", "0", "0"};
 		int countChkOption = 0;
-		int[] tmp2 = {1,0,0,1};
+		// int[] tmp2 = {1,0,0,1};
+		String[] tmp2 = {"1", "0", "0", "1"};
 		int cCO2 = 2;
 		try {
 			System.out.println("-------------------- getKKList '강남구' ------------");
@@ -79,7 +81,6 @@ public class KKServiceTest {
 			e.printStackTrace();
 		}
 	}
-	*/
 	
 	/*// 해당 노래방 리뷰 불러오기
 	@Test

@@ -60,13 +60,15 @@ public class DAOTest {
 	
 	@Test
 	public void getSearchKKList() {
-		int[] tmp = {1,0,0,1};
-		System.out.println("test 1");
-		assertNotNull(new KKDAO(conn).getSearchKKList("湲덉쿇援�"));
-		System.out.println("test 2");
-		assertNotNull(new KKDAO(conn).getSearchKKList(tmp, 2, "湲덉쿇援�"));
-		System.out.println("test 3");
-		assertNotNull(new KKDAO(conn).getSearchKKList("媛뺣궓援�"));
+		// int[] tmp = {1,0,0,1};
+		String[] tmp = {"1", "0", "0", "1"};
+		System.out.println("---> test 1");
+		// new KKDAO(conn).getSearchKKList("금천구");
+		assertNotNull(new KKDAO(conn).getSearchKKList("금천구"));
+		System.out.println("---> test 2");
+		assertNotNull(new KKDAO(conn).getSearchKKList(tmp, 2, "금천구"));
+		System.out.println("---> test 3");
+		assertNotNull(new KKDAO(conn).getSearchKKList("강남구"));
 	}
 
 	
