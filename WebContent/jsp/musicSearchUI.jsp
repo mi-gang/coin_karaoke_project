@@ -28,9 +28,8 @@
 		<div id="container">
 			<div class="music_input_group">
 				<input class="music_input" type="search" id="search"
-					placeholder="곡명, 가수로 검색하세요" /> <img
-					class="music_search" src="img/search.svg" id="music_search"
-					style="cursor: pointer" />
+					placeholder="곡명, 가수로 검색하세요" /> <img class="music_search"
+					src="img/search.svg" id="music_search" style="cursor: pointer" />
 			</div>
 			<div class="ent_button_group">
 				<input class="button" id="tj" type="button" value="TJ" /> <input
@@ -96,8 +95,8 @@
 				<div class="new_play_list_title">플레이 리스트 명</div>
 			</div>
 			<input class="new_play_list_title_input" type="text"
-				placeholder="플레이리스트 명을 입력하세요" /> <input
-				class="confirm_btn" id="confirm2" type="button" value="저장" />
+				placeholder="플레이리스트 명을 입력하세요" /> <input class="confirm_btn"
+				id="confirm2" type="button" value="저장" />
 		</div>
 		<div class="modal_isMember" id="modal_isMember">
 			<div class="close_btn3">
@@ -153,13 +152,17 @@
   
       const modal = document.querySelector(".modal_overlay");
       const modalOpen = document.querySelector(".like_img");
-    
+    let PLdata;
       //플레이리스트 목록 불러오기
       $(".music_list_output").on("click", ".music_output .like_img", function() {
     	  modal.classList.add("on"); 
     	 let entInput = $(".on").attr("id");
     	  const musicNumElement = $(this).closest(".music_output").find(".music_num");
     	  const musicNum = musicNumElement.text(); 
+    	  const musicTitleElement = $(this).closest(".music_output").find(".music_title");
+    	  const musictitle = musicTitleElement.text();   
+    	  const musicSingerElement = $(this).closest(".music_output").find(".music_singer");
+    	  const musicSinger = musicSingerElement.text();  
     	  let data = "";
     	  let playListTitle="";
     	  $.ajax({
@@ -173,6 +176,7 @@
     	        alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
     	      },
     	    success: function(list) {
+    	    	PLdata=list;
     	    	//console.log(JSON.parse(list));
     	    	let musicbymyplaylistData=JSON.parse(list);
     	    	for(i in musicbymyplaylistData){
@@ -185,8 +189,36 @@
     	    	 $(".playlist_list").html(playListTitle);
     	     // const result_data = list;
     	    }
-    	  });
+    	      
+    	  })  	 
     	});
+      //플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
+      $(".playlist_list").on("click", ".like_btn", function() {
+   	  const musicPlaylistId=$(this).closest(".playlist").find("playlistId");
+   	  const playListId= musicPlaylistId.text();
+   	  //const playListIdElement = $(this).closest(".playlist").find(".music_singer");
+   	  //const musicSinger = musicSingerElement.text();     
+   	  	$.ajax({
+   	  	   	url: "controller?cmd=addMusic",
+   	  		    data: { 	
+   	  		    	 brand: entInput,//brand
+   	  	    	     songId: musicNum, //musicNum
+   	  	    	     title: musictitle,
+   	  	    	     singer: musicSinger,
+   	  	    	     playlistId: playListId,
+   	  		     },
+   	  		     error: function(jqXHR, textStatus, errorThrown) {
+   	  	 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+   	  	 	      },
+   	  		     success: function (result){
+   	  		    	// result_data=JSON.parse(result)
+   	  		    	// console.log(result_data);
+   	  				//if(result_data.result!=true){
+   	  				//alert('플레이리스트가 추가되지 않았습니다.');
+   	  				
+   	  		     }
+   	  	       })
+      }) 
       const modalClose = document.querySelector(".close_img");
       modalOpen.addEventListener("click", function () {
         modal.classList.add("on");
@@ -301,44 +333,7 @@
 	     }
        })
       })
-      //플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
-       $(".playlist_list").on("click", ".like_btn", function() {
-    	   let entInput = $(".on").attr("id");
-     	  const musicNumElement = $(this).closest(".music_output").find(".music_num");
-     	  const musicNum = musicNumElement.text();   
-     	  console.log(musicNum);
-     	  const musicTitleElement = $(this).closest(".music_output").find(".music_title");
-    	  const musictitle = musicTitleElement.text();   
-    	  const musicSingerElement = $(this).closest(".music_output").find(".music_singer");
-    	  const musicSinger = musicSingerElement.text();  
-    	  console.log(musicSinger);
-    	  const musicPlaylistId=$(this).closest(".playlist").find("playlistId");
-    	  const playListId= musicPlaylistId.text();
-    	  console.log(playListId);
-    	  //const playListIdElement = $(this).closest(".playlist").find(".music_singer");
-    	  //const musicSinger = musicSingerElement.text();     
-    	  	$.ajax({
-    	  	   	url: "controller?cmd=addMusic",
-    	  		    data: { 	
-    	  		    	 brand: entInput,//brand
-    	  	    	     songId: musicNum, //musicNum
-    	  	    	     title: musictitle,
-    	  	    	     singer: musicSinger,
-    	  	    	     playlistId: playListId,
-    	  		     },
-    	  		     error: function(jqXHR, textStatus, errorThrown) {
-    	  	 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
-    	  	 	      },
-    	  		     success: function (result){
-    	  		    	// result_data=JSON.parse(result)
-    	  		    	// console.log(result_data);
-    	  				//if(result_data.result!=true){
-    	  				//alert('플레이리스트가 추가되지 않았습니다.');
-    	  				
-    	  		     }
-    	  	       })
-       })
-  
+
     </script>
 </body>
 </html>
