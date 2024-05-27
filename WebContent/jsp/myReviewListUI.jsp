@@ -33,120 +33,119 @@ pageEncoding="UTF-8"%>
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
-        <div id="myRiview_wrapper">
+        <!-- <div class="empty-page">
+          <span>등록된 리뷰가 없습니다.</span>
+        </div> -->
+        <div id="myReview-wrapper">
           <div id="total_reservation">
             <span>총 </span>
-            <span>2</span>
+            <span></span>
             <span>건</span>
           </div>
           <div id="review-items">
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
-            <div id="review-item">
-              <div id="review-content1">
-                <div class="KK-title">
-                  <span class="resultKKTitle">777 노래연습장</span>
-                  <img src="img/arrow_right.svg" />
-                </div>
-                <button class="delete-button">삭제</button>
-              </div>
-              <div id="review-content2">
-                <span class="review-date">2024.05.04</span>
-                <div class="stars">
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/filledStar.svg" alt="채워진 별" />
-                  <img src="../img/star_half.svg" alt="0.5점 별" />
-                </div>
-                <span class="review-description"
-                  >사운드가 좋아요 재방문 의사 있어요 😍</span
-                >
-              </div>
-            </div>
           </div>
         </div>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
-        <div><img src="../img/mainPageIcon.svg" alt="메인 페이지" /></div>
-        <div><img src="../img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
-        <div><img src="../img/musicIcon.svg" alt="노래 검색 페이지" /></div>
+        <div><img src="img/mainPageIcon.svg" alt="메인 페이지" /></div>
+        <div><img src="img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
+        <div><img src="img/musicIcon.svg" alt="노래 검색 페이지" /></div>
         <div>
-          <img src="../img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
+          <img src="img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
         </div>
-        <div><img src="../img/userIcon.svg" alt="마이페이지" /></div>
+        <div><img src="img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
+
     <!-- 부트스트랩 -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <!-- 모달 -->
+
+    <!-- 리뷰 삭제 모달 1 -->
+    <div class="modal" id="deleteReviewModal1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <!-- <h4 class="modal-title">이용시간</h4> -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="cancle-modal-body-wrapper">
+              <span class="cancle-modal-title">리뷰를 삭제하시겠습니까?</span>
+              <span class="cancle-modal-content"
+                >노래방 이용 시작 시간 기준 <b>20분</b> 내 취소 시 <br />취소
+                수수료가 부과됩니다.</span>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button delete-button"
+              id="add2-add-time-button"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              삭제하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 리뷰 삭제 모달 2 -->
+    <div class="modal" id="deleteReviewModal2">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <!-- <h4 class="modal-title">이용시간</h4> -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="cancle-modal-body-wrapper">
+              <span class="cancle-modal-title">삭제 완료</span>
+              <span class="cancle-modal-content">리뷰가 삭제되었습니다.</span>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="submit_button add-button"
+              id="add2-add-time-button"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/mypage.js"></script>
   </body>
 </html>
+

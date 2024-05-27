@@ -29,7 +29,6 @@ public class UpcomingReservation implements Action {
 			request.setAttribute("reservationVOs", reservationVOs);
 			page = "jsp/UpcomingReservation.jsp";
 		}
-
 		return new Url(page, Url.FORWARD);
 	}
 

@@ -35,7 +35,7 @@ public class ReviewService {
 	}
 
 	/** 리뷰 삭제하기 */
-	public boolean addReview(int reviewId) {
+	public boolean deleteReview(int reviewId) {
 
 		boolean result = false;
 
@@ -45,7 +45,7 @@ public class ReviewService {
 	}
 
 	/** 나의 리뷰 리스트 불러오기 */
-	public Collection<ReviewVO> getReviewListByUserId(int userId) {
+	public Collection<ReviewVO> getReviewListByUserId(String userId) {
 
 		Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 

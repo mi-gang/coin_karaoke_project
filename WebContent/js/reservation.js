@@ -7,16 +7,39 @@ $(".reservations-status-button").on("click", function () {
   $(".reservation_content_wrapper").hide();
 
   if ($(this).attr("id") == "status-1") {
-    $(".status-1-1").show();
-    $(".status-1-2").show();
+//    $(".status-1-1").show();
+//    $(".status-1-2").show();
 
     $.ajax({
-      url: "controller?cmd=reservationListUI",
+      url: "controller?cmd=uncompletedReservationListAction",
       method: "POST",
-      success: function (response) {},
+      success: function (response) {
+    	  console.log(response);
+    	  for (var i = 0; i < response.length; i++) {
+			reselt = '<div class="reservation_content_wrapper status-1-2"><div id="reservation_status_wrapper">'
+				+ '<span id="reservation_status">이용 중</span></div>'
+				+'<div id="reservation_content"><div id="KK_img"><img src="img/KK_img.svg" /></div>'
+				+'<div id="reservation_detail_wrapper"><div id="reservation_detail"><div id="reservation_detail_row">'
+				+'<span id="karaoke_name">'
+				+response[i].reservationId
+				+'</span><img src="img/arrow_right.svg" id="arrow_right" />'
+				+'</div><div id="reservation-time"><%-- <fmt:parseDate var="reservationDate" value="${reservationVOs.startTime}"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" /> --%>'
+				+'<div>'
+				+response[i].startTime
+				+'</div><div id="reservation-start-time"><span id="reservation-start-hour">16</span> <span>:</span>'
+				+'<span id="reservation-start-minute">00</span></div><span>-</span><div id="reservation-end-time">'
+				+'<span id="reservation-end-hour">'
+				+response[i].startTime
+				+'</span> <span>:</span> <span id="reservation-end-minute">00</span>'
+				+'</div></div></div><div id="button_wrapper"><button type="button" class="submit_button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>'
+				+'<button class="cancle_button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>'
+				+'</div></div></div></div>';
+		}
+    	  $("#reservation-contents-wrapper").html(response);
+      },
     });
-
-    $.ajax({
+  }
+/*    $.ajax({
       url: "controller?cmd=idCheckAction",
       data: { manager_id: $(this).val() },
       success: function (responseText) {
@@ -34,7 +57,7 @@ $(".reservations-status-button").on("click", function () {
     });
 
     return false;
-  }
+  }*/
   if ($(this).attr("id") == "status-2") {
     $(".status-2-1").show();
     $(".status-2-2").show();
