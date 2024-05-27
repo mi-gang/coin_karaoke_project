@@ -64,11 +64,11 @@ pageEncoding="UTF-8"%>
                 <div class="starScoreWrapper">
                   <span id="starAvgScore">4.6</span>
                   <div class="stars">
-                    <img src="../img/filledStar.svg" alt="채워진 별" />
-                    <img src="../img/filledStar.svg" alt="채워진 별" />
-                    <img src="../img/filledStar.svg" alt="채워진 별" />
-                    <img src="../img/filledStar.svg" alt="채워진 별" />
-                    <img src="../img/star_half.svg" alt="0.5점 별" />
+                    <img src="img/filledStar.svg" alt="채워진 별" />
+                    <img src="img/filledStar.svg" alt="채워진 별" />
+                    <img src="img/filledStar.svg" alt="채워진 별" />
+                    <img src="img/filledStar.svg" alt="채워진 별" />
+                    <img src="img/star_half.svg" alt="0.5점 별" />
                   </div>
                 </div>
                 <p class="resultKKAddress">서울 금천구 가산디지털1로 151</p>
@@ -81,7 +81,7 @@ pageEncoding="UTF-8"%>
                 <div class="bookmark"></div>
                 <img
                   class="kkRepresentativeImg"
-                  src="../img/representativeKKImg1.png"
+                  src="img/representativeKKImg1.png"
                   alt="노래방 대표 이미지"
                 />
               </div>
@@ -136,11 +136,11 @@ pageEncoding="UTF-8"%>
             <div id="review-content2">
               <span class="review-date">2024.05.04</span>
               <div class="stars">
-                <img src="../img/filledStar.svg" alt="채워진 별" />
-                <img src="../img/filledStar.svg" alt="채워진 별" />
-                <img src="../img/filledStar.svg" alt="채워진 별" />
-                <img src="../img/filledStar.svg" alt="채워진 별" />
-                <img src="../img/star_half.svg" alt="0.5점 별" />
+                <img src="img/filledStar.svg" alt="채워진 별" />
+                <img src="img/filledStar.svg" alt="채워진 별" />
+                <img src="img/filledStar.svg" alt="채워진 별" />
+                <img src="img/filledStar.svg" alt="채워진 별" />
+                <img src="img/star_half.svg" alt="0.5점 별" />
               </div>
               <span class="review-description"
                 >사운드가 좋아요 재방문 의사 있어요 😍</span
