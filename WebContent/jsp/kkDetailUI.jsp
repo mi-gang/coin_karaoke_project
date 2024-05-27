@@ -430,6 +430,8 @@
       			console.log("로그인 여부 따라 가림막  on/off의 data..........");
       			console.log(data);
       			console.log(data.isLogin);
+      			const detailTxtReviewCnt = data.reviewList.length;
+      			
       			if(data.isLogin === false) {
       				$(".tapMenu").click(function() {
       					$(".tapMenu").removeClass("active");
@@ -442,7 +444,7 @@
       						//
       						console.log("로그인 여부 따라 가림막  on/off");
       						let invisibleDiv = "<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>";
-      						$("#textReviewContainer").append("<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>");
+      						$("#textReviewContainer").prepend("<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>");
       						//
       						$(".reviewItem").css("background-color", "rgba(246,246,246,0.94)");
 	      		              $(".reviewItem").css("color", "rgba(246,246,246,0.94)");
@@ -465,7 +467,6 @@
       						$("#defaultInfoContainer").removeClass("selected");
       						$("#invisibleLoginUser").removeClass("on");
       						$("#reviewContainer").addClass("selected");
-      						let detailTxtReviewCnt = 3;  // 임의로 작성한 값
       		              if(detailTxtReviewCnt < 1) {
       		                $(".textReviewContainer").addClass("noReview");
       		                $(".guideWordsNoReview").addClass("on");
