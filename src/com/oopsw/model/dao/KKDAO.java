@@ -5,12 +5,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+// import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 import com.oopsw.model.vo.KKVO;
 
@@ -19,6 +26,57 @@ public class KKDAO {
 
 	public KKDAO(Connection conn) {
 		this.conn = conn;
+	}
+	
+	// 추가 메서드 - 노래방 상세정보 페이지의 기본 정보 불러오기
+	public KKVO getSelectedKKBasicInfo(String kkId) {
+		String sql = "SELECT kk_id, name, opening_hour, closing_hour, note, address "
+				+ "FROM kks WHERE kk_id=?";
+		String sql2 = "SELECT k.kk_id, kw.content FROM kks k, keywords kw, kk_keywords kkw "
+				+ "WHERE k.kk_id=? AND k.kk_id = kkw.kk_id "
+				+ "AND kw.keyword_id=kkw.keyword_id ORDER BY k.kk_id";
+		KKVO vo = null;
+		Collection<String> tmpKeywordList = new ArrayList<String>();
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(kkId));
+			System.out.println("pstmt");
+			ResultSet rs = pstmt.executeQuery();
+			PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+			pstmt2.setInt(1, Integer.parseInt(kkId));
+			ResultSet rs2 = pstmt2.executeQuery();
+			System.out.println(rs);
+
+			// kkId, name, opHour, clHour, note, address + keywords
+			if (rs.next()) {
+				Date opHour = rs.getDate(3);
+				LocalDate localOpHour = opHour.toLocalDate();
+				Date csHour = rs.getDate(4);
+				LocalDate localCsHour = csHour.toLocalDate();
+				LocalTime localTime = LocalTime.of(0, 0,0);
+				LocalDateTime opDateTime = localOpHour.atTime(localTime);
+				LocalDateTime csDateTime = localCsHour.atTime(localTime);
+				/*//
+				SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+				String formattedOpeningHour = formatter.format(opDateTime);
+				String formattedClosingHour = formatter.format(csDateTime);	*/			
+				
+				vo = new KKVO(rs.getInt(1), rs.getString(2), opDateTime, csDateTime,
+						rs.getString(5), rs.getString(6));
+				while(rs2.next()) {
+					tmpKeywordList.add(rs2.getString(2));					
+				}
+				vo.setRepresentativeKeywordList(tmpKeywordList);
+			} else {
+				System.out.println("검색 결과 없음"); // recommendKKList가 null이 아닌 size 0이다!
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return vo;
 	}
 
 	// 완료 - 근처 추천 노래방 목록 불러오기 - getNearRecommendKKList
@@ -170,7 +228,7 @@ public class KKDAO {
 	 */
 
 	// 완료 - 추가조건O인 경우
-	public List<String[]> getSearchKKList(int[] chkAdditionalOptions, int countChkOption, String addressGu) {
+	public List<String[]> getSearchKKList(String[] chkAdditionalOptions, int countChkOption, String addressGu) {
 		String sql = "SELECT kks.kk_id, kks.name, kks.address, kw.content "
 				+ "FROM kks, keywords kw, kk_keywords kkw "
 				+ "WHERE kks.kk_id IN ("
@@ -187,17 +245,86 @@ public class KKDAO {
 				+ "AND (kks.note NOT IN('금일휴업', '임시휴무')) "
 				+ "ORDER BY kks.kk_id";
 		List<String[]> resultList = new ArrayList<String[]>();
+		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, chkAdditionalOptions[0]);
-			pstmt.setInt(2, chkAdditionalOptions[1]);
-			pstmt.setInt(3, chkAdditionalOptions[2]);
-			pstmt.setInt(4, chkAdditionalOptions[3]);
+			// System.out.println("추가조건 배열 크기: " + chkAdditionalOptions.length);
+			System.out.println("===== KKDAO chkAdditionalOptions =====");
+			 System.out.println(chkAdditionalOptions.length);
+			// String[] tmpArr = chkAdditionalOptions[0].split(",");
+			if(chkAdditionalOptions.length == 1) {
+				System.out.println("chkOptions 길이 1 if문");
+				System.out.println(">> chkOptions[0]");
+				System.out.println(chkAdditionalOptions[0]);
+				String[] tmpArr = chkAdditionalOptions[0].split(",");
+				for(int i=0; i < tmpArr.length; i++) {
+					// System.out.println(chkAdditionalOptions[i]);
+					System.out.println(tmpArr[i]);
+					/*pstmt.setString(1, tmpArr[0]);
+					pstmt.setString(2, tmpArr[1]);
+					pstmt.setString(3, tmpArr[2]);
+					pstmt.setString(4, tmpArr[3]);*/
+					pstmt.setInt(1, Integer.parseInt(tmpArr[0]));
+					/*pstmt.setInt(2, Integer.parseInt(tmpArr[1]));
+					pstmt.setInt(3, Integer.parseInt(tmpArr[2]));
+					pstmt.setInt(4, Integer.parseInt(tmpArr[3]));*/
+				}
+			} else {
+				System.out.println("chkOptions 길이 1 아님 else 문");
+				System.out.println(chkAdditionalOptions.length);
+				for(int i=0; i<chkAdditionalOptions.length; i++) {
+					System.out.println(chkAdditionalOptions[i]);
+				}
+				System.out.println("------------");
+				/*pstmt.setString(1, chkAdditionalOptions[0]);
+				pstmt.setString(2, chkAdditionalOptions[1]);
+				pstmt.setString(3, chkAdditionalOptions[2]);
+				pstmt.setString(4, chkAdditionalOptions[3]);*/
+				pstmt.setInt(1, Integer.parseInt(chkAdditionalOptions[0]));
+				pstmt.setInt(2, Integer.parseInt(chkAdditionalOptions[1]));
+				pstmt.setInt(3, Integer.parseInt(chkAdditionalOptions[2]));
+				pstmt.setInt(4, Integer.parseInt(chkAdditionalOptions[3]));
+			}
+			
+			/*System.out.println("tmpArr 크기: " + tmpArr.length);
+			for(int i=0; i < tmpArr.length; i++) {
+				System.out.println(tmpArr[i]);
+			}
+			chkAdditionalOptions[0] = tmpArr[0];
+			/*
+			
+			// System.out.println("===== chkAdditionalOptions 0 1 2 3 출력 =====");
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			for(int i=0; i<tmpArr.length; i++) {
+				pstmt.setInt((i+1), Integer.parseInt(tmpArr[i]));
+			}
+			
+			/*pstmt.setString(1, tmpArr[0]);
+			pstmt.setString(2, tmpArr[1]);
+			pstmt.setString(3, tmpArr[2]);
+			pstmt.setString(4, tmpArr[3]);*/
+			
+			/*System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println(chkAdditionalOptions[0]);
+			System.out.println(chkAdditionalOptions[1]);
+			System.out.println(chkAdditionalOptions[2]);
+			System.out.println(chkAdditionalOptions[3]);
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
+			pstmt.setInt(1, Integer.parseInt(chkAdditionalOptions[0]));
+			pstmt.setInt(2, Integer.parseInt(chkAdditionalOptions[1]));
+			pstmt.setInt(3, Integer.parseInt(chkAdditionalOptions[2]));
+			pstmt.setInt(4, Integer.parseInt(chkAdditionalOptions[3]));*/
+			/*pstmt.setInt(1, Integer.parseInt(tmpArr[0]));
+			pstmt.setInt(2, Integer.parseInt(tmpArr[1]));
+			pstmt.setInt(3, Integer.parseInt(tmpArr[2]));
+			pstmt.setInt(4, Integer.parseInt(tmpArr[3]));*/
 			pstmt.setInt(5, countChkOption);
 			pstmt.setString(6, addressGu);
-			System.out.println("pstmt");
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(rs);
+			/*System.out.println("pstmt");
+			System.out.println(pstmt);
+			ResultSet rs = pstmt.executeQuery();
+			System.out.println(rs);*/
 
 			while (rs.next()) {
 				System.out.println("while문");
@@ -208,21 +335,19 @@ public class KKDAO {
 				tmp[3] = rs.getString(4);
 				resultList.add(tmp);
 			}
-
-			for (int i = 0; i < resultList.size(); i++) {
+			
+			/*for (int i = 0; i < resultList.size(); i++) {
 				for (int j = 0; j < resultList.get(0).length; j++) {
 					System.out.println(resultList.get(i)[j]);
 				}
 				System.out.println("----------------");
 			}
-			System.out.println("KKDAO 메서드 종료");
+			System.out.println("KKDAO 메서드 종료");*/
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		
-
 		return resultList;
 	}
 	/*

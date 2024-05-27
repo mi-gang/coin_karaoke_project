@@ -1,0 +1,296 @@
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+#container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+form {
+  width: 32.4rem;
+  height: 40.4rem;
+  margin-top: 10rem;
+}
+
+#inputField,
+#pwInputField {
+  height: 24.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  div {
+    border-bottom: 0.1rem solid black;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  img {
+    width: 3rem;
+    background-repeat: no-repeat;
+    background-position: right;
+    border: none;
+  }
+  img.default {
+    content: url("img/default.svg");
+  }
+  img.check {
+    content: url("img/validate.svg");
+  }
+  img.fail {
+    content: url("img/fail.svg");
+  }
+  img.editPencil {
+    content: url("img/editPencil.svg");
+  }
+
+  input {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 0.8rem;
+    width: 29.4rem;
+    padding-left: 4.7rem;
+    padding-bottom: 0.8rem;
+    border: none;
+
+    background-repeat: no-repeat;
+    background-size: 3rem;
+    background-position: left;
+    background-position-x: 0.5rem;
+  }
+
+  input::placeholder {
+    color: #979797;
+  }
+
+  #userId {
+    background-image: url("img/email.svg");
+    color: #979797;
+  }
+
+  input[type="password"],
+  #passwordConfirm {
+    background-image: url("img/password.svg");
+  }
+
+  #nickname {
+    background-image: url("img/user.svg");
+  }
+
+  #birthDate {
+    background-image: url("img/cake.svg");
+    width: 32.4rem;
+    color: #979797;
+  }
+}
+
+.inputError {
+  color: #fc6262;
+  font-size: 1.5rem;
+  height: 3.3rem;
+}
+
+button {
+  border-radius: 2rem;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  width: 32.4rem;
+  height: 5.8rem;
+  font-size: 3rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+  font-weight: bold;
+}
+
+.inactivate {
+  background-color: #e4e4e4;
+  color: #979797;
+}
+
+a {
+  color: #979797;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
+}
+
+/* 시간 추가 모달 */
+
+#add1-modal-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#add1-modal-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 7.1rem;
+  /* padding: 2rem; */
+  padding: 0 2rem 2rem 2rem;
+}
+
+#add1-modal-body-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#add1-modal-body-title > span {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+
+  text-align: center;
+}
+
+#add1-modal-body-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-bottom: 5rem;
+}
+
+#add1-modal-body-contents > hr {
+  border: 0.8px solid #b6b6b6;
+}
+
+.add1-modal-body-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row; /* row or column 알아서 */
+  width: 100%;
+}
+
+.add1-modal-body-content-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add1-modal-body-content-time {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-button {
+  width: 9rem;
+  height: 4rem;
+  font-size: 1.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  border-top: none;
+}
+
+/* 시간 추가 모달 3 : 예약 내용 확인 */
+
+#add3-pay-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+
+  /* width: 155px;
+  height: 27px;
+  left: 227px;
+  top: 580px; */
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+/* 모달 4 */
+#add4-modal-body-wrapper {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+
+  text-align: center;
+  padding: 1.5rem 3rem 3rem 3rem; /* 안됨 */
+}
+
+#add1-modal-body-contents form {
+  margin: 0;
+  height: 18.5rem;
+}
+
+#pwInputField {
+  height: 18.5rem;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+#updatePasswordModal {
+  .modal-content {
+    width: 39.2rem;
+  }
+
+  div.modal-body {
+    display: flex;
+    justify-content: center;
+  }
+
+  #add1-modal-body-wrapper {
+    width: 32.4rem;
+    padding: 0;
+  }
+
+  .modal-footer button {
+    width: 13rem;
+    height: 4rem;
+  }
+
+  #hidePasswordModal {
+    background-color: #ffffff;
+    color: black;
+    border: solid black 1px;
+  }
+}
+
+.modal.show {
+  display: flex !important;
+  justify-content: center;
+}
