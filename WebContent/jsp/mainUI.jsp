@@ -698,10 +698,188 @@
 					}
 
 					function updateChart(brand) {
-						const
-							songNumber = $("???");
-						songNumber.text(songNumber.attr("data-" + brand));
+						$(".music_output").show();
+						let brandName = '';
+						if (brand == "KY") {
+							brandName = "kumyoung";
+						} else {
+							brandName = "tj";
+						}
+						let data = "";
+						$.ajax({
+							type: "GET",
+							url:
+								"https://api.manana.kr/karaoke/" + brandName + ".json",
+							data: {},
+							success: function (response) {
+								// 서버에서 준 결과를 response라는 변수에 담음
+								result_data = response; //JSON.parse()
+								let output = "";
+								for (let i = 0; i < result_data.length; i++) {
+									output += `<div class="music_output" id="music_output">
+																	<div class="music_num">` + result_data[i].no + `</div>
+																	<div class="music_info">
+																	<span class="music_title">` + result_data[i].title + `</span>
+																	<span class="music_singer">` + result_data[i].singer + `</span>
+																	</div>
+																	<div class="music_like">
+																	<img class="like_img" src="img/folder_open.svg"></div>
+																	</div>`;
+								}
+								$(".music_list_output").html(output);
+							},
+						});
 					}
+					$("#chart-header button:first-child").trigger("click")
+
+					//***플레이리스트 모달***
+
+					var img = document.getElementById("music_saved");
+					img.addEventListener("click", function () {
+						img.src = "../img/song_notsave.svg";
+					});
+
+					$(document).ready(function () {
+						$("#tj").click();
+					});
+					//클릭한 버튼 값 가지고 오기
+					$(".button").on("click", function () {
+						var entInput = this.id;
+					});
+					const ent = $(".button").get();
+					let button = "";
+					ent.forEach(function (option) {
+						option.addEventListener("click", function () {
+							ent.forEach(function (item) {
+								item.classList.remove("on");
+							});
+							option.classList.add("on");
+						});
+					});
+
+
+					//플레이리스트 목록 불러오기
+					$(".music_list_output").on("click", ".music_output .like_img", function () {
+						modal.classList.add("on");
+						let entInput = $(".on").attr("id");
+						const musicNumElement = $(this).closest(".music_output").find(".music_num");
+						const musicNum = musicNumElement.text();
+						let data = "";
+						let playListTitle = "";
+						$.ajax({
+							url: "controller?cmd=checkMusicbymyplaylist",
+							data: {
+
+								brand: entInput,//brand
+								songId: musicNum //musicNum
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
+							},
+							success: function (list) {
+								//console.log(JSON.parse(list));
+								let musicbymyplaylistData = JSON.parse(list);
+								for (i in musicbymyplaylistData) {
+									playListTitle += `<span class="playlist"> <img class="like_btn"
+						id="music_saved" src="img/folder_open.svg" /> <span
+						class="list_title">` + musicbymyplaylistData[i].playListTitle + `</span>
+						<span class="playlistId"></span>
+					</span>`
+								}
+								$(".playlist_list").html(playListTitle);
+								// const result_data = list;
+							}
+						});
+					});
+					const modal = document.querySelector(".modal_overlay");
+					const modalOpen = document.querySelector(".like_img");
+					const modalClose = document.querySelector(".close_img");
+					modalOpen.addEventListener("click", function () {
+						modal.classList.add("on");
+					});
+					// $(".music_like").on("click", ".like_img", function () {});
+
+					modalClose.addEventListener("click", function () {
+						modal.classList.remove("on");
+					});
+
+					const createModalOpen = document.querySelector(".create_music_list");
+					const modalClose2 = document.querySelector(".close_img2");
+					createModalOpen.addEventListener("click", function () {
+						$("#create_playlist").show();
+					});
+					modalClose2.addEventListener("click", function () {
+						$("#create_playlist").hide();
+					});
+
+					const isMemberModal = document.querySelector(".create_music_list");
+					const modalClose3 = document.querySelector(".close_img3");
+					isMemberModal.addEventListener("click", function () {
+						$("#create_playlist").show();
+					});
+					modalClose3.addEventListener("click", function () {
+						$("#modal_isMember").hide();
+					});
+
+					$("#confirm2").on("click", function () {
+						console.log("시작");
+						const titleInput = document.querySelector(".new_play_list_title_input");
+						$.ajax({
+							url: "controller?cmd=addPlaylist",
+							data: {
+								newTitle: titleInput.value//brand
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
+							},
+							success: function (result) {
+								// result_data=JSON.parse(result)
+								// console.log(result_data);
+								//if(result_data.result!=true){
+								//alert('플레이리스트가 추가되지 않았습니다.');
+								alert("저장되었습니다!");
+								modal.classList.remove("on");
+
+							}
+						})
+					})
+					//플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
+					$(".playlist_list").on("click", ".like_btn", function () {
+						let entInput = $(".on").attr("id");
+						const musicNumElement = $(this).closest(".music_output").find(".music_num");
+						const musicNum = musicNumElement.text();
+						console.log(musicNum);
+						const musicTitleElement = $(this).closest(".music_output").find(".music_title");
+						const musictitle = musicTitleElement.text();
+						const musicSingerElement = $(this).closest(".music_output").find(".music_singer");
+						const musicSinger = musicSingerElement.text();
+						console.log(musicSinger);
+						const musicPlaylistId = $(this).closest(".playlist").find("playlistId");
+						const playListId = musicPlaylistId.text();
+						console.log(playListId);
+						//const playListIdElement = $(this).closest(".playlist").find(".music_singer");
+						//const musicSinger = musicSingerElement.text();     
+						$.ajax({
+							url: "controller?cmd=addMusic",
+							data: {
+								brand: entInput,//brand
+								songId: musicNum, //musicNum
+								title: musictitle,
+								singer: musicSinger,
+								playlistId: playListId,
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
+							},
+							success: function (result) {
+								// result_data=JSON.parse(result)
+								// console.log(result_data);
+								//if(result_data.result!=true){
+								//alert('플레이리스트가 추가되지 않았습니다.');
+
+							}
+						})
+					});
 				</script>
 			</body>
 
