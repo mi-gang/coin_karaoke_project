@@ -27,6 +27,7 @@ public class UserService {
 			DataSource dataSource =
 					(DataSource) context.lookup("java:comp/env/jdbc/myoracle");
 			conn = dataSource.getConnection();
+			conn.setAutoCommit(false);
 		} catch (NamingException | SQLException e1) {
 			System.err.println("커넥션 풀  실패. 수동으로 전환");
 			try {
@@ -57,7 +58,6 @@ public class UserService {
 	public boolean addKKBookmark(String userId, int KK_ID) {
 		Connection conn = getConnection();
 		boolean result = new KKDAO(conn).addKKBookmark(userId, KK_ID);
-		System.out.println(1);
 		try {
 			conn.commit();
 			conn.close();
@@ -126,10 +126,11 @@ public class UserService {
 		Connection conn = getConnection();
 		boolean result = false;
 		try {
-			result = new UserDAO(conn).isExistEmailTest(userId);
+			result = new UserDAO(conn).isExistEmail(userId);
 			conn.close();
 		} catch (SQLException e) {
 			// result 기본값 false
+			e.printStackTrace();
 		}
 
 		return result;
@@ -140,6 +141,7 @@ public class UserService {
 		boolean result = false;
 		user.setPassword(getEncryptedPassword(user.getEmail(), user.getPassword()));
 		result = new UserDAO(conn).addUser(user);
+		conn.commit();
 		conn.close();
 		return result;
 

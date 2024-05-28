@@ -21,8 +21,7 @@ public class FrontController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("FCS open");
 		request.setCharacterEncoding("UTF-8");
-		String cmd = request.getParameter("cmd");
-		
+		String cmd = request.getParameter("cmd");		
 		Action action = new ActionFactory().getAction(cmd);
 		System.out.println("action");
 		System.out.println(action);

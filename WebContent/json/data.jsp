@@ -16,7 +16,7 @@
         
         JsonObject json = new JsonObject();
         boolean result = true
-        json.addProperty("result": result)
+        json.addProperty("result", result)
         request.setAttribute("dataToSend", gson.toJson(json));
         return new Url("json/data.jsp", Url.FORWARD);
                 결과: 해당 jsp를 받은 사용자는 {"result":true}라는 문자열을 받게 된다.
