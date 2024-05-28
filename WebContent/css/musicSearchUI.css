@@ -178,6 +178,18 @@ input {
 .modal_overlay.on {
   display: block;
 }
+.modal_overlay2 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: rgba(71, 58, 58, 0.25);
+}
+.modal_overlay2.on {
+  display: block;
+}
 .modal_playlist {
   width: 35rem;
   height: auto;
@@ -386,4 +398,5 @@ input {
   margin-bottom: 1rem;
 }
 .playlistId{
+
 }
