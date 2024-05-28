@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>:: 노래방 예약</title>
-  <link rel="stylesheet" href="css/common.css" />
-  <link rel="stylesheet" href="css/kkReservationUI.css" />
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/kkReservationUI.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,7 +24,7 @@
   <div id="mobileContainer">
     <!--헤더-->
     <header>
-      <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+      <img src="../img/left arrow.svg" alt="이전 페이지 이동" />
       <span>스타버스 코인노래방</span>
     </header>
     <!-- 컨텐츠 컨테이너 -->
@@ -171,14 +171,14 @@
         <div id="modal1" class="modal reservationContainer">
           <div class="modalWrapper">
             <div class="closeIconWrapper">
-              <img src="img/close.svg" alt="모달창 닫기" class="closeBtn" />
+              <img src="../img/close.svg" alt="모달창 닫기" class="closeBtn" />
             </div>
             <div class="reservationFormContainer">
               <p class="modalTitle">예약하기</p>
               <div class="roomSelecBoxContainer">
                 <div class="roomBox">
                   <button class="label">예약하실 방을 선택해주세요.</button>
-                  <img src="img/down_arrow.svg" alt="드롭다운" />
+                  <img src="../img/down_arrow.svg" alt="드롭다운" />
                   <ul class="roomList"></ul>
                 </div>
               </div>
@@ -189,7 +189,7 @@
                   <div class="timeSettingWrapper">
                     <div id="startTime" class="timeSettingItem">
                       <input id="startTimeInput" readonly placeholder="-- : --" value="" />
-                      <img src="img/down_arrow.svg" alt="드롭다운" />
+                      <img src="../img/down_arrow.svg" alt="드롭다운" />
                     </div>
                   </div>
                 </div>
@@ -198,7 +198,7 @@
                   <div class="timeSettingWrapper">
                     <div id="hoursOfUse" class="timeSettingItem item3">
                       <input readonly placeholder="-- : --" />
-                      <img src="img/down_arrow.svg" alt="드롭다운" />
+                      <img src="../img/down_arrow.svg" alt="드롭다운" />
                     </div>
                   </div>
                 </div>
@@ -290,7 +290,7 @@
     <div id="modal4" class="modal checkReservation">
       <div class="modalWrapper">
         <div class="closeIconWrapper">
-          <img src="img/close.svg" alt="모달창 닫기" class="closeBtn" />
+          <img src="../img/close.svg" alt="모달창 닫기" class="closeBtn" />
         </div>
         <div class="reservationFormContainer">
           <p class="modalTitle">예약 내용을<br />다시 한 번 확인해주세요</p>
@@ -448,24 +448,24 @@
     $("#modal1 .closeIconWrapper, #modal1 .btn.cancel").on("click", hideModal1);
     $("#modal1 .btn.submit").on("click", checkCanReservation);
 
-    async function checkCanReservation(){
+    async function checkCanReservation() {
       const startDateTime = getStartTime();
       const endDateTime = getEndTime();
       const kkRoomNumber = 1;
 
       // FIXME: 22시부터 8시까지 10시간 이상 예약하면 검사 못하는 문제 있음
 
-      try{
+      try {
 
         const res = await fetch("controller?cmd=isValidTimeForReservation&startTime=" + startDateTime + "&endTime=" + endDateTime + "&KKRoomNumber=" + kkRoomNumber);
         const data = await res.json();
-        if(data.result){
+        if (data.result) {
           showModal4();
-        }else{
+        } else {
           alert("해당 시간은 이미 예약되었습니다!");
-          location.href="controller?cmd=addReservationUI";
+          location.href = "controller?cmd=addReservationUI";
         }
-      }catch(err){
+      } catch (err) {
         showModal4();
       }
     }
@@ -500,7 +500,7 @@
       const startTimeInput = $("#startTimeInput");
       startTimeInput.val(startDateTime.getHours() + " : " + startDateTime.getMinutes());
       updateDateRange();
-      if($("#modal1 #hoursOfUse input").val()){
+      if ($("#modal1 #hoursOfUse input").val()) {
         //이용시간을 설정했다면 종료시간 업데이트하기
         setUsingTime();
       }
@@ -527,18 +527,18 @@
       const reservateBtn = $("#modal1 .btn.submit");
       console.log(startDateTime);
       console.log(endDateTime);
-      if(!(await isAdult()) && (startDateTime.getHours() <= 8 || startDateTime.getHours() >= 22 || endDateTime.getHours() <= 8 || endDateTime.getHours() >= 22)){
+      if (!(await isAdult()) && (startDateTime.getHours() <= 8 || startDateTime.getHours() >= 22 || endDateTime.getHours() <= 8 || endDateTime.getHours() >= 22)) {
         alert("청소년은 22~08시 이용이 제한됩니다.");
         reservateBtn.addClass("inactivate");
-      }else{
+      } else {
         reservateBtn.removeClass("inactivate");
       }
-      if($("#modal1 .roomBox button").text() == "예약하실 방을 선택해주세요."){
+      if ($("#modal1 .roomBox button").text() == "예약하실 방을 선택해주세요.") {
         reservateBtn.addClass("inactivate");
       }
     }
 
-    async function isAdult(){
+    async function isAdult() {
       const res = await fetch("controller?cmd=isAdult");
       const data = await res.json();
       return data.result
@@ -711,12 +711,12 @@
     }
 
     //Modal4: 결제 전 최종확인
-    
+
     $("#modal4 .closeIconWrapper, #modal4 .btn.back").on("click", hideModal4);
     function showModal4() {
-      if($("#modal1 .btn.submit").hasClass("inactivate")){
+      if ($("#modal1 .btn.submit").hasClass("inactivate")) {
         return;
-      }else{
+      } else {
         $("#modal4").css("display", "flex");
         const place = "";
         //예약한 장소 채우기
@@ -737,36 +737,36 @@
 
         //결제금액 계산 후 채우기
         const paymentBox = $("#modal4 .paymentInfo");
-        paymentBox.text("결제금액: " + getPayAmount(startDateTime,endDateTime) + "원");
+        paymentBox.text("결제금액: " + getPayAmount(startDateTime, endDateTime) + "원");
 
-        
+
 
       }
     }
 
-    function getPayAmount(startDateTime, endDateTime){
-      return (endDateTime - startDateTime)/(1000 * 60) * 100;
+    function getPayAmount(startDateTime, endDateTime) {
+      return (endDateTime - startDateTime) / (1000 * 60) * 100;
     }
-    
+
     //Modal5: 결제완료
     $("#modal4 .btn.submit").on("click", payForReservation);
 
-    async function payForReservation(){
+    async function payForReservation() {
       const startDateTime = getStartTime();
       const endDateTime = getEndTime();
       const kkRoomNumber = $("#modal1 .roomBox .label").data("roomId");
 
-      try{
+      try {
 
         const res = await fetch("controller?cmd=isValidTimeForReservation&startTime=" + startDateTime + "&endTime=" + endDateTime + "&KKRoomNumber=" + kkRoomNumber);
         const data = await res.json();
-        if(data.result){
+        if (data.result) {
           showModal5();
-        }else{
+        } else {
           alert("예상치 못한 이유로 예약이 취소되었습니다. 예약 가능한 시간인지 확인한 후 다시 시도해주세요.");
-          location.href="controller?cmd=addReservationUI";
+          location.href = "controller?cmd=addReservationUI";
         }
-      }catch(err){
+      } catch (err) {
         showModal5();
       }
     }
