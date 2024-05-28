@@ -370,7 +370,7 @@
 											</div>
 										</div>
 										<div id="add3-pay-amount">
-											<span id="add3-notice">결제금액 : </span> <span id="add3-notice"></span>
+											<span id="add3-notice">결제금액: </span> <span id="add3-notice"></span>
 											<span id="add3-notice">원</span>
 										</div>
 									</div>
@@ -676,6 +676,17 @@
 							location.href = "controller?cmd=mainUI";
 						}
 					}
+
+					$("#add2-add-time-button").on("click", cancelReservation);
+					async function cancelReservation() {
+						const res = await fetch("controller?cmd=cancelReservation&reservationId=" + getReservationId());
+						const data = await res.json();
+						if (data.result) {
+							alert("예약 취소에 실패하였습니다.");
+							location.href = "controller?cmd=mainUI";
+						}
+					}
+
 
 					// 인기차트
 					// 브랜드 버튼
