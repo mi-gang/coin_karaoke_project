@@ -43,11 +43,12 @@ public class AddReservationUI implements Action {
 			ReservationVO rVO = list.getReservationVOs().get(i);
 			//청소시간을 고려하여 실사용시간 전후 15분도 예약이 잡혀있는 것으로 취급한다.
 			applyCleaningTime(rVO);
-
 			temp.put("width", getWidthFromReservation(rVO));
 			temp.put("offset", getOffsetFromReservation(rVO));
 			temp.put("type", "usedTime");
+			
 			widthList.add(temp);
+			System.out.println("예약추가Action: " + rVO.getReservationId() + " : " + temp.get("width"));
 		}
 		return widthList;
 	}
