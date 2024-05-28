@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.google.gson.GsonBuilder"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="com.google.gson.Gson"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -130,37 +133,141 @@
 
         <script>
             $(document).ready(function () {
+            	// prevURL 저장을 위한 작업
+            	const prevURL = window.location.search;
+		      	console.log(prevURL);
+		      	sessionStorage.setItem("prevURL", prevURL);
+		      	const encodedPrevURL = encodeURIComponent(prevURL);
+		      	console.log(encodedPrevURL);
+		      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+            	//
+            	
+            	const kkList = document.querySelectorAll(".resultItem");
                 const bookmarks = $(".bookmark").get();
-                // 북마크 아이콘 클릭해서 추가/취소
-                bookmarks.forEach(function(option) {
-                    option.addEventListener("click", function() {
-                        option.classList.toggle("add");
-                    })
-                })
-            });     
-            const kkList = document.querySelectorAll(".resultItem");
-            kkList.forEach(function(item) {
-            	item.addEventListener("click", function() {
-            		console.log(item);
-            		const clickedItem = this;
-            		const clickedKKId = clickedItem.querySelector("#resultKKId").textContent;
-            		console.log(clickedKKId);
-            		/* let kkId = $(this).children(0).childNodes(1);
-            		console.log(kkId); */
-            		$.ajax({
+                const leftSideList = document.querySelectorAll(".leftSide");
+                const rightSideImgList = document.querySelectorAll(".kkRepresentativeImg");
+
+                // 내가 북마크한 노래방이면 아이콘 fill으로 페이지 노출
+                kkList.forEach(function(item){
+                	console.log("kkList forEach문");
+                	console.log(item);
+                	const kkId = item.querySelector("#resultKKId").textContent;
+					
+                	$.ajax({
+                		url: "controller?cmd=checkKKBookmarkAction",
+                		data: {kkId: kkId}, 
+                		dataType:"json",
+                		success: function(data) {
+                			console.log(data);
+                			let checkMyBookmark = data.result;
+                			const bookmarkIcon = item.querySelector(".bookmark");
+                			
+                			if(checkMyBookmark == true) {
+                				bookmarkIcon.classList.add("add");
+                				bookmarkIcon.style.backgroundImage = "url(img/bookmarkFill.svg)";
+                			} else if(checkMyBookmark == false) {
+                				bookmarkIcon.style.backgroundImage = "url(img/bookmarkOutline.svg)";
+                			}
+                		}
+                	});
+                });
+             	// 북마크 아이콘 클릭해서 추가/취소
+             	kkList.forEach(function(item) {
+             		const kkId = item.querySelector("#resultKKId").textContent;
+             		const bookmarkIcon = item.querySelector(".bookmark");
+             		
+             		bookmarkIcon.addEventListener("click", function() {
+             			bookmarkIcon.classList.toggle("add");
+             			if(bookmarkIcon.classList.contains("add")) {
+             				console.log("북마크 ON");
+             				bookmarkIcon.style.backgroundImage = "url(img/bookmarkFill.svg)";
+             				$.ajax({
+             					url: "controller?cmd=addBookmarkAction",
+             					data: {kkId: kkId},
+             					dataType:"json",
+             					success: function(data){
+             						if(data.result == true) {
+             							console.log("북마크 추가 완료");
+             						} else {
+             							console.log("북마크 추가 실패");
+             						}
+             					}
+             				});
+             			} else {
+             				console.log("북마크 OFF");
+             				bookmarkIcon.style.backgroundImage = "url(img/bookmarkOutline.svg)";
+             				$.ajax({
+             					url: "controller?cmd=deleteBookmarkAction",
+             					data: {kkId: kkId},
+             					dataType:"json",
+             					success: function(data){
+             						if(data.result == true) {
+             							console.log("북마크 제거 완료");
+             						} else {
+             							console.log("북마크 제거 실패");
+             						}
+             					}
+             				});
+             			}
+             		});
+             		/* item.addEventListener("click", function() {
+             			const clickedItem = this;
+             			console.log(">> clickedItem");
+             			console.log(clickedItem);
+             			console.log(kkId);
+             			$.ajax({
+                			url: "controller?cmd=kkDetailUI",
+           					data:{selectedKKId: kkId}
+                		});
+             			// location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
+             		}); */
+             	});       
+             	// 선택한 노래방의 상세 페이지로 이동
+             	leftSideList.forEach(function(item) {
+             		const kkId = item.querySelector("#resultKKId").textContent;
+             		item.addEventListener("click", function() {
+         			const clickedItem = this;
+         			$.ajax({
             			url: "controller?cmd=kkDetailUI",
-       					data:{selectedKKId: clickedKKId},
-       					success: function(result) {
-            				if(result==0) {
-            					console.log("성공");
-            				} else {
-            					console.log("실패");
-            				}
-            			}
-            		})
-            		// location.replace("controller?cmd=searchForKKWithOptions&searchGu="+searchGu);
-            		location.replace("controller?cmd=kkDetailUI&clickedKKId="+clickedKKId);
-            	});
+       					data:{selectedKKId: kkId}
+            		});
+         			location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
+         			});
+             	});
+             	/* rightSideImgList.forEach(function(item) {
+             		const kkId = item.querySelector("#resultKKId").textContent;
+	         			item.addEventListener("click", function() {
+	         			const clickedItem = this;
+	         			$.ajax({
+	            			url: "controller?cmd=kkDetailUI",
+	       					data:{selectedKKId: kkId}
+	            		});
+	         			location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
+	         		});
+             	}); */
+             	
+             // 하단 메뉴바를 통한 페이지 이동
+                $("nav div").on("click", function() {
+              	  const clickedDiv = $(this);
+              	  const imgAlt = clickedDiv.find("img").attr("alt");
+              	  switch(imgAlt) {
+              	  case "메인 페이지":
+              		  location.replace("controller?cmd=mainUI");
+              		  break;
+              	  case "노래방 검색 페이지":
+              		  location.replace("controller?cmd=kkFilterUI");
+              		  break;
+              	  case "노래 검색 페이지":
+              		  location.replace("controller?cmd=musicListUI");
+              		  break;
+              	  case "나의 예약 내역 페이지":
+              		  location.replace("controller?cmd=reservationListUIAction");
+              		  break;
+              	  case "마이페이지":
+              		  location.replace("controller?cmd=mypageUIAction");
+              		  break;
+              	  }
+                });
             });
         </script>
   </body>

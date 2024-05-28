@@ -15,8 +15,6 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
         <link rel="stylesheet" href="css/loginUI.css">
 
     </head>
@@ -24,8 +22,9 @@
     <body>
         <div id="container">
             <img id="logo" src="img/logo.svg" style="width:21.6rem;height:21.6rem;">
-            <form action="" method="post">
+            <form id="loginForm" action="controller?cmd=login" method="post">
                 <div id="inputField">
+                	<input name="prevURL" id="prevURL" type="hidden"/>
                     <input name="userId" id="userId" placeholder="이메일 입력">
                     <input name="password" type="password" id="password" placeholder="비밀번호 입력">
                 </div>
@@ -38,13 +37,20 @@
                 <a href="controller?cmd=addUserUI">아직 계정이 없으신가요?</a>
             </div>
 
-            <!-- <div id="socialLoginBox">
+            <div id="socialLoginBox">
                 <img src="img/naver_btn.png"></a>
                 <img src="img/google_btn.svg"></a>
                 <img src="img/kakao_btn.svg"></a>
-            </div> -->
+            </div>
         </div>
-        <script>
+        <script>        	
+        	// *
+        	// prevURL : 로그인 페이지로 오기 전에 사용자가 보고있던 페이지 경로
+        	// const prevURL = '${requestScope.prevURL}';
+        	const prevURL = sessionStorage.getItem("prevURL");
+        	console.log(prevURL);
+        	$("#prevURL").val(prevURL);
+        	
             const userId = $("#userId");
             const password = $("#password");
             const errorMessage = $("div.inputError");
@@ -79,17 +85,32 @@
                 // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
                 return password.length > 0;
             }
-
-            $("form").on("submit", login);
-            function login(e) {
-                e.preventDefault();
-                const userId = $("#userId").val();
-                const pw = $("#password").val();
-                const hash = CryptoJS.SHA256(password);
-                let encryptedPw = hash.toString(CryptoJS.enc.Hex);
-                encryptedPw = pw;
-                location.href = "controller?cmd=login&userId=" + userId + "&password=" + encryptedPw;
-            }
+            
+            document.getElementById('loginForm').addEventListener("submit", function() {
+            	event.preventDefault();
+            	
+            	const userId = document.getElementById("userId").value;
+            	const password = document.getElementById("password").value;
+            	
+            	$.ajax({
+            		url: "controller?cmd=login",
+            		data: {userId: userId, password: password, prevURL: prevURL},
+            		dataType: "json",
+            		success: function(response) {
+            			console.log(response);
+            			console.log(response.loginSuccess);
+            			console.log(response.prevURL);
+            			if(response.loginSuccess === true) {
+            				console.log("response.status SUCCESS");
+            				// window.location.href = response.redirectURL;
+            				location.replace("controller"+response.prevURL);
+            			} else {
+            				console.log("response.statuse Fail");
+            			}
+           			}
+           		});
+            });
+            
         </script>
     </body>
 

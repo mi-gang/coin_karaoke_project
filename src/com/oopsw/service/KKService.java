@@ -48,6 +48,14 @@ public class KKService {
 		return conn;
 	}
 	
+	// 추가 메서드 - 노래방 별점 종류(1~5)별 개수 정보 가져오기
+	public ArrayList<String> getAmountStarReviewByType (String kkId) throws SQLException {
+		Connection conn = getConnection();
+		ArrayList<String> starAmountList = new KKDAO(conn).getAmountStarReviewByType(kkId);
+		conn.close();
+		return starAmountList;
+	}
+	
 	// 추가 메서드 - 노래방 상세정보 페이지의 기본 정보 불러오기
 	public KKVO getSelectedKKBasicInfo(String kkId) throws SQLException {
 		Connection conn = getConnection();

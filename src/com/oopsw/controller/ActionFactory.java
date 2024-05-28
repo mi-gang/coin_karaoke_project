@@ -1,5 +1,6 @@
 package com.oopsw.controller;
 
+import com.oopsw.controller.action.AddBookmarkAction;
 import com.oopsw.controller.action.AddInquireAction;
 import com.oopsw.controller.action.AddPlaylist;
 import com.oopsw.controller.action.AddReservationUI;
@@ -8,10 +9,13 @@ import com.oopsw.controller.action.AddReviewAction;
 import com.oopsw.controller.action.AddUser;
 import com.oopsw.controller.action.AddUserUI;
 import com.oopsw.controller.action.AdditionalTimeInfoAction;
+import com.oopsw.controller.action.AmountStarReviewListByType;
 import com.oopsw.controller.action.CancelReservationAction;
 import com.oopsw.controller.action.CanceledReservationListAction;
+import com.oopsw.controller.action.CheckKKBookmarkAction;
 import com.oopsw.controller.action.CheckMusicbymyplaylist;
 import com.oopsw.controller.action.CompletedReservationListAction;
+import com.oopsw.controller.action.DeleteBookmarkAction;
 import com.oopsw.controller.action.DeleteReviewAction;
 import com.oopsw.controller.action.FindPasswordUI;
 import com.oopsw.controller.action.GetNickname;
@@ -34,6 +38,7 @@ import com.oopsw.controller.action.PayAdditionalTimeAction;
 import com.oopsw.controller.action.PayReservationAction;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.ResetPassword;
+import com.oopsw.controller.action.ReviewListAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.SendValidationNumber;
@@ -173,9 +178,24 @@ public class ActionFactory {
 			case "deleteReviewAction":
 				action = new DeleteReviewAction();
 				break;
+			case "reviewListAction":
+				action = new ReviewListAction();
+				break;
 			// inquire
 			case "addInquireAction":
 				action = new AddInquireAction();
+				break;
+			case "checkKKBookmarkAction":
+				action = new CheckKKBookmarkAction();
+				break;
+			case "addBookmarkAction":
+				action = new AddBookmarkAction();
+				break;
+			case "deleteBookmarkAction":
+				action = new DeleteBookmarkAction();
+				break;
+			case "amountStarReviewListByType":
+				action = new AmountStarReviewListByType();
 				break;
 			default:
 				action = new wrongCmd();
