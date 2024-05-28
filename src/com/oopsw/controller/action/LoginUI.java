@@ -59,7 +59,10 @@ public class LoginUI implements Action{
 		System.out.println(encodedPrevURL);
 		String prevURL = null;
 		try {
-			prevURL = URLDecoder.decode(encodedPrevURL, "UTF-8");
+			if(encodedPrevURL != null) {
+				prevURL = URLDecoder.decode(encodedPrevURL, "UTF-8");
+			}
+			// prevURL = URLDecoder.decode(encodedPrevURL, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,12 +77,19 @@ public class LoginUI implements Action{
 			System.out.println("LoginUI:이미 로그인된 상태: " + session.getAttribute("userId"));
 			url.setUrl("controller?cmd=mainUI");
 			url.setFlag(Url.REDIRECT);
-		} /*else {
+		} else {
 			System.out.println("@!@#!@@! LoginUI.Action의 url 출력");
-			url.setUrl("controller"+prevURL);
+			if(prevURL != null) {
+				url.setUrl("controller"+prevURL);
+				System.out.println(url.getUrl());
+				url.setFlag(Url.REDIRECT);
+			} else {
+				return url;
+			}
+			/*url.setUrl("controller"+prevURL);
 			System.out.println(url.getUrl());
-			url.setFlag(Url.REDIRECT);
-		}*/
+			url.setFlag(Url.REDIRECT);*/
+		}
 		return url;
 	}
 	
