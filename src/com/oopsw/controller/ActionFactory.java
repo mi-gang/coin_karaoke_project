@@ -54,7 +54,6 @@ import com.oopsw.controller.action.UpdateNickname;
 import com.oopsw.controller.action.UpdatePassword;
 import com.oopsw.controller.action.UpdateUserUI;
 import com.oopsw.controller.action.MyPlaylist;
-import com.oopsw.controller.action.MyPlaylistmusicUI;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
@@ -140,7 +139,7 @@ public class ActionFactory {
 			case "mypageUIAction":
 				action = new MyPageUIAction();
 				break;
-			// reservation
+			// ***** reservation *****
 			case "addReservationUIAction":
 				action = new AddReservationUIAction();
 				break;
@@ -174,7 +173,7 @@ public class ActionFactory {
 			case "cancelReservationAction":
 				action = new CancelReservationAction();
 				break;
-			// review
+			// ***** review *****
 			case "myReviewListUIAction":
 				action = new MyReviewListUIAction();
 				break;
@@ -206,10 +205,7 @@ public class ActionFactory {
 			case "amountStarReviewListByType":
 				action = new AmountStarReviewListByType();
 				break;
-			// reservation
-			case "upcomingReservation":
-				action = new UpcomingReservation();
-				break;
+			//***** 플레이리스트 *****
 			case "mypagePlaylistUI":
 				action = new MypagePlaylistUI();
 				break;
