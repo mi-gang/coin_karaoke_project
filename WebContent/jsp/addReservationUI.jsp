@@ -47,20 +47,30 @@
 			</div>
 			<div class="timeTableContainer">
 
-				<div class="timeLine">
-				</div>
+				<div class="timeLine"></div>
 				<div class="roomNTimeTableContainer">
-					<c:forEach var="info" items="${infoList}"
-						varStatus="statusInfo">
+					<c:forEach var="info" items="${infoList}" varStatus="statusInfo">
 						<div class="contents timeTable-row">
 							<div id="roomTypeName" class="roomType btn"
 								data-room-id="${info.getRoomId()})">${info.getRoomName()}
 								(${statusInfo.count})</div>
 							<div class="timeRow">
-								<c:forEach var="widthVO" items="${widthListList.get(statusInfo.index)}" varStatus="statusWidth">
-								    <div class="time usedTime" style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")})"></div>
-									<div class="time usedTime" style="width:${widthVO.get("width")};left:calc(0.7rem + ${widthVO.get("offset")})" data-bs-toggle="popover" data-bs-trigger="hover" data-start-time="${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}" data-end-time="${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))}" data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) }예약 불가"></div>
-									<div class="time cleaningTime" style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")} + ${widthVO.get("width")} - ${cleaningTimeSec})"  data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")) }~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) }예약 불가"></div>
+								<c:forEach var="widthVO"
+									items="${widthListList.get(statusInfo.index)}"
+									varStatus="statusWidth">
+									<div class="time usedTime"
+										style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")})"></div>
+									<div class="time usedTime" style="width:${widthVO.get("
+										width")};left:calc(0.7rem + ${widthVO.get("offset")})" data-bs-toggle="popover"
+										data-bs-trigger="hover"
+										data-start-time="${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("
+										HH:mm"))}" data-end-time="${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("
+										HH:mm"))}" data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) }예약불가"></div>
+									<div class="time cleaningTime"
+										style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("
+										offset")} + ${widthVO.get("width")} - ${cleaningTimeSec})"  data-bs-toggle="popover"
+										data-bs-trigger="hover"
+										data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")) }~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) }예약불가"></div>
 								</c:forEach>
 							</div>
 						</div>
@@ -80,7 +90,12 @@
 							<div class="roomBox">
 								<button class="label">예약하실 방을 선택해주세요.</button>
 								<img src="img/down_arrow.svg" alt="드롭다운" />
-								<ul class="roomList"></ul>
+								<ul class="roomList">
+									<c:forEach var="room" items="${infoList}" varStatus="status">
+
+										<li class="roomItem" data-room-id="${room.getRoomId()}">${room.getRoomName()}(${status.count})</li>
+									</c:forEach>
+								</ul>
 							</div>
 						</div>
 						<div class="reservationTimeFormContainer">
@@ -264,24 +279,24 @@
 
 	<script>
     // let kkRoomCnt = $(".roomType").length;
-    let kkRoomCnt = 12; // 노래방 방 개수 데이터 불러와서 넣을 곳
-    let kkRoomList = [
-      "2인실(1)",
-      "2인실(2)",
-      "2인실(3)",
-      "2인실(4)",
-      "4인실(1)",
-      "4인실(2)",
-      "단체실",
-    ]; // 노래방 방 정보 넣을 곳
+//    let kkRoomCnt = 12; // 노래방 방 개수 데이터 불러와서 넣을 곳
+//    let kkRoomList = [
+//      "2인실(1)",
+//      "2인실(2)",
+//      "2인실(3)",
+//      "2인실(4)",
+//      "4인실(1)",
+//      "4인실(2)",
+//      "단체실",
+//    ]; // 노래방 방 정보 넣을 곳
     let dropBox = $(".label");
 
-    // 방 선택 드롭박스에 불러온 방 정보 채우기
-    for (let i = 0; i < kkRoomList.length; i++) {
-      $(".roomList").append(
-        "<li class='roomItem'>" + kkRoomList[i] + "</li>"
-      );
-    }
+    // 방 선택 드롭박스에 불러온 방 정보 채우기 (JSP로 바뀌며 사라짐)
+//    for (let i = 0; i < kkRoomList.length; i++) {
+//      $(".roomList").append(
+//        "<li class='roomItem'>" + kkRoomList[i] + "</li>"
+//      );
+//    }
 
     // 현재 날짜, 시간 정보
     let now = new Date();
@@ -306,6 +321,7 @@
     // 예약하기 모달 - 드롭박스 - 선택한 방 종류 넘기기
     const options = $(".roomItem").get();
     const handleSelect = function (item) {
+      dropBox.data("roomId", $(item).data("roomId"));
       dropBox.html(item.textContent);
       if (dropBox.parent().hasClass("active")) {
         dropBox.parent().removeClass("active");
@@ -432,8 +448,6 @@
 
       // 청소년 이용불가시간 차단
       const reservateBtn = $("#modal1 .btn.submit");
-      console.log(startDateTime);
-      console.log(endDateTime);
       if(!(await isAdult()) && (startDateTime.getHours() <= 8 || startDateTime.getHours() >= 22 || endDateTime.getHours() <= 8 || endDateTime.getHours() >= 22)){
         alert("청소년은 22~08시 이용이 제한됩니다.");
         reservateBtn.addClass("inactivate");
@@ -453,12 +467,12 @@
     function getEndTime() {
       const usingHour = parseInt($("#modal3 #hour input").val()) || 0;
       const usingMinute = parseInt($("#modal3 #minute input").val()) || 0;
-
-      const endTime = getStartTime();
-      endTime.setHours(endTime.getHours() + usingHour);
-      endTime.setMinutes(endTime.getMinutes() + usingMinute);
-
-      return endTime;
+	  if(getStartTime()){
+		   const endTime = getStartTime();
+	       endTime.setHours(endTime.getHours() + usingHour);
+	       endTime.setMinutes(endTime.getMinutes() + usingMinute);
+	       return endTime
+	  }
     }
     function updateDate() {
       const searchDate = $("#modal2 .searchDate");
@@ -602,9 +616,11 @@
       usingTimeInput.val(usingHour + " : " + usingMinute);
 
       //modal2 종료시간 설정
-      const endTime = getEndTime();
-      const endTimeInput = $("#endTimeInput");
-      endTimeInput.val(endTime.getHours() + " : " + endTime.getMinutes());
+      if(getEndTime()){
+	      const endTime = getEndTime();
+	      const endTimeInput = $("#endTimeInput");
+	      endTimeInput.val(endTime.getHours() + " : " + endTime.getMinutes());
+      }
 
       updateDateRange();
       hideModal3();
@@ -629,6 +645,7 @@
         //예약한 장소 채우기
         $("#modal4 .kkRoomInfo .kkRoomName").text($("header span").text());
         $("#modal4 .kkRoomInfo .kkRoomType").text($("#modal1 .roomBox button").text());
+        $("#modal4 .kkRoomInfo .kkRoomType").data("roomId", $("#modal1 button.label").data("roomId"));
         //예약날짜 채우기
         $("#modal4 .reservateDate").text($("#modal1 .reservateDate").text());
 
@@ -661,11 +678,11 @@
     async function payForReservation(){
       const startDateTime = getStartTime();
       const endDateTime = getEndTime();
-      const kkRoomNumber = $("#modal1 .roomBox .label").data("roomId");
+      const kkRoomNumber = $("#modal4 .kkRoomInfo .kkRoomType").data("roomId");
 
       try{
 
-        const res = await fetch("controller?cmd=isValidTimeForReservation&startTime=" + startDateTime + "&endTime=" + endDateTime + "&KKRoomNumber=" + kkRoomNumber);
+        const res = await fetch("controller?cmd=payReservationAction&startTime=" + toLDT(startDateTime) + "&endTime=" + toLDT(endDateTime) + "&roomId=" + kkRoomNumber);
         const data = await res.json();
         if(data.result){
           showModal5();
@@ -678,6 +695,15 @@
       }
     }
 
+    function toLDT(datetime){
+    	const year    = datetime.getFullYear();
+    	const month   = String(datetime.getMonth()).padStart(2,"0");
+    	const day     = String(datetime.getDate()).padStart(2,"0");
+    	const hours   = String(datetime.getHours()).padStart(2,"0");
+    	const minutes = String(datetime.getMinutes()).padStart(2,"0");
+    	const seconds = String(datetime.getSeconds()).padStart(2,"0");
+    	return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+    }
 
     function hideModal4() {
       $("#modal4").css("display", "none");
