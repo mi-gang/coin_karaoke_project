@@ -35,10 +35,11 @@
 .filterItem {
     padding: 0.8rem 1rem;
     border-radius: 1rem;
-    color: #fff;
+    /* color: #fff; */
     font-size: 1.2rem;
     font-weight: 700;
-    background-color: #E3CDFF;
+    background-color: #F2F2F2;
+    /* background-color: #E3CDFF; */
 }
 
 /* 검색결과 목록 영역 */
@@ -99,10 +100,14 @@
     width: 22rem;
     height: 2.2rem;
     margin-top: 1.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .representativeKeywordItem {
-    padding: 0.5rem 1.3rem;
+	display: inline-block;
+    padding: 0.3rem 1.3rem;
     margin-right: 0.5rem;
     border-radius: 0.5rem;
     background-color: #F2F2F2;
