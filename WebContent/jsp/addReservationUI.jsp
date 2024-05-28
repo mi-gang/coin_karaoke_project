@@ -45,12 +45,10 @@
 			<div class="timeTableContainer">
 				<div class="timeLine"></div>
 				<div class="roomNTimeTableContainer">
-
-					<c:forEach var="reservation" items="${reservations}" varStatus="status">
-
+					<c:forEach var="reservation" items="${rrInfoList}" varStatus="status">
 						<div class="contents timeTable-row">
 							<div id="roomTypeName" class="roomType btn"
-								data-room-id="${reservation.roomId})">2인실
+								data-room-id="${reservation.getRoomId()})">${reservation.getRoomName()}
 								(${status.count})</div>
 							<div class="timeRow">
 								<div class="time emptyTime" style="width: 105px"></div>

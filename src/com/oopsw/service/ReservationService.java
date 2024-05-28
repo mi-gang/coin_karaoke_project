@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -45,10 +46,10 @@ public class ReservationService {
 	}
 
 	/** 해당 노래방의 방, 예약 현황 정보 불러오기 */
-	public Collection<ReservationRoomInfoVO> getroomReservationStatusList(int kkId) {
+	public List<ReservationRoomInfoVO> getRoomReservationStatusList(int kkId) {
 
-		Collection<ReservationRoomInfoVO> reservationRoomInfoVOs = new ArrayList<>();
-		Collection<ReservationVO> reservationVOs = new ArrayList<>();
+		List<ReservationRoomInfoVO> reservationRoomInfoVOs = new ArrayList<ReservationRoomInfoVO>();
+		List<ReservationVO> reservationVOs = null;
 
 		Map<Integer, String> roomInfoList = new HashMap<Integer, String>();
 		roomInfoList = new KKDAO(conn).getRoomInfoList(kkId);
@@ -61,7 +62,6 @@ public class ReservationService {
 
 			// roomId별 예약 현황 정보 불러오기
 			reservationVOs = new ReservationDAO(conn).getReservationListByRoomId(roomId);
-
 			reservationRoomInfoVOs.add(new ReservationRoomInfoVO(roomId, roomName, reservationVOs));
 		}
 		return reservationRoomInfoVOs;

@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.oopsw.model.vo.ReservationVO;
 import com.oopsw.model.vo.RoomInfoVO;
@@ -100,20 +101,21 @@ public class ReservationDAO {
 
 	// 예약하기
 	/** 예약 현황 정보 불러오기 0 */
-	public Collection<ReservationVO> getReservationListByRoomId(int roomId) {
+	public List<ReservationVO> getReservationListByRoomId(int roomId) {
 
 		String sql = "select s.reservation_id, s.start_time, s.end_time from reservations s, room_infos r "
 				+ "where s.room_id=? AND s.room_id=r.room_id AND IS_CANCEL = 0 "
 				+ "and s.end_time > sysdate order by s.start_time";
 
-		Collection<ReservationVO> reservationVOs = new ArrayList<ReservationVO>();
+		List<ReservationVO> reservationVOs = new ArrayList<ReservationVO>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, roomId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime(),
-							rs.getTimestamp(3).toLocalDateTime(), roomId));
+					ReservationVO temp = new ReservationVO(rs.getInt(1), rs.getTimestamp(2).toLocalDateTime(),
+							rs.getTimestamp(3).toLocalDateTime(), roomId);
+					reservationVOs.add(temp);
 				}
 			}
 		} catch (SQLException e) {

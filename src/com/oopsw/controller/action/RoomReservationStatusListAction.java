@@ -22,8 +22,8 @@ public class RoomReservationStatusListAction implements Action {
 		ReservationService service = new ReservationService();
 		Collection<ReservationRoomInfoVO> infoVOs = new ArrayList<>();
 
-		infoVOs = service.getroomReservationStatusList(kkId);
-		request.setAttribute("infoVOs", gson.toJson(infoVOs));
+		infoVOs = service.getRoomReservationStatusList(kkId);
+		request.setAttribute("dataToSend", gson.toJson(infoVOs));
 
 		return new Url("json/data.jsp", Url.FORWARD);
 	}

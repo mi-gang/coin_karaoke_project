@@ -477,19 +477,16 @@ public class KKDAO {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, kkId);
-			System.out.println("pstmt");
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(rs);
 
 			while (rs.next()) {
-				System.out.println("count");
 				roomInfoList.put(Integer.valueOf(rs.getInt(1)), rs.getString(2));
 			}
 
-			System.out.println("해당 노래방의 방 정보 불러오기");
-			for (Entry<Integer, String> entrySet : roomInfoList.entrySet()) {
-				System.out.println(entrySet.getKey() + " - " + entrySet.getValue());
-			}
+//			System.out.println("해당 노래방의 방 정보 불러오기");
+//			for (Entry<Integer, String> entrySet : roomInfoList.entrySet()) {
+//				System.out.println(entrySet.getKey() + " - " + entrySet.getValue());
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

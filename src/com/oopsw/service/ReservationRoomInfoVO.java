@@ -1,16 +1,16 @@
 package com.oopsw.service;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.oopsw.model.vo.ReservationVO;
 
 public class ReservationRoomInfoVO {
 	private int roomId;
 	private String roomName;
-	private Collection<ReservationVO> reservationVOs;
+	private List<ReservationVO> reservationVOs;
 	
 	
-	public ReservationRoomInfoVO(int roomId, String roomName, Collection<ReservationVO> reservationVOs) {
+	public ReservationRoomInfoVO(int roomId, String roomName, List<ReservationVO> reservationVOs) {
 		setRoomId(roomId);
 		setRoomName(roomName);
 		setReservationVOs(reservationVOs);
@@ -28,10 +28,10 @@ public class ReservationRoomInfoVO {
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
-	public Collection<ReservationVO> getReservationVOs() {
+	public List<ReservationVO> getReservationVOs() {
 		return reservationVOs;
 	}
-	public void setReservationVOs(Collection<ReservationVO> reservationVOs) {
+	public void setReservationVOs(List<ReservationVO> reservationVOs) {
 		this.reservationVOs = reservationVOs;
 	}
 	@Override
