@@ -151,9 +151,12 @@ public class ReservationDAO {
 	/** 예약내역 중 이용 중/예정 내역 불러오기 */
 	public Collection<ReservationVO> getUncompletedReservationList(String userId) {
 
-		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
-				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
-				+ "and ro.KK_id = k.KK_id and user_id=? and END_TIME >= sysdate and is_cancel = 0";
+		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, r.user_id, k.KK_id, k.name, ri.room_id, ri.name "
+				+ "FROM reservations r "
+				+ "JOIN room_infos ri ON r.room_id = ri.room_id "
+				+ "JOIN KKs k ON ri.KK_id = k.KK_id "
+				+ "and user_id=? and END_TIME >= sysdate and is_cancel = 0 "
+				+ "order by r.end_time asc";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
@@ -163,7 +166,7 @@ public class ReservationDAO {
 				while (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
+							rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getString(9)));
 				}
 			}
 		} catch (SQLException e) {
@@ -175,10 +178,13 @@ public class ReservationDAO {
 
 	/** 예약내역 중 이용 완료 내역 불러오기 */
 	public Collection<ReservationVO> getCompletedReservationList(String userId) {
-
-		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
-				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
-				+ "and ro.KK_id = k.KK_id and user_id=? and END_TIME < sysdate and is_cancel = 0";
+		
+		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, r.user_id, k.KK_id, k.name, ri.room_id, ri.name "
+				+ "FROM reservations r "
+				+ "JOIN room_infos ri ON r.room_id = ri.room_id "
+				+ "JOIN KKs k ON ri.KK_id = k.KK_id "
+				+ "and user_id=? and END_TIME < sysdate and is_cancel = 0 "
+				+ "order by r.end_time desc";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
@@ -188,7 +194,7 @@ public class ReservationDAO {
 				while (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
+							rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getString(9)));
 				}
 			}
 		} catch (SQLException e) {
@@ -200,10 +206,13 @@ public class ReservationDAO {
 
 	/** 예약내역 중 취소 내역 불러오기 */
 	public Collection<ReservationVO> getCanceledReservationList(String userId) {
-
-		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, k.KK_id, k.name "
-				+ "from reservations r, room_infos ro, KKs k where r.room_id = ro.room_id "
-				+ "and ro.KK_id = k.KK_id and user_id=? and is_cancel = 1";
+		
+		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, r.user_id, k.KK_id, k.name, ri.room_id, ri.name "
+				+ "FROM reservations r "
+				+ "JOIN room_infos ri ON r.room_id = ri.room_id "
+				+ "JOIN KKs k ON ri.KK_id = k.KK_id "
+				+ "and user_id=? is_cancel = 1 "
+				+ "order by r.end_time desc";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
@@ -213,7 +222,7 @@ public class ReservationDAO {
 				while (rs.next()) {
 					reservationVOs.add(new ReservationVO(rs.getInt(1), rs.getInt(2),
 							rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), userId,
-							rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
+							rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getString(9)));
 				}
 			}
 		} catch (SQLException e) {

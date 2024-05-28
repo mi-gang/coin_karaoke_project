@@ -32,7 +32,7 @@
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
-        <div id="reservation_wrapper">
+        <div id="reservation-wrapper">
           <div id="reservations_status">
             <button class="reservations-status-button" id="status-1">
               이용 중/예정
@@ -44,8 +44,8 @@
               취소
             </button>
           </div>
-          <div id="reservation_list">
-            <div id="total_reservation">
+          <div id="reservation-list">
+            <div id="total-reservation">
               <span>총 </span>
               <span>2</span>
               <span>건</span>
@@ -106,16 +106,24 @@
             <div id="add1-modal-body-wrapper">
               <h4 class="modal-title">시간 추가</h4>
               <div id="add1-modal-body-title">
-                <span>세븐스타코인노래연습장 철산역점</span>
+                <span class="add-kkname"></span>
               </div>
               <div id="add1-modal-body-contents">
                 <div class="add1-modal-body-content">
                   <span class="add1-modal-body-content-title"
                     >기존 예약 시간</span
                   >
-                  <span class="add1-modal-body-content-time"
-                    >16:00 - 17:30</span
-                  >
+                  <div class="add1-modal-body-content-time"
+                    >
+                   <div >
+                      <span id="add1-original-start">1</span>
+                      <span>시간</span>
+                    </div>
+                    <div >
+                      <span id="additional-minute-a-status">34</span>
+                      <span>분</span>
+                    </div>
+                   </div>
                 </div>
                 <hr />
                 <div class="add1-modal-body-content">
@@ -161,7 +169,7 @@
               <button
                 type="button"
                 disabled="disabled"
-                class="submit_button add-button"
+                class="submit-button add-button"
                 id="add1-add-time-button"
                 data-bs-toggle="modal"
                 data-bs-target="#addTimeModal3"
@@ -223,7 +231,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
@@ -248,7 +256,7 @@
             <div id="add1-modal-body-wrapper">
               <h4 class="modal-title">예약 내용을 확인해주세요 :)</h4>
               <div id="add1-modal-body-title">
-                <span>세븐스타코인노래연습장 철산역점</span>
+                <span class="add-kkname"></span>
               </div>
               <div id="add1-modal-body-contents">
                 <div class="add1-modal-body-content">
@@ -287,7 +295,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button back-button"
+              class="submit-button add-button back-button"
               id="time-setting-button"
               data-bs-toggle="modal"
               data-bs-target="#addTimeModal"
@@ -297,7 +305,7 @@
             </button>
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="time-setting-button"
               data-bs-toggle="modal"
               data-bs-target="#addTimeModal4"
@@ -336,8 +344,8 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
-              id="add2-add-time-button"
+              class="submit-button add-button"
+              id="add4-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
@@ -377,7 +385,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
@@ -419,7 +427,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
@@ -449,12 +457,12 @@
           <div class="modal-body">
             <div class="review-modal-body-wrapper">
               <!-- <span class="cancle-modal-title">취소 완료</span> -->
-              <span class="review-modal-content"
-                >세븐스타코인노래연습장 철산역점</span
+              <span class="review-modal-content" id="review-kkname"
+                ></span
               >
               <!-- 별점 자리 -->
               <textarea
-                id="review-description"
+                id="review-description" class="description"
                 placeholder="이용한 노래방에 대한 솔직한 리뷰를 남겨주세요."
               ></textarea>
             </div>
@@ -464,7 +472,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
@@ -503,7 +511,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
@@ -528,16 +536,17 @@
               data-bs-dismiss="modal"
             ></button>
           </div>
-
-          <!-- Modal body -->
+<!-- 		<form action="" method="post" id="inquire-action">
+ -->          <!-- Modal body -->
           <div class="modal-body">
             <div class="inquire-modal-body-wrapper">
               <!-- <span class="cancle-modal-title">취소 완료</span> -->
-              <span class="review-modal-content"
+              <span class="review-modal-content" id="inquire-kkname"
                 >세븐스타코인노래연습장 철산역점</span
               >
               <textarea
-                id="review-description"
+                id="inquire-description" class="description"
+                name="content"
                 placeholder="노래방에 문의 또는 신고할 내용을 작성해주세요."
               ></textarea>
             </div>
@@ -547,20 +556,20 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button inquire-button"
-              id="add2-add-time-button"
+              class="submit-button add-button inquire-button"
+              id="inquire-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
-              data-bs-target="#addInquireModal2"
             >
               문의/신고하기
             </button>
           </div>
+          <!-- </form> -->
         </div>
       </div>
     </div>
 
-    <!-- 리뷰 작성 완료 모달 -->
+    <!-- 문의/신고 작성 완료 모달 -->
     <!-- The Modal -->
     <div class="modal" id="addInquireModal2">
       <div class="modal-dialog modal-dialog-centered">
@@ -588,7 +597,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
+              class="submit-button add-button"
               id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"

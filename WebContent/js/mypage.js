@@ -121,7 +121,6 @@ $("#add2-add-time-button").on("click", function() {
 });
 
 
-
 // $.ajax({
 // url: "/html/myPage-myReviewListUI.html", // 서버의 URL로 변경해주세요
 // type: "GET", // 또는 'POST', 서버의 요구사항에 맞춰서 설정하세요
