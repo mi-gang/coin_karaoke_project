@@ -6,12 +6,14 @@ import com.oopsw.controller.action.KKDetailUI;
 import com.oopsw.controller.action.KKFilterUI;
 import com.oopsw.controller.action.KKSearchResultUI;
 import com.oopsw.controller.action.AddInquireAction;
+import com.oopsw.controller.action.AddMusic;
 import com.oopsw.controller.action.AddReservationUIAction;
 import com.oopsw.controller.action.AddReviewAction;
 import com.oopsw.controller.action.AdditionalTimeInfoAction;
 import com.oopsw.controller.action.CancelReservationAction;
 import com.oopsw.controller.action.CanceledReservationListAction;
 import com.oopsw.controller.action.CompletedReservationListAction;
+import com.oopsw.controller.action.DeletePlaylist;
 import com.oopsw.controller.action.DeleteReviewAction;
 import com.oopsw.controller.action.IsValidTimeForReservationAction;
 import com.oopsw.controller.action.Login;
@@ -19,13 +21,20 @@ import com.oopsw.controller.action.LoginUI;
 import com.oopsw.controller.action.Logout;
 import com.oopsw.controller.action.MyReviewListAction;
 import com.oopsw.controller.action.MyReviewListUIAction;
+import com.oopsw.controller.action.MypagePlaylistUI;
 import com.oopsw.controller.action.MypageUIAction;
 import com.oopsw.controller.action.PayAdditionalTimeAction;
 import com.oopsw.controller.action.PayReservationAction;
+import com.oopsw.controller.action.PlaylistMusicList;
+import com.oopsw.controller.action.PlaylistMusicNumber;
+import com.oopsw.controller.action.PlaylistMusicUI;
+import com.oopsw.controller.action.PlaylistTitle;
 import com.oopsw.controller.action.ReservationListUIAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.MusicListUI;
+import com.oopsw.controller.action.MyPlaylist;
+import com.oopsw.controller.action.MyPlaylistmusicUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.UpcomingReservation;
 import com.oopsw.controller.action.addUser;
@@ -173,10 +182,38 @@ public class ActionFactory {
 		// inquire
 		case "addInquireAction":
 			action = new AddInquireAction();
-			break;		
+			break;	
+		case "mypagePlaylistUI":
+			action=new MypagePlaylistUI();
+			break;
+		case "myPlaylist":
+			action=new MyPlaylist();
+			break;
+		case "playlistMusicNumber":
+			action=new PlaylistMusicNumber();
+			break;
+		case "deletePlaylist":
+				 action= new DeletePlaylist();
+				 break;
+		case "addMusic":
+			action=new AddMusic();
+			break;
+		case "deleteMusic":
+			action=new DeleteMusic();
+			break;
+		case "playlistMusicUI":
+		action=new PlaylistMusicUI();
+		break;
+		case "playlistTitle":
+			action=new PlaylistTitle();
+			break;
+		case "playlistMusicList":
+			action=new PlaylistMusicList();
+			break;
 		default:
 			action = new wrongCmd();
 			break;
+	
 		}
 
 		return action;
