@@ -20,14 +20,15 @@ public class UncompletedReservationListAction implements Action {
 
 		ReservationService service = new ReservationService();
 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HttpSession session = request.getSession();
 		Object userId = session.getAttribute("userId");
 
 		String page = "controller?cmd=login";
 
 		if (userId != null) {
+			System.out.println(userId);
 			reservationVOs = service.getUncompletedReservationList((String) userId);
 			// request.setAttribute("reservationVOs", reservationVOs);
 	        request.setAttribute("dataToSend", gson.toJson(reservationVOs));

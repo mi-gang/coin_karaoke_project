@@ -17,7 +17,7 @@ $("#review-page").on("click", function() {
 });
 
 // 노래방 상세 페이지 이동
-$(".KK-title").on("click", function() {
+$("#review-items").on("click", ".KK-title", function() {
 	alert("action: KKDetailUI");
 });
 
@@ -52,44 +52,36 @@ $(".login-button").on("click", function() {
 });
 
 // 나의 리뷰 불러오기 ajax
-$(document)
-		.ready(
-				function() {
-					console.log("나의 리뷰 뷸ㄹ옿기ㅐ");
-					$
-							.ajax({
-								url : "controller?cmd=myReviewListAction",
-								type : "GET",
-								dataType : "json",
-								success : function(data) {
-									console.log(data);
-									// data는 서버로부터 받은 리뷰 리스트입니다.
-									// 여기서는 data가 객체 배열이라고 가정합니다.
-									for (var i = 0; i < data.length; i++) {
-										var reviewItem = '<div class="review-item" data-id='
-												+ data[i].reviewId
-												+ '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
-												+ data[i].KKname
-												+ '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>'
-												+ '<div class="review-content2"><span class="review-date">'
-												+ data[i].startTime.date.year
-												+ " ."
-												+ data[i].startTime.date.month
-												+ " ."
-												+ data[i].startTime.date.day
-												+ '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
-												+ '<span class="review-description">'
-												+ data[i].content
-												+ "</span></div></div>";
-										$("#review-items").append(reviewItem); // 생성된
-																				// div를
-																				// 문서에
-																				// 추가합니다.
-										$("#review-count").text(data.length);
-									}
-								},
-							});
+$(document).ready(function() {
+	console.log("나의 리뷰 뷸ㄹ옿기ㅐ");
+		$.ajax({
+			url : "controller?cmd=myReviewListAction",
+			type : "GET",
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				for (var i = 0; i < data.length; i++) {
+					var reviewItem = '<div class="review-item" data-id='
+						+ data[i].reviewId
+						+ '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
+						+ data[i].KKname
+						+ '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>'
+						+ '<div class="review-content2"><span class="review-date">'
+						+ data[i].startTime.date.year
+						+ " ."
+						+ data[i].startTime.date.month
+						+ " ."
+						+ data[i].startTime.date.day
+						+ '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
+						+ '<span class="review-description">'
+						+ data[i].content
+						+ "</span></div></div>";
+					$("#review-items").append(reviewItem); 
+					$("#review-count").text(data.length);
+					}
+				},
 				});
+			});
 
 // 리뷰 삭제 모달
 $("#review-items").on("click", ".review-delete", function() {
@@ -101,9 +93,12 @@ $("#review-items").on("click", ".review-delete", function() {
 	$("#deleteReviewModal1").modal("show");
 });
 
-$("#review-items").on("click", ".delete-action", function(e) {
+$(".delete-action").on("click", function(e) {
+	e.stopPropagation(); // 이벤트 버블링 방지
+
 	// console.log(this);
 	// console.log(e.target);
+	console.log($(this));
 	let reviewId = $(this).closest("#deleteReviewModal1").data("review-id");
 	console.log("reviewId : " + reviewId);
 	$.ajax({
@@ -113,13 +108,18 @@ $("#review-items").on("click", ".delete-action", function(e) {
 		dataType : "json",
 		success : function(data) {
 			console.log(data);
-			console.log(data.result);
-			if (data.result) {
+			// console.log(data.result);
+			if (data) {
 				$("#deleteReviewModal2").modal("show");
 			}
 		},
 	});
 });
+
+$("#add2-add-time-button").on("click", function() {
+	location.href="controller?cmd=myReviewListUIAction";
+});
+
 
 // $.ajax({
 // url: "/html/myPage-myReviewListUI.html", // 서버의 URL로 변경해주세요

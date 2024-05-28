@@ -94,6 +94,11 @@ public class ReservationService {
 
 		reservationVOs = new ReservationDAO(conn).getCompletedReservationList(userId);
 
+		// 리뷰 작성 여부 / 작성 가능 여부 불러오기
+		for (int i = 0; i < reservationVOs.size(); i++) {
+			
+		}
+		
 		return reservationVOs;
 	}
 
