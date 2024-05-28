@@ -15,7 +15,7 @@
 }
 
 .starcolor {
-  fill: #e3cdff;
+  fill: #9747ff;
 }
 
 .star:last-of-type {
@@ -23,7 +23,7 @@
 }
 
 .overlay {
-  background-color: #000;
+  background-color: #888;
   opacity: 0.5;
   position: absolute;
   top: 0;
@@ -35,7 +35,7 @@
 
 @supports (mix-blend-mode: color) {
   .overlay {
-    mix-blend-mode: color;
+    mix-blend-mode: plus-lighter;
     opacity: unset;
   }
 }

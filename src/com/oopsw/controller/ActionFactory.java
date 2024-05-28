@@ -29,6 +29,7 @@ import com.oopsw.controller.action.MusicListUI;
 import com.oopsw.controller.action.MyPageUIAction;
 import com.oopsw.controller.action.MyReviewListAction;
 import com.oopsw.controller.action.MyReviewListUIAction;
+import com.oopsw.controller.action.NearRecommendKKList;
 import com.oopsw.controller.action.PayAdditionalTimeAction;
 import com.oopsw.controller.action.PayReservationAction;
 import com.oopsw.controller.action.ReservationListUIAction;
@@ -94,6 +95,9 @@ public class ActionFactory {
 				break;
 			case "mainUI":
 				action = new MainUI();
+				break;
+			case "nearRecommendKKList":
+				action = new NearRecommendKKList();
 				break;
 			case "addReservationUI":
 				action = new AddReservationUI();

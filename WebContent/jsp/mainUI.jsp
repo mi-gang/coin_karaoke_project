@@ -476,56 +476,93 @@
 
 	<script src="js/reservation.js"></script>
 	<script>
-		$(".starContainer").each(function(i, item) {
-			const
-			rating = item.querySelector(".rating");
-			const
-			overlay = item.querySelector(".overlay");
-			const
-			rate = item.querySelector(".starRate").dataset.starRate;
-			drawStarRate(rating, overlay, rate);
-		});
-		const
-		label = document.querySelector(".label");
-		const
-		options = document.querySelectorAll(".regionItem");
-		const
-		searchOptions = document.querySelectorAll(".optionItem");
+	//*** 추천 노래방 목록 ***
+    updateStarContainer();
+    function updateStarContainer() {
+        $(".starContainer").each(function (i, item) {
+            const
+                rating = item.querySelector(".rating");
+            const
+                overlay = item.querySelector(".overlay");
+            const
+                rate = item.querySelector(".starRate").dataset.starRate;
+            drawStarRate(rating, overlay, rate);
+        });
 
-		// 클릭한 옵션의 텍스트를 라벨 안에 넣음
-		const
-		handleSelect = function(item) {
-			label.innerHTML = item.textContent;
-			label.parentNode.classList.remove("active");
-		};
-		// 옵션 클릭시 클릭한 옵션을 넘김
-		options.forEach(function(option) {
-			option.addEventListener("click", function() {
-				handleSelect(option);
-			});
-		});
-		// 라벨을 클릭시 옵션 목록이 열림/닫힘
-		label.addEventListener("click", function() {
-			if (label.parentNode.classList.contains("active")) {
-				label.parentNode.classList.remove("active");
-			} else {
-				label.parentNode.classList.add("active");
-			}
-		});
-		// 옵션 아이템 클릭시 테두리 색상 변경
-		searchOptions.forEach(function(option) {
-			option
-					.addEventListener("click",
-							function() {
-								// 클릭한 옵션 아이템에만 active 클래스 추가
-								option.classList.toggle("active");
-								const
-								svg = option.querySelector("img");
-								svg.style.fill = option.classList
-										.contains("active") ? "#e3cdff"
-										: "currentColor";
-							});
-		});
+    }
+    const
+        label = document.querySelector(".label");
+    const
+        options = document.querySelectorAll(".regionItem");
+    const
+        searchOptions = document.querySelectorAll(".optionItem");
+
+    // 클릭한 옵션의 텍스트를 라벨 안에 넣음
+    const
+        handleSelect = function (item) {
+            label.innerHTML = item.textContent;
+            label.parentNode.classList.remove("active");
+            updateRecommendKKContainer(item.textContent);
+        };
+    // 옵션 클릭시 클릭한 옵션을 넘김
+    options.forEach(function (option) {
+        option.addEventListener("click", function () {
+            handleSelect(option);
+        });
+    });
+    // 라벨을 클릭시 옵션 목록이 열림/닫힘
+    label.addEventListener("click", function () {
+        if (label.parentNode.classList.contains("active")) {
+            label.parentNode.classList.remove("active");
+        } else {
+            label.parentNode.classList.add("active");
+        }
+    });
+    // 옵션 아이템 클릭시 테두리 색상 변경
+    searchOptions.forEach(function (option) {
+        option
+            .addEventListener("click",
+                function () {
+                    // 클릭한 옵션 아이템에만 active 클래스 추가
+                    option.classList.toggle("active");
+                    const
+                        svg = option.querySelector("img");
+                    svg.style.fill = option.classList
+                        .contains("active") ? "#e3cdff"
+                        : "currentColor";
+                });
+    });
+
+    async function updateRecommendKKContainer(addressGu) {
+        const res = await fetch("controller?cmd=nearRecommendKKList&myLocation=" + addressGu);
+        const data = await res.json();
+        let str = "";
+        for (let i = 0; i < data.length; i++) {
+            str += `<div class="card"><img src = "img/representativeKKImg1.png" class="card-img-top" alt = "` + data[i].name + `" >
+        <div class="card-body">
+            <div class="card-title">`+ data[i].name + `
+            </div>
+            <div class="starContainer">
+                <span class="starRate"
+                    data-star-rate="`+ data[i].starRating + `">` + data[i].starRating + `</span>
+                <div class="rating-wrap">
+                    <div class="rating">
+                        <div class="overlay"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="KK-usability">
+                <span>777m</span> <span>혼잡도: <span
+                    class="normal"
+                    data-crowded="0.5">보통</span></span>
+            </div>
+        </div>
+                    </div > `;
+        }
+
+        $("#KK-container").html(str);
+        updateStarContainer();
+    }
 
 		// 인기차트
 		// 브랜드 버튼
