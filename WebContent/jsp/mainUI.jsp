@@ -1,11 +1,3 @@
-<%@page import="java.time.LocalDateTime"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.oopsw.model.vo.KKVO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.oopsw.service.KKService"%>
-<%@page import="com.oopsw.model.vo.ReservationVO"%>
-<%@page import="com.oopsw.service.ReservationService"%>
-<%@page import="com.oopsw.service.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -94,15 +86,6 @@
 					</div>
 				</div>
 				<div id="KK-container">
-					<%
-						KKService kkService = new KKService();
-						List<KKVO> kks = kkService.getNearRecommendKKList("금천구");
-						if (kks.size() > 10) {
-							kks = kks.subList(0, 11);
-						}
-
-						request.setAttribute("recommendKKList", kks);
-					%>
 					<c:forEach var="kk" items="${recommendKKList}">
 						<div class="card">
 							<img src="img/representativeKKImg1.png" class="card-img-top"
@@ -133,11 +116,6 @@
 						href="controller?cmd=reservationListUI">전체보기 <img
 						src="img/arrow_right.svg" alt=""></a>
 				</div>
-				<%
-					String userId = (String) request.getSession().getAttribute("userId");
-					ReservationVO upcomingReservation = new ReservationService().getUpcomingReservation(userId);
-					request.setAttribute("upR", upcomingReservation);
-				%>
 				<c:choose>
 					<c:when test="${empty userId}">
 						<div id="invisibleUnLoginUser" class="invisibleUnLoginUser on">
@@ -149,7 +127,8 @@
 							</div>
 						</div>
 					</c:when>
-					<c:when test="${empty upR}">
+					<c:when test="${upR.getReservationId() == 0}">
+					
 						<div id="reservation_content_wrapper">
 							<div id="reservation_status_wrapper">
 
@@ -163,7 +142,6 @@
 									<div id="reservation_detail">
 										<div id="reservation_detail_row">
 											<span id="karaoke_name">대기중인 예약이 없습니다.</span>
-											<!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
 										</div>
 										<div id="reservation-time">
 											<div id="reservation-start-time">
@@ -183,32 +161,31 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-
 						<div id="reservation_content_wrapper">
 							<div id="reservation_status_wrapper">
 
-								<span id="reservation_status"><%=upcomingReservation.getStartTime().isAfter(LocalDateTime.now()) ? "이용중" : "예약"%></span>
+								<span id="reservation_status">${upR.getStartTime().isAfter(LocalDateTime.now()) ? "이용중" : "예약"}</span>
 							</div>
 							<div id="reservation_content"
-								data-reservation-id="<%=upcomingReservation.getReservationId()%>">
+								data-reservation-id="${upR.getReservationId()}">
 								<div id="KK_img">
 									<img src="img/KK_img.svg" />
 								</div>
 								<div id="reservation_detail_wrapper">
 									<div id="reservation_detail">
 										<div id="reservation_detail_row">
-											<span id="karaoke_name"><%=upcomingReservation.getKKname()%></span>
+											<span id="karaoke_name">${upR.getKKname()}</span>
 											<!-- <img src="/img/arrow_right.svg" id="arrow_right" /> -->
 										</div>
 										<div id="reservation-time">
 											<div id="reservation-start-time">
-												<span id="reservation-start-hour"><%=String.format("%02d", upcomingReservation.getStartTime().getHour())%></span>
-												<span>:</span> <span id="reservation-start-minute"><%=String.format("%02d", upcomingReservation.getStartTime().getMinute())%></span>
+												<span id="reservation-start-hour">${String.format("%02d", upR.getStartTime().getHour())}</span>
+												<span>:</span> <span id="reservation-start-minute">${String.format("%02d", upR.getStartTime().getMinute())}</span>
 											</div>
 											<span>-</span>
 											<div id="reservation-end-time">
-												<span id="reservation-end-hour"><%=String.format("%02d", upcomingReservation.getEndTime().getHour())%></span>
-												<span>:</span> <span id="reservation-end-minute"><%=String.format("%02d", upcomingReservation.getEndTime().getMinute())%></span>
+												<span id="reservation-end-hour">${String.format("%02d", upR.getEndTime().getHour())}</span>
+												<span>:</span> <span id="reservation-end-minute">${String.format("%02d", upR.getEndTime().getMinute())}</span>
 											</div>
 										</div>
 									</div>
