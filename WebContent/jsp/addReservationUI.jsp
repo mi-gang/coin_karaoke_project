@@ -1,7 +1,10 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% request.getAttribute("ReservationsList"); %>
+<%
+	request.getAttribute("ReservationsList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,81 +46,80 @@
 				* <span>보라색</span>은 청소시간입니다.
 			</div>
 			<div class="timeTableContainer">
-				<div class="timeLine"></div>
+
+				<div class="timeLine">
+				</div>
 				<div class="roomNTimeTableContainer">
-					<c:forEach var="reservation" items="${rrInfoList}" varStatus="status">
+					<c:forEach var="info" items="${infoList}"
+						varStatus="statusInfo">
 						<div class="contents timeTable-row">
 							<div id="roomTypeName" class="roomType btn"
-								data-room-id="${reservation.getRoomId()})">${reservation.getRoomName()}
-								(${status.count})</div>
+								data-room-id="${info.getRoomId()})">${info.getRoomName()}
+								(${statusInfo.count})</div>
 							<div class="timeRow">
-								<div class="time emptyTime" style="width: 105px"></div>
-
-								<div class="time usedTime" data-bs-toggle="popover"
-									data-bs-trigger="hover" data-bs-content="18:00~18:25 예약 불가"
-									style="width: 105px"></div>
-								<div class="time cleaningTime" data-bs-toggle="popover"
-									data-bs-trigger="hover" data-bs-content="18:00~18:25 예약 불가"
-									style="width: 30px"></div>
+								<c:forEach var="widthVO" items="${widthListList.get(statusInfo.index)}" varStatus="statusWidth">
+								    <div class="time usedTime" style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")})"></div>
+									<div class="time usedTime" style="width:${widthVO.get("width")};left:calc(0.7rem + ${widthVO.get("offset")})" data-bs-toggle="popover" data-bs-trigger="hover" data-start-time="${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}" data-end-time="${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))}" data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) }예약 불가"></div>
+									<div class="time cleaningTime" style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")} + ${widthVO.get("width")} - ${cleaningTimeSec})"  data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")) }~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm")) }예약 불가"></div>
+								</c:forEach>
 							</div>
 						</div>
 					</c:forEach>
-					
-
 				</div>
 
-				<!-- 예약하기 모달(#modal1) -->
-				<div id="modal1" class="modal reservationContainer">
-					<div class="modalWrapper">
-						<div class="closeIconWrapper">
-							<img src="img/close.svg" alt="모달창 닫기" class="closeBtn" />
+			</div>
+			<!-- 예약하기 모달(#modal1) -->
+			<div id="modal1" class="modal reservationContainer">
+				<div class="modalWrapper">
+					<div class="closeIconWrapper">
+						<img src="img/close.svg" alt="모달창 닫기" class="closeBtn" />
+					</div>
+					<div class="reservationFormContainer">
+						<p class="modalTitle">예약하기</p>
+						<div class="roomSelecBoxContainer">
+							<div class="roomBox">
+								<button class="label">예약하실 방을 선택해주세요.</button>
+								<img src="img/down_arrow.svg" alt="드롭다운" />
+								<ul class="roomList"></ul>
+							</div>
 						</div>
-						<div class="reservationFormContainer">
-							<p class="modalTitle">예약하기</p>
-							<div class="roomSelecBoxContainer">
-								<div class="roomBox">
-									<button class="label">예약하실 방을 선택해주세요.</button>
-									<img src="img/down_arrow.svg" alt="드롭다운" />
-									<ul class="roomList"></ul>
+						<div class="reservationTimeFormContainer">
+							<p class="reservateDate"></p>
+							<div class="timeWrapper">
+								<div class="timeType">시작 시간</div>
+								<div class="timeSettingWrapper">
+									<div id="startTime" class="timeSettingItem">
+										<input id="startTimeInput" readonly placeholder="-- : --"
+											value="" /> <img src="img/down_arrow.svg" alt="드롭다운" />
+									</div>
 								</div>
 							</div>
-							<div class="reservationTimeFormContainer">
-								<p class="reservateDate"></p>
-								<div class="timeWrapper">
-									<div class="timeType">시작 시간</div>
-									<div class="timeSettingWrapper">
-										<div id="startTime" class="timeSettingItem">
-											<input id="startTimeInput" readonly placeholder="-- : --"
-												value="" /> <img src="img/down_arrow.svg" alt="드롭다운" />
-										</div>
+							<div class="timeWrapper">
+								<div class="timeType">이용 시간</div>
+								<div class="timeSettingWrapper">
+									<div id="hoursOfUse" class="timeSettingItem item3">
+										<input readonly placeholder="-- : --" /> <img
+											src="img/down_arrow.svg" alt="드롭다운" />
 									</div>
 								</div>
-								<div class="timeWrapper">
-									<div class="timeType">이용 시간</div>
-									<div class="timeSettingWrapper">
-										<div id="hoursOfUse" class="timeSettingItem item3">
-											<input readonly placeholder="-- : --" /> <img
-												src="img/down_arrow.svg" alt="드롭다운" />
-										</div>
+							</div>
+							<div class="timeWrapper">
+								<div class="timeType">이용 종료 시간</div>
+								<div class="timeSettingWrapper">
+									<div id="endTime" class="timeSettingItem">
+										<input id="endTimeInput" readonly placeholder="-- : --" />
 									</div>
 								</div>
-								<div class="timeWrapper">
-									<div class="timeType">이용 종료 시간</div>
-									<div class="timeSettingWrapper">
-										<div id="endTime" class="timeSettingItem">
-											<input id="endTimeInput" readonly placeholder="-- : --" />
-										</div>
-									</div>
-								</div>
-								<div class="m1btnContainer">
-									<div class="btn cancel">취소</div>
-									<div class="btn submit inactivate">예약</div>
-								</div>
+							</div>
+							<div class="m1btnContainer">
+								<div class="btn cancel">취소</div>
+								<div class="btn submit inactivate">예약</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 			<!-- 하단 메뉴바 -->
 		</div>
 		<nav>

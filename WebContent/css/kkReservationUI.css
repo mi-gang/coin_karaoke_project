@@ -81,9 +81,12 @@ p {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    border-bottom: 1px solid black;
+    position: relative;
 
     .time {
       height: 90%;
+      position: absolute;
     }
     .emptyTime {
       background-color: white;
@@ -94,6 +97,7 @@ p {
 
     .cleaningTime {
       background-color: #9747ff;
+      z-index: 1;
     }
   }
 }
@@ -773,10 +777,10 @@ nav {
   background-color: #9747ff;
 }
 
-.inactivate{
+.inactivate {
   background-color: #e4e4e4 !important;
   color: #979797 !important;
 }
-#modal5 a{
+#modal5 a {
   text-decoration-line: none;
 }

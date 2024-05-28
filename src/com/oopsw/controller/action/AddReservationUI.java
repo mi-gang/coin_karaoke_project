@@ -4,11 +4,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +18,7 @@ import com.oopsw.service.ReservationService;
 public class AddReservationUI implements Action {
 	static final float TABLE_WIDTH_REM = 252.7f;
 	static final float MIN_TO_REM = TABLE_WIDTH_REM / (24 * 60);// 1분당 width 구하기
+	static final int CLEANING_TIME_SEC = 15;
 
 	@Override
 	public Url execute(HttpServletRequest request) {
@@ -30,9 +28,9 @@ public class AddReservationUI implements Action {
 		for (ReservationRoomInfoVO infoVO : list) {
 			widthListList.add(getWidthList(infoVO));
 		}
-		// Map: <width, 1.4rem>, <type, "cleaning/using/empty">
 		request.setAttribute("infoList", list);
 		request.setAttribute("widthListList", widthListList);
+		request.setAttribute("cleaningTimeSec", getWidthByMin(CLEANING_TIME_SEC) + "rem");
 		return new Url("jsp/addReservationUI.jsp", Url.FORWARD);
 	}
 
@@ -43,13 +41,29 @@ public class AddReservationUI implements Action {
 		for (int i = 0; i < size; i++) {
 			LinkedHashMap<String, String> temp = new LinkedHashMap<>();
 			ReservationVO rVO = list.getReservationVOs().get(i);
+			//청소시간을 고려하여 실사용시간 전후 15분도 예약이 잡혀있는 것으로 취급한다.
+			applyCleaningTime(rVO);
 
 			temp.put("width", getWidthFromReservation(rVO));
 			temp.put("offset", getOffsetFromReservation(rVO));
-			temp.put("type", "using");
+			temp.put("type", "usedTime");
 			widthList.add(temp);
 		}
 		return widthList;
+	}
+
+	private void applyCleaningTime(ReservationVO rVO) {
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime startOffset = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(),
+				0, 0);
+		if(rVO.getStartTime().isBefore(startOffset.plusMinutes(15))){
+			//예약자의 정보를 숨기기 위해 예약이 언제 시작되었는지 숨긴다.
+			rVO.setStartTime(startOffset);
+		}else{
+			rVO.setStartTime(rVO.getStartTime().minusMinutes(CLEANING_TIME_SEC));
+		}
+
+		rVO.setEndTime(rVO.getEndTime().plusMinutes(CLEANING_TIME_SEC));
 	}
 
 	private String getWidthFromReservation(ReservationVO vo) {
