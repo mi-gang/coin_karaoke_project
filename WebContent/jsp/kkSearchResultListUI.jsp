@@ -35,7 +35,11 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/starRate.css">
+	<script src="js/starRate.js"></script>
+    
   </head>
   <body>
     <!-- 모바일 컨테이너 -->
@@ -73,13 +77,18 @@
 		                        <p class="resultKKTitle">${result.getName()}</p>
 		                        <div class="starScoreWrapper">
 		                            <span id="starAvgScore">${result.getStarRating()}</span>
-		                            <div class="stars">
+		                            <div class="rating-wrap">
+										<div class="rating">
+											<div class="overlay"></div>
+										</div>
+									</div>
+		                            <!-- <div class="stars">
 		                                <img src="img/filledStar.svg" alt="채워진 별">
 		                                <img src="img/filledStar.svg" alt="채워진 별">
 		                                <img src="img/filledStar.svg" alt="채워진 별">
 		                                <img src="img/filledStar.svg" alt="채워진 별">
 		                                <img src="img/star_half.svg" alt="0.5점 별">
-		                            </div>
+		                            </div> -->
 		                        </div>
 		                        <p class="resultKKAddress">${result.getAddress()}</p>
 		                        <div class="representativeKeywords">
@@ -141,6 +150,31 @@
 		      	console.log(encodedPrevURL);
 		      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
             	//
+            	
+            	// 해당 노래방의 평균 별점만큼 별 아이콘
+            	updateStarContainer();
+				function updateStarContainer() {
+					$(".starScoreWrapper").each(function (i, item) {
+						const rating = item.querySelector(".rating");
+						const overlay = item.querySelector(".overlay");												
+						const rate = item.querySelector("#starAvgScore").textContent;
+						drawStarRate(rating, overlay, rate);
+					});
+				}
+				
+				// 평균 별점 아이콘 크기 조정
+				const ratingDiv = document.querySelectorAll(".rating");
+				console.log("ratingDiv");
+				console.log(ratingDiv);
+				const divsInRating = ratingDiv.querySelectorAll("div");
+				console.log("divsInRating");
+				console.log(divsInRating);
+				
+				ratingDiv.forEach(function(rating) {
+					rating.forEach(function(div) {
+						div.style.width = '20px';
+					});
+				});
             	
             	const kkList = document.querySelectorAll(".resultItem");
                 const bookmarks = $(".bookmark").get();
@@ -210,17 +244,6 @@
              				});
              			}
              		});
-             		/* item.addEventListener("click", function() {
-             			const clickedItem = this;
-             			console.log(">> clickedItem");
-             			console.log(clickedItem);
-             			console.log(kkId);
-             			$.ajax({
-                			url: "controller?cmd=kkDetailUI",
-           					data:{selectedKKId: kkId}
-                		});
-             			// location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
-             		}); */
              	});       
              	// 선택한 노래방의 상세 페이지로 이동
              	leftSideList.forEach(function(item) {
@@ -234,17 +257,6 @@
          			location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
          			});
              	});
-             	/* rightSideImgList.forEach(function(item) {
-             		const kkId = item.querySelector("#resultKKId").textContent;
-	         			item.addEventListener("click", function() {
-	         			const clickedItem = this;
-	         			$.ajax({
-	            			url: "controller?cmd=kkDetailUI",
-	       					data:{selectedKKId: kkId}
-	            		});
-	         			location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
-	         		});
-             	}); */
              	
              // 하단 메뉴바를 통한 페이지 이동
                 $("nav div").on("click", function() {
