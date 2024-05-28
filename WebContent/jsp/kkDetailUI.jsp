@@ -44,9 +44,7 @@
         src="img/left arrow.svg"
         alt="이전 페이지 이동"
       />
-      <!-- <span>스타버스 코인노래방</span> -->
       <span>${KKVO.getName()}</span>
-      <!-- 목록에서 클릭한 노래방명이 들어갈 자리 !-->
     </header>
     <!-- 컨텐츠 컨테이너 -->
     <div id="container">
@@ -297,16 +295,7 @@
                 </div>
               </div>
             </div>
-            <div class="textReviewContainer">
-              <!-- <div id="invisibleUnLoginUser" class="invisibleUnLoginUser">
-                <div class="invisibleWrapper">
-                  <p>이 노래방의 상세 리뷰가 궁금하신가요?</p>
-                  <div id="reviewLoginBtn" class="reviewLoginBtn">
-                    로그인하고 리얼 리뷰 보기
-                  </div>
-                </div>
-              </div> -->
-            </div>
+            <div class="textReviewContainer"></div>
           </div>
         </div>
       </div>
@@ -322,6 +311,24 @@
 
     <script>
       $(document).ready(function () {
+    	// prevURL: 로그인 후 다시 돌아올 현재 페이지
+    	/* const prevURL1 = window.location.search;
+      	console.log(prevURL1);
+      	const encodedPrevURL = encodeURIComponent(prevURL1);
+      	console.log(encodedPrevURL);
+      	sessionStorage.setItem("prevURL", encodedPrevURL); */
+      	/* const currentURL = window.location.search;
+      	console.log(currentURL);
+      	const encodedCurrURL = encodeURIComponent(currentURL);
+      	sessionStorage.setItem("currURL", encodedCurrURL); */
+      	
+      	
+      	// 헤더의 '이전 페이지' 접근하기
+      	$("header img").on("click", function() {
+      		// console.log(sessionStorage.getItem("prevURL"));
+      		location.replace("controller"+sessionStorage.getItem("prevURL"));
+      	});
+      	
         const kkId = "${KKVO.getKkId()}";
         console.log(kkId);
         console.log("1 ajax success data: ");
@@ -386,7 +393,13 @@
         			$("#bookmark").on("click", function()  {
         				console.log("로그인해야 북마크 가능!");
         				alert("로그인한 유저만 북마크 가능합니다. 로그인 페이지로 이동합니다 :)");
-        				location.replace("controller?cmd=loginUI");
+        				const prevURL1 = window.location.search;
+        		      	console.log(prevURL1);
+        		      	const encodedPrevURL = encodeURIComponent(prevURL1);
+        		      	console.log(encodedPrevURL);
+        		      	sessionStorage.setItem("prevURL", encodedPrevURL);
+        				// location.replace("controller?cmd=loginUI");
+        		      	location.replace("controller?cmd=loginUI&prevURL="+sessionPrevURL);
         			});
         		}
         	}
@@ -418,7 +431,6 @@
         
         
         let reviewList = "${reviewList}";
-        console.log("--> reviewList")
         console.log(reviewList);
         // 로그인 여부에 따라 리뷰 가림막 On/Off
       	$.ajax({
@@ -427,9 +439,6 @@
       		dataType: "json",
       		success: function(data) {
       			// 로그인 X
-      			console.log("로그인 여부 따라 가림막  on/off의 data..........");
-      			console.log(data);
-      			console.log(data.isLogin);
       			const detailTxtReviewCnt = data.reviewList.length;
       			
       			if(data.isLogin === false) {
@@ -441,19 +450,34 @@
       						$("#defaultInfoContainer").addClass("selected");
       			            $("#reviewContainer").removeClass("selected");
       					} else if(menuType === "review") {
-      						//
-      						console.log("로그인 여부 따라 가림막  on/off");
-      						let invisibleDiv = "<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>";
-      						$("#textReviewContainer").prepend("<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>");
-      						//
+      						const invisibleDiv = "<div id='invisibleUnLoginUser' class='invisibleUnLoginUser'><div class='invisibleWrapper'><p>이 노래방의 상세 리뷰가 궁금하신가요?</p><div id='reviewLoginBtn' class='reviewLoginBtn'>로그인하고 리얼 리뷰 보기</div></div></div>";
       						$(".reviewItem").css("background-color", "rgba(246,246,246,0.94)");
-	      		              $(".reviewItem").css("color", "rgba(246,246,246,0.94)");
-	      		              $(".reviewContents").css("background-color", "rgba(246,246,246,0.94)");
-	      		              $("#defaultInfoContainer").removeClass("selected");
-	      		              $("#reviewContainer").addClass("selected notLogin");
-	      		              $("#invisibleUnLoginUser").addClass("on");
+      						$(".reviewItem").css("color", "rgba(246,246,246,0.94)");
+      						$(".reviewContents").css("background-color", "rgba(246,246,246,0.94)");
+      						$("#defaultInfoContainer").removeClass("selected");
+      						$("#reviewContainer").addClass("selected notLogin");
+      						$(".textReviewContainer").prepend(invisibleDiv);
+      						$(".invisibleUnLoginUser").addClass("on");
+	      		            // 텍스트 리뷰 보기 버튼 클릭 -> 로그인 페이지로 이동
+      						$("#reviewLoginBtn").click(function() {
+      							// console.log(prevURL);
+      		            		// location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+      							
+      		            		// location.replace("controller?cmd=loginUI");
+      		            		console.log("텍스트 리뷰 보기 버튼 클릭");
+      		            		const prevURL1 = window.location.search;
+      		                	console.log(prevURL1);
+      		                	const encodedPrevURL = encodeURIComponent(prevURL1);
+      		                	console.log(encodedPrevURL);
+      		                	sessionStorage.setItem("prevURL", encodedPrevURL);
+      		            		console.log(sessionStorage.getItem("prevURL"));
+      		            		let sessionPrevURL = sessionStorage.getItem("prevURL");
+      		            		console.log(sessionPrevURL);
+      		            		
+      		            		location.replace("controller?cmd=loginUI&prevURL="+sessionPrevURL);
+      		            	});
       					}
-      				});	
+      				});       				
       			} else {
       			// 로그인 O
       				$(".tapMenu").click(function() {
@@ -481,6 +505,7 @@
       		}
       	});
         
+     	
 
         // 리뷰 개수만큼 item 생성
         $.ajax({
@@ -623,12 +648,28 @@
           return;
         });
 
-        // 로그인하고 텍스트 리뷰 보기 버튼 클릭시, 로그인 페이지로 이동 (현재는 alert)
-        $("#reviewLoginBtn").click(function() {
-          // alert("로그인 페이지로 이동!");
-          location.replace("controller?cmd=loginUI");
-          return;
-        })
+     // 하단 메뉴바를 통한 페이지 이동
+        $("nav div").on("click", function() {
+      	  const clickedDiv = $(this);
+      	  const imgAlt = clickedDiv.find("img").attr("alt");
+      	  switch(imgAlt) {
+      	  case "메인 페이지":
+      		  location.replace("controller?cmd=mainUI");
+      		  break;
+      	  case "노래방 검색 페이지":
+      		  location.replace("controller?cmd=kkFilterUI");
+      		  break;
+      	  case "노래 검색 페이지":
+      		  location.replace("controller?cmd=musicListUI");
+      		  break;
+      	  case "나의 예약 내역 페이지":
+      		  location.replace("controller?cmd=reservationListUIAction");
+      		  break;
+      	  case "마이페이지":
+      		  location.replace("controller?cmd=mypageUIAction");
+      		  break;
+      	  }
+        });
       });
     </script>
   </body>
