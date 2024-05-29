@@ -28,10 +28,13 @@ pageEncoding="UTF-8"%>
     <!-- 모바일 컨테이너 -->
     <div id="mobileContainer">
       <!--헤더-->
-      <header>
+      <header> 
+        <img />
         <div id="mypage-header">
           <span>마이페이지</span>
-          <button id="logout-button">로그아웃</button>
+          <button id="logout-button1" class="logout-button" 
+          	data-bs-toggle="modal" data-bs-target="#logoutModal"
+          >로그아웃</button>
         </div>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -132,6 +135,7 @@ pageEncoding="UTF-8"%>
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
+            <!-- <h4 class="modal-title">이용시간</h4> -->
             <button
               type="button"
               class="btn-close"
@@ -141,11 +145,8 @@ pageEncoding="UTF-8"%>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
-              <span class="cancle-modal-title">등록 완료</span>
-              <span class="cancle-modal-content"
-                >문의/신고가 접수되었습니다.</span
-              >
+            <div class="cancel-modal-body-wrapper">
+              <span class="cancel-modal-title">로그아웃 하시겠습니까?</span>
             </div>
           </div>
 
@@ -153,12 +154,12 @@ pageEncoding="UTF-8"%>
           <div class="modal-footer">
             <button
               type="button"
-              class="submit_button add-button"
-              id="add2-add-time-button"
+              class="submit-button add-button"
+              id="logout-button2"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
-              닫기
+              	로그아웃
             </button>
           </div>
         </div>
@@ -166,7 +167,16 @@ pageEncoding="UTF-8"%>
     </div>
     
     <script>
- // 마이페이지 메인 화면 불러오기 AJax
+    
+    // 
+/*     $(document).ready(function () {
+    	let userId = sessionStorage.getItem('userId');
+    	if (userId == null) {
+			
+		}
+    }); */
+    
+ 	// 마이페이지 메인 화면 불러오기 AJax
     $(document).ready(function () {
     	console.log("마이페이지 메인 불러오기");
     	$.ajax({
@@ -213,19 +223,18 @@ pageEncoding="UTF-8"%>
     				 
     			// 나의 플레이리스트
 				for (var i = 0; i < data.playlistVOs.length; i++) {
-					$("#playlist"+[i+1]).attr("data-playListId-"+[i+1], data.playlistVOs[i].playListId);;
+					$("#playlist"+[i+1]).attr("data-playListId", data.playlistVOs[i].playListId);;
 					$("#playlist-name"+[i+1]).append(data.playlistVOs[i].playListTitle);
 				}
     			$("#playlist-amount").append(data.playlistCount);
 
     			
     			// 나의 리뷰
-     			let reviewItem = '<div class="review-item"> data-id='
+     			let reviewItem = '<div class="review-item" data-id='
      				+ data.reviewVO.reviewId
      				+ '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
     				+ data.reviewVO.KKname 
-    		    	+ '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete" id="' + data.reviewVO.reviewId
-    		    	+ '">삭제</button></div>'
+    		    	+ '</span><img src="img/arrow_right.svg" /></div></div>'
     		    	+ '<div class="review-content2"><span class="review-date">'
     		    	+ data.reviewVO.startTime.date.year+" ." + data.reviewVO.startTime.date.month +" ."+data.reviewVO.startTime.date.day
     		    	+ '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
@@ -239,6 +248,29 @@ pageEncoding="UTF-8"%>
     			 });
     });
 
+    
+    // 하단 메뉴바를 통한 페이지 이동
+    $("nav div").on("click", function() {
+  	  const clickedDiv = $(this);
+  	  const imgAlt = clickedDiv.find("img").attr("alt");
+  	  switch(imgAlt) {
+  	  case "메인 페이지":
+  		  location.replace("controller?cmd=mainUI");
+  		  break;
+  	  case "노래방 검색 페이지":
+  		  location.replace("controller?cmd=kkFilterUI");
+  		  break;
+  	  case "노래 검색 페이지":
+  		  location.replace("controller?cmd=musicListUI");
+  		  break;
+  	  case "나의 예약 내역 페이지":
+  		  location.replace("controller?cmd=reservationListUIAction");
+  		  break;
+  	  case "마이페이지":
+  		  location.replace("controller?cmd=mypageUIAction");
+  		  break;
+  	  }
+    });
 
     </script>
 

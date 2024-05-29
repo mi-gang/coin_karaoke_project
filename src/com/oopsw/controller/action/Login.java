@@ -2,8 +2,6 @@ package com.oopsw.controller.action;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +11,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
-import com.oopsw.model.vo.UserVO;
 import com.oopsw.service.UserService;
 
 public class Login implements Action {
@@ -32,11 +29,11 @@ public class Login implements Action {
 		// *
 		// 로그인 유도 페이지로부터 로그인 UI에 접속하여 로그인 성공 -> 다시 로그인 유도 페이지로 돌아가야함.
 		// (예: 노래방 상세페이지-리뷰 _ '로그인하고 리얼 리뷰 보기' 버튼 클릭으로 로그인 -> 노래방 상세페이지로 돌아가야함)
-		String prevURL = request.getParameter("prevURL");
+		String prevURL = "?cmd=mainUI";		// 임시 처리
 		System.out.println("!! ~~ 로그인 Action 파일");
 		System.out.println("!! ~~ prevURL: ");
 		System.out.println(prevURL);
-		String dPrevURL = null;
+		String dPrevURL = "?cmd=mainUI";
 		try {
 			dPrevURL = prevURL = URLDecoder.decode(prevURL, "UTF-8");
 		} catch (UnsupportedEncodingException e) {

@@ -202,6 +202,12 @@ public class ReservationService {
 		// start_time, end_time, availableTime, 성인유무 을 보내야 함
 		AdditionalTimeInfoVO aTimeInfoVO = new AdditionalTimeInfoVO(startTime, endTime, availableHour, availableMinute,
 				isAdult);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return aTimeInfoVO;
 	}
@@ -235,6 +241,12 @@ public class ReservationService {
 		if (!isAdult && maxEndTime.isAfter(limitTime)) {
 
 			availableMinutes = (int) Duration.between(endTime, limitTime).toMinutes();
+		}
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 		return availableMinutes;
@@ -297,6 +309,13 @@ public class ReservationService {
 		}
 		LocalDateTime endTime = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId).getEndTime();
 		result = new ReservationDAO(conn).updateReservation(endTime.plusMinutes(additionalTime), reservationId);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
 

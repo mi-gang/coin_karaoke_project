@@ -12,7 +12,7 @@ $("#bookmark-page").on("click", function() {
 
 // 플레이리스트 페이지 이동
 $("#playlist-page").on("click", function() {
-	alert("action: playListMusicUI");
+	location.href = "controller?cmd=mypagePlaylistUI";
 });
 
 // 나의 리뷰 페이지 이동
@@ -27,12 +27,12 @@ $("#review-items").on("click", ".KK-title", function() {
 
 // 회원정보 수정
 $("#edit-user-info-button").on("click", function() {
-	alert("action: updateUserUI");
+	location.href = "controller?cmd=updateUserUI";
 });
 
-// 로그아웃
-$("#logout-button").on("click", function() {
-	alert("action: logout");
+// 로그아웃 버튼 2
+$("#logout-button2").on("click", function() {
+	location.href = "controller?cmd=logout";
 });
 
 // // 리뷰 삭제 모달
@@ -46,8 +46,9 @@ $("#KK-search-img").on("click", function() {
 });
 
 // 플레이리스트 이동
-$(".playlist").on("click", function() {
-	alert("action : playListUI");
+$("#playlists").on("click", ".playlist", function() {
+	playlistId = $(this).closest(".playlist").attr("data-playlistid");
+	location.href = "controller?cmd=playlistMusicUI&playlistId="+playlistId;
 });
 
 // 비회원 로그인 바로가기

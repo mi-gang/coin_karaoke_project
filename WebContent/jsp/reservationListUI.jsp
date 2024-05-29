@@ -27,13 +27,13 @@
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+        <img />
         <span>나의 예약</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
         <div id="reservation-wrapper">
-          <div id="reservations_status">
+          <div id="reservations-status">
             <button class="reservations-status-button" id="status-1">
               이용 중/예정
             </button>
@@ -47,7 +47,7 @@
           <div id="reservation-list">
             <div id="total-reservation">
               <span>총 </span>
-              <span>2</span>
+              <span id="content-amount"></span>
               <span>건</span>
             </div>
             <div id="reservation-contents-wrapper">
@@ -115,13 +115,16 @@
                   >
                   <div class="add1-modal-body-content-time"
                     >
-                   <div >
-                      <span id="add1-original-start">1</span>
-                      <span>시간</span>
+                   <div>
+                      <span id="add1-original-startHour"></span>
+                      <span>:</span>
+                      <span id="add1-original-startMinute"></span>
                     </div>
-                    <div >
-                      <span id="additional-minute-a-status">34</span>
-                      <span>분</span>
+                    <span>-</span>
+                    <div>
+                      <span id="add1-original-endHour"></span>
+                      <span>:</span>
+                      <span id="add1-original-endMinute"></span>
                     </div>
                    </div>
                 </div>
@@ -296,7 +299,6 @@
             <button
               type="button"
               class="submit-button add-button back-button"
-              id="time-setting-button"
               data-bs-toggle="modal"
               data-bs-target="#addTimeModal"
               data-bs-dismiss="modal"
@@ -308,7 +310,6 @@
               class="submit-button add-button"
               id="time-setting-button"
               data-bs-toggle="modal"
-              data-bs-target="#addTimeModal4"
               data-bs-dismiss="modal"
             >
               결제
@@ -612,5 +613,30 @@
     </div>
 
     <script src="js/reservation.js"></script>
+    <script>
+    
+    // 하단 메뉴바를 통한 페이지 이동
+    $("nav div").on("click", function() {
+  	  const clickedDiv = $(this);
+  	  const imgAlt = clickedDiv.find("img").attr("alt");
+  	  switch(imgAlt) {
+  	  case "메인 페이지":
+  		  location.replace("controller?cmd=mainUI");
+  		  break;
+  	  case "노래방 검색 페이지":
+  		  location.replace("controller?cmd=kkFilterUI");
+  		  break;
+  	  case "노래 검색 페이지":
+  		  location.replace("controller?cmd=musicListUI");
+  		  break;
+  	  case "나의 예약 내역 페이지":
+  		  location.replace("controller?cmd=reservationListUIAction");
+  		  break;
+  	  case "마이페이지":
+  		  location.replace("controller?cmd=mypageUIAction");
+  		  break;
+  	  }
+    });
+    </script>
   </body>
 </html>

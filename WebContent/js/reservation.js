@@ -19,7 +19,7 @@ $(".reservations-status-button").on("click", function () {
           //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
           let startDate = new Date(
             response[i].startTime.date.year,
-            response[i].startTime.date.month - 1,
+            response[i].startTime.date.month -1,
             response[i].startTime.date.day,
             response[i].startTime.time.hour,
             response[i].startTime.time.minute,
@@ -27,7 +27,7 @@ $(".reservations-status-button").on("click", function () {
           );
           let endDate = new Date(
             response[i].endTime.date.year,
-            response[i].endTime.date.month - 1,
+            response[i].endTime.date.month -1,
             response[i].endTime.date.day,
             response[i].endTime.time.hour,
             response[i].endTime.time.minute,
@@ -37,14 +37,14 @@ $(".reservations-status-button").on("click", function () {
           let startDateFormat =
             startDate.getFullYear() +
             "년" +
-            startDate.getMonth() +
+            (startDate.getMonth()+1) +
             "월" +
             startDate.getDate() +
             "일";
           let endDateFormat =
             endDate.getFullYear() +
             "년" +
-            endDate.getMonth() +
+            (endDate.getMonth()+1) +
             "월" +
             endDate.getDate() +
             "일";
@@ -63,12 +63,30 @@ $(".reservations-status-button").on("click", function () {
             .getMinutes()
             .toString()
             .padStart(2, "0");
+          
+          let button2 = '<button class="cancel-button" data-bs-toggle="modal" data-bs-target="#cancelReservationModal1">예약 취소</button>';
+          let reservationStatus = '이용 예정';
 
-          reselt =
+          const sysdate = new Date;
+          
+          console.log("sysdate.getTime()"+sysdate.getTime());
+          console.log("startDate"+startDate.getTime());
+          console.log("endDate"+endDate.getTime());
+          console.log(sysdate.getTime() >= startDate.getTime());
+          console.log(sysdate.getTime() <= endDate.getTime());
+          
+          if (sysdate.getTime() >= startDate.getTime() && sysdate.getTime() <= endDate.getTime()) {
+        	  button2 = '<button class="cancel-button inquire-modal-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>';
+        	  reservationStatus = '이용 중';
+          }
+          
+          result =
             '<div class="reservation-content-wrapper" id=' +
             response[i].reservationId +
             '><div class="reservation-status-wrapper">' +
-            '<span class="reservation-status">이용 중</span></div>' +
+            '<span class="reservation-status">' +
+            reservationStatus +
+            '</span></div>' +
             '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>' +
             '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">' +
             '<span id="karaoke-name" class="kk-name">' +
@@ -84,7 +102,7 @@ $(".reservations-status-button").on("click", function () {
             '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
             startHourFormat +
             "</span> <span>:</span>" +
-            '<span id="reservation-start-minute">' +
+            '<span class="reservation-start-minute">' +
             startMinuteFormat +
             '</span></div><span>-</span><div class="reservation-end-time">' +
             '<span class="reservation-end-hour">' +
@@ -92,11 +110,12 @@ $(".reservations-status-button").on("click", function () {
             '</span> <span>:</span> <span class="reservation-end-minute">' +
             endMinuteFormat +
             "</span>" +
-            '</div></div></div><div class="button_wrapper"><button type="button" class="submit-button add-time-button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>' +
-            '<button class="cancel-button inquire-modal-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>' +
-            "</div></div></div></div>";
-          $("#reservation-contents-wrapper").append(reselt);
+            '</div></div></div><div class="button-wrapper"><button type="button" class="submit-button add-time-button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>' +
+            button2 +
+            '</div></div></div></div>';
+          $("#reservation-contents-wrapper").append(result);
         }
+        $("#content-amount").text(response.length);
       },
     });
   }
@@ -160,7 +179,7 @@ $(".reservations-status-button").on("click", function () {
             .padStart(2, "0");
           
           let reviewButton = null;
-          let inquireButton = '<button class="cancel-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>';
+          let inquireButton = '<button class="cancel-button inquire-modal-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>';
           
           console.log(response[i].isReviewWritten);
           
@@ -214,12 +233,13 @@ $(".reservations-status-button").on("click", function () {
             '</span> <span>:</span> <span class="reservation-end-minute">' +
             endMinuteFormat +
             "</span>" +
-            '</div></div></div><div class="button_wrapper">' +
+            '</div></div></div><div class="button-wrapper">' +
             reviewButton +
             inquireButton +
             "</div></div></div></div>";
           $("#reservation-contents-wrapper").append(result);
         }// for문 end
+        $("#content-amount").text(response.length);
       } // success end
     });
   }
@@ -282,7 +302,7 @@ $(".reservations-status-button").on("click", function () {
             .toString()
             .padStart(2, "0");
 
-          reselt =
+          result =
             '<div class="reservation-content-wrapper" id=' +
             response[i].reservationId +
             '><div class="reservation-status-wrapper">' +
@@ -311,14 +331,15 @@ $(".reservations-status-button").on("click", function () {
             endMinuteFormat +
             "</span>" +
             "</div></div></div>" +
-            '<div id="cancle-info"><span>취소 수수료</span><div><span>' +
+            '<div id="cancel-info"><span>취소 수수료</span><div><span>' +
             4500 +
             "</span><span>원</span><span>(50%)</span></div></div>" +
             "</div></div></div>";
 
-          $("#reservation-contents-wrapper").append(reselt);
-        }
-      },
+          $("#reservation-contents-wrapper").append(result);
+        }// for end
+        $("#content-amount").text(response.length);
+      }
     });
   }
 
@@ -338,19 +359,8 @@ $(".reservations-status-button").on("click", function () {
         }
       },
     });
-
-    return false;
   }*/
-  if ($(this).attr("id") == "status-2") {
-    $(".status-2-1").show();
-    $(".status-2-2").show();
-    $(".status-2-3").show();
-    return false;
-  }
-  if ($(this).attr("id") == "status-3") {
-    $(".status-3").show();
-    return false;
-  }
+
 });
 
 // for (let i = 0; i < reservationStatus.length; i++) {
@@ -369,6 +379,10 @@ $("#reservation-contents-wrapper").on("click", ".add-time-button", function () {
   $("#setting-hour").val("");
   $("#setting-minute").val("");
   $("#add1-add-time-button").attr("disabled", true);
+  
+  // 예약 아이디 옮겨놓기
+  let reservationId = $(this).closest(".reservation-content-wrapper").attr("id");
+  $("#addTimeModal3").attr("data-reservation-id", reservationId);
 
   // 노래방 이름 옮겨놓기
   const kkname = $("#karaoke-name").text();
@@ -377,14 +391,48 @@ $("#reservation-contents-wrapper").on("click", ".add-time-button", function () {
 
   // 시작 시간, 종료시간 옮겨놓기
   $(".reservation-start-hour");
-});
-
+  
+  let startHour = $(this).closest(".reservation-detail-wrapper").find(".reservation-start-hour").text();
+  let startMinute = $(this).closest(".reservation-detail-wrapper").find(".reservation-start-minute").text();
+  let endHour = $(this).closest(".reservation-detail-wrapper").find(".reservation-end-hour").text();
+  let endMinute = $(this).closest(".reservation-detail-wrapper").find(".reservation-end-minute").text();
+  
+  $("#add1-original-startHour").text(startHour);
+  $("#add1-original-startMinute").text(startMinute);
+  $("#add1-original-endHour").text(endHour);
+  $("#add1-original-endMinute").text(endMinute);
+  
 // 추가 가능 시간 설정하기
-
+    
+  $.ajax({
+    url: "controller?cmd=addableTime",
+    type: "GET",
+    data: { "reservationId" : reservationId},
+    dataType: "json",
+    success: function (data) {
+    	
+      let minute = parseInt(data.minute);
+      
+      let carry = 0;
+      let hours = Math.floor(minute / 60);
+      let minutes = minute % 60;
+      
+      $(".additional-hour-a-status").text(hours);
+      $(".additional-minute-a-status").text(minutes);
+      
+    },
+  });
+  
+  
+  
 // 미성년자 회원일 경우 안내창 설정하기
 // if () {
 //   $("#add1-notice").text("미성년자는 10시 이후 출입이 제한됩니다.");
 // }
+  
+  
+});
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -470,10 +518,11 @@ $("#add2-add-time-button").on("click", function (event) {
 // 추가하기 버튼 클릭 시
 $("#add1-add-time-button").on("click", function () {
   // 이용 종료시간 변경하기
+	
   let endHour =
-    parseInt($("#reservation-end-hour").text()) +
+    parseInt($("#add1-original-endHour").text()) +
     parseInt($(".target-hour").text());
-  let endMinute = parseInt($("#reservation-end-minute").text());
+  let endMinute = parseInt($("#add1-original-endMinute").text());
 
   // 분 더하기 로직
   let carry = 0;
@@ -506,6 +555,45 @@ $("#add1-add-time-button").on("click", function () {
   $("#add3-amount").text(amount);
 });
 
+// 시간 추가 결제 버튼 클릭 시
+$("#time-setting-button").on("click", function () {
+	
+	const reservationId = $("#addTimeModal3").data("reservationId");
+	
+	console.log($("#addTimeModal3").data("reservationId"));
+	let hour = parseInt($(".set-hour").text() || 0);
+	let minute = parseInt($(".set-minute").text() || 0);
+	
+	minute += hour * 60;
+	
+	$.ajax({
+		url: "controller?cmd=payAdditionalTimeAction",
+		type: "POST",
+		data: { "reservationId": reservationId, "additionalTime" : minute},
+		dataType: "json",
+		success: function (data) {
+			console.log(data);
+		    if (data) {
+		        $("#addTimeModal4").modal("show");
+		      } else {
+		        // 나중에 처리
+		      }
+		    },
+		    error: function (xhr, status, error) {
+		        console.log("AJAX 요청 실패");
+		        console.log("Status: " + status);
+		        console.log("Error: " + error);
+		    }
+		  });
+	
+	 ;
+	
+	
+});
+
+
+
+
 //////////////////////////////////////////
 // 리뷰 모달
 // 리뷰 모달 오픈 버튼 클릭 시
@@ -514,7 +602,7 @@ $("#reservation-contents-wrapper").on("click", ".review-button1", function () {
   const reservationId = $(this)
     .closest(".reservation-content-wrapper")
     .attr("id");
-  $("#addReviewModal").attr("data-reservationId", reservationId);
+  $("#addReviewModal").attr("data-reservation-id", reservationId);
 
   // 노래방 이름 옮겨놓기
   const kkname = $(this)
@@ -526,7 +614,7 @@ $("#reservation-contents-wrapper").on("click", ".review-button1", function () {
 
 //모달 내 리뷰 등록 버튼 클릭 시 이벤트
 $("#add-review-button").on("click", function () {
-  const reservationId = $(this).closest(".modal").attr("data-reservationId");
+  const reservationId = $(this).closest(".modal").attr("data-reservation-id");
   const content = $("#review-description").val();
   const star = $("#review-star").val();
 
@@ -566,7 +654,7 @@ $("#reservation-contents-wrapper").on(
       .closest(".reservation-content-wrapper")
       .attr("id");
     //	console.log("reservationId : "+reservationId);
-    $("#addInquireModal").attr("data-reservationId", reservationId);
+    $("#addInquireModal").attr("data-reservation-id", reservationId);
 
     // 노래방 이름 옮겨놓기
     $("#inquire-kkname").text("");
@@ -578,7 +666,7 @@ $("#reservation-contents-wrapper").on(
 
 // 모달 내 문의/신고하기 버튼 클릭 시 이벤트
 $("#inquire-button").on("click", function () {
-  const reservationId = $(this).closest(".modal").attr("data-reservationId");
+  const reservationId = $(this).closest(".modal").attr("data-reservation-id");
   const content = $("#inquire-description").val();
   //	const textarea = document.getElementById('inquire-description').value;
 
@@ -618,23 +706,24 @@ $("#reservation-contents-wrapper").on("click", ".cancel-button", function () {
     .closest(".reservation-content-wrapper")
     .attr("id");
   //	console.log("reservationId : "+reservationId);
-  $("#cancelReservationModal1").attr("data-reservationId", reservationId);
+  $("#cancelReservationModal1").attr("data-reservation-id", reservationId);
 });
 
 //모달 내 취소하기 버튼 클릭 시 이벤트
 $("#reservation-delete-button").on("click", function () {
-  const reservationId = $(this).closest(".modal").attr("data-reservationId");
+  const reservationId = $(this).closest(".modal").attr("data-reservation-id");
 
   $.ajax({
-    url: "controller?cmd=addInquireAction",
+    url: "controller?cmd=cancelReservationAction",
     type: "POST",
-    data: { reservationId: reservationId },
+    data: {"reservationId": reservationId},
     dataType: "json",
     success: function (data) {
       console.log(data);
       // console.log(data.result);
       if (data) {
         $("#cancelReservationModal2").modal("show");
+        location.href="controller?cmd=reservationListUI";
       } else {
         // 나중에 처리
       }

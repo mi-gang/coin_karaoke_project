@@ -15,7 +15,7 @@ public class Logout implements Action {
 		if (session != null) {
 			session.invalidate();
 		}
-		return new Url("메인페이지", Url.FORWARD);
+		return new Url("controller?cmd=mainUI", Url.FORWARD);
 	}
 
 }
