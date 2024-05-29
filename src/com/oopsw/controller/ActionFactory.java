@@ -9,6 +9,7 @@ import com.oopsw.controller.action.AddReservationUIAction;
 import com.oopsw.controller.action.AddReviewAction;
 import com.oopsw.controller.action.AddUser;
 import com.oopsw.controller.action.AddUserUI;
+import com.oopsw.controller.action.AddableTime;
 import com.oopsw.controller.action.AdditionalTimeInfoAction;
 import com.oopsw.controller.action.AmountStarReviewListByType;
 import com.oopsw.controller.action.CancelReservationAction;
@@ -48,8 +49,10 @@ import com.oopsw.controller.action.ResetPassword;
 import com.oopsw.controller.action.ReviewListAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.SearchForKKWithOptions;
+import com.oopsw.controller.action.SearchedKKList;
 import com.oopsw.controller.action.SendValidationNumber;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.UpdateKKBookmark;
 import com.oopsw.controller.action.UpdateNickname;
 import com.oopsw.controller.action.UpdatePassword;
 import com.oopsw.controller.action.UpdateUserUI;
@@ -115,6 +118,9 @@ public class ActionFactory {
 			case "nearRecommendKKList":
 				action = new NearRecommendKKList();
 				break;
+			case "addableTime":
+				action = new AddableTime();
+				break;
 			case "addReservationUI":
 				action = new AddReservationUI();
 				break;
@@ -142,7 +148,10 @@ public class ActionFactory {
 			case "mypageUIAction":
 				action = new MyPageUIAction();
 				break;
-			// ***** reservation *****
+			case "myPageAction":
+				action = new MyPageAction();
+				break;
+			// reservation
 			case "addReservationUIAction":
 				action = new AddReservationUIAction();
 				break;
@@ -205,10 +214,13 @@ public class ActionFactory {
 			case "deleteBookmarkAction":
 				action = new DeleteBookmarkAction();
 				break;
+			case "updateKKBookmark":
+				action = new UpdateKKBookmark();
+				break;
 			case "amountStarReviewListByType":
 				action = new AmountStarReviewListByType();
 				break;
-			//***** 플레이리스트 *****
+			// ***** 플레이리스트 *****
 			case "mypagePlaylistUI":
 				action = new MypagePlaylistUI();
 				break;
@@ -236,9 +248,13 @@ public class ActionFactory {
 			case "playlistMusicList":
 				action = new PlaylistMusicList();
 				break;
-        case "updatePlaylistTitle":
-			action=new UpdatePlaylistTitle();
-			break;
+			case "updatePlaylistTitle":
+				action = new UpdatePlaylistTitle();
+				break;
+			// 임시
+			case "searchedKKList":
+				action = new SearchedKKList();
+				break;
 			default:
 				action = new wrongCmd();
 				break;

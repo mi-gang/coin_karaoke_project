@@ -357,7 +357,7 @@
     </div>
 
     <!-- 예약 취소 모달 1 -->
-    <div class="modal" id="cancleReservationModal1">
+    <div class="modal" id="cancelReservationModal1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <!-- Modal Header -->
@@ -372,9 +372,9 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
-              <span class="cancle-modal-title">예약을 취소하시겠습니까?</span>
-              <span class="cancle-modal-content"
+            <div class="cancel-modal-body-wrapper">
+              <span class="cancel-modal-title">예약을 취소하시겠습니까?</span>
+              <span class="cancel-modal-content"
                 >노래방 이용 시작 시간 기준 <b>20분</b> 내 취소 시 <br />취소
                 수수료가 부과됩니다.</span
               >
@@ -386,10 +386,9 @@
             <button
               type="button"
               class="submit-button add-button"
-              id="add2-add-time-button"
+              id="reservation-delete-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
-              data-bs-target="#cancleReservationModal2"
             >
               취소하기
             </button>
@@ -399,7 +398,7 @@
     </div>
 
     <!-- 예약 취소 모달 2 -->
-    <div class="modal" id="cancleReservationModal2">
+    <div class="modal" id="cancelReservationModal2">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <!-- Modal Header -->
@@ -414,9 +413,9 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
-              <span class="cancle-modal-title">취소 완료</span>
-              <span class="cancle-modal-content"
+            <div class="cancel-modal-body-wrapper">
+              <span class="cancel-modal-title">취소 완료</span>
+              <span class="cancel-modal-content"
                 >예약이 취소되었습니다. <br />세부 내역은 나의 예약 - 취소
                 내역에서 확인해주세요.</span
               >
@@ -428,7 +427,6 @@
             <button
               type="button"
               class="submit-button add-button"
-              id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
@@ -456,11 +454,18 @@
           <!-- Modal body -->
           <div class="modal-body">
             <div class="review-modal-body-wrapper">
-              <!-- <span class="cancle-modal-title">취소 완료</span> -->
+              <!-- <span class="cancel-modal-title">취소 완료</span> -->
               <span class="review-modal-content" id="review-kkname"
                 ></span
               >
-              <!-- 별점 자리 -->
+              <p>별점</p>
+              <input
+                  type="text"
+                  class="review-star"
+                  id="review-star"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  maxlength="1"
+                />
               <textarea
                 id="review-description" class="description"
                 placeholder="이용한 노래방에 대한 솔직한 리뷰를 남겨주세요."
@@ -473,10 +478,9 @@
             <button
               type="button"
               class="submit-button add-button"
-              id="add2-add-time-button"
+              id="add-review-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
-              data-bs-target="#addReviewModal2"
             >
               리뷰 등록
             </button>
@@ -501,9 +505,9 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
-              <span class="cancle-modal-title">등록 완료</span>
-              <span class="cancle-modal-content">리뷰가 등록되었습니다.</span>
+            <div class="cancel-modal-body-wrapper">
+              <span class="cancel-modal-title">등록 완료</span>
+              <span class="cancel-modal-content">리뷰가 등록되었습니다.</span>
             </div>
           </div>
 
@@ -512,7 +516,6 @@
             <button
               type="button"
               class="submit-button add-button"
-              id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
@@ -540,7 +543,7 @@
  -->          <!-- Modal body -->
           <div class="modal-body">
             <div class="inquire-modal-body-wrapper">
-              <!-- <span class="cancle-modal-title">취소 완료</span> -->
+              <!-- <span class="cancel-modal-title">취소 완료</span> -->
               <span class="review-modal-content" id="inquire-kkname"
                 >세븐스타코인노래연습장 철산역점</span
               >
@@ -585,9 +588,9 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="cancle-modal-body-wrapper">
-              <span class="cancle-modal-title">등록 완료</span>
-              <span class="cancle-modal-content"
+            <div class="cancel-modal-body-wrapper">
+              <span class="cancel-modal-title">등록 완료</span>
+              <span class="cancel-modal-content"
                 >문의/신고가 접수되었습니다.</span
               >
             </div>
@@ -598,7 +601,6 @@
             <button
               type="button"
               class="submit-button add-button"
-              id="add2-add-time-button"
               data-bs-toggle="modal"
               data-bs-dismiss="modal"
             >
@@ -610,5 +612,35 @@
     </div>
 
     <script src="js/reservation.js"></script>
+    
+    <script>
+	 	// 하단 메뉴바를 통한 페이지 이동
+	    $("nav div").on("click", function() {
+	  	  const clickedDiv = $(this);
+	  	  const imgAlt = clickedDiv.find("img").attr("alt");
+	  	  switch(imgAlt) {
+	  	  case "메인 페이지":
+	  		  // location.replace("controller?cmd=mainUI");
+	  		  location.href = "controller?cmd=mainUI";
+	  		  break;
+	  	  case "노래방 검색 페이지":
+	  		  // location.replace("controller?cmd=kkFilterUI");
+	  		  location.href = "controller?cmd=kkFilterUI";
+	  		  break;
+	  	  case "노래 검색 페이지":
+	  		  // location.replace("controller?cmd=musicListUI");
+	  		  location.href = "controller?cmd=musicListUI";
+	  		  break;
+	  	  case "나의 예약 내역 페이지":
+	  		  // location.replace("controller?cmd=reservationListUIAction");
+	  		  location.href = "controller?cmd=reservationListUIAction";
+	  		  break;
+	  	  case "마이페이지":
+	  		  // location.replace("controller?cmd=mypageUIAction");
+	  		  location.href = "controller?cmd=mypageUIAction";
+	  		  break;
+	  	  }
+	    });
+    </script>
   </body>
 </html>

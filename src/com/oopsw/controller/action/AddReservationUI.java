@@ -24,12 +24,14 @@ public class AddReservationUI implements Action {
 	public Url execute(HttpServletRequest request) {
 		int kkId = Integer.parseInt(request.getParameter("kkId"));
 		List<ReservationRoomInfoVO> list = new ReservationService().getRoomReservationStatusList(kkId);
+		System.out.println("list: " + list);
 		List<List<LinkedHashMap<String, String>>> widthListList = new ArrayList<>(); //예약테이블의 한 행에 나열될 div의 정보
 		for (ReservationRoomInfoVO infoVO : list) {
 			widthListList.add(getWidthList(infoVO));
 		}
 		request.setAttribute("infoList", list);
 		request.setAttribute("widthListList", widthListList);
+		System.out.println("widthListList: " + widthListList);
 		request.setAttribute("cleaningTimeSec", getWidthByMin(CLEANING_TIME_SEC) + "rem");
 		return new Url("jsp/addReservationUI.jsp", Url.FORWARD);
 	}

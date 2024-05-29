@@ -5,95 +5,93 @@
     color: #E4E4E4;  // 옅은회색
  */
 
-
-
-
- /* 검색조건 영역 */
+/* 검색조건 영역 */
 .filterContainer {
-    display: flex;
-    align-items: center;
-    width: 39.4rem;
-    height: 6.2rem;
+  display: flex;
+  align-items: center;
+  width: 39.4rem;
+  height: 6.2rem;
+  overflow-x: scroll;
 }
 
 .resultList {
-    width: 39.4rem;
-    height: calc(100% - 6.2rem);
-    overflow-y: scroll;
+  width: 39.4rem;
+  height: calc(100% - 6.2rem);
+  overflow-y: scroll;
 
-    /* 스크롤바 숨기기 */
-    -ms-overflow-style: none;
+  /* 스크롤바 숨기기 */
+  -ms-overflow-style: none;
 }
 
 .resultList::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .filterWrapper {
-    display: flex;
-    gap: 1.1rem;
-    margin-left: 1.3rem;
+  display: flex;
+  gap: 1.1rem;
+  margin-left: 1.3rem;
 }
 
 .filterItem {
-    padding: 0.8rem 1rem;
-    border-radius: 1rem;
-    /* color: #fff; */
-    font-size: 1.2rem;
-    font-weight: 700;
-    background-color: #F2F2F2;
-    /* background-color: #E3CDFF; */
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  /* color: #fff; */
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: #f2f2f2;
+  width: max-content;
+  /* background-color: #E3CDFF; */
 }
 
 /* 검색결과 목록 영역 */
 .resultItem {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 39.4rem;
-    height: 15.901rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    border: 0.1rem solid #F1F1F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 39.4rem;
+  height: 15.901rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  border: 0.1rem solid #f1f1f1;
 }
 
 .leftSide {
-    width: 19.5rem;
-    height: 11.8rem;
-    margin-right: 5.3rem;
-    font-size: 1.2rem;
+  width: 19.5rem;
+  height: 11.8rem;
+  margin-right: 5.3rem;
+  font-size: 1.2rem;
 }
 
 .rightSide {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    width: 10rem;
-    height: inherit;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 10rem;
+  height: inherit;
 }
 
 .resultKKTitle {
-    margin: 0;
-    margin-bottom: 0.3rem;
-    font-size: 2rem;
-    font-weight: 700;
+  margin: 0;
+  margin-bottom: 0.3rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .starScoreWrapper {
-    display: flex;
-    gap: 0.4rem;
-    /* width: 13.8rem; */
-    margin-bottom: 1.5rem;
-    width: 100%;
-    height: 2.4rem;
+  display: flex;
+  gap: 0.4rem;
+  /* width: 13.8rem; */
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 2.4rem;
 }
 
 .starScoreWrapper span {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #E3CDFF;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e3cdff;
 }
-
 
 /* .stars img {
     width: 2.4rem;
@@ -101,91 +99,99 @@
 } */
 
 .representativeKeywords {
-    width: 22rem;
-    height: 2.2rem;
-    margin-top: 1.4rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  width: 22rem;
+  height: 2.2rem;
+  margin-top: 1.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .representativeKeywordItem {
-	display: inline-block;
-    padding: 0.3rem 1.3rem;
-    margin-right: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: #F2F2F2;
+  display: inline-block;
+  padding: 0.3rem 1.3rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #f2f2f2;
 }
 
 .bookmark {
-    /* position: fixed;
+  /* position: fixed;
     right: 3.5rem; */
-    width: 2.4rem;
-    height: 3.1rem;
-    cursor: pointer;
-    background-image: url("../img/bookmarkOutline.svg");
+  width: 2.4rem;
+  height: 3.1rem;
+  cursor: pointer;
+  background-image: url("../img/bookmarkOutline.svg");
 }
 
 .bookmark.add {
-    background-image: url("../img/bookmarkFill.svg");
+  background-image: url("../img/bookmarkFill.svg");
 }
 
 .kkRepresentativeImg {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 1rem;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1rem;
 }
 
-/* 로그인 모달 */
-.modalBack {
-	position: absolute;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	width: inherit;
-	min-height: calc(100vh - 15rem);
-	z-index: 5;
-	background-color: rgba(0,0,0,0.25);
-}
-.modal {
-	position: absolute;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	gap: 2rem;
-	width: 30rem;
-	height: 30rem;
-	border-radius: 1rem;
-	z-index: 999;
-	border: 1px solid blue;
-	background-color: #fff;
-}
-
-.iconDiv {
+.noResultData {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
-	width: 90%;
-	margin-top: -2rem;
-	margin-bottom: 2rem;
-}
-
-.iconDiv img {
-	cursor: pointer;
-}
-
-.modal p {
-	width: 80%;
 	font-size: 2rem;
 	text-align: center;
 }
 
+/* 로그인 모달 */
+.modalBack {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  min-height: calc(100vh - 15rem);
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.modal {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+  z-index: 999;
+  border: 1px solid blue;
+  background-color: #fff;
+}
+
+.iconDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 90%;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+}
+
+.iconDiv img {
+  cursor: pointer;
+}
+
+.modal p {
+  width: 80%;
+  font-size: 2rem;
+  text-align: center;
+}
+
 .loginBtn {
-	padding: 0.5rem 1.5rem;
-	font-size: 2rem;
-	color: #fff;
-	border-radius: 1rem;
-	cursor: pointer;
-	background-color: #9747FF;
+  padding: 0.5rem 1.5rem;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: #9747ff;
 }

@@ -10,8 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
-import com.oopsw.model.vo.ReservationVO;
 import com.oopsw.service.ReservationService;
+import com.oopsw.service.completedReservationVO;
 
 public class CompletedReservationListAction implements Action {
 
@@ -20,7 +20,7 @@ public class CompletedReservationListAction implements Action {
 
 		ReservationService service = new ReservationService();
 
-		Collection<ReservationVO> reservationVOs = new ArrayList<>();
+		Collection<completedReservationVO> completedReservationVOs = new ArrayList<>();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HttpSession session = request.getSession();
 		Object userId = session.getAttribute("userId");
@@ -29,8 +29,8 @@ public class CompletedReservationListAction implements Action {
 
 		if (userId != null) {
 			System.out.println(userId);
-			reservationVOs = service.getCompletedReservationList((String) userId);
-			request.setAttribute("dataToSend", gson.toJson(reservationVOs));
+			completedReservationVOs = service.getCompletedReservationList((String) userId);
+			request.setAttribute("dataToSend", gson.toJson(completedReservationVOs));
 			page = "json/data.jsp";
 		}
 

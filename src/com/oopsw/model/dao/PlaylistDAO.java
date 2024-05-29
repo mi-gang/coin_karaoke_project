@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import com.oopsw.model.vo.PlaylistVO;
 import com.oopsw.model.vo.SongVO;
@@ -223,4 +221,50 @@ public class PlaylistDAO {
 		}
 		return result;
 	}
+	
+	// 플레이리스트 3개 불러오기
+	public Collection<PlaylistVO> getmypagePlaylist(String userId){
+		String sql="select * from "
+				+ "(select playlist_id, playlist_title "
+				+ "from playlists "
+				+ "where user_id=? "
+				+ "order by playlist_title asc) "
+				+ "where rownum >= 1 and  rownum <= 3";
+		Collection<PlaylistVO> list=new ArrayList<>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,userId);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next())
+				list.add(new PlaylistVO(rs.getInt(1),rs.getString(2)));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/** 플레이리스트 개수 불러오기 */
+	public int getPlaylistCount(String userId) {
+
+		String sql = "select count(review_id) "
+				+ "from reviews r "
+				+ "JOIN reservations re ON re.reservation_id = r.reservation_id "
+				+ "where re.user_id=?";
+
+		int result = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, userId);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					result = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

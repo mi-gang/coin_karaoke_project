@@ -123,4 +123,62 @@ public class ReviewDAO {
 		}
 		return reviewVOs;
 	}
+	
+	
+	/** 최근 작성 리뷰 불러오기 */
+	public ReviewVO getReviewByUserId(String userId) {
+
+		String sql = "SELECT review_id, content, star, start_time, end_time, name "
+				+ "FROM (SELECT rev.review_id, rev.content, rev.star, res.start_time, "
+				+ "res.end_time, k.name, ROWNUM rnum "
+				+ "FROM reviews rev "
+				+ "JOIN reservations res ON rev.RESERVATION_ID = res.RESERVATION_ID "
+				+ "JOIN room_infos ri ON res.ROOM_ID = ri.ROOM_ID "
+				+ "JOIN KKs k ON ri.KK_ID = k.KK_ID "
+				+ "WHERE res.USER_ID = ? "
+				+ "ORDER BY rev.review_date DESC) "
+				+ "WHERE rnum = 1";
+
+		ReviewVO reviewVO = null;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, userId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					reviewVO = new ReviewVO(rs.getInt(1), rs.getString(2), rs.getFloat(3),
+							rs.getTimestamp(4).toLocalDateTime(), rs.getTimestamp(5).toLocalDateTime(),
+							rs.getString(6));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reviewVO;
+	}
+	
+	
+	
+	/** 리뷰 개수 불러오기 */
+	public int getReviewCount(String userId) {
+
+		String sql = "select count(review_id) "
+				+ "from reviews r "
+				+ "JOIN reservations re ON re.reservation_id = r.reservation_id "
+				+ "where re.user_id=?";
+
+		int result = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, userId);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					result = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
