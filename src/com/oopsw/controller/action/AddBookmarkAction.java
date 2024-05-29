@@ -15,7 +15,36 @@ public class AddBookmarkAction implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String userId = session.getAttribute("userId").toString();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonObject json = new JsonObject();
+		
+		boolean isLogin = session.getAttribute("userId") != null;
+		
+		if(isLogin) {
+			String userId = session.getAttribute("userId").toString();
+			System.out.println(">> userId: ");
+			System.out.println(userId);
+			int kkId = Integer.parseInt(request.getParameter("kkId"));
+			boolean addMyBookmark = new UserService().addKKBookmark(userId, kkId);
+			json.addProperty("result", addMyBookmark);
+		} else {
+			json.addProperty("result", false);
+		}
+		
+		request.setAttribute("dataToSend",  gson.toJson(json));
+		return new Url("json/data.jsp", Url.FORWARD);
+		
+		
+		/*System.out.println("@@$(*#(*! AddBookmarkAction ");
+		System.out.println(session.getAttribute("userId".toString()));
+		String userId = null;
+		if(session.getAttribute("userId").toString() != null) {
+			userId = session.getAttribute("userId").toString();
+		} else if(session.getAttribute("userId").toString() == null){
+			userId = "";
+		}
+		System.out.println("userId");
+		System.out.println(userId);
 		int kkId = Integer.parseInt(request.getParameter("kkId"));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
@@ -23,7 +52,7 @@ public class AddBookmarkAction implements Action {
 		JsonObject json = new JsonObject();
 		json.addProperty("result", addMyBookmark);
 		request.setAttribute("dataToSend", gson.toJson(json));
-		return new Url("json/data.jsp", Url.FORWARD);
+		return new Url("json/data.jsp", Url.FORWARD);*/
 	}
 
 }

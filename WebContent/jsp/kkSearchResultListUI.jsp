@@ -105,7 +105,17 @@
 	                </c:forEach>
             	</c:if>
             </div>
+            
+            <!-- 로그인 모달 -->
+            <div class="modalBack">
+		        <div class="modal">
+		        	<div class="iconDiv"><img src="img/close.svg" alt="모달 닫기"></div>
+		        	<p>즐겨찾기는 로그인한 유저만 사용 가능한 기능입니다.</p>
+		        	<div class="loginBtn">로그인하러 가기</div>
+		        </div>
+	        </div>
         </div>
+        
         <!-- 하단 메뉴바 -->
         <nav>
           <div>
@@ -142,14 +152,14 @@
 
         <script>
             $(document).ready(function () {
-            	// prevURL 저장을 위한 작업
+            	/* // prevURL 저장을 위한 작업
             	const prevURL = window.location.search;
 		      	console.log(prevURL);
 		      	sessionStorage.setItem("prevURL", prevURL);
 		      	const encodedPrevURL = encodeURIComponent(prevURL);
 		      	console.log(encodedPrevURL);
 		      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
-            	//
+            	// */
             	
             	// 해당 노래방의 평균 별점만큼 별 아이콘
             	updateStarContainer();
@@ -162,7 +172,7 @@
 					});
 				}
 				
-				// 평균 별점 아이콘 크기 조정
+				/* // 평균 별점 아이콘 크기 조정
 				const ratingDiv = document.querySelectorAll(".rating");
 				console.log("ratingDiv");
 				console.log(ratingDiv);
@@ -174,7 +184,7 @@
 					rating.forEach(function(div) {
 						div.style.width = '20px';
 					});
-				});
+				}); */
             	
             	const kkList = document.querySelectorAll(".resultItem");
                 const bookmarks = $(".bookmark").get();
@@ -211,17 +221,22 @@
              		const bookmarkIcon = item.querySelector(".bookmark");
              		
              		bookmarkIcon.addEventListener("click", function() {
-             			bookmarkIcon.classList.toggle("add");
+             			// bookmarkIcon.classList.toggle("add");
              			if(bookmarkIcon.classList.contains("add")) {
-             				console.log("북마크 ON");
+             				// console.log("북마크 ON");
              				bookmarkIcon.style.backgroundImage = "url(img/bookmarkFill.svg)";
              				$.ajax({
              					url: "controller?cmd=addBookmarkAction",
              					data: {kkId: kkId},
              					dataType:"json",
              					success: function(data){
+             						console.log("addBookmarkAction");
+             						console.log(data);
+             						console.log(data.result);
              						if(data.result == true) {
              							console.log("북마크 추가 완료");
+             							bookmarkIcon.classList.toggle("add");
+             							bookmarkIcon.style.backgroundImage = "url(img/bookmarkFill.svg)";
              						} else {
              							console.log("북마크 추가 실패");
              						}
@@ -229,7 +244,7 @@
              				});
              			} else {
              				console.log("북마크 OFF");
-             				bookmarkIcon.style.backgroundImage = "url(img/bookmarkOutline.svg)";
+             				// bookmarkIcon.style.backgroundImage = "url(img/bookmarkOutline.svg)";
              				$.ajax({
              					url: "controller?cmd=deleteBookmarkAction",
              					data: {kkId: kkId},
@@ -237,8 +252,35 @@
              					success: function(data){
              						if(data.result == true) {
              							console.log("북마크 제거 완료");
+             							bookmarkIcon.style.backgroundImage = "url(img/bookmarkOutline.svg)";
              						} else {
-             							console.log("북마크 제거 실패");
+             							if(data.isLogin === false) {
+             							// 미로그인 상태에서 북마크 클릭 -> 로그인 모달
+                 							$(".modal").css("display", "flex");
+                 							$(".modal").addClass("active");
+               								if($(".modal").hasClass("active")) {
+               									$(".modalBack").css("display", "flex");
+               								}
+               								
+               								// 로그인 유도 모달창 닫기
+               								$(".modal img").on("click", function() {
+               									$(".modalBack").css("display", "none");
+               									$(".modal").css("display", "none");
+               								});
+               								
+               								// 로그인 UI로 이동
+               								$(".loginBtn").on("click", function() {
+               									// prevURL 저장을 위한 작업
+               					            	const prevURL = window.location.search;
+               							      	console.log(prevURL);
+               							      	sessionStorage.setItem("prevURL", prevURL);
+               							      	const encodedPrevURL = encodeURIComponent(prevURL);
+               							      	console.log(encodedPrevURL);
+               							      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+               					            	//
+               									location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+               								});
+             							}
              						}
              					}
              				});

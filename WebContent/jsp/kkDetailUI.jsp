@@ -299,6 +299,16 @@
           </div>
         </div>
       </div>
+      
+      <!-- 로그인 모달 -->
+      <div class="modalBack">
+	    <div class="modal">
+	    	<div class="iconDiv"><img src="img/close.svg" alt="모달 닫기"></div>
+	    	<p>즐겨찾기는 로그인한 유저만 사용 가능한 기능입니다.</p>
+	    	<div class="loginBtn">로그인하러 가기</div>
+	    </div>
+	  </div>
+      
     </div>
     <!-- 하단 메뉴바 -->
     <nav>
@@ -391,15 +401,41 @@
         			// 로그인 X
         			// 북마크 on/off 시도 -> 로그인 페이지로 이동
         			$("#bookmark").on("click", function()  {
-        				console.log("로그인해야 북마크 가능!");
-        				alert("로그인한 유저만 북마크 가능합니다. 로그인 페이지로 이동합니다 :)");
+        				//console.log("로그인해야 북마크 가능!");
+        				// alert("로그인한 유저만 북마크 가능합니다. 로그인 페이지로 이동합니다 :)");
         				const prevURL1 = window.location.search;
         		      	console.log(prevURL1);
         		      	const encodedPrevURL = encodeURIComponent(prevURL1);
         		      	console.log(encodedPrevURL);
         		      	sessionStorage.setItem("prevURL", encodedPrevURL);
-        				// location.replace("controller?cmd=loginUI");
-        		      	location.replace("controller?cmd=loginUI&prevURL="+sessionPrevURL);
+        		      	
+        		      	$(".modal").css("display", "flex");
+							$(".modal").addClass("active");
+							if($(".modal").hasClass("active")) {
+								$(".modalBack").css("display", "flex");
+							}
+							
+							// 로그인 유도 모달창 닫기
+							$(".modal img").on("click", function() {
+								$(".modalBack").css("display", "none");
+								$(".modal").css("display", "none");
+							});
+							
+							// 로그인 UI로 이동
+							$(".loginBtn").on("click", function() {
+								// prevURL 저장을 위한 작업
+				            	const prevURL = window.location.search;
+						      	console.log(prevURL);
+						      	sessionStorage.setItem("prevURL", prevURL);
+						      	const encodedPrevURL = encodeURIComponent(prevURL);
+						      	console.log(encodedPrevURL);
+						      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+				            	//
+								location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+							});
+							
+        		      	// location.replace("controller?cmd=loginUI");
+        		      	// location.replace("controller?cmd=loginUI&prevURL="+sessionPrevURL);
         			});
         		}
         	}
