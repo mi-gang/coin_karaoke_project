@@ -98,8 +98,8 @@
 												</div>
 											</div>
 											<div class="KK-usability">
-												<span>777m</span> <span>혼잡도: <span class="normal"
-														data-crowded="0.5">보통</span></span>
+												<span></span> <span><span class="normal"
+														data-crowded="0.5"></span></span>
 											</div>
 										</div>
 									</div>
@@ -608,9 +608,9 @@
                 </div>
             </div>
             <div class="KK-usability">
-                <span>777m</span> <span>혼잡도: <span
+                <span></span> <span><span
                     class="normal"
-                    data-crowded="0.5">보통</span></span>
+                    data-crowded="0.5"></span></span>
             </div>
         </div>
                     </div > `;
