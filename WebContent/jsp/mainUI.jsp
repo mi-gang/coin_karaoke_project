@@ -118,7 +118,8 @@
 									<div id="invisibleUnLoginUser" class="invisibleUnLoginUser on">
 										<div class="invisibleWrapper">
 											<p>최근에 예약한 노래방이 어디더라?</p>
-											<a id="reviewLoginLink" href="controller?cmd=loginUI" style="text-decoration:none">
+											<a id="reviewLoginLink" href="controller?cmd=loginUI"
+												style="text-decoration:none">
 												<div id="reviewLoginBtn" class="reviewLoginBtn">로그인하고 최근에 예약한 노래방 보기
 												</div>
 											</a>
@@ -532,15 +533,15 @@
 				<!-- <script src="js/reservation.js"></script> -->
 				<script>
 					// 로그인 버튼 클릭 시 페이지 경로를 prevURL 세션 스토리지에 저장
-					$("#reviewLoginLink").on("click", function() {
+					$("#reviewLoginLink").on("click", function () {
 						const prevURL = window.location.search;
-				      	console.log(prevURL);
-				      	sessionStorage.setItem("prevURL", prevURL);
-				      	const encodedPrevURL = encodeURIComponent(prevURL);
-				      	console.log(encodedPrevURL);
-				      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+						console.log(prevURL);
+						sessionStorage.setItem("prevURL", prevURL);
+						const encodedPrevURL = encodeURIComponent(prevURL);
+						console.log(encodedPrevURL);
+						sessionStorage.setItem("ePrevURL", encodedPrevURL);
 					});
-			      	
+
 					//*** 추천 노래방 목록 ***
 					updateStarContainer();
 					function updateStarContainer() {
@@ -637,20 +638,20 @@
 						const kkName = $("#add1-modal-body-title span");
 						const oriTime = $(".add1-modal-body-content-time:first");
 						const addiTime = $(".add1-modal-body-content-time:last");
+
 						const subBtn = $("#addTimeModal .submit_button");
 
 						kkName.text($("#karaoke_name").text());
 						oriTime.text($("#reservation-time").get()[0].innerText);
-						const addiMinutes = await getAdditioinalMinutesInfo();
+						const addiMinutes = await getAdditioinalMinutes(getReservationId());
 						addiTime.text(minToHoursString(addiMinutes));
 						addiTime.data("minutes", addiMinutes);
 						inactivateBtn(subBtn);
 					}
-					async function getAdditioinalMinutesInfo(rId) {
-						// const res = await fetch("controller?cmd=additionalTimeInfo&reservationId=" + getReservationId());
-						// const data = await res.json();
-						let minutes = 90;
-						//let minutes = data.minutes;
+					async function getAdditioinalMinutes(rId) {
+						const res = await fetch("controller?cmd=addableTime&reservationId=" + rId);
+						const data = await res.json();
+						let minutes = data.minute;
 						return minutes;
 					}
 					function getReservationId() {
