@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,7 +22,6 @@ import com.oopsw.model.dao.UserDAO;
 import com.oopsw.model.vo.ReservationVO;
 
 public class ReservationService {
-
 	public Connection conn;
 
 	public ReservationService() {
@@ -151,6 +151,45 @@ public class ReservationService {
 				isAdult);
 
 		return aTimeInfoVO;
+	}
+	
+	/** 추가가능시간 분 단위로 알려주기 */
+	public int getAddableMinutes(String userId, int reservationId){
+		ReservationVO reservationVO = null;
+		ReservationVO reservationVO2 = null;
+
+		reservationVO = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId);
+
+		LocalDateTime startTime = reservationVO.getStartTime();
+		LocalDateTime endTime = reservationVO.getEndTime();
+		int roomId = reservationVO.getRoomId();
+		// 리턴 : start_time, end_time, roomId
+
+		reservationVO2 = new ReservationDAO(conn).getAvailableExtraUsingTime(roomId, endTime);
+		// 리턴 : reservation_id, start_time -> starttime만 씀
+
+		// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
+		Duration diff = Duration.between(reservationVO2.getStartTime(), endTime);
+		int availableMinutes = (int) diff.toMinutes() - 15;// TODO: 청소시간 15분 상수로 바꾸기
+
+		// 성인 유무 같이 보내기
+		boolean isAdult = false;
+		try {
+			isAdult = new UserDAO(conn).isAdult(userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		LocalDateTime maxEndTime=endTime.plusMinutes(availableMinutes);
+		LocalDateTime limitTime = LocalDateTime.of(endTime.toLocalDate(), LocalTime.of(22, 0));
+		// TODO: 청소년 이용불가시간: 22~08시. 상수로 바꿀것.
+		// 청소년인 경우 22시까지만 놀 수 있는 추가시간으로 재설정
+		if(!isAdult && maxEndTime.isAfter(limitTime)){
+			
+			availableMinutes = (int)Duration.between(endTime, limitTime).toMinutes();
+		}
+
+		return availableMinutes;
 	}
 
 	/** 예약하기 */
