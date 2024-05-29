@@ -155,21 +155,16 @@ public class ReservationService {
 	
 	/** 추가가능시간 분 단위로 알려주기 */
 	public int getAddableMinutes(String userId, int reservationId){
+		ReservationDAO rDao = new ReservationDAO(conn);
 		ReservationVO reservationVO = null;
-		ReservationVO reservationVO2 = null;
-
-		reservationVO = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId);
-
-		LocalDateTime startTime = reservationVO.getStartTime();
+		reservationVO = rDao.getOriginalReservationTime(userId, reservationId);
 		LocalDateTime endTime = reservationVO.getEndTime();
-		int roomId = reservationVO.getRoomId();
-		// 리턴 : start_time, end_time, roomId
-
-		reservationVO2 = new ReservationDAO(conn).getAvailableExtraUsingTime(roomId, endTime);
-		// 리턴 : reservation_id, start_time -> starttime만 씀
+		
+		
+		LocalDateTime upcomingReservationTime = rDao.getUpcomingReservationByReservationId(reservationId);
 
 		// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
-		Duration diff = Duration.between(reservationVO2.getStartTime(), endTime);
+		Duration diff = Duration.between(endTime, upcomingReservationTime);
 		int availableMinutes = (int) diff.toMinutes() - 15;// TODO: 청소시간 15분 상수로 바꾸기
 
 		// 성인 유무 같이 보내기

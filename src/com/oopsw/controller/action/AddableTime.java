@@ -18,7 +18,7 @@ public class AddableTime implements Action {
 		JsonObject json = new JsonObject();
 		json.addProperty("minute", addableMinutes);
 		request.setAttribute("dataToSend", json.toString());
-		return null;
+		return new Url("json/data.jsp", Url.FORWARD);
 	}
 
 }
