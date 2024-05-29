@@ -977,7 +977,30 @@
 
 							}
 						})
-					})
+					});
+					
+					// 하단 메뉴바를 통한 페이지 이동
+				      $("nav div").on("click", function() {
+				    	  const clickedDiv = $(this);
+				    	  const imgAlt = clickedDiv.find("img").attr("alt");
+				    	  switch(imgAlt) {
+				    	  case "메인 페이지":
+				    		  location.replace("controller?cmd=mainUI");
+				    		  break;
+				    	  case "노래방 검색 페이지":
+				    		  location.replace("controller?cmd=kkFilterUI");
+				    		  break;
+				    	  case "노래 검색 페이지":
+				    		  location.replace("controller?cmd=musicListUI");
+				    		  break;
+				    	  case "나의 예약 내역 페이지":
+				    		  location.replace("controller?cmd=reservationListUIAction");
+				    		  break;
+				    	  case "마이페이지":
+				    		  location.replace("controller?cmd=mypageUIAction");
+				    		  break;
+				    	  }
+				      });
 
 				</script>
 			</body>
