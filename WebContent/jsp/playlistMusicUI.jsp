@@ -44,7 +44,7 @@
                 </div>
               </div>
             </div>
-            <div class="playlist_song_num">21곡</div>
+            <div class="playlist_song_num"></div>
           </div>
           <div class="ent_button_group">
             <input class="button" id="tj" type="button" value="TJ" />
@@ -52,10 +52,10 @@
           </div>
           <div class="music_outputs">
             <div class="music_output" id="music_output">
-              <div class="music_num">12345</div>
+              <div class="music_num"></div>
               <div class="music_info">
-                <span class="music_title">흐흐</span>
-                <span class="music_singer">신난다</span>
+                <span class="music_title"></span>
+                <span class="music_singer"></span>
               </div>
               <div class="music_delete">
                 <img class="delete_img" src="img/Trash.svg" />
@@ -90,7 +90,7 @@
             <div class="close_btn2">
               <img class="close_img2" src="img/close.svg" />
             </div>
-            <div class="modal_playlist_title">'회식 음악 리스트'</div>
+            <div class="modal_playlist_title"></div>
             <div class="delete_alert_text">
               <div class="delete_alert">삭제 하시겠습니까?</div>
               <div class="delete_alert_red">저장된 음악이 모두 삭제됩니다</div>
@@ -111,7 +111,7 @@
             <div class="close_btn3">
               <img class="close_img3" src="img/close.svg" />
             </div>
-            <div class="modal_playlist_title1">'회식 음악 리스트'</div>
+            <div class="modal_playlist_title1"></div>
             <div class="delete_alert1">삭제 하시겠습니까?</div>
             <div class="btn_group1">
               <input class="ok_btn1" id="confirm" type="button" value="확인" />
@@ -178,30 +178,63 @@
       const modal3 = document.querySelector(".modal_overlay3");
       const modalOpen3 = document.querySelector(".delete_img");
       const modalClose3 = document.querySelector(".close_img3");
-      modalOpen3.addEventListener("click", function () {
+      $(".music_outputs").on("click", ".music_output .music_delete", function() {
         modal3.classList.add("on");
+        let entInput = $(".on").attr("id");
+        const songId= $(this).closest(".music_output").attr('data-set-songId');
+        const songTitle = $(this).closest(".music_output").attr('data-set-songTitle');
+   	  // const songTitle = songTitleElement.text();
+   	$(".modal_playlist_title1").text(songTitle);
+   	$(".delete_music_modal").on("click", ".btn_group1 .ok_btn1", function() {
+ 	$.ajax({
+       	url: "controller?cmd=deleteMusic",
+    	    data: { 	
+    	      playlistId: playlistId,//brand	
+    	  		brand : entInput,
+    	  		songId : songId
+    	     },
+    	     error: function(jqXHR, textStatus, errorThrown) {
+     	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+     	      },
+    	     success: function (result){
+    	    	alert("삭제되었습니다.");
+    	    	modal3.classList.remove("on"); 
+    	  
+    	     }
+           })})
+      
       });
+     
       modalClose3.addEventListener("click", function () {
         modal3.classList.remove("on");
       });
-      const ent = $(".button").get();
-      let button = "";
-      ent.forEach(function (option) {
-        option.addEventListener("click", function () {
-          ent.forEach(function (item) {
-            item.classList.remove("on");
-          });
-          option.classList.add("on");
-        });
-      });
       $(document).ready(function () {
-        $("#tj").click();
-      });
+          $("#tj").click();
+        });
+        // const ent = document.querySelector(".button");
+        //클릭한 버튼 값 가지고 오기
+        $(".button").on("click", function () {
+          var entInput = this.id;
+           console.log(entInput);
+        });
+        const ent = $(".button").get();
+        let button = "";
+        ent.forEach(function (option) {
+          option.addEventListener("click", function () {
+            ent.forEach(function (item) {
+              item.classList.remove("on");
+            });
+            option.classList.add("on");
+          });
+        });
+      
       
       //플레이 리스트 이름 가져오기
-      $(document).ready(function () {
+		 let playlistTitle="";
     	  let data = "";
     	  let playListTitle="";
+    	  let entInput = $(".button").attr("id");
+    	  console.log(entInput);
     $.ajax ({
         "url" : "controller?cmd=playlistTitle",
      	data:{ 
@@ -214,33 +247,121 @@
  	    	 let result=JSON.parse(dataToSend);
  	    	 console.log(result);
  	    	 console.log(result.result);
- 	    	data = `<div class="playlist_title">` + result.result + `</div>`;
+ 	    	data = `<div class="playlist_title" data-set-title=` + result.result + `>` + result.result + `</div>`;
  	    	 $(".playlist_title").html(data);
+ 	        //playlistTitle = $(".playlist_title").html();
+ 	      //  const playlistTitle=document.querySelector(".playlist_title");
+           // console.log(playlistTitle);
+ 	    	const dataSetTitle = $(".playlist_title").data("set-title"); // data-set-title 액세스
+ 	       console.log("플레이리스트 제목:", result.result);
+ 	      $(".modal_playlist_title").html(result.result);
+ 	       
    	}})
-	});
-      
-      //플레이 리스트 내에 저장되어 있는 곡 리스트 가져오기
-       $(document).ready(function () {
-    	  let data = "";
-    	  let playListTitle="";
-    	  let entInput = $(".on").attr("id");
-    $.ajax ({
-        "url" : "controller?cmd=playlistMusicList",
-     	data:{ 
-     		playlistId: playlistId,	
-     		entInput : entInput
-     	},
-     	 error: function(jqXHR, textStatus, errorThrown) {
- 	        alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
- 	      },
- 	     success: function(dataToSend) {
- 	    	 let result=JSON.parse(dataToSend);
- 	    	 console.log(result);
- 	    	 console.log(result.result);
- 	    	data = `<div class="playlist_title">` + result.result + `</div>`;
- 	    	 $(".playlist_title").html(data);
-   	}})
-	});
+    //플레이 리스트 내에 저장되어 있는 곡 리스트 가져오기(버튼 선택으로 바꿔야함.)=> 버튼을 무조건 한번 눌러야 송출됨. + 곡 개수 가져오기
+    $(".ent_button_group").on("click", function () {
+    	 let entInput = $(".on").attr("id");
+    	// console.log($(".on"));
+    	// console.log($(".on").attr("id"));
+    	// console.log(entInput);
+    	// console.log(entInput);
+    	  let playListTitle = "";
+    	  //초기화$(".music_outputs").html(playListTitle);
+    	 // $(".music_outputs").html("");
+
+ $.ajax ({
+     "url" : "controller?cmd=playlistMusicList",
+  	data:{ 
+  		playlistId: playlistId,	
+  		brand : entInput
+  	},
+  	 error: function(jqXHR, textStatus, errorThrown) {
+	        alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
+	      },
+	     success: function(dataToSend) {
+	    	 let result=JSON.parse(dataToSend);
+	    	 console.log(entInput); 
+	    	 for(i in result){
+	    	 	    playListTitle+=`<div class="music_output" id="music_output" data-set-songTitle=`+ result[i].title +`  data-set-songId=`+ result[i].songId +`>
+	                <div class="music_num">` + result[i].songId +`</div>
+	                <div class="music_info">
+	                  <span class="music_title">` + result[i].title +`</span>
+	                  <span class="music_singer">` + result[i].singer +`</span>
+	                </div>
+	                <div class="music_delete">
+	                  <img class="delete_img" src="img/Trash.svg" />
+	                </div>
+	              </div>`
+	    	   		 }  	
+	    	 $(".music_outputs").html(""); // 새 내용 추가 전에 컨테이너 지우기
+	    	    if (result.length === 0) {
+	    	      // 데이터 없음 메시지 출력
+	    	      $(".music_outputs").html("<h1>데이터가 없습니다.</h1>");
+	    	    } else {
+	    	      $(".music_outputs").html(playListTitle);
+	    	      console.log(result);
+	    	    }}	      
+	      })
+	      	      //곡 내부 개수 
+	       	$.ajax({
+       	url: "controller?cmd=playlistMusicNumber",
+    	    data: { 	
+    	    	playlistId: playlistId,	
+    	  		brand : entInput
+    	     },
+    	     error: function(jqXHR, textStatus, errorThrown) {
+     	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+     	      },
+    	     success: function (result){
+    	    	 let songNum=JSON.parse(result);
+    			console.log(songNum.result);
+    			$(".playlist_song_num").html(songNum.result+"곡");
+    	     }
+           })
+	})
+	//플레이리스트 이름 변경하기(드롭다운)
+       $(".confirm_btn").on("click", function () {
+        
+       	const titleInput = document.querySelector(".new_play_list_title_input");
+       	$.ajax({
+       	url: "controller?cmd=updatePlaylistTitle",
+    	    data: { 	
+    			playlistId: playlistId,
+    	      newTitle: titleInput.value//brand
+    	     },
+    	     error: function(jqXHR, textStatus, errorThrown) {
+     	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+     	      },
+    	     success: function (result){
+    			alert("플레이리스트 이름이 변경되었습니다!");
+    			modal.classList.remove("on"); 
+    			console.log("저장");
+    	     }
+           })
+          })
+   
+          
+  //  $(".modal_playlist_title").text(playlistTitle.value);
+          //플레이리스트 삭제하기
+           $(".ok_btn").on("click", function () {
+       	$.ajax({
+       	url: "controller?cmd=deletePlaylist",
+    	    data: { 	
+    			playlistId: playlistId,
+    	     },
+    	     error: function(jqXHR, textStatus, errorThrown) {
+     	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+     	      },
+    	     success: function (result){
+    			alert("삭제되었습니다.!");
+    			modal2.classList.remove("on"); 
+    			console.log("저장");
+    			 location.href = "controller?cmd=mypagePlaylistUI";
+    	     }
+           })
+          })
+          
+
+     
     </script>
   </body>
 </html>

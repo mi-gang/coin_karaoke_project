@@ -163,11 +163,14 @@ public class MusicService {
 	public Collection<SongVO> playlistMusicList(int playlistId,String brand){
 		Collection<SongVO> list=new ArrayList<>();
 		Collection<PlaylistVO> list2=new ArrayList<>();
-		list2=new PlaylistDAO(conn).getSongListInPlaylist(playlistId);
+		list2=new PlaylistDAO(conn).getSongListInPlaylist(playlistId, brand);
+		System.out.println(list2);
 		for(PlaylistVO vo :list2 ){
 			SongVO temp = new PlaylistDAO(conn).getSongInfo(vo.getSongId(), brand);
 			list.add(temp);
+			
 		}
+		System.out.println(list);
 //		try {
 ////			conn.commit();
 //			conn.close();

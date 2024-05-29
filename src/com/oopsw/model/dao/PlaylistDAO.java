@@ -156,12 +156,13 @@ public class PlaylistDAO {
 		}
 		return songNum;		
 	}
-	public Collection<PlaylistVO> getSongListInPlaylist(int playlistId){
-		String sql="SELECT brand, song_id from SONGS_PLAYLISTS where playlist_id = ?";
+	public Collection<PlaylistVO> getSongListInPlaylist(int playlistId, String brand){
+		String sql="SELECT brand, song_id from SONGS_PLAYLISTS where playlist_id = ? AND brand =?";
 		Collection<PlaylistVO> list=new ArrayList<>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1,playlistId);
+			pstmt.setString(2,brand);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next())
 				list.add(new PlaylistVO(rs.getString(1),rs.getInt(2)));
@@ -173,7 +174,7 @@ public class PlaylistDAO {
 	}
 	
 	public SongVO getSongInfo(int songId, String brand){
-		String sql="SELECT singer, title FROM songs  WHERE song_id=? AND brand=?";
+		String sql="SELECT song_Id,brand,title,singer FROM songs  WHERE song_id=? AND brand=? order by song_Id desc";
 		SongVO vo=new SongVO();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -181,7 +182,7 @@ public class PlaylistDAO {
 			pstmt.setString(2, brand);
 			ResultSet rs=pstmt.executeQuery();
 			if(rs.next())
-				vo=new SongVO(rs.getString(1),rs.getString(2));
+				vo=new SongVO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

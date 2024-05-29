@@ -37,6 +37,7 @@ import com.oopsw.controller.action.MyPlaylist;
 import com.oopsw.controller.action.MyPlaylistmusicUI;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.UpcomingReservation;
+import com.oopsw.controller.action.UpdatePlaylistTitle;
 import com.oopsw.controller.action.addUser;
 import com.oopsw.controller.action.addUserUI;
 import com.oopsw.controller.action.findPasswordUI;
@@ -209,6 +210,9 @@ public class ActionFactory {
 			break;
 		case "playlistMusicList":
 			action=new PlaylistMusicList();
+			break;
+		case "updatePlaylistTitle":
+			action=new UpdatePlaylistTitle();
 			break;
 		default:
 			action = new wrongCmd();
