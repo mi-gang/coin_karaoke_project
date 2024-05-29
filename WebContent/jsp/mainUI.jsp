@@ -50,7 +50,6 @@
 										</button>
 
 										<ul class="regionList">
-											<li class="regionItem">서울 전체</li>
 											<li class="regionItem">강남구</li>
 											<li class="regionItem">강동구</li>
 											<li class="regionItem">강북구</li>
