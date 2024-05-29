@@ -746,12 +746,22 @@
 
 					$("#cancleReservationModal1 #add2-add-time-button").on("click", cancelReservation);
 					async function cancelReservation() {
-						const res = await fetch("controller?cmd=cancelReservation&reservationId=" + getReservationId());
-						const data = await res.json();
-						if (data.result) {
-							alert("예약 취소에 실패하였습니다.");
+						if (isEndTimeIn20Min()) {
+							alert("20분 이내 예약은 취소할 수 없습니다.");
 							location.href = "controller?cmd=mainUI";
+							return;
 						}
+
+						const res = await fetch("controller?cmd=cancelReservationAction&reservationId=" + getReservationId());
+						const data = await res.json();
+						if (!data.result) {
+							alert("예약 취소에 실패하였습니다.");
+						}
+						location.href = "controller?cmd=mainUI";
+					}
+
+					function isEndTimeIn20Min() {
+						return false;
 					}
 
 
