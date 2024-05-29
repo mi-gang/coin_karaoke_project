@@ -3,9 +3,12 @@ package com.oopsw.service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,7 +19,7 @@ import com.oopsw.model.dao.KKDAO;
 import com.oopsw.model.dao.ReservationDAO;
 import com.oopsw.model.dao.ReviewDAO;
 import com.oopsw.model.vo.KKVO;
-import com.oopsw.model.vo.ReviewVO;;
+import com.oopsw.model.vo.ReviewVO;
 
 public class KKService {
 	
@@ -267,6 +270,53 @@ public class KKService {
 		return result;
 	}
 	
+	// 검색 결과 목록 불러오기 - 조건 전부 입력받을 수 있는 완성본
+	public List<KKVO> getKKList(String addressGu, LocalDateTime startTime, LocalDateTime endTime, int usingTime, int[] keywords){
+		KKDAO kkDao = new KKDAO(getConnection());
+		List<KKVO> result= new ArrayList<KKVO>();
+		List<KKVO> candidateKKs = new ArrayList<KKVO>();
+		List<KKVO> evidentKKs = new ArrayList<KKVO>();
+
+		// 기술력의 한계로 키워드가 있는 경우와 없는 경우 다른 SQL문을 사용함.
+		if(keywords.length == 0){
+			candidateKKs = kkDao.getCandidateKKListWithoutKeywords(addressGu, startTime, endTime, usingTime);
+			evidentKKs = kkDao.getEvidentKKList(addressGu, startTime, endTime);
+		} else{
+			candidateKKs = kkDao.getCandidateKKListWithKeywords(addressGu, startTime, endTime, usingTime, keywords);
+			evidentKKs = kkDao.getEvidentKKListWithKeywords(addressGu, startTime, endTime, keywords);
+		}
+		System.out.println("evidents========");
+		for (KKVO kkvo : evidentKKs) {
+			System.out.print(kkvo.getKkId() + ", ");
+		}
+		System.out.println();
+		System.out.println("candidate: =========");
+		for (KKVO kkvo : candidateKKs) {
+			System.out.print(kkvo.getKkId() + ", ");
+		}
+		System.out.println();
+		// 후보 노래방은 실제보다 많을 수는 있어도 적은 경우는 없음.
+		if(candidateKKs.isEmpty()){
+			return result;
+		}
+		
+		// TODO: 후보KKs의 특정 시간대 예약을 전부 받아서 조건에 맞지 않는 결과물 제거
+		// TODO: candidate와 evident는 겹치면 안 되는데 겹치는 이슈가 발생. 임시로 안 겹치도록 구성함.
+		Set<KKVO> filter = new HashSet<>();
+		for (KKVO kkvo : candidateKKs) {
+			filter.add(kkvo);
+		}
+		for (KKVO kkvo : evidentKKs) {
+			filter.add(kkvo);
+		}
+		result.addAll(filter);
+		System.out.println("result===============");
+		for (KKVO kkvo : result) {
+			System.out.print(kkvo.getKkId() + ", ");
+		}
+		return result;
+		
+	}
 	// 해당 노래방 리뷰 불러오기 - ReviewDAO의 getReviewListByKKId
 	public Collection<ReviewVO> getReviewListByKK(int KKId) throws SQLException {
 		Connection conn = getConnection();

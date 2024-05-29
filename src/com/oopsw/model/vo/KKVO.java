@@ -119,14 +119,7 @@ public class KKVO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((closingHour == null) ? 0 : closingHour.hashCode());
 		result = prime * result + kkId;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((note == null) ? 0 : note.hashCode());
-		result = prime * result + ((openingHour == null) ? 0 : openingHour.hashCode());
-		result = prime * result + ((representativeKeywordList == null) ? 0 : representativeKeywordList.hashCode());
-		result = prime * result + Float.floatToIntBits(starRating);
 		return result;
 	}
 
@@ -139,41 +132,11 @@ public class KKVO {
 		if (getClass() != obj.getClass())
 			return false;
 		KKVO other = (KKVO) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (closingHour == null) {
-			if (other.closingHour != null)
-				return false;
-		} else if (!closingHour.equals(other.closingHour))
-			return false;
 		if (kkId != other.kkId)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (note == null) {
-			if (other.note != null)
-				return false;
-		} else if (!note.equals(other.note))
-			return false;
-		if (openingHour == null) {
-			if (other.openingHour != null)
-				return false;
-		} else if (!openingHour.equals(other.openingHour))
-			return false;
-		if (representativeKeywordList == null) {
-			if (other.representativeKeywordList != null)
-				return false;
-		} else if (!representativeKeywordList.equals(other.representativeKeywordList))
-			return false;
-		if (Float.floatToIntBits(starRating) != Float.floatToIntBits(other.starRating))
 			return false;
 		return true;
 	}
+
+
 	
 }

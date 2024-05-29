@@ -421,26 +421,19 @@ public class KKDAO {
 	// 서비스에서 다시 검사를 요청해야한다.
 	public List<KKVO> getCandidateKKListWithoutKeywords(String addressGu, LocalDateTime startTime,
 			LocalDateTime endTime, int usingTime) {
-		String sql = "select distinct kks.kk_id, kks.NAME, kks.OPENING_HOUR, kks.CLOSING_HOUR, kks.NOTE from kks, kks.ADDRESS"
+		String sql = "select distinct kks.kk_id, kks.NAME, kks.ADDRESS from kks "
 				+ "Join room_infos rooms ON kks.kk_id = rooms.kk_id"
-				+ "JOIN reservations r ON rooms.room_id = r.room_id" + "where kks.address like '%' || ? || '%'" // 1
-				+ "and (" + "    --검색종료시간 < 예약시작시간 || 예약종료시간 < 검색시작시간" + "    --예약종료시간     <=      검색시작시간"
-				+ "    r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')" // 2
-				+ "    -- 검색종료시간                       					  <= 예약시작시간"
-				+ "    or TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time" // 3
-				+ "    -- 검색시작시간 < 예약시작시간 < 검색종료시간 < 예약시작시간"
-				+ "    or (TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time -- 검색시작시간 < 예약시작시간" // 4
-				+ "    and r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')   -- 예약시작시간 < 검색종료시간" // 5
-				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time    -- 검색종료시간 < 예약종료시간" // 6
-				+ "    and round((r.start_time - TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))*24*60,2) >= ?) --예약시작시간 - 검색시작시간 > 이용시간(분단위)" // 7,
-																																	// 8
-				+ "    --예약시작시간 < 검색시작시간 < 예약종료시간 < 검색종료시간"
-				+ "    or (r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')-- 예약시작시간 < 검색시작시간" // 9
-				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time    -- 검색시작시간 < 예약종료시간" // 10
-				+ "    and r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')    -- 예약종료시간 < 검색종료시간 " // 11
-				+ "    and round((TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') - r.end_time)*24*60,2) >= ?)" // 12,
-																									// 13
-				+ ");";
+				+ " JOIN reservations r ON rooms.room_id = r.room_id where kks.address like '%' || ? || '%'" + " and ("
+				+ "    r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    or TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time"
+				+ "    or (TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time"
+				+ "    and r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time"
+				+ "    and round((r.start_time - TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))*24*60,2) >= ?)"
+				+ "    or (r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time"
+				+ "    and r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    and round((TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') - r.end_time)*24*60,2) >= ?))";
 		List<KKVO> result = new ArrayList<KKVO>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -459,8 +452,7 @@ public class KKDAO {
 			pstmt.setInt(13, usingTime);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				result.add(new KKVO(rs.getInt(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(),
-						rs.getTimestamp(4).toLocalDateTime(), rs.getString(5), rs.getString(6)));
+				result.add(new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -472,36 +464,32 @@ public class KKDAO {
 	// 키워드가 있는 경우
 	public List<KKVO> getCandidateKKListWithKeywords(String addressGu, LocalDateTime startTime, LocalDateTime endTime,
 			int usingTime, int[] keywords) {
-		String sql = "select distinct kks.kk_id, kks.NAME, kks.OPENING_HOUR, kks.CLOSING_HOUR, kks.NOTE from kks, kks.ADDRESS"
-				+ "Join room_infos rooms ON kks.kk_id = rooms.kk_id"
-				+ "JOIN reservations r ON rooms.room_id = r.room_id where kks.address like '%' || ? || '%'" // 1
-				+ "and kks.KK_ID in (select KKK.KK_ID from kk_keywords kkk INNER JOIN kks ON kkk.kk_id = kks.kk_id"
-				+ "WHERE kks.address like '%' || ? || '%' and kkk.keyword_id in ? group by kkk.kk_id" // 2,3
-				+ "having COUNT(KKK.KK_ID) >= ?) and (     --검색종료시간 < 예약시작시간 || 예약종료시간 < 검색시작시간" //4
-				+ "    --예약종료시간     <=      검색시작시간" + "    r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')" 
-				+ "    -- 검색종료시간                       					  <= 예약시작시간"
-				+ "    or TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time" 
-				+ "    -- 검색시작시간 < 예약시작시간 < 검색종료시간 < 예약시작시간"
-				+ "    or (TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time -- 검색시작시간 < 예약시작시간"
-				+ "    and r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')   -- 예약시작시간 < 검색종료시간"
-				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time    -- 검색종료시간 < 예약종료시간" 
-				+ "    and round((r.start_time - TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))*24*60,2) >= ?) --예약시작시간 - 검색시작시간 > 이용시간(분단위)" 
-				+ "    --예약시작시간 < 검색시작시간 < 예약종료시간 < 검색종료시간"
-				+ "    or (r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')-- 예약시작시간 < 검색시작시간"
-				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time    -- 검색시작시간 < 예약종료시간"
-				+ "    and r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')    -- 예약종료시간 < 검색종료시간 "
-				+ "    and round((TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') - r.end_time)*24*60,2) >= ?)" 
-				+ ");";
+		String sql = "select distinct kks.kk_id, kks.NAME, kks.ADDRESS from kks"
+				+ " Join room_infos rooms ON kks.kk_id = rooms.kk_id"
+				+ " JOIN reservations r ON rooms.room_id = r.room_id where kks.address like '%' || ? || '%'" // 1
+				+ " and kks.KK_ID in (select KKK.KK_ID from kk_keywords kkk INNER JOIN kks ON kkk.kk_id = kks.kk_id"
+				+ " WHERE kks.address like '%' || ? || '%' and kkk.keyword_id in (?) group by kkk.kk_id" // 2,3
+				+ " having COUNT(KKK.KK_ID) >= ?) and (" // 4
+				+ " r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ " or TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time"
+				+ "    or (TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.start_time"
+				+ "    and r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time"
+				+ "    and round((r.start_time - TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))*24*60,2) >= ?)"
+				+ "    or (r.start_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    and TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.end_time"
+				+ "    and r.end_time <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS')"
+				+ "    and round((TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') - r.end_time)*24*60,2) >= ?)" + ")";
 		List<KKVO> result = new ArrayList<KKVO>();
-		String keywordsString = "(";
+		String keywordsString = "";
 		for (int i = 0; i < keywords.length; i++) {
-			if(i == 0){
+			if (i == 0) {
 				keywordsString += keywords[i];
-			}else{
-				keywordsString += ", " + keywords[i]; 
+			} else {
+				keywordsString += ", " + keywords[i];
 			}
 		}
-		keywordsString += ")";
+		System.out.println(keywordsString);
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, addressGu);
@@ -522,13 +510,84 @@ public class KKDAO {
 			pstmt.setInt(16, usingTime);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				result.add(new KKVO(rs.getInt(1), rs.getString(2), rs.getTimestamp(3).toLocalDateTime(),
-						rs.getTimestamp(4).toLocalDateTime(), rs.getString(5), rs.getString(6)));
+				result.add(new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+		return result;
+	}
+
+	public List<KKVO> getEvidentKKList(String addressGu, LocalDateTime startTime, LocalDateTime endTime) {
+		String sql = "select kk_id, kks.NAME, kks.ADDRESS from kks where address like '%' || ? || '%' and kk_id not in (select distinct kks.kk_id from kks"
+				+ " Join room_infos rooms ON kks.kk_id = rooms.kk_id"
+				+ " JOIN reservations r ON rooms.room_id = r.room_id"
+				+ " where (r.START_TIME >= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') and r.START_TIME <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))"
+				+ " or (TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') <= r.END_TIME and r.END_TIME <= TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))"
+				+ ")";
+
+		PreparedStatement pstmt;
+		List<KKVO> result = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, addressGu);
+			pstmt.setString(2, LDT2D(startTime));
+			pstmt.setString(3, LDT2D(endTime));
+			pstmt.setString(4, LDT2D(startTime));
+			pstmt.setString(5, LDT2D(endTime));
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				result.add(new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3)));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public List<KKVO> getEvidentKKListWithKeywords(String addressGu, LocalDateTime startTime, LocalDateTime endTime,
+			int[] keywords) {
+		String sql = "select kks.kk_id, kks.NAME, kks.ADDRESS from kks where address like '%' || ? || '%' " //1
+				+ " and kks.KK_ID in (select KKK.KK_ID from kk_keywords kkk" 
+				+ " INNER JOIN kks ON kkk.kk_id = kks.kk_id WHERE kks.address like '%' || ? || '%'" //2
+				+ " and kkk.keyword_id in (?) group by kkk.kk_id" + " having COUNT(KKK.KK_ID) = ?)" //3,4
+				+ " and kks.kk_id not in (select distinct kks.kk_id from kks"
+				+ " Join room_infos rooms ON kks.kk_id = rooms.kk_id"
+				+ " JOIN reservations r ON rooms.room_id = r.room_id"
+				+ " where (r.START_TIME >= TO_DATE(?, 'YYYY-MM-DD HH24:MI') and r.START_TIME <= TO_DATE(?, 'YYYY-MM-DD HH24:MI'))" //5,6
+				+ " or (TO_DATE(?, 'YYYY-MM-DD HH24:MI') <= r.END_TIME and r.END_TIME <= TO_DATE(?, 'YYYY-MM-DD HH24:MI'))" //7,8
+				+ " )";
+		String keywordsString = "";
+		for (int i = 0; i < keywords.length; i++) {
+			if (i == 0) {
+				keywordsString += keywords[i];
+			} else {
+				keywordsString += ", " + keywords[i];
+			}
+		}
+		PreparedStatement pstmt;
+		List<KKVO> result = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, addressGu);
+			pstmt.setString(2, addressGu);
+			pstmt.setString(3, keywordsString);
+			pstmt.setInt(4, keywords.length);
+			pstmt.setString(5, LDT2D(startTime));
+			pstmt.setString(6, LDT2D(endTime));
+			pstmt.setString(7, LDT2D(startTime));
+			pstmt.setString(8, LDT2D(endTime));
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				result.add(new KKVO(rs.getInt(1), rs.getString(2), rs.getString(3)));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 

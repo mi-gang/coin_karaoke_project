@@ -49,6 +49,7 @@ import com.oopsw.controller.action.ResetPassword;
 import com.oopsw.controller.action.ReviewListAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.SearchForKKWithOptions;
+import com.oopsw.controller.action.SearchedKKList;
 import com.oopsw.controller.action.SendValidationNumber;
 import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.UpdateNickname;
@@ -65,187 +66,192 @@ public class ActionFactory {
 	public Action getAction(String cmd) {
 		Action action = new wrongCmd();
 		switch (cmd) {
-			case "login":
-				action = new Login();
-				break;
-			case "reservationListUI":
-				action = new ReservationListUIAction();
-				break;
-			case "loginUI":
-				action = new LoginUI();
-				break;
-			case "logout":
-				action = new Logout();
-				break;
-			case "addUserUI":
-				action = new AddUserUI();
-				break;
-			case "addUser":
-				action = new AddUser();
-				break;
-			case "isExistEmail":
-				action = new IsExistEmail();
-				break;
-			case "findPasswordUI":
-				action = new FindPasswordUI();
-				break;
-			case "sendValidationNumber":
-				action = new SendValidationNumber();
-				break;
-			case "resetPassword":
-				action = new ResetPassword();
-				break;
-			case "updateUserUI":
-				action = new UpdateUserUI();
-				break;
-			case "getNickname":
-				action = new GetNickname();
-				break;
-			case "updateNickname":
-				action = new UpdateNickname();
-				break;
-			case "updatePassword":
-				action = new UpdatePassword();
-				break;
-			case "isAdult":
-				action = new IsAdult();
-				break;
-			case "mainUI":
-				action = new MainUI();
-				break;
-			case "nearRecommendKKList":
-				action = new NearRecommendKKList();
-				break;
-			case "addableTime":
-				action = new AddableTime();
-				break;
-			case "addReservationUI":
-				action = new AddReservationUI();
-				break;
-			case "musicListUI":
-				action = new MusicListUI();
-				break;
-			case "checkMusicbymyplaylist":
-				action = new CheckMusicbymyplaylist();
-				break;
-			case "addPlaylist":
-				action = new AddPlaylist();
-				break;
-			case "kkFilterUI":
-				action = new KKFilterUI();
-				break;
-			case "searchForKKWithOptions":
-				action = new SearchForKKWithOptions();
-				break;
-			case "kkSearchResultUI":
-				action = new KKSearchResultUI();
-				break;
-			case "kkDetailUI":
-				action = new KKDetailUI();
-				break;
-			case "mypageUIAction":
-				action = new MyPageUIAction();
-				break;
-			// ***** reservation *****
-			case "addReservationUIAction":
-				action = new AddReservationUIAction();
-				break;
-			case "roomReservationStatusListAction":
-				action = new RoomReservationStatusListAction();
-				break;
-			case "isValidTimeForReservationAction":
-				action = new IsValidTimeForReservationAction();
-				break;
-			case "payReservationAction":
-				action = new PayReservationAction();
-				break;
-			case "reservationListUIAction":
-				action = new ReservationListUIAction();
-				break;
-			case "uncompletedReservationListAction":
-				action = new UncompletedReservationListAction();
-				break;
-			case "completedReservationListAction":
-				action = new CompletedReservationListAction();
-				break;
-			case "canceledReservationListAction":
-				action = new CanceledReservationListAction();
-				break;
-			case "additionalTimeInfoAction":
-				action = new AdditionalTimeInfoAction();
-				break;
-			case "payAdditionalTimeAction":
-				action = new PayAdditionalTimeAction();
-				break;
-			case "cancelReservationAction":
-				action = new CancelReservationAction();
-				break;
-			// ***** review *****
-			case "myReviewListUIAction":
-				action = new MyReviewListUIAction();
-				break;
-			case "myReviewListAction":
-				action = new MyReviewListAction();
-				break;
-			case "addReviewAction":
-				action = new AddReviewAction();
-				break;
-			case "deleteReviewAction":
-				action = new DeleteReviewAction();
-				break;
-			case "reviewListAction":
-				action = new ReviewListAction();
-				break;
-			// inquire
-			case "addInquireAction":
-				action = new AddInquireAction();
-				break;
-			case "checkKKBookmarkAction":
-				action = new CheckKKBookmarkAction();
-				break;
-			case "addBookmarkAction":
-				action = new AddBookmarkAction();
-				break;
-			case "deleteBookmarkAction":
-				action = new DeleteBookmarkAction();
-				break;
-			case "amountStarReviewListByType":
-				action = new AmountStarReviewListByType();
-				break;
-			//***** 플레이리스트 *****
-			case "mypagePlaylistUI":
-				action = new MypagePlaylistUI();
-				break;
-			case "myPlaylist":
-				action = new MyPlaylist();
-				break;
-			case "playlistMusicNumber":
-				action = new PlaylistMusicNumber();
-				break;
-			case "deletePlaylist":
-				action = new DeletePlaylist();
-				break;
-			case "addMusic":
-				action = new AddMusic();
-				break;
-			case "deleteMusic":
-				action = new DeleteMusic();
-				break;
-			case "playlistMusicUI":
-				action = new PlaylistMusicUI();
-				break;
-			case "playlistTitle":
-				action = new PlaylistTitle();
-				break;
-			case "playlistMusicList":
-				action = new PlaylistMusicList();
-				break;
-        case "updatePlaylistTitle":
-			action=new UpdatePlaylistTitle();
+		case "login":
+			action = new Login();
 			break;
-			default:
-				action = new wrongCmd();
-				break;
+		case "reservationListUI":
+			action = new ReservationListUIAction();
+			break;
+		case "loginUI":
+			action = new LoginUI();
+			break;
+		case "logout":
+			action = new Logout();
+			break;
+		case "addUserUI":
+			action = new AddUserUI();
+			break;
+		case "addUser":
+			action = new AddUser();
+			break;
+		case "isExistEmail":
+			action = new IsExistEmail();
+			break;
+		case "findPasswordUI":
+			action = new FindPasswordUI();
+			break;
+		case "sendValidationNumber":
+			action = new SendValidationNumber();
+			break;
+		case "resetPassword":
+			action = new ResetPassword();
+			break;
+		case "updateUserUI":
+			action = new UpdateUserUI();
+			break;
+		case "getNickname":
+			action = new GetNickname();
+			break;
+		case "updateNickname":
+			action = new UpdateNickname();
+			break;
+		case "updatePassword":
+			action = new UpdatePassword();
+			break;
+		case "isAdult":
+			action = new IsAdult();
+			break;
+		case "mainUI":
+			action = new MainUI();
+			break;
+		case "nearRecommendKKList":
+			action = new NearRecommendKKList();
+			break;
+		case "addableTime":
+			action = new AddableTime();
+			break;
+		case "addReservationUI":
+			action = new AddReservationUI();
+			break;
+		case "musicListUI":
+			action = new MusicListUI();
+			break;
+		case "checkMusicbymyplaylist":
+			action = new CheckMusicbymyplaylist();
+			break;
+		case "addPlaylist":
+			action = new AddPlaylist();
+			break;
+		case "kkFilterUI":
+			action = new KKFilterUI();
+			break;
+		case "searchForKKWithOptions":
+			action = new SearchForKKWithOptions();
+			break;
+		case "kkSearchResultUI":
+			action = new KKSearchResultUI();
+			break;
+		case "kkDetailUI":
+			action = new KKDetailUI();
+			break;
+		case "mypageUIAction":
+			action = new MyPageUIAction();
+			break;
+		// ***** reservation *****
+		case "addReservationUIAction":
+			action = new AddReservationUIAction();
+			break;
+		case "roomReservationStatusListAction":
+			action = new RoomReservationStatusListAction();
+			break;
+		case "isValidTimeForReservationAction":
+			action = new IsValidTimeForReservationAction();
+			break;
+		case "payReservationAction":
+			action = new PayReservationAction();
+			break;
+		case "reservationListUIAction":
+			action = new ReservationListUIAction();
+			break;
+		case "uncompletedReservationListAction":
+			action = new UncompletedReservationListAction();
+			break;
+		case "completedReservationListAction":
+			action = new CompletedReservationListAction();
+			break;
+		case "canceledReservationListAction":
+			action = new CanceledReservationListAction();
+			break;
+		case "additionalTimeInfoAction":
+			action = new AdditionalTimeInfoAction();
+			break;
+		case "payAdditionalTimeAction":
+			action = new PayAdditionalTimeAction();
+			break;
+		case "cancelReservationAction":
+			action = new CancelReservationAction();
+			break;
+		// ***** review *****
+		case "myReviewListUIAction":
+			action = new MyReviewListUIAction();
+			break;
+		case "myReviewListAction":
+			action = new MyReviewListAction();
+			break;
+		case "addReviewAction":
+			action = new AddReviewAction();
+			break;
+		case "deleteReviewAction":
+			action = new DeleteReviewAction();
+			break;
+		case "reviewListAction":
+			action = new ReviewListAction();
+			break;
+		// inquire
+		case "addInquireAction":
+			action = new AddInquireAction();
+			break;
+		case "checkKKBookmarkAction":
+			action = new CheckKKBookmarkAction();
+			break;
+		case "addBookmarkAction":
+			action = new AddBookmarkAction();
+			break;
+		case "deleteBookmarkAction":
+			action = new DeleteBookmarkAction();
+			break;
+		case "amountStarReviewListByType":
+			action = new AmountStarReviewListByType();
+			break;
+		// ***** 플레이리스트 *****
+		case "mypagePlaylistUI":
+			action = new MypagePlaylistUI();
+			break;
+		case "myPlaylist":
+			action = new MyPlaylist();
+			break;
+		case "playlistMusicNumber":
+			action = new PlaylistMusicNumber();
+			break;
+		case "deletePlaylist":
+			action = new DeletePlaylist();
+			break;
+		case "addMusic":
+			action = new AddMusic();
+			break;
+		case "deleteMusic":
+			action = new DeleteMusic();
+			break;
+		case "playlistMusicUI":
+			action = new PlaylistMusicUI();
+			break;
+		case "playlistTitle":
+			action = new PlaylistTitle();
+			break;
+		case "playlistMusicList":
+			action = new PlaylistMusicList();
+			break;
+		case "updatePlaylistTitle":
+			action = new UpdatePlaylistTitle();
+			break;
+		//임시
+		case "searchedKKList":
+			action = new SearchedKKList();
+			break;
+			
+		default:
+			action = new wrongCmd();
+			break;
 
 		}
 
