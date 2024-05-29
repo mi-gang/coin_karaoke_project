@@ -304,7 +304,7 @@
         </div>
         <div>
           <img
-            src="img/searchIcon.svg"
+            src="img/searchIcon_on.svg"
             alt="노래방 검색 페이지"
           />
         </div>

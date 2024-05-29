@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+header span {
+	margin-left: 3.5rem;
+}
+
 #container {
   display: flex;
   justify-content: flex-start;
