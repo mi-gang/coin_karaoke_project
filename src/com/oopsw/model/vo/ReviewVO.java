@@ -28,6 +28,12 @@ public class ReviewVO {
 		setEndTime(endTime);
 		setKKname(KKname);
 	}
+	
+	public ReviewVO(String content, float star, int reservationId) {
+		setContent(content);
+		setStar(star);
+		setReservationId(reservationId);
+	}
 
 	public int getReviewId() {
 		return reviewId;

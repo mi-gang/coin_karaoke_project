@@ -1,4 +1,9 @@
+
+
 // 페이지 이동
+
+
+
 
 // 저장한 노래방 리스트 페이지 이동
 $("#bookmark-page").on("click", function() {
@@ -12,8 +17,7 @@ $("#playlist-page").on("click", function() {
 
 // 나의 리뷰 페이지 이동
 $("#review-page").on("click", function() {
-	location.href = "controller?cmd=myReviewListAction";
-	alert("action: playListMusicUI");
+	location.href = "controller?cmd=myReviewListUIAction";
 });
 
 // 노래방 상세 페이지 이동

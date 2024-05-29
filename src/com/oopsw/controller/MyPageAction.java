@@ -1,35 +1,30 @@
-package com.oopsw.controller.action;
-
-import java.util.ArrayList;
-import java.util.Collection;
+package com.oopsw.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.oopsw.controller.Action;
-import com.oopsw.controller.Url;
-import com.oopsw.model.vo.ReservationVO;
 import com.oopsw.service.ReservationService;
+import com.oopsw.service.myPageVO;
 
-public class CanceledReservationListAction implements Action {
+public class MyPageAction implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		ReservationService service = new ReservationService();
 
-		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HttpSession session = request.getSession();
 		Object userId = session.getAttribute("userId");
+
+		ReservationService service = new ReservationService();
 
 		String page = "controller?cmd=login";
 
 		if (userId != null) {
 			System.out.println(userId);
-			reservationVOs = service.getCanceledReservationList((String) userId);
-			request.setAttribute("dataToSend", gson.toJson(reservationVOs));
+			myPageVO myPageVO = service.myPageInfo((String) userId);
+			request.setAttribute("dataToSend", gson.toJson(myPageVO));
 			page = "json/data.jsp";
 		}
 

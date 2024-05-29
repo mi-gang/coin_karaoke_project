@@ -17,9 +17,14 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.oopsw.model.dao.KKDAO;
+import com.oopsw.model.dao.PlaylistDAO;
 import com.oopsw.model.dao.ReservationDAO;
+import com.oopsw.model.dao.ReviewDAO;
 import com.oopsw.model.dao.UserDAO;
+import com.oopsw.model.vo.KKVO;
+import com.oopsw.model.vo.PlaylistVO;
 import com.oopsw.model.vo.ReservationVO;
+import com.oopsw.model.vo.ReviewVO;
 
 public class ReservationService {
 	public Connection conn;
@@ -42,6 +47,13 @@ public class ReservationService {
 	public ReservationVO getUpcomingReservation(String userId) {
 
 		ReservationVO reservationVO = new ReservationDAO(conn).getUpcomingReservation(userId);
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return reservationVO;
 	}
 
@@ -64,6 +76,13 @@ public class ReservationService {
 			reservationVOs = new ReservationDAO(conn).getReservationListByRoomId(roomId);
 			reservationRoomInfoVOs.add(new ReservationRoomInfoVO(roomId, roomName, reservationVOs));
 		}
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return reservationRoomInfoVOs;
 	}
 
@@ -73,6 +92,12 @@ public class ReservationService {
 		boolean result = false;
 
 		result = new ReservationDAO(conn).isValidTimeForReservation(startTime, endTime, roomId);
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return result;
 	}
@@ -84,22 +109,44 @@ public class ReservationService {
 
 		reservationVOs = new ReservationDAO(conn).getUncompletedReservationList(userId);
 
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return reservationVOs;
 	}
 
 	/** 예약내역 중 이용 완료 내역 불러오기 */
-	public Collection<ReservationVO> getCompletedReservationList(String userId) {
+	public Collection<completedReservationVO> getCompletedReservationList(String userId) {
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
+
+		Collection<completedReservationVO> completedReservationVOs = new ArrayList<>();
 
 		reservationVOs = new ReservationDAO(conn).getCompletedReservationList(userId);
 
 		// 리뷰 작성 여부 / 작성 가능 여부 불러오기
-		for (int i = 0; i < reservationVOs.size(); i++) {
-			
+		for (ReservationVO reservationVO : reservationVOs) {
+
+			boolean result = new ReservationDAO(conn).isReviewWritten(userId, reservationVO.getReservationId());
+
+			System.out.println(result);
+			if (result) {
+				completedReservationVOs.add(new completedReservationVO(reservationVO, result));
+			} else {
+				completedReservationVOs.add(new completedReservationVO(reservationVO, false));
+			}
 		}
-		
-		return reservationVOs;
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return completedReservationVOs;
 	}
 
 	/** 예약내역 중 취소 내역 불러오기 */
@@ -108,6 +155,12 @@ public class ReservationService {
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
 		reservationVOs = new ReservationDAO(conn).getCanceledReservationList(userId);
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return reservationVOs;
 	}
@@ -194,6 +247,12 @@ public class ReservationService {
 
 		result = new ReservationDAO(conn).addReservation(reservationVO);
 
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
@@ -204,6 +263,12 @@ public class ReservationService {
 
 		result = new ReservationDAO(conn).updateReservation(endTime, reservationId);
 
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
@@ -213,6 +278,12 @@ public class ReservationService {
 		boolean result = false;
 
 		result = new ReservationDAO(conn).cancelReservation(userId, reservationId);
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return result;
 	}
@@ -227,6 +298,57 @@ public class ReservationService {
 		LocalDateTime endTime = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId).getEndTime();
 		result = new ReservationDAO(conn).updateReservation(endTime.plusMinutes(additionalTime), reservationId);
 		return result;
+	/** 마이페이지 */
+	public myPageVO myPageInfo(String userId) {
+
+		
+		// 닉네임
+		String nickname = null;
+		try {
+			nickname = new UserDAO(conn).getNickname(userId);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+				
+		// 저장된 노래방
+		Collection<String> keywordList = new ArrayList<String>();
+		List<String[]> tmpKKList = new KKDAO(conn).getMypageBookmarkKK(userId);
+		
+		System.out.println(tmpKKList);
+
+		int kkId = Integer.parseInt(tmpKKList.get(0)[0]);
+		String name = tmpKKList.get(0)[1];
+		String address = tmpKKList.get(0)[2];
+		float starRating = new ReservationDAO(conn).getStarAvgByKKId(kkId);
+
+		if (tmpKKList.size() > 1) {
+			keywordList = new ArrayList<String>();
+			keywordList.add(tmpKKList.get(0)[3]);
+
+			for (int i = 1; i < tmpKKList.size(); i++) {
+				keywordList.add(tmpKKList.get(i)[3]);
+			}
+		}
+		KKVO kkVO = new KKVO(kkId, name, address, starRating, keywordList);
+		int bookmarkCount = new KKDAO(conn).getBookmarkCount(userId);
+
+		// 플레이리스트
+		Collection<PlaylistVO> playlistVOs = new PlaylistDAO(conn).getmypagePlaylist(userId);
+		int playlistCount = new PlaylistDAO(conn).getPlaylistCount(userId);
+		
+		// 리뷰
+		ReviewVO reviewVO = new ReviewDAO(conn).getReviewByUserId(userId);
+		int reviewCount = new ReviewDAO(conn).getReviewCount(userId);
+		
+		myPageVO myPageVO = new myPageVO(nickname, kkVO, bookmarkCount, reviewVO, reviewCount, playlistVOs,
+				playlistCount);
+
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return myPageVO;
 	}
 
 }

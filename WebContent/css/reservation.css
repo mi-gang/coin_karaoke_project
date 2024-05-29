@@ -169,7 +169,7 @@
   color: #ffffff;
 }
 
-.cancle-button {
+.cancel-button {
   width: 7.5rem;
   height: 3.2rem;
 
@@ -189,9 +189,11 @@
 
 .review-button2 {
   width: 9.5rem;
+    color: #888888;
+  background-color: #e4e4e4;
 }
 
-#cancle-info {
+#cancel-info {
   font-weight: 400;
   font-size: 1.3rem;
   line-height: 16px;
@@ -200,7 +202,7 @@
   column-gap: 0.5rem;
 }
 
-#cancle-info > div {
+#cancel-info > div {
   color: #ff5e5e;
 }
 
@@ -348,11 +350,6 @@
   font-size: 1.5rem;
 }
 
-.submit_button:disabled {
-  color: #888888;
-  background-color: #e4e4e4;
-}
-
 #add1-add-time-arrow-img {
   display: flex;
   flex-direction: row;
@@ -496,7 +493,7 @@
 
 /* 예약 취소 모달 */
 
-.cancle-modal-body-wrapper {
+.cancel-modal-body-wrapper {
   width: 100%;
   height: 11rem;
   display: flex;
@@ -506,7 +503,7 @@
   row-gap: 3rem;
 }
 
-.cancle-modal-title {
+.cancel-modal-title {
   font-weight: 700;
   font-size: 1.8rem;
   line-height: 25px;
@@ -514,7 +511,7 @@
   text-align: center;
 }
 
-.cancle-modal-content {
+.cancel-modal-content {
   /* width: 30rem;
   height: 15rem; */
 
@@ -571,4 +568,9 @@
 
 .inquire-button {
   width: 12rem;
+}
+
+.submit-button:disabled {
+  color: #888888;
+  background-color: #e4e4e4;
 }
