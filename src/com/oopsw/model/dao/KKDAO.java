@@ -28,6 +28,76 @@ public class KKDAO {
 		this.conn = conn;
 	}
 	
+	// 추가 메서드 - 노래방 별점 종류(1~5)별 개수 정보 가져오기 
+	public ArrayList<String> getAmountStarReviewByType(String kkId) {
+		String sql = "SELECT COUNT(DISTINCT r.review_id) "
+				+ "FROM (SELECT * FROM reviews rev, reservations res, KKs k, room_infos ri "
+				+ "WHERE (k.kk_id=?) AND (k.kk_id=ri.kk_id AND ri.room_id=res.room_id AND res.reservation_id=rev.reservation_id) "
+				+ "ORDER BY res.END_TIME DESC), kks, room_infos ri, reviews r, reservations rv, users u "
+				+ "WHERE ROWNUM >= 1 and ROWNUM <= 10 "
+				+ "AND(kks.kk_id=ri.kk_id AND ri.room_id=rv.room_id "
+				+ "AND rv.reservation_id=r.reservation_id AND u.user_id=rv.user_id) "
+				+ "AND r.star=?";
+		ArrayList<String> starAmountList = new ArrayList<String>();
+		
+		try {
+			PreparedStatement pstmt1;
+			pstmt1 = conn.prepareStatement(sql);
+			pstmt1.setInt(1, Integer.parseInt(kkId));
+			pstmt1.setInt(2, 1);
+			ResultSet rs1 = pstmt1.executeQuery();
+			
+			if(rs1.next()) {
+				starAmountList.add(rs1.getString(1));
+			}
+			//
+			PreparedStatement pstmt2;
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, Integer.parseInt(kkId));
+			pstmt2.setInt(2, 2);
+			ResultSet rs2 = pstmt2.executeQuery();
+			
+			if(rs2.next()) {
+				starAmountList.add(rs2.getString(1));
+			}
+			//
+			PreparedStatement pstmt3;
+			pstmt3 = conn.prepareStatement(sql);
+			pstmt3.setInt(1, Integer.parseInt(kkId));
+			pstmt3.setInt(2, 3);
+			ResultSet rs3 = pstmt3.executeQuery();
+			
+			if(rs3.next()) {
+				starAmountList.add(rs3.getString(1));
+			}
+			//
+			PreparedStatement pstmt4;
+			pstmt4 = conn.prepareStatement(sql);
+			pstmt4.setInt(1, Integer.parseInt(kkId));
+			pstmt4.setInt(2, 4);
+			ResultSet rs4 = pstmt4.executeQuery();
+			
+			if(rs4.next()) {
+				starAmountList.add(rs4.getString(1));
+			}
+			//
+			PreparedStatement pstmt5;
+			pstmt5 = conn.prepareStatement(sql);
+			pstmt5.setInt(1, Integer.parseInt(kkId));
+			pstmt5.setInt(2, 5);
+			ResultSet rs5 = pstmt5.executeQuery();
+			
+			if(rs5.next()) {
+				starAmountList.add(rs5.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return starAmountList;
+	}
+	
 	// 추가 메서드 - 노래방 상세정보 페이지의 기본 정보 불러오기
 	public KKVO getSelectedKKBasicInfo(String kkId) {
 		String sql = "SELECT kk_id, name, opening_hour, closing_hour, note, address "
@@ -477,19 +547,16 @@ public class KKDAO {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, kkId);
-			System.out.println("pstmt");
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(rs);
 
 			while (rs.next()) {
-				System.out.println("count");
 				roomInfoList.put(Integer.valueOf(rs.getInt(1)), rs.getString(2));
 			}
 
-			System.out.println("해당 노래방의 방 정보 불러오기");
-			for (Entry<Integer, String> entrySet : roomInfoList.entrySet()) {
-				System.out.println(entrySet.getKey() + " - " + entrySet.getValue());
-			}
+//			System.out.println("해당 노래방의 방 정보 불러오기");
+//			for (Entry<Integer, String> entrySet : roomInfoList.entrySet()) {
+//				System.out.println(entrySet.getKey() + " - " + entrySet.getValue());
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

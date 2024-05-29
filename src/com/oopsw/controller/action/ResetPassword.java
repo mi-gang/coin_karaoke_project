@@ -1,26 +1,22 @@
 package com.oopsw.controller.action;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import com.google.gson.JsonObject;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.UserService;
 
-public class resetPassword implements Action {
+public class ResetPassword implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
 		boolean result = false;
-		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("userId");
+		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		String actualVNumber = request.getParameter("vNumber");
 		
@@ -29,6 +25,11 @@ public class resetPassword implements Action {
 			result = new UserService().resetPassword(userId, password);
 		}
 		
+		if(result){
+			System.out.println("O 비밀번호를 reset하였습니다! : resetPassword.java");
+		}else{
+			System.out.println("X 비밀번호를 reset에 실패하였습니다.: resetPassword.java");
+		}
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
 		request.setAttribute("dataToSend", json.toString());
@@ -49,7 +50,6 @@ public class resetPassword implements Action {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
 

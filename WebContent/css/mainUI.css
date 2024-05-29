@@ -1,0 +1,1043 @@
+/* 추천 노래방 */
+#recommend-wrapper {
+  width: 40.4rem;
+  height: 26.8rem;
+  margin-left: 2.6rem;
+  border-bottom: 1px solid #b6b6b6;
+
+  .wrapper-header {
+    display: flex;
+    justify-content: space-between;
+
+    height: 8rem;
+  }
+}
+
+.subTitle {
+  margin: 0;
+  margin-bottom: 1.6rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+/* 지역 검색 */
+
+#regionWrapper p {
+  margin-right: 1.6rem;
+}
+
+.regionBox .label {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  /*width: 30rem;*/
+  height: inherit;
+  margin: 0;
+  border: 0 none;
+  /*border: 1px solid red;*/
+  outline: 0 none;
+  padding-left: 15px;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 400;
+  background: transparent;
+  cursor: pointer;
+}
+
+.regionBox .regionList {
+  background-color: #fff;
+  border: 0.1rem solid #f9f9f9;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 0.5rem;
+  overflow: scroll;
+  max-height: 0;
+  transition: 0.3s ease-in;
+}
+
+.regionBox.active .regionList {
+  max-height: 14rem;
+}
+
+.regionBox .regionItem {
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+  /* border-bottom: 1px dash rgb(170, 72, 72); */
+  padding: 0.7rem 1.5rem 0.8rem;
+  transition: 0.1s;
+  position: relative;
+  z-index: 10;
+  background-color: white;
+}
+
+.regionBox .regionItem:hover {
+  background: #f4f4f4;
+}
+
+.regionBox .regionList::-webkit-scrollbar-track {
+  background: transparent;
+}
+.regionBox .regionList::-webkit-scrollbar-thumb {
+  background: #b6b6b6;
+  border-radius: 45px;
+}
+
+.regionBox .regionList::-webkit-scrollbar-thumb:hover {
+  background: #686868;
+}
+
+/* 추천 노래방 리스트 */
+#KK-container {
+  width: 40.4rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  column-gap: 1.1rem;
+  padding-right: 1rem;
+
+  .card {
+    width: 11.2rem;
+    height: 18rem;
+    border: none;
+    flex: none;
+
+    img {
+      border-radius: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-body {
+      padding: 0;
+
+      .card-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0;
+      }
+
+      .starContainer {
+        display: flex;
+        margin-top: -0.3rem;
+
+        span {
+          font-size: 1.2rem;
+          font-weight: bolder;
+          color: #e3cdff;
+          margin-right: 1rem;
+        }
+      }
+
+      .KK-usability {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+
+        .normal {
+          color: #69bae8;
+        }
+        .good {
+          color: #35d274;
+        }
+        .bad {
+          color: #ff7575;
+        }
+      }
+    }
+  }
+}
+/* 다가오는 예약 일정 */
+#upcoming-wrapper {
+  width: 40.4rem;
+  height: 23.6rem;
+  margin-left: 2.6rem;
+  border-bottom: 1px solid #b6b6b6;
+
+  .wrapper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    a {
+      margin-right: 2rem;
+      font-size: 1.2rem;
+      color: black;
+      text-decoration-line: none;
+      margin-bottom: 1.3rem;
+    }
+  }
+}
+
+#reservation_content_wrapper {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 38.2rem;
+
+  row-gap: 1rem;
+}
+
+#reservation_status_wrapper {
+  width: 10rem;
+  height: 2.2rem;
+  background: #f2f2f2;
+  border-radius: 40px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+#reservation_status {
+  font-weight: 700;
+  font-size: 12px;
+  width: 10rem;
+  text-align: center;
+  color: #808080;
+}
+
+#reservation_content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+#reservation_detail_wrapper {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+
+#reservation_detail {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#reservation_detail_row {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+}
+
+#karaoke_name {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 20px;
+}
+
+#reservation-time {
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.2rem;
+}
+
+#reservation-start-time {
+  display: flex;
+  flex-direction: row;
+}
+#reservation-end-time {
+  display: flex;
+  flex-direction: row;
+}
+
+#button_wrapper {
+  display: flex;
+  justify-content: end;
+  gap: 1.5rem;
+}
+
+.submit_button {
+  width: 7.5rem;
+  height: 3.2rem;
+
+  background: #9747ff;
+  border-radius: 10px;
+  border: none;
+
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.cancle_button {
+  width: 7.5rem;
+  height: 3.2rem;
+
+  border-radius: 10px;
+  border-style: solid;
+
+  border-width: 1px;
+  border-color: #e4e4e4;
+  background-color: #ffffff;
+
+  font-size: 1.2rem;
+}
+
+/* 다가오는 예약일정 모달들 */
+
+.modal-header {
+  border-bottom: none;
+  padding: 2rem 2rem;
+}
+
+.modal-footer {
+  justify-content: center;
+  border-top: none;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.btn-close {
+  width: 3rem;
+  height: 2rem;
+}
+
+/* 모달 공통 */
+
+.modal-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
+}
+
+/* 시간 추가 모달 */
+
+#add1-modal-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#add1-modal-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 4rem;
+  /* padding: 2rem; */
+  padding: 0 2rem 2rem 2rem;
+}
+
+#add1-modal-body-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#add1-modal-body-title > span {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+
+  text-align: center;
+}
+
+#add1-modal-body-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#add1-modal-body-contents > hr {
+  border: 0.8px solid #b6b6b6;
+}
+
+.add1-modal-body-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row; /* row or column 알아서 */
+  width: 100%;
+}
+
+.add1-modal-body-content-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add1-modal-body-content-time {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+
+  width: 20rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add1-addTime {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+
+  color: #9747ff;
+}
+
+.add-button {
+  width: 9rem;
+  height: 4rem;
+  font-size: 1.5rem;
+}
+
+#add1-add-time-arrow-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+
+  width: 20rem;
+  height: 3rem;
+}
+
+#set-hour {
+  margin-left: 3rem;
+}
+
+/* .modal-footer > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+} */
+
+#add1-notice {
+  width: auto;
+  height: 2rem;
+}
+
+.add1-add-time-arrow {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background-color: transparent;
+
+  background-image: url("../img/down_arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  cursor: pointer;
+}
+
+/* 시간 추가 모달 2 : 추가 시간 설정 */
+
+#add2-modal-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 2rem;
+}
+
+#add2-modal-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 10rem;
+}
+
+#add2-modal-time > span {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+#add2-modal-time-setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+#add2-modal-time-setting > span {
+  font-size: 6rem;
+}
+
+.add2-time-setting-input {
+  width: 10rem;
+  height: 10rem;
+  left: 89px;
+  top: 695px;
+  font-size: 80px;
+
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  outline: none;
+
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 82px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* 시간 추가 모달 3 : 예약 내용 확인 */
+
+#add3-pay-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+
+  /* width: 155px;
+  height: 27px;
+  left: 227px;
+  top: 580px; */
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+/* 모달 4 */
+#add4-modal-body-wrapper {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+
+  text-align: center;
+  padding: 1.5rem 3rem 3rem 3rem; /* 안됨 */
+}
+
+/* 예약 취소 모달 */
+
+.cancle-modal-body-wrapper {
+  width: 40rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+}
+
+.cancle-modal-title {
+  /* width: 196px;
+  height: 25px;
+  left: 116px;
+  top: 400px; */
+
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 25px;
+  /* identical to box height */
+  text-align: center;
+}
+
+.cancle-modal-content {
+  /* width: 30rem;
+  height: 15rem; */
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 22px;
+  text-align: center;
+}
+
+/* 인기차트 */
+#chart-wrapper {
+  height: 27.8rem;
+
+  .wrapper-header {
+    padding-left: 2.6rem;
+    height: 8.8rem;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px +10px -5px -3px rgba(181, 181, 181, 0.25);
+
+    #brand-container {
+      margin-right: 1.7rem;
+
+      button {
+        width: 7rem;
+        height: 3.5rem;
+        border-radius: 4rem;
+        border: 1px solid #e4e4e4;
+        background-color: white;
+      }
+
+      button.brand-activate {
+        background-color: #9747ff;
+        color: white;
+      }
+    }
+  }
+
+  /* 플레이리스트 모달, 음악 등 */
+  #container {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .music_input_group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    /* grid-template-rows: 7.4rem auto 7.4rem; */
+    width: 38rem;
+    /* height: 95%; */
+    height: 5rem;
+    /* border: 1px solid violet; */
+    border-radius: 22px;
+    border: 1px solid #bbb;
+    margin-top: 2.4rem;
+    margin-bottom: 0.8rem;
+  }
+  .music_input {
+    width: 80%;
+    height: 5rem;
+    border: none;
+    /* border-radius: 22px; */
+    padding: 1rem 6rem;
+    font-size: 130%;
+    font-weight: bold;
+  }
+  .music_search {
+    width: 1.7rem;
+    margin: 0;
+  }
+  .ent_button_group {
+    width: 43rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    background: none;
+  }
+  .button {
+    flex-basis: auto;
+    width: 7rem;
+    height: 3.5rem;
+    position: relative;
+    margin-right: 0.5rem;
+    border-color: #e4e4e4;
+    background: white;
+    border-radius: 4rem;
+    font-size: 150%;
+  }
+  .button.on {
+    flex-basis: auto;
+    width: 7rem;
+    height: 3.5rem;
+    position: relative;
+    margin-right: 0.5rem;
+    background: #9747ff;
+    border-radius: 4rem;
+    font-size: 150%;
+    color: white;
+    box-shadow: 5px 5px 5px;
+  }
+  /* .KY_button {
+  flex-basis: auto;
+  width: 7rem;
+  height: 3.5rem;
+  position: relative;
+  border-color: #e4e4e4;
+  background: white;
+  border-radius: 4rem;
+  font-size: 150%;
+} */
+  .ent_button {
+    flex-basis: auto;
+    width: 7rem;
+    height: 3.5rem;
+    position: relative;
+    border-color: #e4e4e4;
+    background: white;
+    border-radius: 4rem;
+    font-size: 150%;
+  }
+
+  input::placeholder {
+    color: #b6b6b6;
+    font-weight: bold;
+  }
+  input:focus {
+    outline: none;
+  }
+
+  /* 
+input search type일때 붙는 못생긴 x 지우기 */
+  input {
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+  }
+  .music_list_output {
+    width: 100%;
+    height: 19rem;
+    overflow-y: scroll;
+  }
+
+  .music_list_output::-webkit-scrollbar {
+    display: none;
+  }
+
+  .music_output {
+    width: 100%;
+    height: 7.6rem;
+    border: 1px solid #e4e4e4;
+    display: flex;
+  }
+  .music_num {
+    height: 7.6rem;
+    width: 10.2rem;
+    font-size: 180%;
+    font-weight: bold;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .music_info {
+    height: 7.4rem;
+    width: 25.6rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .music_title {
+    height: 60%;
+    width: 100%;
+    font-size: 170%;
+    font-weight: 400;
+    text-overflow: hidden;
+  }
+
+  .music_singer {
+    height: 40%;
+    width: 100%;
+    color: #7b7b7b;
+    font-size: 140%;
+    margin-top: 1rem;
+  }
+  .music_like {
+    width: 7.2rem;
+    height: 7.4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .like_img {
+    width: 2.4rem;
+    height: 2.4rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .modal_overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    background-color: rgba(71, 58, 58, 0.25);
+    z-index: 1;
+  }
+  .modal_overlay.on {
+    display: block;
+  }
+  .modal_overlay2 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    background-color: rgba(71, 58, 58, 0.25);
+  }
+  .modal_overlay2.on {
+    display: block;
+  }
+  .modal_playlist {
+    width: 35rem;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70%;
+    margin-left: 9%;
+    position: absolute;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    /* display: none;*/
+    background-color: white;
+  }
+  .modal_create {
+    width: 35rem;
+    height: 29.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70%;
+    margin-left: 9%;
+    position: absolute;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    /* display: none;*/
+    background-color: white;
+  }
+
+  .close_btn {
+    margin-top: 1.7rem;
+    margin-left: 31.1rem;
+  }
+  .close_img {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .close_btn2 {
+    margin-top: 1.7rem;
+    margin-left: 31.1rem;
+  }
+  .close_img2 {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .modal_title {
+    font-size: 240%;
+    margin-top: 7%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-weight: bolder;
+  }
+  .playlist_list {
+    width: 26.8rem;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4.1rem;
+    overflow-y: scroll;
+    max-height: 15rem;
+  }
+
+  .playlist_list::-webkit-scrollbar {
+    display: none;
+  }
+  .playlist {
+    width: 22.5rem;
+    height: 4.8rem;
+    background-color: #f3f3f3;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    border-radius: 1rem;
+    justify-self: centers;
+    align-items: center;
+  }
+
+  .playlist_list::-webkit-scrollbar {
+    /* display: none; */
+  }
+  .like_btn {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: 1.2rem;
+    margin-top: 0rem;
+  }
+  .list_title {
+    font-size: 150%;
+    font-weight: bold;
+    margin-left: 1.1rem;
+    margin-top: 0rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .create_music_list {
+    width: 22.5rem;
+    height: 4.8rem;
+    background-color: #f3f3f3;
+    margin-top: 1.3rem;
+    margin-left: 6.2rem;
+    display: flex;
+    border-radius: 1rem;
+  }
+
+  .plus_img {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: 1.2rem;
+    margin-top: 1.3rem;
+    color: #7b7b7b;
+  }
+
+  .create_title {
+    font-size: 150%;
+    font-weight: bold;
+    margin-left: 1.1rem;
+    margin-top: 1.5rem;
+  }
+
+  .confirm_btn {
+    width: 5.7rem;
+    height: 3.5rem;
+    border-radius: 4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #9747ff;
+    color: white;
+    border: none;
+    font-size: 120%;
+    font-weight: bold;
+    margin-top: 2.6rem;
+    margin-left: 40%;
+    margin-bottom: 1rem;
+  }
+  .new_play_list_title {
+    width: 28.5rem;
+    height: 3rem;
+    font-size: 140%;
+    font-weight: bold;
+    margin-top: 2.4rem;
+    margin-left: 3rem;
+    border: none;
+  }
+
+  .new_play_list_title_input {
+    width: 28.5rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 0.5rem;
+    margin-left: 3rem;
+    border-width: 0 0 1px;
+  }
+
+  .modal_isMember {
+    width: 35rem;
+    height: 29.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70%;
+    margin-left: 9%;
+    position: absolute;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    /* display: none;*/
+    background-color: white;
+  }
+
+  .close_btn3 {
+    margin-top: 1.7rem;
+    margin-left: 31.1rem;
+  }
+  .close_img3 {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .modal_alert {
+    font-size: 200%;
+    width: 27erm;
+    height: 7.1rem;
+    word-break: keep-all;
+    margin-top: 9rem;
+    text-align: center;
+  }
+
+  .login_btn {
+    width: 15.7rem;
+    height: 3.5rem;
+    border-radius: 4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #9747ff;
+    color: white;
+    border: none;
+    font-size: 120%;
+    font-weight: bold;
+    margin-top: 2.6rem;
+    margin-left: 9.5rem;
+    margin-bottom: 1rem;
+  }
+  .playlistId {
+  }
+}
+
+/* 공통 */
+.wrapper {
+  width: 100%;
+}
+
+.wrapper-header {
+  padding-top: 2.6rem;
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 2.8rem;
+}
+
+/* 비로그인 회원 리뷰 가림 */
+.invisibleUnLoginUser {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 39.1rem;
+  height: 16.3rem;
+  font-size: 2rem;
+  background-color: rgba(246, 246, 246, 0.94);
+}
+
+.invisibleUnLoginUser.on {
+  display: flex;
+}
+
+.invisibleWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 34.2rem;
+  text-align: center;
+}
+
+.reviewLoginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34.2rem;
+  height: 3.3rem;
+  padding: 2rem 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #9747ff;
+  border-radius: 1rem;
+  border: 0.3rem solid #9747ff;
+  cursor: pointer;
+}
+
+.inactivate {
+  background-color: #e4e4e4;
+  color: #979797;
+}

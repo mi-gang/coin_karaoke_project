@@ -10,7 +10,7 @@ import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.UserService;
 
-public class sendValidationNumber implements Action {
+public class SendValidationNumber implements Action {
 	private final int MAX_VNUMBER = 9999;//인증번호 범위: 1 ~ MAX_VNUMBER
 	private final int EXPIRED_MINUTE = 5; //인증번호 유효시간: 5분 
 
@@ -18,7 +18,7 @@ public class sendValidationNumber implements Action {
 	public Url execute(HttpServletRequest request) {
 		UserService service = new UserService();
 		String userId = request.getParameter("userId");
-		boolean isExistEmail =service.isExistEmail(userId); 
+		boolean isExistEmail =service.isExistEmail(userId);
 		if(isExistEmail){
 			HttpSession session = request.getSession();
 			int vNumber = (int)(1 + Math.random() * MAX_VNUMBER);

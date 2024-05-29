@@ -5,12 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 
-public class addUserUI implements Action {
+public class MyPageUIAction implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
 
-		return new Url("html/addUserUI.html", Url.FORWARD);
+		return new Url("jsp/myPageUI.jsp", Url.FORWARD);
 	}
-
 }

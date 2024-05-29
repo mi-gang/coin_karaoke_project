@@ -1,0 +1,41 @@
+.rating-wrap {
+  display: flex;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.star {
+  width: 30px;
+  height: 30px;
+  margin-right: 2px;
+}
+
+.starcolor {
+  fill: #9747ff;
+}
+
+.star:last-of-type {
+  margin-right: 0;
+}
+
+.overlay {
+  background-color: #888;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+@supports (mix-blend-mode: color) {
+  .overlay {
+    mix-blend-mode: plus-lighter;
+    opacity: unset;
+  }
+}

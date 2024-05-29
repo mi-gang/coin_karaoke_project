@@ -3,24 +3,25 @@ package com.oopsw.controller.action;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.UserService;
 
-public class idAdult implements Action {
+public class UpdatePassword implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserService service = new UserService();
+		String oldPassword = request.getParameter("oldPassword");
+		String newPassword = request.getParameter("newPassword");
+		String userId = (String) session.getAttribute("userId");
 		boolean result = false;
-		String userId = request.getParameter("userId");
-		try {
-			result = new UserService().isAdult(userId);
-		} catch (SQLException e) {
-			// userId가 없을 때
-		}
 		
+		result = service.updatePassword(userId, oldPassword, newPassword);
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
 		request.setAttribute("dataToSend", json.toString());

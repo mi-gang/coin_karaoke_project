@@ -11,7 +11,7 @@ import com.oopsw.controller.Url;
 import com.oopsw.model.vo.UserVO;
 import com.oopsw.service.UserService;
 
-public class addUser implements Action {
+public class AddUser implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
@@ -28,6 +28,11 @@ public class addUser implements Action {
 			//successAdd = false;
 		}
 	
+		if(successAdd){
+			System.out.println("O 회원가입에 성공하였습니다. : addUserAction");
+		}else{
+			System.out.println("X 회원가입에 실패하였습니다. : addUserAction");
+		}
 		JsonObject json = new JsonObject();
 		json.addProperty("result", successAdd);
 		request.setAttribute("dataToSend", json.toString());

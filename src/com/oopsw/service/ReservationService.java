@@ -6,6 +6,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -15,7 +19,6 @@ import com.oopsw.model.dao.KKDAO;
 import com.oopsw.model.dao.ReservationDAO;
 import com.oopsw.model.dao.UserDAO;
 import com.oopsw.model.vo.ReservationVO;
-import com.oopsw.model.vo.RoomInfoVO;
 
 public class ReservationService {
 
@@ -33,34 +36,34 @@ public class ReservationService {
 
 	// ReservationDAO reservationDAO = null;
 	KKDAO kkDAO = null;
-	UserDAO dao = new UserDAO();
+	UserDAO dao = new UserDAO(conn);
 
 	/** 사용자의 가장 최근 예약 일정 불러오기 */
-	public Collection<ReservationVO> getUpcomingReservation(String userId) {
+	public ReservationVO getUpcomingReservation(String userId) {
 
-		Collection<ReservationVO> reservationVOs = new ArrayList<>();
-		reservationVOs = new ReservationDAO(conn).getUpcomingReservation(userId);
-		return reservationVOs;
+		ReservationVO reservationVO = new ReservationDAO(conn).getUpcomingReservation(userId);
+		return reservationVO;
 	}
 
 	/** 해당 노래방의 방, 예약 현황 정보 불러오기 */
-	public Collection<ReservationRoomInfoVO> getroomReservationStatusList(int kkId) {
+	public List<ReservationRoomInfoVO> getRoomReservationStatusList(int kkId) {
 
-		Collection<ReservationRoomInfoVO> reservationRoomInfoVOs = new ArrayList<>();
-		RoomInfoVO roomInfoVO = null;
-		// Map<Integer, String>
+		List<ReservationRoomInfoVO> reservationRoomInfoVOs = new ArrayList<ReservationRoomInfoVO>();
+		List<ReservationVO> reservationVOs = null;
 
-		// roomInfoVO = new KKDAO(conn).getRoomInfoList(kkId);
+		Map<Integer, String> roomInfoList = new HashMap<Integer, String>();
+		roomInfoList = new KKDAO(conn).getRoomInfoList(kkId);
 		// 리턴값 : room_id, name(방 이름)
-		// reservationVOs = new
-		// ReservationDAO(conn).getReservationListByRoomId(roomId);
-		// 리턴값 : s.reservation_id, s.start_time, s.end_time
-		// 돌려줄 때 reservationVO + 방 이름 VO가 필요함
 
-		// 정보 받아서 병합
+		for (Entry<Integer, String> entrySet : roomInfoList.entrySet()) {
 
-		// reservationVOs = reservationDAO(conn).getUpcomingReservation(userId);
+			int roomId = entrySet.getKey();
+			String roomName = entrySet.getValue();
 
+			// roomId별 예약 현황 정보 불러오기
+			reservationVOs = new ReservationDAO(conn).getReservationListByRoomId(roomId);
+			reservationRoomInfoVOs.add(new ReservationRoomInfoVO(roomId, roomName, reservationVOs));
+		}
 		return reservationRoomInfoVOs;
 	}
 
@@ -91,6 +94,11 @@ public class ReservationService {
 
 		reservationVOs = new ReservationDAO(conn).getCompletedReservationList(userId);
 
+		// 리뷰 작성 여부 / 작성 가능 여부 불러오기
+		for (int i = 0; i < reservationVOs.size(); i++) {
+			
+		}
+		
 		return reservationVOs;
 	}
 
@@ -119,14 +127,14 @@ public class ReservationService {
 
 		reservationVO2 = new ReservationDAO(conn).getAvailableExtraUsingTime(roomId, endTime);
 		// 리턴 : reservation_id, start_time -> starttime만 씀
-		
+
 		// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
 		// int availableTime = reservationVO2.getStartTime();
 		Duration diff = Duration.between(reservationVO2.getStartTime(), endTime);
 		int availableTime = (int) diff.toMinutes();
 		int availableHour = availableTime / 60;
 		int availableMinute = availableTime % 60;
-		
+
 		// 기존 이용 시간을 보내야하는가 ????? ㄴㄴ
 
 		// 성인 유무 같이 보내기
@@ -139,8 +147,8 @@ public class ReservationService {
 
 		// UserDAO dao = new UserDAO();
 		// start_time, end_time, availableTime, 성인유무 을 보내야 함
-		AdditionalTimeInfoVO aTimeInfoVO = new AdditionalTimeInfoVO(startTime, endTime,
-				availableHour, availableMinute, isAdult);
+		AdditionalTimeInfoVO aTimeInfoVO = new AdditionalTimeInfoVO(startTime, endTime, availableHour, availableMinute,
+				isAdult);
 
 		return aTimeInfoVO;
 	}

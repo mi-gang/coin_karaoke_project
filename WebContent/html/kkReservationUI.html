@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>:: 노래방 예약</title>
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/kkReservationUI.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- 모바일 컨테이너 -->
+  <div id="mobileContainer">
+    <!--헤더-->
+    <header>
+      <img src="../img/left arrow.svg" alt="이전 페이지 이동" />
+      <span>스타버스 코인노래방</span>
+    </header>
+    <!-- 컨텐츠 컨테이너 -->
+    <div id="container">
+      <div class="infoTxt">* <span>보라색</span>은 청소시간입니다.</div>
+      <div class="timeTableContainer">
+        <div class="timeLine"></div>
+        <div class="roomNTimeTableContainer">
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+          <div class="contents timeTable-row">
+            <div id="roomTypeName" class="roomType btn">2인실 (1)</div>
+            <div class="timeRow">
+              <div class="time emptyTime" style="width: 105px"></div>
+
+              <div class="time usedTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 105px"></div>
+              <div class="time cleaningTime" data-bs-toggle="popover" data-bs-trigger="hover"
+                data-bs-content="18:00~18:25 예약 불가" style="width: 30px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 예약하기 모달(#modal1) -->
+        <div id="modal1" class="modal reservationContainer">
+          <div class="modalWrapper">
+            <div class="closeIconWrapper">
+              <img src="../img/close.svg" alt="모달창 닫기" class="closeBtn" />
+            </div>
+            <div class="reservationFormContainer">
+              <p class="modalTitle">예약하기</p>
+              <div class="roomSelecBoxContainer">
+                <div class="roomBox">
+                  <button class="label">예약하실 방을 선택해주세요.</button>
+                  <img src="../img/down_arrow.svg" alt="드롭다운" />
+                  <ul class="roomList"></ul>
+                </div>
+              </div>
+              <div class="reservationTimeFormContainer">
+                <p class="reservateDate"></p>
+                <div class="timeWrapper">
+                  <div class="timeType">시작 시간</div>
+                  <div class="timeSettingWrapper">
+                    <div id="startTime" class="timeSettingItem">
+                      <input id="startTimeInput" readonly placeholder="-- : --" value="" />
+                      <img src="../img/down_arrow.svg" alt="드롭다운" />
+                    </div>
+                  </div>
+                </div>
+                <div class="timeWrapper">
+                  <div class="timeType">이용 시간</div>
+                  <div class="timeSettingWrapper">
+                    <div id="hoursOfUse" class="timeSettingItem item3">
+                      <input readonly placeholder="-- : --" />
+                      <img src="../img/down_arrow.svg" alt="드롭다운" />
+                    </div>
+                  </div>
+                </div>
+                <div class="timeWrapper">
+                  <div class="timeType">이용 종료 시간</div>
+                  <div class="timeSettingWrapper">
+                    <div id="endTime" class="timeSettingItem">
+                      <input id="endTimeInput" readonly placeholder="-- : --" />
+                    </div>
+                  </div>
+                </div>
+                <div class="m1btnContainer">
+                  <div class="btn cancel">취소</div>
+                  <div class="btn submit inactivate">예약</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 하단 메뉴바 -->
+    </div>
+    <nav>
+      <div id="reservationBtn" class="reservation Yusbtn">예약하기</div>
+    </nav>
+
+    <script>
+      //bootstrap popover
+      var popoverTriggerList = [].slice.call(
+        document.querySelectorAll('[data-bs-toggle="popover"]')
+      );
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl);
+      });
+    </script>
+
+    <!-- 시작시간 설정 모달(#modal2) -->
+    <div id="modal2" class="modal startTime">
+      <div class="modalContent">
+        <div class="searchDate"></div>
+        <div class="timeSettingWrapper">
+          <div class="timeTypeWrapper">
+            <input id="timeType" type="hidden" />
+            <div class="timeType">AM</div>
+            <div class="timeType">PM</div>
+          </div>
+          <div class="timeWrapper">
+            <div id="hour" class="time">
+              <p>시</p>
+              <input name="hour" type="number" />
+            </div>
+            <span>:</span>
+            <div id="minute" class="time">
+              <p>분</p>
+              <input name="minute" type="number" />
+            </div>
+          </div>
+        </div>
+        <div class="btnWrapper">
+          <div class="btn cancel">취소</div>
+          <div class="btn setting">설정</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 이용시간 설정 모달(#modal3) -->
+    <div id="modal3" class="modal usingTime">
+      <div class="modalContent">
+        <p class="subTitle">이용 시간</p>
+        <div class="timeWrapper">
+          <div id="hour" class="time">
+            <p>시</p>
+            <input name="hour" placeholder="0" type="number" />
+          </div>
+          <span>:</span>
+          <div id="minute" class="time">
+            <p>분</p>
+            <input name="minute" type="number" placeholder="0" required />
+          </div>
+        </div>
+        <div class="btnContainer">
+          <div id="usingTimeCancelBtn" class="btn cancel">취소</div>
+          <div id="usingTimeSettingBtn" class="btn setting">설정</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 예약 내용 확인 모달(#modal4) -->
+    <div id="modal4" class="modal checkReservation">
+      <div class="modalWrapper">
+        <div class="closeIconWrapper">
+          <img src="../img/close.svg" alt="모달창 닫기" class="closeBtn" />
+        </div>
+        <div class="reservationFormContainer">
+          <p class="modalTitle">예약 내용을<br />다시 한 번 확인해주세요</p>
+          <div class="kkRoomInfo">
+            <span class="kkRoomName"></span>
+            <!--선택한 노래방 상호명_피그마: 스타버스 코인노래방-->
+            <span class="kkRoomType"></span>
+            <!--#modal1에서 선택한 노래방 타입-->
+          </div>
+          <div class="reservateDate"></div>
+          <div class="reservationTimeFormContainer">
+            <div class="timeWrapper">
+              <div class="timeType">시작 시간</div>
+              <div class="timeSettingWrapper">
+                <div id="startTime" class="timeSettingItem">
+                  <input id="startTimeInput" readonly placeholder="-- : --" value="" />
+                </div>
+              </div>
+            </div>
+            <div class="timeWrapper">
+              <div class="timeType">이용 시간</div>
+              <div class="timeSettingWrapper">
+                <div id="hoursOfUse" class="timeSettingItem item3">
+                  <input readonly placeholder="-- : --" />
+                </div>
+              </div>
+            </div>
+            <div class="timeWrapper">
+              <div class="timeType">이용 종료 시간</div>
+              <div class="timeSettingWrapper">
+                <div id="endTime" class="timeSettingItem">
+                  <input id="endTimeInput" readonly placeholder="-- : --" />
+                </div>
+              </div>
+            </div>
+            <p class="paymentInfo">결제금액: <span>4,000</span>원</p>
+            <div class="m4btnContainer">
+              <div class="btn back">이전</div>
+              <!--클릭 시, #modal4 창 닫고, #modal3 보이기-->
+              <div class="btn submit">결제</div>
+              <!--클릭 시, #modal4 창 닫고,결제 완료 모달(#modal5) 보이기-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결제 및 예약 완료 모달(#modal5) -->
+  <div id="modal5" class="modal5Background">
+    <div class="modal">
+      <div class="contentsContainer">
+        <p class="largeTxt">결제 및 예약이<br />확정되었습니다.</p>
+        <p class="smallTxt">
+          이용 시작 <span>20분 전</span>부터는 취소 수수료가<br />부과되는 점
+          참고해주세요!
+        </p>
+        <a href="controller?cmd=reservationListUI">
+          <div class="btn">나의 예약 보기</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // let kkRoomCnt = $(".roomType").length;
+    let kkRoomCnt = 12; // 노래방 방 개수 데이터 불러와서 넣을 곳
+    let kkRoomList = [
+      "2인실(1)",
+      "2인실(2)",
+      "2인실(3)",
+      "2인실(4)",
+      "4인실(1)",
+      "4인실(2)",
+      "단체실",
+    ]; // 노래방 방 정보 넣을 곳
+    let dropBox = $(".label");
+
+    // 방 선택 드롭박스에 불러온 방 정보 채우기
+    for (let i = 0; i < kkRoomList.length; i++) {
+      $(".roomList").append(
+        "<li class='roomItem'>" + kkRoomList[i] + "</li>"
+      );
+    }
+
+    // 현재 날짜, 시간 정보
+    let now = new Date();
+    let currentHour = now.getHours();
+
+    for (let i = 0; i < 24; i++) {
+      let hour = currentHour + i;
+      if (hour > 24) {
+        hour = hour - 24;
+      }
+      $(".timeLine").append("<div class='time'>" + hour + ":00</div");
+    }
+    // 예약하기 모달 - 방 선택 드롭박스 열림/닫힘
+    dropBox.click(function () {
+      if ($(this).parent().hasClass("active")) {
+        $(this).parent().removeClass("active");
+      } else {
+        $(this).parent().addClass("active");
+      }
+    });
+
+    // 예약하기 모달 - 드롭박스 - 선택한 방 종류 넘기기
+    const options = $(".roomItem").get();
+    const handleSelect = function (item) {
+      dropBox.html(item.textContent);
+      if (dropBox.parent().hasClass("active")) {
+        dropBox.parent().removeClass("active");
+      }
+    };
+
+    options.forEach(function (option) {
+      option.addEventListener("click", function () {
+        handleSelect(option);
+        updateDateRange();
+      });
+    });
+
+    function numericDayToKorean(numericDay) {
+      result = "";
+      switch (numericDay) {
+        case 0:
+          result = "일";
+          break;
+        case 1:
+          result = "월";
+          break;
+        case 2:
+          result = "화";
+          break;
+        case 3:
+          result = "수";
+          break;
+        case 4:
+          result = "목";
+          break;
+        case 5:
+          result = "금";
+          break;
+        case 6:
+          result = "토";
+          break;
+      }
+      return result;
+    }
+    function getOnlyDate(datetime) {
+      return datetime.getFullYear() + "." + datetime.getMonth() + "." + datetime.getDate() + "(" + numericDayToKorean(datetime.getDay()) + ")";
+
+    }
+    //Modal1: 예약하기
+    $("#reservationBtn").on("click", showModal1);
+    $("#modal1 .closeIconWrapper, #modal1 .btn.cancel").on("click", hideModal1);
+    $("#modal1 .btn.submit").on("click", checkCanReservation);
+
+    async function checkCanReservation() {
+      const startDateTime = getStartTime();
+      const endDateTime = getEndTime();
+      const kkRoomNumber = 1;
+
+      // FIXME: 22시부터 8시까지 10시간 이상 예약하면 검사 못하는 문제 있음
+
+      try {
+
+        const res = await fetch("controller?cmd=isValidTimeForReservation&startTime=" + startDateTime + "&endTime=" + endDateTime + "&KKRoomNumber=" + kkRoomNumber);
+        const data = await res.json();
+        if (data.result) {
+          showModal4();
+        } else {
+          alert("해당 시간은 이미 예약되었습니다!");
+          location.href = "controller?cmd=addReservationUI";
+        }
+      } catch (err) {
+        showModal4();
+      }
+    }
+    function showModal1() {
+      $("#modal1").css("display", "flex");
+    }
+    function hideModal1() {
+      $("#modal1").css("display", "none");
+    }
+
+    //Modal2: 시작시간
+    $("#startTime").on("click", showModal2);
+    $("#modal2 .btn.cancel").on("click", hideModal2);
+    // AM/PM 설정: #timeType에 value로 저장
+    $("#modal2 .timeType").on("click", setTimeType);
+    //시, 분 설정:
+    $("#modal2 #hour input").on("change", setHour);
+    $("#modal2 #minute input").on("change", setMinute);
+    $("#modal2 .btn.setting").on("click", setStartDateTime);
+
+    function setStartDateTime(e) {
+
+      const startHourVal = $("#modal2 #hour input").val();
+      const timeTypeVal = $("#timeType").val();
+      const startMinuteVal = $("#minute input").val();
+      if (!startHourVal || !startMinuteVal) {
+        alert("시작 시, 분을 입력해주세요!");
+        return;
+      }
+
+      const startDateTime = getStartTime();
+      const startTimeInput = $("#startTimeInput");
+      startTimeInput.val(startDateTime.getHours() + " : " + startDateTime.getMinutes());
+      updateDateRange();
+      if ($("#modal1 #hoursOfUse input").val()) {
+        //이용시간을 설정했다면 종료시간 업데이트하기
+        setUsingTime();
+      }
+      hideModal2();
+    }
+
+
+    async function updateDateRange() {
+      const dateRange = $("#modal1 .reservationTimeFormContainer .reservateDate")
+      const startDateTime = getStartTime();
+      const endDateTime = getEndTime();
+
+      if (!startDateTime) {
+        console.log("updateDateRange(): " + "시작시간 미입력");
+        return;
+      }
+
+      dateRange.text(getOnlyDate(startDateTime));
+      if (endDateTime && startDateTime.getDate() != endDateTime.getDate()) {
+        dateRange.text(dateRange.text() + " ~ " + getOnlyDate(endDateTime));
+      }
+
+      // 청소년 이용불가시간 차단
+      const reservateBtn = $("#modal1 .btn.submit");
+      console.log(startDateTime);
+      console.log(endDateTime);
+      if (!(await isAdult()) && (startDateTime.getHours() <= 8 || startDateTime.getHours() >= 22 || endDateTime.getHours() <= 8 || endDateTime.getHours() >= 22)) {
+        alert("청소년은 22~08시 이용이 제한됩니다.");
+        reservateBtn.addClass("inactivate");
+      } else {
+        reservateBtn.removeClass("inactivate");
+      }
+      if ($("#modal1 .roomBox button").text() == "예약하실 방을 선택해주세요.") {
+        reservateBtn.addClass("inactivate");
+      }
+    }
+
+    async function isAdult() {
+      const res = await fetch("controller?cmd=isAdult");
+      const data = await res.json();
+      return data.result
+    }
+    function getEndTime() {
+      const usingHour = parseInt($("#modal3 #hour input").val()) || 0;
+      const usingMinute = parseInt($("#modal3 #minute input").val()) || 0;
+
+      const endTime = getStartTime();
+      endTime.setHours(endTime.getHours() + usingHour);
+      endTime.setMinutes(endTime.getMinutes() + usingMinute);
+
+      return endTime;
+    }
+    function updateDate() {
+      const searchDate = $("#modal2 .searchDate");
+      const startHourVal = $("#modal2 #hour input").val();
+      const timeTypeVal = $("#timeType").val();
+
+      if (!timeTypeVal) {
+        console.log("updateDate(): PM/AM 설정이 없습니다.");
+        searchDate.text("");
+        return;
+      }
+      if (!startHourVal) {
+        console.log("updateDate(): 시를 입력해주세요");
+        searchDate.text("");
+        return;
+      }
+      const startTime = getStartTime();
+      searchDate.text(getOnlyDate(startTime));
+
+    }
+
+    function getStartTime() {
+      let startHourVal = $("#modal2 #hour input").val();
+      let startMinuteVal = $("#minute input").val();
+      const timeTypeVal = $("#timeType").val();
+
+      if (!timeTypeVal) {
+        console.log("getStartTime(): PM/AM 설정이 없습니다.");
+        return;
+      }
+      if (!startHourVal) {
+        console.log("getStartTime(): 시를 입력해주세요");
+        return;
+      }
+      if (!startMinuteVal) {
+        startMinuteVal = 0;
+      }
+
+      startHourVal = parseInt(startHourVal);
+      startMinuteVal = parseInt(startMinuteVal);
+
+      const now = new Date();
+      const startTime = new Date();
+      if (timeTypeVal == 'PM') {
+        startTime.setHours(startHourVal + 12);
+      } else {
+        startTime.setHours(startHourVal);
+      }
+      startTime.setMinutes(startMinuteVal);
+
+      if (startTime < now) {
+        // 시작시간이 지금보다 이전인 경우는 없으므로 다음날로 변경
+        startTime.setDate(now.getDate() + 1);
+      } else {
+        startTime.setDate(now.getDate());
+      }
+
+      return startTime;
+    }
+    function setHour(e) {
+      const hour = e.target.value;
+      if (hour < 0 || hour >= 12) {
+        alert('0~11 범위만 입력할 수 있습니다! 자정은 AM 0시입니다.');
+        e.target.value = '';
+        return;
+      }
+
+      try {
+        e.target.value = parseInt(hour)
+      } catch {
+        alert('정수만 입력해 주십시오.');
+        e.target.value = '';
+        return;
+      }
+
+      updateDate();
+    }
+    function setMinute(e) {
+      const minute = e.target.value;
+      if (minute < 0 || hour >= 60) {
+        alert('0~59 범위만 입력할 수 있습니다!');
+        e.target.value = '';
+        return;
+      }
+
+      if (isNaN(minute)) {
+        alert("sdfds");
+      }
+      try {
+        e.target.value = parseInt(minute);
+
+      } catch {
+        alert('정수만 입력해 주십시오.');
+        e.target.value = '';
+        return;
+      }
+
+      updateDate();
+    }
+    function setTimeType(e) {
+      $("#timeType").val(e.target.textContent);
+      $("#modal2 .timeType").removeClass("active");
+      $(e.target).addClass("active");
+
+      updateDate();
+    }
+    function showModal2() {
+      $("#modal2").css("display", "flex");
+    }
+    function hideModal2() {
+      $("#modal2").css("display", "none");
+    }
+
+    //Modal3: 이용시간
+    $("#hoursOfUse").on("click", showModal3);
+    $("#modal3 .btn.cancel").on("click", hideModal3);
+    // 이용시간 설정
+    $("#modal3 .btn.setting").on("click", setUsingTime);
+
+    function setUsingTime() {
+      let usingHour = parseInt($("#modal3 #hour input").val()) || 0;
+      let usingMinute = parseInt($("#modal3 #minute input").val()) || 0;
+      if (usingHour < 0 || usingMinute < 0) {
+        alert("음수는 설정할 수 없습니다!");
+      }
+      else if (usingHour == 0 && usingMinute < 10) {
+        alert("최소 이용 가능시간은 10분입니다!");
+        return;
+      } else if (usingHour >= 24) {
+        alert("최대 이용 가능시간은 24시간입니다!");
+        return;
+      }
+
+      if (usingMinute >= 60) {
+        usingHour = parseInt(usingMinute / 60);
+        usingMinute = usingMinute - (usingHour * 60);
+      }
+
+      //modal1 이용시간 설정
+      const usingTimeInput = $("#modal1 #hoursOfUse input");
+      usingTimeInput.val(usingHour + " : " + usingMinute);
+
+      //modal2 종료시간 설정
+      const endTime = getEndTime();
+      const endTimeInput = $("#endTimeInput");
+      endTimeInput.val(endTime.getHours() + " : " + endTime.getMinutes());
+
+      updateDateRange();
+      hideModal3();
+    }
+
+    function showModal3() {
+      $("#modal3").css("display", "flex");
+    }
+    function hideModal3() {
+      $("#modal3").css("display", "none");
+    }
+
+    //Modal4: 결제 전 최종확인
+
+    $("#modal4 .closeIconWrapper, #modal4 .btn.back").on("click", hideModal4);
+    function showModal4() {
+      if ($("#modal1 .btn.submit").hasClass("inactivate")) {
+        return;
+      } else {
+        $("#modal4").css("display", "flex");
+        const place = "";
+        //예약한 장소 채우기
+        $("#modal4 .kkRoomInfo .kkRoomName").text($("header span").text());
+        $("#modal4 .kkRoomInfo .kkRoomType").text($("#modal1 .roomBox button").text());
+        //예약날짜 채우기
+        $("#modal4 .reservateDate").text($("#modal1 .reservateDate").text());
+
+        //시작시간 이용시간 종료시간 가져오기
+        const startDateTime = getStartTime();
+        const endDateTime = getEndTime();
+        const startTimeInput = $("#modal4 #startTimeInput");
+        const usingTimeInput = $("#modal4 #hoursOfUse input");
+        const endTimeInput = $("#modal4 #endTimeInput");
+        startTimeInput.val(startDateTime.getHours() + " : " + startDateTime.getMinutes());
+        usingTimeInput.val($("#modal1 #hoursOfUse input").val());
+        endTimeInput.val(endDateTime.getHours() + " : " + endDateTime.getMinutes());
+
+        //결제금액 계산 후 채우기
+        const paymentBox = $("#modal4 .paymentInfo");
+        paymentBox.text("결제금액: " + getPayAmount(startDateTime, endDateTime) + "원");
+
+
+
+      }
+    }
+
+    function getPayAmount(startDateTime, endDateTime) {
+      return (endDateTime - startDateTime) / (1000 * 60) * 100;
+    }
+
+    //Modal5: 결제완료
+    $("#modal4 .btn.submit").on("click", payForReservation);
+
+    async function payForReservation() {
+      const startDateTime = getStartTime();
+      const endDateTime = getEndTime();
+      const kkRoomNumber = $("#modal1 .roomBox .label").data("roomId");
+
+      try {
+
+        const res = await fetch("controller?cmd=isValidTimeForReservation&startTime=" + startDateTime + "&endTime=" + endDateTime + "&KKRoomNumber=" + kkRoomNumber);
+        const data = await res.json();
+        if (data.result) {
+          showModal5();
+        } else {
+          alert("예상치 못한 이유로 예약이 취소되었습니다. 예약 가능한 시간인지 확인한 후 다시 시도해주세요.");
+          location.href = "controller?cmd=addReservationUI";
+        }
+      } catch (err) {
+        showModal5();
+      }
+    }
+
+
+    function hideModal4() {
+      $("#modal4").css("display", "none");
+    }
+    function showModal5() {
+      $("#modal5").css("display", "flex");
+      $("#modal5").css("justify-content", "center");
+      $("#modal5").css("align-items", "center");
+      $("#modal5>.modal").css("position", "relative");
+    }
+
+  </script>
+</body>
+
+</html>
