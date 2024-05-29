@@ -15,6 +15,8 @@ import com.oopsw.controller.Url;
 import com.oopsw.model.vo.KKVO;
 import com.oopsw.service.KKService;
 
+import jdk.internal.dynalink.beans.StaticClass;
+
 public class SearchedKKList implements Action {
 
 	@Override
@@ -45,7 +47,23 @@ public class SearchedKKList implements Action {
         request.setAttribute("chkOptionsContents", chkOptionsContents);
 		request.setAttribute("searchGu", searchGu);
 		request.setAttribute("resultList", resultList);
+		request.setAttribute("usingTime", minutesToTime(usingMinutes));
+		request.setAttribute("searchTime", dateTimeRange2TimeRange(startTime, endTime));
         return new Url("jsp/kkSearchResultListUI.jsp", Url.FORWARD);
+	}
+	private String dateTimeRange2TimeRange(LocalDateTime startTime, LocalDateTime endTime) {
+		String start = String.format("%02d", startTime.getHour()) + ":" +String.format("%02d", startTime.getMinute());
+		String end = String.format("%02d", endTime.getHour()) + ":" +String.format("%02d", endTime.getMinute());
+		return start + " ~ " + end;
+	}
+	private String minutesToTime(int usingMinutes) {
+		int hours = usingMinutes / 60;
+		int minutes = usingMinutes % 60;
+		String result = "";
+		result += hours != 0 ? hours+"시간 " : "";
+		
+		result += minutes != 0 ? minutes+"분" : "";
+		return result;
 	}
 
 }
