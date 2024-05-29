@@ -50,7 +50,6 @@
 										</button>
 
 										<ul class="regionList">
-											<li class="regionItem">서울 전체</li>
 											<li class="regionItem">강남구</li>
 											<li class="regionItem">강동구</li>
 											<li class="regionItem">강북구</li>
@@ -98,8 +97,8 @@
 												</div>
 											</div>
 											<div class="KK-usability">
-												<span></span> <span><span class="normal"
-														data-crowded="0.5"></span></span>
+												<span>777m</span> <span>혼잡도: <span class="normal"
+														data-crowded="0.5">보통</span></span>
 											</div>
 										</div>
 									</div>
@@ -608,9 +607,9 @@
                 </div>
             </div>
             <div class="KK-usability">
-                <span></span> <span><span
+                <span>777m</span> <span>혼잡도: <span
                     class="normal"
-                    data-crowded="0.5"></span></span>
+                    data-crowded="0.5">보통</span></span>
             </div>
         </div>
                     </div > `;
