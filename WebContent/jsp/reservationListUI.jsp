@@ -68,7 +68,7 @@
         </div>
         <div>
           <img
-            src="img/reservationIcon.svg"
+            src="img/reservationIcon_on.svg"
             alt="나의 예약 내역 페이지"
           />
         </div>
