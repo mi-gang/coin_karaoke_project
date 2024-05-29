@@ -189,6 +189,8 @@
 
 .review-button2 {
   width: 9.5rem;
+    color: #888888;
+  background-color: #e4e4e4;
 }
 
 #cancel-info {
@@ -346,11 +348,6 @@
   width: 9rem;
   height: 4rem;
   font-size: 1.5rem;
-}
-
-.submit_button:disabled {
-  color: #888888;
-  background-color: #e4e4e4;
 }
 
 #add1-add-time-arrow-img {
@@ -571,4 +568,9 @@
 
 .inquire-button {
   width: 12rem;
+}
+
+.submit-button:disabled {
+  color: #888888;
+  background-color: #e4e4e4;
 }

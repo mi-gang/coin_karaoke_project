@@ -122,6 +122,9 @@ public class ActionFactory {
 			case "mypageUIAction":
 				action = new MyPageUIAction();
 				break;
+			case "myPageAction":
+				action = new MyPageAction();
+				break;
 			// reservation
 			case "addReservationUIAction":
 				action = new AddReservationUIAction();

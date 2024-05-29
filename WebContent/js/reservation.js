@@ -113,20 +113,20 @@ $(".reservations-status-button").on("click", function () {
         for (var i = 0; i < response.length; i++) {
           //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
           let startDate = new Date(
-            response[i].startTime.date.year,
-            response[i].startTime.date.month - 1,
-            response[i].startTime.date.day,
-            response[i].startTime.time.hour,
-            response[i].startTime.time.minute,
-            response[i].startTime.time.second
+            response[i].reservationVO.startTime.date.year,
+            response[i].reservationVO.startTime.date.month - 1,
+            response[i].reservationVO.startTime.date.day,
+            response[i].reservationVO.startTime.time.hour,
+            response[i].reservationVO.startTime.time.minute,
+            response[i].reservationVO.startTime.time.second
           );
           let endDate = new Date(
-            response[i].endTime.date.year,
-            response[i].endTime.date.month - 1,
-            response[i].endTime.date.day,
-            response[i].endTime.time.hour,
-            response[i].endTime.time.minute,
-            response[i].endTime.time.second
+            response[i].reservationVO.endTime.date.year,
+            response[i].reservationVO.endTime.date.month - 1,
+            response[i].reservationVO.endTime.date.day,
+            response[i].reservationVO.endTime.time.hour,
+            response[i].reservationVO.endTime.time.minute,
+            response[i].reservationVO.endTime.time.second
           );
 
           let startDateFormat =
@@ -158,19 +158,46 @@ $(".reservations-status-button").on("click", function () {
             .getMinutes()
             .toString()
             .padStart(2, "0");
-
-          reselt =
+          
+          let reviewButton = null;
+          let inquireButton = '<button class="cancel-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>';
+          
+          console.log(response[i].isReviewWritten);
+          
+          // 리뷰 작성 여부 처리
+          if (response[i].isReviewWritten) {
+        	  reviewButton = '<button type="button" disabled class="submit-button review-button2"> 리뷰 작성 완료 </button>';
+          }else{
+        	  reviewButton = '<button type="button" class="submit-button review-button1" data-bs-toggle="modal"data-bs-target="#addReviewModal">리뷰 작성</button>';
+          }
+          
+          // 3일 이후 여부 처리
+          const today = new Date;
+          
+          let diff = Math.abs(today.getTime() - endDate.getTime());
+          diff = Math.floor(diff / (1000 * 60 * 60 * 24));
+//        console.log(diff);
+          
+          if (diff > 3) {
+        	  reviewButton = '<button type="button" disabled class="submit-button review-button2"> 리뷰 작성 불가 </button>';
+        	  inquireButton = '';
+        	  if (response[i].isReviewWritten) {
+            	  reviewButton = '<button type="button" disabled class="submit-button review-button2"> 리뷰 작성 완료 </button>';
+        	  }
+          }
+          
+          result =
             '<div class="reservation-content-wrapper" id=' +
-            response[i].reservationId +
+            response[i].reservationVO.reservationId +
             '><div class="reservation-status-wrapper">' +
             '<span class="reservation-status">이용 완료</span></div>' +
             '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>' +
             '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">' +
             '<span id="karaoke-name" class="kk-name">' +
-            response[i].KKname +
+            response[i].reservationVO.KKname +
             '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
             '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
-            response[i].startTime +
+            response[i].reservationVO.startTime +
             '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
             "<div>" +
             startDateFormat +
@@ -187,12 +214,13 @@ $(".reservations-status-button").on("click", function () {
             '</span> <span>:</span> <span class="reservation-end-minute">' +
             endMinuteFormat +
             "</span>" +
-            '</div></div></div><div class="button_wrapper"><button type="button" class="submit-button review-button1" data-bs-toggle="modal"data-bs-target="#addReviewModal">리뷰 작성(3일 남음)</button>' +
-            '<button class="cancel-button" data-bs-toggle="modal"data-bs-target="#cancelReservationModal1">예약 취소</button>' +
+            '</div></div></div><div class="button_wrapper">' +
+            reviewButton +
+            inquireButton +
             "</div></div></div></div>";
-          $("#reservation-contents-wrapper").append(reselt);
-        }
-      },
+          $("#reservation-contents-wrapper").append(result);
+        }// for문 end
+      } // success end
     });
   }
 

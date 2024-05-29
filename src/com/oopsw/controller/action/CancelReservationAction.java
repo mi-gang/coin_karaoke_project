@@ -9,8 +9,9 @@ public class CancelReservationAction implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+		
 		return null;
+
 	}
 
 }

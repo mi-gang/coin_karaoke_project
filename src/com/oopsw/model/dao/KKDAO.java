@@ -1,10 +1,13 @@
 package com.oopsw.model.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 // import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,12 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 
 import com.oopsw.model.vo.KKVO;
 
@@ -496,6 +493,67 @@ public class KKDAO {
 		}
 
 		return roomInfoList;
+	}
+	
+	/** 저장한 노래방 개수 한개 불러오기 */
+	public List<String[]> getMypageBookmarkKK(String userId) {
+		String sql = "select kks.kk_id, kks.name, kks.address, kws.content "
+				+ "from kk_bookmarks bm "
+				+ "JOIN kks kks ON kks.kk_id = bm.kk_id "
+				+ "JOIN kk_keywords kw ON kks.kk_id = kw.kk_id "
+				+ "JOIN keywords kws ON kws.keyword_id = kw.keyword_id "
+				+ "where kks.kk_id = (select kk_id from ( "
+				+ "select kks.kk_id, kks.name, kks.address, kws.content "
+				+ "from kk_bookmarks bm "
+				+ "JOIN kks kks ON kks.kk_id = bm.kk_id "
+				+ "JOIN kk_keywords kw ON kks.kk_id = kw.kk_id "
+				+ "JOIN keywords kws ON kws.keyword_id = kw.keyword_id "
+				+ "where bm.user_id=? "
+				+ "ORDER BY kks.kk_id) where rownum = 1)";
+		
+		List<String[]> resultList = new ArrayList<String[]>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String[] tmp = new String[4];
+				tmp[0] = Integer.toString(rs.getInt(1));
+				tmp[1] = rs.getString(2);
+				tmp[2] = rs.getString(3);
+				tmp[3] = rs.getString(4);
+				resultList.add(tmp);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return resultList;
+	}
+	
+	/** 저장한 노래방 개수 불러오기 */
+	public int getBookmarkCount(String userId) {
+
+		String sql = "select count(kk_id) "
+				+ "from KK_BOOKMARKS "
+				+ "where user_id=?";
+
+		int result = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, userId);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					result = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

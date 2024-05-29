@@ -152,10 +152,8 @@ public class ReservationDAO {
 	public Collection<ReservationVO> getUncompletedReservationList(String userId) {
 
 		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, r.user_id, k.KK_id, k.name, ri.room_id, ri.name "
-				+ "FROM reservations r "
-				+ "JOIN room_infos ri ON r.room_id = ri.room_id "
-				+ "JOIN KKs k ON ri.KK_id = k.KK_id "
-				+ "and user_id=? and END_TIME >= sysdate and is_cancel = 0 "
+				+ "FROM reservations r " + "JOIN room_infos ri ON r.room_id = ri.room_id "
+				+ "JOIN KKs k ON ri.KK_id = k.KK_id " + "and user_id=? and END_TIME >= sysdate and is_cancel = 0 "
 				+ "order by r.end_time asc";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
@@ -178,12 +176,10 @@ public class ReservationDAO {
 
 	/** 예약내역 중 이용 완료 내역 불러오기 */
 	public Collection<ReservationVO> getCompletedReservationList(String userId) {
-		
+
 		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, r.user_id, k.KK_id, k.name, ri.room_id, ri.name "
-				+ "FROM reservations r "
-				+ "JOIN room_infos ri ON r.room_id = ri.room_id "
-				+ "JOIN KKs k ON ri.KK_id = k.KK_id "
-				+ "and user_id=? and END_TIME < sysdate and is_cancel = 0 "
+				+ "FROM reservations r " + "JOIN room_infos ri ON r.room_id = ri.room_id "
+				+ "JOIN KKs k ON ri.KK_id = k.KK_id " + "and user_id=? and END_TIME < sysdate and is_cancel = 0 "
 				+ "order by r.end_time desc";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
@@ -204,15 +200,39 @@ public class ReservationDAO {
 		return reservationVOs;
 	}
 
+	/** 리뷰 작성 여부 불러오기 */
+	public boolean isReviewWritten(String userId, int reservationId) {
+
+		String sql = "select count(review_id) " + "from reviews r "
+				+ "JOIN reservations re ON re.reservation_id = r.reservation_id " + "where re.user_id = ? "
+				+ "and re.reservation_id = ?";
+
+		boolean result = false;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, reservationId);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					if (rs.getInt(1) > 0) {
+						result = true;
+					}
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	/** 예약내역 중 취소 내역 불러오기 */
 	public Collection<ReservationVO> getCanceledReservationList(String userId) {
-		
+
 		String sql = "select r.reservation_id, r.is_cancel, r.start_time, r.end_time, r.user_id, k.KK_id, k.name, ri.room_id, ri.name "
-				+ "FROM reservations r "
-				+ "JOIN room_infos ri ON r.room_id = ri.room_id "
-				+ "JOIN KKs k ON ri.KK_id = k.KK_id "
-				+ "and user_id=? is_cancel = 1 "
-				+ "order by r.end_time desc";
+				+ "FROM reservations r " + "JOIN room_infos ri ON r.room_id = ri.room_id "
+				+ "JOIN KKs k ON ri.KK_id = k.KK_id " + "and user_id=? and is_cancel = 1 " + "order by r.end_time desc";
 
 		Collection<ReservationVO> reservationVOs = new ArrayList<>();
 
@@ -359,6 +379,29 @@ public class ReservationDAO {
 		result = result.split("\\.")[0];
 		result = result.replace('T', ' ');
 
+		return result;
+	}
+	
+	/** 예약 개수 불러오기 */
+	public int getReservationCount(String userId) {
+
+		String sql = "select count(reservation_id) "
+				+ "from reservations "
+				+ "where user_id=?";
+
+		int result = 0;
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, userId);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					result = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 }
