@@ -515,7 +515,7 @@
         return endDateTime;
       }
       function getUsingMinutes() {
-        const endTime = $("#hiddenTime2").val().split(":");
+        const endTime = $("#hiddenTime3").val().split(":");
         let usingMinutes = (parseInt(endTime[0]) || 0) * 60 + (parseInt(endTime[1]) || 0);
 
         return usingMinutes;
