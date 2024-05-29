@@ -2,6 +2,7 @@ package com.oopsw.controller.action;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +21,11 @@ public class SearchedKKList implements Action {
 	public Url execute(HttpServletRequest request) {
 		//받아온 파라미터를 적절한 데이터로 가공...
 		String searchGu = request.getParameter("searchGu");
-		String[] chkOptions = request.getParameterValues("chkAdditionalOptions"); // {1,0,0,1} 하나의 String으로 들어옴		
+		String[] chkOptions = request.getParameterValues("option"); // {1,0,0,1} 하나의 String으로 들어옴		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime startTime = LocalDateTime.parse(request.getParameter("startTime"), formatter);
 		LocalDateTime endTime = LocalDateTime.parse(request.getParameter("endTime"), formatter);
-		int usingTime = Integer.parseInt(request.getParameter("usingTime"));
+		int usingMinutes = Integer.parseInt(request.getParameter("usingMinutes"));
 		int [] keywords = new int[0];
 		if(chkOptions != null){
 			keywords = new int[chkOptions.length];
@@ -34,11 +35,17 @@ public class SearchedKKList implements Action {
 		}
 		//가공끝
 		
-		List<KKVO> result = new KKService().getKKList(searchGu, startTime, endTime, usingTime, keywords);
+		KKService kkService = new KKService();
+		ArrayList<String> chkOptionsContents = new ArrayList<String>();
+		for (int keywordId : keywords) {
+			chkOptionsContents.add(kkService.getKeywordByKeywordId(keywordId));
+		}
+		List<KKVO> resultList = new KKService().getKKList(searchGu, startTime, endTime, usingMinutes, keywords);
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        request.setAttribute("dataToSend", gson.toJson(result));
-        return new Url("json/data.jsp", Url.FORWARD);
+        request.setAttribute("chkOptionsContents", chkOptionsContents);
+		request.setAttribute("searchGu", searchGu);
+		request.setAttribute("resultList", resultList);
+        return new Url("jsp/kkSearchResultListUI.jsp", Url.FORWARD);
 	}
 
 }

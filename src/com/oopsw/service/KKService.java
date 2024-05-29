@@ -330,4 +330,8 @@ public class KKService {
 		return reviewList;
 	}
 
+	public String getKeywordByKeywordId(int keywordId){
+		Connection conn = getConnection();
+		return new KKDAO(conn).getKeywordByKeywordId(keywordId);
+	}
 }

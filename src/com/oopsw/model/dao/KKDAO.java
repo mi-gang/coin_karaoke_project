@@ -689,5 +689,25 @@ public class KKDAO {
 
 		return roomInfoList;
 	}
+	
+	public String getKeywordByKeywordId(int keywordId) {
+		String sql = "SELECT content FROM keywords WHERE keyword_id=?";
+		String result = null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, keywordId);
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()){
+				result = rs.getString(1);
+			}
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 
 }
