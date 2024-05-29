@@ -22,7 +22,7 @@
 	<div id="mobileContainer">
 		<!--헤더-->
 		<header>
-			<img src="img/left arrow.svg" alt="이전 페이지 이동" /> <span>노래 검색</span>
+			<span>노래 검색</span>
 		</header>
 		<!-- 컨텐츠 컨테이너 -->
 		<div id="container">
@@ -56,7 +56,7 @@
 				<img src="img/searchIcon.svg" alt="노래방 검색 페이지" />
 			</div>
 			<div>
-				<img src="img/musicIcon.svg" alt="노래 검색 페이지" />
+				<img src="img/musicIcon_on.svg" alt="노래 검색 페이지" />
 			</div>
 			<div>
 				<img src="img/reservationIcon.svg" alt="나의 예약 내역 페이지" />

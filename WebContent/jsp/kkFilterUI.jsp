@@ -38,10 +38,10 @@
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img
+        <!-- <img
           src="img/left arrow.svg"
           alt="이전 페이지 이동"
-        />
+        /> -->
         <span>노래방 검색</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -304,7 +304,7 @@
         </div>
         <div>
           <img
-            src="img/searchIcon.svg"
+            src="img/searchIcon_on.svg"
             alt="노래방 검색 페이지"
           />
         </div>

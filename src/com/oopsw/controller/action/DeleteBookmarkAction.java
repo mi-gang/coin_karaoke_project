@@ -15,6 +15,27 @@ public class DeleteBookmarkAction implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonObject json = new JsonObject();
+		
+		boolean isLogin = session.getAttribute("userId") != null;
+		
+		if(isLogin) {
+			String userId = session.getAttribute("userId").toString();
+			System.out.println(">> userId: ");
+			System.out.println(userId);
+			int kkId = Integer.parseInt(request.getParameter("kkId"));
+			boolean deleteMyBookmark = new UserService().deleteKKBookmark(userId, kkId);
+			json.addProperty("result", deleteMyBookmark);
+		} else {
+			json.addProperty("result", false);
+		}
+		
+		request.setAttribute("dataToSend",  gson.toJson(json));
+		return new Url("json/data.jsp", Url.FORWARD);
+		
+		
+		/*HttpSession session = request.getSession();
 		String userId = session.getAttribute("userId").toString();
 		int kkId = Integer.parseInt(request.getParameter("kkId"));
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -23,7 +44,7 @@ public class DeleteBookmarkAction implements Action {
 		JsonObject json = new JsonObject();
 		json.addProperty("result", deleteMyBookmark);
 		request.setAttribute("dataToSend", gson.toJson(json));
-		return new Url("json/data.jsp", Url.FORWARD);
+		return new Url("json/data.jsp", Url.FORWARD);*/
 	}
 
 }

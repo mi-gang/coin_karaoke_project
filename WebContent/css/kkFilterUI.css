@@ -9,6 +9,10 @@ p {
   margin: 0;
 }
 
+header span {
+	margin-left: 3.5rem;
+}
+
 #container {
   overflow-y: scroll;
 }

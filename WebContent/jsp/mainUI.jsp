@@ -118,7 +118,7 @@
 									<div id="invisibleUnLoginUser" class="invisibleUnLoginUser on">
 										<div class="invisibleWrapper">
 											<p>최근에 예약한 노래방이 어디더라?</p>
-											<a href="controller?cmd=loginUI" style="text-decoration:none">
+											<a id="reviewLoginLink" href="controller?cmd=loginUI" style="text-decoration:none">
 												<div id="reviewLoginBtn" class="reviewLoginBtn">로그인하고 최근에 예약한 노래방 보기
 												</div>
 											</a>
@@ -276,7 +276,7 @@
 					<!-- 하단 메뉴바 -->
 					<nav>
 						<div>
-							<img src="img/mainPageIcon.svg" alt="메인 페이지" />
+							<img src="img/mainPageIcon_on.svg" alt="메인 페이지" />
 						</div>
 						<div>
 							<img src="img/searchIcon.svg" alt="노래방 검색 페이지" />
@@ -531,6 +531,16 @@
 
 				<!-- <script src="js/reservation.js"></script> -->
 				<script>
+					// 로그인 버튼 클릭 시 페이지 경로를 prevURL 세션 스토리지에 저장
+					$("#reviewLoginLink").on("click", function() {
+						const prevURL = window.location.search;
+				      	console.log(prevURL);
+				      	sessionStorage.setItem("prevURL", prevURL);
+				      	const encodedPrevURL = encodeURIComponent(prevURL);
+				      	console.log(encodedPrevURL);
+				      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+					});
+			      	
 					//*** 추천 노래방 목록 ***
 					updateStarContainer();
 					function updateStarContainer() {

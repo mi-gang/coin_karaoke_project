@@ -386,3 +386,56 @@ nav {
   background-color: #9747ff;
 }
 
+/* 로그인 모달 */
+.modalBack {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	width: inherit;
+	min-height: calc(100vh - 15rem);
+	z-index: 5;
+	background-color: rgba(0,0,0,0.25);
+}
+.modal {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 2rem;
+	width: 30rem;
+	height: 30rem;
+	border-radius: 1rem;
+	z-index: 999;
+	border: 1px solid blue;
+	background-color: #fff;
+}
+
+.iconDiv {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 90%;
+	margin-top: -2rem;
+	margin-bottom: 2rem;
+}
+
+.iconDiv img {
+	cursor: pointer;
+}
+
+.modal p {
+	width: 80%;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.loginBtn {
+	padding: 0.5rem 1.5rem;
+	font-size: 2rem;
+	color: #fff;
+	border-radius: 1rem;
+	cursor: pointer;
+	background-color: #9747FF;
+}

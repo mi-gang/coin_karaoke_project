@@ -112,7 +112,7 @@ pageEncoding="UTF-8"%>
         <div>
           <img src="img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
         </div>
-        <div><img src="img/userIcon.svg" alt="마이페이지" /></div>
+        <div><img src="img/userIcon_on.svg" alt="마이페이지" /></div>
       </nav>
     </div>
 
