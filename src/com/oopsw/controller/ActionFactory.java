@@ -54,6 +54,21 @@ import com.oopsw.controller.action.UpdateNickname;
 import com.oopsw.controller.action.UpdatePassword;
 import com.oopsw.controller.action.UpdateUserUI;
 import com.oopsw.controller.action.MyPlaylist;
+import com.oopsw.controller.action.MyPlaylistmusicUI;
+import com.oopsw.controller.action.SearchForKKWithOptions;
+import com.oopsw.controller.action.UpcomingReservation;
+import com.oopsw.controller.action.UpdatePlaylistTitle;
+import com.oopsw.controller.action.addUser;
+import com.oopsw.controller.action.addUserUI;
+import com.oopsw.controller.action.findPasswordUI;
+import com.oopsw.controller.action.getNickname;
+import com.oopsw.controller.action.idAdult;
+import com.oopsw.controller.action.isExistEmail;
+import com.oopsw.controller.action.resetPassword;
+import com.oopsw.controller.action.sendValidationNumber;
+import com.oopsw.controller.action.updateNickname;
+import com.oopsw.controller.action.updatePassword;
+import com.oopsw.controller.action.updateUserUI;
 import com.oopsw.controller.action.wrongCmd;
 
 public class ActionFactory {
@@ -233,6 +248,9 @@ public class ActionFactory {
 			case "playlistMusicList":
 				action = new PlaylistMusicList();
 				break;
+        case "updatePlaylistTitle":
+			action=new UpdatePlaylistTitle();
+			break;
 			default:
 				action = new wrongCmd();
 				break;

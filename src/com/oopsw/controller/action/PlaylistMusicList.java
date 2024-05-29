@@ -21,10 +21,13 @@ public class PlaylistMusicList implements Action {
 		 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			HttpSession session = request.getSession();
 			int playlistId=Integer.parseInt(request.getParameter("playlistId"));
-			String brand=request.getParameter("entInput");
+			String brand=request.getParameter("brand");
+			System.out.println(playlistId);
+			System.out.println(brand);
 			Collection<SongVO> list = new MusicService().playlistMusicList(playlistId, brand);
 			request.setAttribute("dataToSend", gson.toJson(list));
 			System.out.println(list);
+			System.out.println("종료");
 			return new Url("json/data.jsp", Url.FORWARD);
 		}
 	}

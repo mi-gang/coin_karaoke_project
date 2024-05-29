@@ -158,7 +158,7 @@
       $(".music_list_output").on("click", ".music_output .like_img", function() {
     	  modal.classList.add("on"); 
     	 let entInput = $(".on").attr("id");
-    	 
+    	 console.log(entInput);
     	  const musicNumElement = $(this).closest(".music_output").find(".music_num");
     	  const musicNum = musicNumElement.text(); 
     	  const  musictitleElement =  $(this).closest(".music_output").find('.music_title');
@@ -311,7 +311,7 @@
             // 서버에서 준 결과를 response라는 변수에 담음
             result_data = response; //JSON.parse()
             for (const value of result_data) {
-              data += `<div class="music_output" id="music_output" data-set-musicNum=`+value.no+` data-set-musicTitle=`+value.title+` data-set-singer=`+value.singer+` >
+              data += `<div class="music_output" id="music_output" data-set-musicNum=`+value.no+` data-set-musicTitle="`+value.title+`" data-set-singer=`+value.singer+` >
             <div class="music_num">` + value.no +`</div>
             <div class="music_info">
               <span class="music_title">` +value.title+`</span>
