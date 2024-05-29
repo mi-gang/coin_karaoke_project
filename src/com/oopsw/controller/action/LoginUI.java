@@ -80,7 +80,8 @@ public class LoginUI implements Action{
 		} else {
 			System.out.println("@!@#!@@! LoginUI.Action의 url 출력");
 			if(prevURL != null) {
-				url.setUrl("controller"+prevURL);
+				// url.setUrl("controller"+prevURL);
+				url.setUrl("controller?cmd=loginUI");
 				System.out.println(url.getUrl());
 				url.setFlag(Url.REDIRECT);
 			} else {

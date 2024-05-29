@@ -54,12 +54,20 @@ public class Login implements Action {
 			
 			// *
 			if(prevURL != null) {
+				System.out.println("!= null 여기??????????");
 				String tmp = url.getUrl() + dPrevURL;
 				url.setUrl(tmp);
 				// url.setUrl("controller"+dPrevURL);
 				// url.setFlag(Url.REDIRECT);
-			} else {
+			} else if (prevURL == "") {
+				System.out.println(" == '' : 여기??????????");
 				url.setUrl("controller?cmd=mainUI");
+				url.setFlag(Url.FORWARD);
+				return url;
+			} else {
+				System.out.println("여기??????????");
+				url.setUrl("controller?cmd=mainUI");
+				return url;
 				// url.setFlag(Url.REDIRECT);
 			}
 			/*url.setUrl("controller?cmd=mainUI");
@@ -68,15 +76,23 @@ public class Login implements Action {
 		} else{
 			System.out.println("X 로그인 실패: " + userId + " : LoginAction");
 			if(dPrevURL != null) {
+				System.out.println("!= null 여기??????????");
 				System.out.println("==> dPrevURL: ");
 				System.out.println(dPrevURL);
 				String tmp = url.getUrl() + "?cmd=loginUI&prevURL="+dPrevURL;
 				url.setUrl(tmp);
 				// url.setUrl("controller?cmd=loginUI&prevURL="+dPrevURL);
 				url.setFlag(Url.FORWARD);
-			} else if (dPrevURL == null){
+			} else if(dPrevURL == "") {
+				System.out.println(" == '' 여기>?????");
 				url.setUrl("controller?cmd=loginUI");
 				url.setFlag(Url.FORWARD);
+				return url;
+			} else if (dPrevURL == null){
+				System.out.println("여기??????????");
+				url.setUrl("controller?cmd=loginUI");
+				url.setFlag(Url.FORWARD);
+				return url;
 			}
 			
 			// return url;
