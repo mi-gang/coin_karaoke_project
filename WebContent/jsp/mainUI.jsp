@@ -216,6 +216,61 @@
 									<button>KY</button>
 								</div>
 							</div>
+							<div class="music_list_output">
+								<div class="music_output" id="music_output">
+									<div class="music_num"></div>
+									<div class="music_info">
+										<span class="music_title"></span> <span class="music_singer"></span>
+									</div>
+									<div class="music_like">
+										<img class="like_img" src="img/folder_open.svg" />
+									</div>
+								</div>
+							</div>
+
+							<!-- 플레이리스트 모달들 -->
+							<div class="modal_overlay">
+								<div class="modal_playlist" id="modal_playlist">
+									<div class="music_like_modal">
+										<div class="close_btn">
+											<img class="close_img" src="img/close.svg" />
+										</div>
+										<div class="modal_title">내 음악에 저장하기</div>
+										<div class="playlist_list">
+											<span class="playlist"> <img class="like_btn" id="music_saved"
+													src="img/folder_open.svg" /> <span class="list_title"></span></span>
+											</span>
+										</div>
+									</div>
+									<div class="create_music_list">
+										<img class="plus_img" src="img/add_circle_outline.svg" /> <span
+											class="create_title">신규
+											플레이리스트 생성</span>
+									</div>
+									<input class="confirm_btn" id="confirm1" type="button" value="저장" />
+								</div>
+								<div class="modal_create" id="create_playlist" style="display: none">
+									<div class="music_like_modal">
+										<div class="close_btn2">
+											<img class="close_img2" src="img/close.svg" />
+										</div>
+										<div class="modal_title">새 플레이 리스트</div>
+										<div class="new_play_list_title">플레이 리스트 명</div>
+									</div>
+									<input class="new_play_list_title_input" type="text"
+										placeholder="플레이리스트 명을 입력하세요" /> <input class="confirm_btn" id="confirm2"
+										type="button" value="저장" />
+								</div>
+							</div>
+							<div class="modal_overlay2">
+								<div class="modal_isMember" id="modal_isMember">
+									<div class="close_btn3">
+										<img class="close_img3" src="img/close.svg" />
+									</div>
+									<div class="modal_alert">로그인 유저만 사용할 수 있는 서비스입니다</div>
+									<input class="login_btn" id="login_move" type="button" value="로그인하러 가기" />
+								</div>
+							</div>
 						</section>
 					</div>
 					<!-- 하단 메뉴바 -->
@@ -473,6 +528,7 @@
 					</div>
 				</div>
 
+
 				<!-- <script src="js/reservation.js"></script> -->
 				<script>
 					//*** 추천 노래방 목록 ***
@@ -697,6 +753,15 @@
 						updateChart(e.target.textContent); //TJ, KY 중 하나를 넘긴다.
 					}
 
+					function getActivatedBrand() {
+						const brands = $("#brand-container button");
+						brands.each(function () {
+							if ($(this).hasClass("brand-activate")) {
+								return $(this).text();
+							}
+						})
+					}
+
 					function updateChart(brand) {
 						$(".music_output").show();
 						let brandName = '';
@@ -738,34 +803,21 @@
 					img.addEventListener("click", function () {
 						img.src = "../img/song_notsave.svg";
 					});
-
-					$(document).ready(function () {
-						$("#tj").click();
-					});
-					//클릭한 버튼 값 가지고 오기
-					$(".button").on("click", function () {
-						var entInput = this.id;
-					});
-					const ent = $(".button").get();
-					let button = "";
-					ent.forEach(function (option) {
-						option.addEventListener("click", function () {
-							ent.forEach(function (item) {
-								item.classList.remove("on");
-							});
-							option.classList.add("on");
-						});
-					});
-
-
+					const modal = document.querySelector(".modal_overlay");
+					const modalOpen = document.querySelector(".like_img");
 					//플레이리스트 목록 불러오기
 					$(".music_list_output").on("click", ".music_output .like_img", function () {
 						modal.classList.add("on");
-						let entInput = $(".on").attr("id");
+						let entInput = getActivatedBrand();
+
 						const musicNumElement = $(this).closest(".music_output").find(".music_num");
 						const musicNum = musicNumElement.text();
+						const musictitleElement = $(this).closest(".music_output").find('.music_title');
+						const musictitle = musictitleElement.text();
+						const musicSingerElement = $(this).closest(".music_output").find('.music_singer');
+						const musicSinger = musicSingerElement.text();
+						console.log(musicSinger);
 						let data = "";
-						let playListTitle = "";
 						$.ajax({
 							url: "controller?cmd=checkMusicbymyplaylist",
 							data: {
@@ -777,22 +829,91 @@
 								alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
 							},
 							success: function (list) {
-								//console.log(JSON.parse(list));
+								//	console.log(JSON.parse(list));
 								let musicbymyplaylistData = JSON.parse(list);
+								let playListTitle = "";
 								for (i in musicbymyplaylistData) {
-									playListTitle += `<span class="playlist"> <img class="like_btn"
-						id="music_saved" src="img/folder_open.svg" /> <span
-						class="list_title">` + musicbymyplaylistData[i].playListTitle + `</span>
-						<span class="playlistId"></span>
-					</span>`
+									let a = "";
+									if ((musicbymyplaylistData[i].isMusic) === true) {
+										a = "src = 'img/folder_open.svg'";
+									} else {
+										a = "src = 'img/song_notsave.svg'";
+									}
+
+									playListTitle += '<span class="playlist" data-set-MusicNum='
+										+ musicNum
+										+ ' data-set-playId='
+										+ musicbymyplaylistData[i].playListId
+										+ ' data-set-musicTitle='
+										+ musictitle
+										+ ' data-set-singer='
+										+ musicSinger
+										+ ' data-set-isMusic='
+										+ musicbymyplaylistData[i].isMusic
+										+ '><img class="like_btn" id="music_saved" '
+										+ a
+										+ '/> <span	class="list_title">'
+										+ musicbymyplaylistData[i].playListTitle
+										+ '</span></span></span>'
 								}
 								$(".playlist_list").html(playListTitle);
+
 								// const result_data = list;
 							}
-						});
+						})
 					});
-					const modal = document.querySelector(".modal_overlay");
-					const modalOpen = document.querySelector(".like_img");
+					//플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
+					$(".playlist_list").on("click", ".like_btn", function () {
+						const musicNum = $(this).closest(".playlist").attr('data-set-MusicNum');
+						console.log(musicNum);
+						const musictitle = $(this).closest(".playlist").attr('data-set-musicTitle');
+						console.log(musictitle);
+						const musicSinger = $(this).closest(".playlist").attr('data-set-singer');
+						isMusic = $(this).closest(".playlist").attr('data-set-isMusic');
+						console.log(isMusic);
+						let entInput = $(".on").attr("id");
+						playlistId = $(this).closest(".playlist").attr('data-set-playId');
+						console.log(playlistId);
+						if (isMusic === "false") {
+							console.log("추가 ajax");
+							$.ajax({
+								url: "controller?cmd=addMusic",
+								data: {
+									brand: entInput,//brand
+									songId: musicNum, //musicNum
+									title: musictitle,
+									singer: musicSinger,
+									playlistId: playlistId,
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
+								},
+								success: function (result) {
+									alert('음악이 추가되었습니다.');
+									document.getElementById("music_saved").src = "img/folder_open.svg";
+								}
+							})
+						}//isMusic 값에 따라 ajax 동작(여기서는 addMusic)
+						else {
+							console.log("삭제 ajax");
+							$.ajax({
+								url: "controller?cmd=deleteMusic",
+								data: {
+									brand: entInput,//brand
+									songId: musicNum, //musicNum
+									playlistId: playlistId,
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
+								},
+								success: function (result) {
+									alert('음악이 삭제되었습니다.');
+									document.getElementById("music_saved").src = "img/song_notsave.svg";
+								}
+							})
+						}//isMusic 값에 따라 ajax 동작(여기서는 deleteMusic)
+
+					});
 					const modalClose = document.querySelector(".close_img");
 					modalOpen.addEventListener("click", function () {
 						modal.classList.add("on");
