@@ -208,11 +208,11 @@ public class ReservationService {
 	}
 
 	/** 예약 취소하기 */
-	public boolean cancelReservation(int reservationId) {
+	public boolean cancelReservation(String userId, int reservationId) {
 
 		boolean result = false;
 
-		result = new ReservationDAO(conn).cancelReservation(reservationId);
+		result = new ReservationDAO(conn).cancelReservation(userId, reservationId);
 
 		return result;
 	}

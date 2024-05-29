@@ -355,14 +355,15 @@ public class ReservationDAO {
 	}
 
 	/** 예약 취소하기 */
-	public boolean cancelReservation(int reservationId) {
+	public boolean cancelReservation(String userId, int reservationId) {
 
-		String sql = "update reservations set is_cancel=1 where reservation_id=?";
+		String sql = "update reservations set is_cancel=1 where reservation_id=? and user_Id= ?";
 
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, reservationId);
+			pstmt.setString(2, userId);
 
 			int num = pstmt.executeUpdate();
 			if (num == 1) {
