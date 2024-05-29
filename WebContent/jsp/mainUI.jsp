@@ -736,15 +736,15 @@
 					$("#time-setting-button").on("click", submitModal3);
 					async function submitModal3() {
 						const addMinute = parseInt($("#add1-add-time-arrow-img").data("minute"));
-						const res = await fetch("controller?cmd=payAdditioanlTime&reservationId=" + getReservationId() + "&additionalTime=" + addMinute);
+						const res = await fetch("controller?cmd=payAdditionalTimeAction&reservationId=" + getReservationId() + "&additionalTime=" + addMinute);
 						const data = await res.json();
 						if (!data.result) {
 							alert("예약에 실패하였습니다! 다른 사람이 먼저 해당 시간에 예약했을 수 있습니다.");
-							location.href = "controller?cmd=mainUI";
 						}
+						location.href = "controller?cmd=mainUI";
 					}
 
-					$("#add2-add-time-button").on("click", cancelReservation);
+					$("#cancleReservationModal1 #add2-add-time-button").on("click", cancelReservation);
 					async function cancelReservation() {
 						const res = await fetch("controller?cmd=cancelReservation&reservationId=" + getReservationId());
 						const data = await res.json();
