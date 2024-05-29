@@ -258,6 +258,7 @@
  	       
    	}})
     //플레이 리스트 내에 저장되어 있는 곡 리스트 가져오기(버튼 선택으로 바꿔야함.)=> 버튼을 무조건 한번 눌러야 송출됨. + 곡 개수 가져오기
+    //문제 : 플레이리스트의 버튼을 한번 눌러야 제대로 된 데이터를 가져옴.. 
     $(".ent_button_group").on("click", function () {
     	 let entInput = $(".on").attr("id");
     	// console.log($(".on"));
@@ -295,7 +296,7 @@
 	    	 $(".music_outputs").html(""); // 새 내용 추가 전에 컨테이너 지우기
 	    	    if (result.length === 0) {
 	    	      // 데이터 없음 메시지 출력
-	    	      $(".music_outputs").html("<h1>데이터가 없습니다.</h1>");
+	    	      $(".music_outputs").html("<h1> 저장된 음악이 없습니다.</h1>");
 	    	    } else {
 	    	      $(".music_outputs").html(playListTitle);
 	    	      console.log(result);
@@ -318,6 +319,7 @@
     	     }
            })
 	})
+      
 	//플레이리스트 이름 변경하기(드롭다운)
        $(".confirm_btn").on("click", function () {
         

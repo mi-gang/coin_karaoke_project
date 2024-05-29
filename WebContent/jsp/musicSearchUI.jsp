@@ -178,6 +178,10 @@
     	        alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
     	      },
     	    success: function(list) {
+    	    	if(list===null){
+    	    		 $(".modal_overlay2").show(); 
+    	    	}
+    	    	else{
     	    //	console.log(JSON.parse(list));
     	    	let musicbymyplaylistData=JSON.parse(list);
     	  	  let playListTitle="";
@@ -209,7 +213,7 @@
     	 
     	     // const result_data = list;
     	    }    
-    	  })  	 
+    	    } })  	 
     	});
       //플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
       $(".playlist_list").on("click", ".like_btn", function() {
@@ -223,6 +227,9 @@
     	  let entInput = $(".on").attr("id");
     	  playlistId=$(this).closest(".playlist").attr('data-set-playId');
     	  console.log(playlistId);
+    	  const clickedLikeBtn = $(this);
+    	    const isMusicSaved = clickedLikeBtn.attr("src") === "img/folder_open.svg";
+
    	  if(isMusic==="false"){
    		console.log("추가 ajax");
    	  	$.ajax({
@@ -238,8 +245,9 @@
    	  	 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
    	  	 	      },
    	  		     success: function (result){
-   	  				alert('음악이 추가되었습니다.');
-   	  			document.getElementById("music_saved").src = "img/folder_open.svg";
+   	  				//alert('음악이 추가되었습니다.');
+   	  			//document.getElementById("music_saved").src = "img/folder_open.svg";
+   	  		    clickedLikeBtn.attr("src", "img/folder_open.svg");
    	  		     }
    	  	       })}//isMusic 값에 따라 ajax 동작(여기서는 addMusic)
    	  	       else{
@@ -255,8 +263,9 @@
    	  	 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
    	  	 	      },
    	  		     success: function (result){
-   	  				alert('음악이 삭제되었습니다.');
-   	  			document.getElementById("music_saved").src = "img/song_notsave.svg";
+   	  				//alert('음악이 삭제되었습니다.');
+   	  			//document.getElementById("music_saved").src = "img/song_notsave.svg";
+   	  		    clickedLikeBtn.attr("src", "img/song_notsave.svg");
    	  		     }
    	  	       })}//isMusic 값에 따라 ajax 동작(여기서는 deleteMusic)
    	  	    	   
@@ -283,10 +292,10 @@
       const isMemberModal = document.querySelector(".create_music_list");
       const modalClose3 = document.querySelector(".close_img3");
       isMemberModal.addEventListener("click", function () {
-        $("#create_playlist").show();
+        $(".modal_overlay2").show();
       });
       modalClose3.addEventListener("click", function () {
-        $("#modal_isMember").hide();
+        $(".modal_overlay2").hide();
       });
 
       
@@ -369,7 +378,7 @@
 	    	// console.log(result_data);
 			//if(result_data.result!=true){
 			//alert('플레이리스트가 추가되지 않았습니다.');
-			alert("저장되었습니다!");
+			//alert("저장되었습니다!");
 			modal.classList.remove("on"); 
 			
 	     }

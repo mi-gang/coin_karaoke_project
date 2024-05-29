@@ -21,6 +21,9 @@ public class CheckMusicbymyplaylist implements Action {
 		HttpSession session = request.getSession();
 //		Object userId = session.getAttribute("userId");
 		String userId="test@test.com";
+		//boolean isLogin = session.getAttribute("userId") != null;
+		//String userId = (String)session.getAttribute("userId");  // 로그인 상태가 아닐때는 null일것. ->.toString()은 나중에
+		System.out.println(userId);
 		String brand=request.getParameter("brand");
 		int songId=Integer.parseInt(request.getParameter("songId")) ;
 //		Url url= new Url("html/loginUI.html", Url.FORWARD);
