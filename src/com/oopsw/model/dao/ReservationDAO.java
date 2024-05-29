@@ -307,8 +307,9 @@ public class ReservationDAO {
 	// 다음에 잡힌 예약이 없다면 null을 반환하여 서비스에서 처리하도록 하였다.
 	public LocalDateTime getUpcomingReservationByReservationId(int reservationId) {
 		String sql = "select start_time from (select start_time from reservations r "
-				+ "where r.START_TIME > (select end_time from reservations r where r.RESERVATION_ID=? and r.IS_CANCEL=0)"
-				+ "and r.room_id = (select room_id from reservations r where r.RESERVATION_ID=? and r.IS_CANCEL=0)"
+				+ "where r.START_TIME > (select end_time from reservations r where r.RESERVATION_ID=? and r.IS_CANCEL=0) "
+				+ "and r.room_id = (select room_id from reservations r where r.RESERVATION_ID=? and r.IS_CANCEL=0) "
+				+ "and r.is_canceled = 0 "
 				+ "order by r.START_TIME asc) where rownum = 1";
 		LocalDateTime result = null;
 
