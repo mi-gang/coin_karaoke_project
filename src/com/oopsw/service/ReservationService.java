@@ -217,4 +217,16 @@ public class ReservationService {
 		return result;
 	}
 
+	public boolean addAdditionalReservation(String userId, int reservationId, int additionalTime) {
+		boolean result = false;
+		int realAddableMinutes = getAddableMinutes(userId, reservationId);
+		//유효성검사 보류
+		if(additionalTime > realAddableMinutes){
+			return false;
+		}
+		LocalDateTime endTime = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId).getEndTime();
+		result = new ReservationDAO(conn).updateReservation(endTime.plusMinutes(additionalTime), reservationId);
+		return result;
+	}
+
 }

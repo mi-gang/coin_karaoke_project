@@ -341,7 +341,7 @@ public class ReservationDAO {
 		boolean result = false;
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setTimestamp(1, Timestamp.valueOf(endTime));
+			pstmt.setString(1, LDT2D(endTime));
 			pstmt.setInt(2, reservationId);
 
 			int num = pstmt.executeUpdate();
@@ -374,6 +374,7 @@ public class ReservationDAO {
 		return result;
 	}
 
+	//LocalDateTime을 "YYYY-MM-DD HH24:MI:SS" 형식의 문자열로 포맷해준다. 
 	private String LDT2D(LocalDateTime ldt) {
 		String result = ldt.toString();
 		result = result.split("\\.")[0];

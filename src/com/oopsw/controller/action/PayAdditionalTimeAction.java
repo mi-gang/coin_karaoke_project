@@ -12,8 +12,8 @@ public class PayAdditionalTimeAction implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 		String userId = (String)request.getSession().getAttribute("userId");
-		int reservationId = (int)request.getAttribute("reservationId");
-		int additionalTime = (int)request.getAttribute("additionalTime");
+		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
+		int additionalTime = Integer.parseInt(request.getParameter("additionalTime"));
 		
 		boolean result = new ReservationService().addAdditionalReservation(userId, reservationId, additionalTime);
 		JsonObject json = new JsonObject();
