@@ -36,6 +36,8 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/starRate.css">
+	<script src="js/starRate.js"></script>
   </head>
   <body>
     <!--헤더-->
@@ -95,7 +97,12 @@
                 <p id="avgStarScore">${starRating}</p>
                 <p class="countReviews">총 <span id="countReviewsValue"></span>개 리뷰</p>
                 <div class="starsWrapper">
-                  <svg
+                <div class="rating-wrap">
+					<div class="rating">
+						<div class="overlay"></div>
+					</div>
+				</div>
+                  <%-- <svg
                     width="25"
                     height="25"
                     viewBox="0 0 25 25"
@@ -209,7 +216,7 @@
                         />
                       </clipPath>
                     </defs>
-                  </svg>
+                  </svg> --%>
                 </div>
               </div>
               <div class="starScoreGraphWrapper">
@@ -336,9 +343,22 @@
       	// 헤더의 '이전 페이지' 접근하기
       	$("header img").on("click", function() {
       		// console.log(sessionStorage.getItem("prevURL"));
-      		// location.replace("controller"+sessionStorage.getItem("prevURL"));
-      		history.back();
+      		location.replace("controller"+sessionStorage.getItem("prevURL"));
+      		/* $(window).trigger("refreshPreviousPage");
+      		history.back(); */
       	});
+      	
+     	// 해당 노래방의 평균 별점만큼 별 아이콘
+    	updateStarContainer();
+		function updateStarContainer() {
+			$(".avgStarScoresWrapper").each(function (i, item) {
+				const rating = item.querySelector(".rating");
+				const overlay = item.querySelector(".overlay");
+				const rate = item.querySelector("#avgStarScore").textContent;
+				drawStarRate(rating, overlay, rate);
+			});
+		};
+      	
       	
         const kkId = "${KKVO.getKkId()}";
         console.log(kkId);
@@ -397,6 +417,8 @@
              					}
              				});
         				}
+        				// 노래방 검색결과 목록 페이지 새로고침 해주기
+        				const refreshURL = 'controller?cmd'
         			});
         		} else {
         			// 로그인 X

@@ -298,6 +298,7 @@ public class ReservationService {
 		LocalDateTime endTime = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId).getEndTime();
 		result = new ReservationDAO(conn).updateReservation(endTime.plusMinutes(additionalTime), reservationId);
 		return result;
+	}
 	/** 마이페이지 */
 	public myPageVO myPageInfo(String userId) {
 

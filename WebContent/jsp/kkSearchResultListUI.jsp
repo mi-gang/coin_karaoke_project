@@ -144,6 +144,9 @@
         </nav>
 
         <script>
+        /* $(window).on("refreshPreviousPage", function() {
+        	window.location.reload();
+        }); */
             $(document).ready(function () {
             	/* // prevURL 저장을 위한 작업
             	const prevURL = window.location.search;
@@ -349,22 +352,22 @@
              		item.addEventListener("click", function() {
 	         			const clickedItem = this;
 	         			const kkId = item.querySelector("#resultKKId").textContent;
-	         			/* // prevURL 저장을 위한 작업
+	         			// prevURL 저장을 위한 작업
 		            	const prevURL = window.location.search;
 				      	console.log(prevURL);
 				      	sessionStorage.setItem("prevURL", prevURL);
 				      	const encodedPrevURL = encodeURIComponent(prevURL);
 				      	console.log(encodedPrevURL);
 				      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
-		            	// */
+		            	//
 	         			$.ajax({
 	            			url: "controller?cmd=kkDetailUI",
 	       					/* data:{selectedKKId: kkId} */
 	       					data: {clickedKKId: kkId}
 	            		});
-	         			// location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
+	         			location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
 	         			// location.replace("controller?cmd=kkDetailUI&prevURL="+encodedPrevURL);
-	         			location.href = "controller?cmd=kkDetailUI&clickedKKId="+kkId;
+	         			// location.href = "controller?cmd=kkDetailUI&clickedKKId="+kkId;
          			});
              	});
              	
