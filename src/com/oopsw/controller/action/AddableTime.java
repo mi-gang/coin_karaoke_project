@@ -7,19 +7,18 @@ import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
 import com.oopsw.service.ReservationService;
 
-public class CancelReservationAction implements Action {
+public class AddableTime implements Action {
 
 	@Override
 	public Url execute(HttpServletRequest request) {
-		boolean result = false;
 		String userId = (String) request.getSession().getAttribute("userId");
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
-		result = new ReservationService().cancelReservation(userId, reservationId);
 		
+		int addableMinutes = new ReservationService().getAddableMinutes(userId, reservationId);
 		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
+		json.addProperty("minute", addableMinutes);
 		request.setAttribute("dataToSend", json.toString());
-		return new Url("json/data.jsp");
+		return new Url("json/data.jsp", Url.FORWARD);
 	}
 
 }

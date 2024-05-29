@@ -9,6 +9,7 @@ import com.oopsw.controller.action.AddReservationUIAction;
 import com.oopsw.controller.action.AddReviewAction;
 import com.oopsw.controller.action.AddUser;
 import com.oopsw.controller.action.AddUserUI;
+import com.oopsw.controller.action.AddableTime;
 import com.oopsw.controller.action.AdditionalTimeInfoAction;
 import com.oopsw.controller.action.AmountStarReviewListByType;
 import com.oopsw.controller.action.CancelReservationAction;
@@ -116,6 +117,9 @@ public class ActionFactory {
 			case "nearRecommendKKList":
 				action = new NearRecommendKKList();
 				break;
+			case "addableTime":
+				action = new AddableTime();
+				break;
 			case "addReservationUI":
 				action = new AddReservationUI();
 				break;
@@ -143,7 +147,10 @@ public class ActionFactory {
 			case "mypageUIAction":
 				action = new MyPageUIAction();
 				break;
-			// ***** reservation *****
+			case "myPageAction":
+				action = new MyPageAction();
+				break;
+			// reservation
 			case "addReservationUIAction":
 				action = new AddReservationUIAction();
 				break;

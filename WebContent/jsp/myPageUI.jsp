@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
           <img id="mypage-user-icon" src="img/mypage-user.svg" />
           <div id="user-info">
             <div>
-              <span id="user-nickname">mumumu</span>
+              <span id="user-nickname"></span>
               <span class="info-normal-text">님</span>
             </div>
             <button id="edit-user-info-button">회원정보 수정</button>
@@ -58,7 +58,8 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
           <div id="bookmark-item">
-
+				
+				
           </div>
         </div>
         <div id="playlist-info-wrapper" class="info-wrapper">
@@ -73,17 +74,17 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
           <div id="playlists">
-            <div class="playlist">
+            <div class="playlist" id="playlist1">
               <img src="img/playlist.svg" />
-              <span class="playlist-name">내 음악 리스트</span>
+              <span class="playlist-name" id="playlist-name1"></span>
             </div>
-            <div class="playlist">
+            <div class="playlist" id="playlist2">
               <img src="img/playlist.svg" />
-              <span class="playlist-name">내 음악 리스트</span>
+              <span class="playlist-name" id="playlist-name2"></span>
             </div>
-            <div class="playlist">
+            <div class="playlist" id="playlist3">
               <img src="img/playlist.svg" />
-              <span class="playlist-name">내 음악 리스트</span>
+              <span class="playlist-name" id="playlist-name3"></span>
             </div>
           </div>
         </div>
@@ -168,37 +169,77 @@ pageEncoding="UTF-8"%>
  // 마이페이지 메인 화면 불러오기 AJax
     $(document).ready(function () {
     	console.log("마이페이지 메인 불러오기");
-    	 $.ajax({
-    		 url: "controller?cmd=myReviewListAction",
-    		 type: "GET",
-    		 dataType: "json",
-    		 success: function (data) {
-    			 console.log(data);
-    		     // data는 서버로부터 받은 리뷰 리스트입니다.
-    		     // 여기서는 data가 객체 배열이라고 가정합니다.
-    			 for (var i = 0; i < data.length; i++) {
+    	$.ajax({
+    		url: "controller?cmd=myPageAction",
+    		dataType: "json",
+    		type: "POST",
+    		success: function (data) {
+    			console.log(data);
+    			$("#bookmark-item").empty();
+    			
+    			// 닉네임
+    			$("#user-nickname").text(data.nickname);
+    			
+    			// 저장한 노래방
+    			let kkId = data.kkVO.kkId;
+    			let kkName = data.kkVO.name;
+    			let starRating = data.kkVO.starRating;
+    			let address = data.kkVO.address;
+    			let contents = "";
+    			
+    			for (var i = 0; i < data.kkVO.representativeKeywordList.length; i++) {
+    				contents += '<span class="representativeKeywordItem">'
+    							+ data.kkVO.representativeKeywordList[i]
+	             				+ '</span>';
+				}
+    			
+    			let bookmarkItem = '<div class="resultItem"><div class="leftSide"><p class="resultKKTitle">'
+    				+ kkName
+    				+'</p><div class="starScoreWrapper"><span id="starAvgScore">'
+    				+ starRating
+    				+ '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" />'
+    	        	+ '<img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" />'
+    	        	+  '<img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" />'
+    	        	+ '</div></div><p class="resultKKAddress">'
+    	        	+ '</p><div class="representativeKeywords">'
+    	        	+ contents
+    	        	+ '</div></div><div class="rightSide"><div class="bookmark"></div>'
+    	        	+ '<img class="kkRepresentativeImg" src="img/representativeKKImg1.png" alt="노래방 대표 이미지"/>'
+    	        	+ '</div></div>';
     				 
-    				 // 저장한 노래방 중 최근 저장(제일 마지막 거) 불러오기
+    			$("#bookmark-item").append(bookmarkItem);
+    			$("#bookmark-amount").append(data.bookmarkCount);
+    			
     				 
-    				 // 나의 플레이리스트 중 최근 생성 - 3개 불러오기
-    				 
-    				 // 나의 리뷰 중 최근 거 불러오기
-    				 var reviewItem =
-    					 '<div class="review-item"><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
-    					 + data[i].KKname 
-    		    		 + '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete" id="' + data[i].reviewId
-    		    		 + '">삭제</button></div>'
-    		    		 + '<div class="review-content2"><span class="review-date">'
-    		    		 + data[i].startTime.date.year+" ." + data[i].startTime.date.month +" ."+data[i].startTime.date.day
-    		    		 + '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
-    		    		 + '<span class="review-description">'
-    		    		 + data[i].content
-    		    		 + "</span></div></div>";
-    				 $("review-item").append(reviewItem); // 생성된 div를 문서에 추가합니다.
+    			// 나의 플레이리스트
+				for (var i = 0; i < data.playlistVOs.length; i++) {
+					$("#playlist"+[i+1]).attr("data-playListId-"+[i+1], data.playlistVOs[i].playListId);;
+					$("#playlist-name"+[i+1]).append(data.playlistVOs[i].playListTitle);
+				}
+    			$("#playlist-amount").append(data.playlistCount);
+
+    			
+    			// 나의 리뷰
+     			let reviewItem = '<div class="review-item"> data-id='
+     				+ data.reviewVO.reviewId
+     				+ '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">'
+    				+ data.reviewVO.KKname 
+    		    	+ '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete" id="' + data.reviewVO.reviewId
+    		    	+ '">삭제</button></div>'
+    		    	+ '<div class="review-content2"><span class="review-date">'
+    		    	+ data.reviewVO.startTime.date.year+" ." + data.reviewVO.startTime.date.month +" ."+data.reviewVO.startTime.date.day
+    		    	+ '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>'
+    		    	+ '<span class="review-description">'
+    		    	+ data.reviewVO.content
+    		    	+ "</span></div></div>";
+    			
+    		    	$("#review-item").append(reviewItem);
+    		    	$("#review-amount").append(data.reviewCount);
     				 }
-    			 },
     			 });
     });
+
+
     </script>
 
     <script src="js/mypage.js"></script>

@@ -81,7 +81,7 @@
 							</div>
 							<div id="KK-container">
 								<c:forEach var="kk" items="${recommendKKList}">
-									<div class="card">
+									<div class="card" data-kk-id="${kk.getKkId()}">
 										<img src="img/representativeKKImg1.png" class="card-img-top"
 											alt="${kk.getName()}">
 										<div class="card-body">
@@ -117,7 +117,8 @@
 									<div id="invisibleUnLoginUser" class="invisibleUnLoginUser on">
 										<div class="invisibleWrapper">
 											<p>최근에 예약한 노래방이 어디더라?</p>
-											<a id="reviewLoginLink" href="controller?cmd=loginUI" style="text-decoration:none">
+											<a id="reviewLoginLink" href="controller?cmd=loginUI"
+												style="text-decoration:none">
 												<div id="reviewLoginBtn" class="reviewLoginBtn">로그인하고 최근에 예약한 노래방 보기
 												</div>
 											</a>
@@ -531,29 +532,19 @@
 				<!-- <script src="js/reservation.js"></script> -->
 				<script>
 					// 로그인 버튼 클릭 시 페이지 경로를 prevURL 세션 스토리지에 저장
-					$("#reviewLoginLink").on("click", function() {
+					$("#reviewLoginLink").on("click", function () {
 						const prevURL = window.location.search;
-				      	console.log(prevURL);
-				      	sessionStorage.setItem("prevURL", prevURL);
-				      	const encodedPrevURL = encodeURIComponent(prevURL);
-				      	console.log(encodedPrevURL);
-				      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+						console.log(prevURL);
+						sessionStorage.setItem("prevURL", prevURL);
+						const encodedPrevURL = encodeURIComponent(prevURL);
+						console.log(encodedPrevURL);
+						sessionStorage.setItem("ePrevURL", encodedPrevURL);
 					});
-			      	
+
 					//*** 추천 노래방 목록 ***
 					updateStarContainer();
-					function updateStarContainer() {
-						$(".starContainer").each(function (i, item) {
-							const
-								rating = item.querySelector(".rating");
-							const
-								overlay = item.querySelector(".overlay");
-							const
-								rate = item.querySelector(".starRate").dataset.starRate;
-							drawStarRate(rating, overlay, rate);
-						});
+					updateRecommendKKsLink();
 
-					}
 					const
 						label = document.querySelector(".label");
 					const
@@ -602,7 +593,7 @@
 						const data = await res.json();
 						let str = "";
 						for (let i = 0; i < data.length; i++) {
-							str += `<div class="card"><img src = "img/representativeKKImg1.png" class="card-img-top" alt = "` + data[i].name + `" >
+							str += `<div class="card" data-kk-id="` + data[i].kkId + `"><img src = "img/representativeKKImg1.png" class="card-img-top" alt = "` + data[i].name + `" >
         <div class="card-body">
             <div class="card-title">`+ data[i].name + `
             </div>
@@ -626,6 +617,29 @@
 
 						$("#KK-container").html(str);
 						updateStarContainer();
+						updateRecommendKKsLink();
+					}
+
+					function updateStarContainer() {
+						$(".starContainer").each(function (i, item) {
+							const
+								rating = item.querySelector(".rating");
+							const
+								overlay = item.querySelector(".overlay");
+							const
+								rate = item.querySelector(".starRate").dataset.starRate;
+							drawStarRate(rating, overlay, rate);
+						});
+
+					}
+					function updateRecommendKKsLink() {
+						$("#KK-container .card").each(function (i, item) {
+							$(item).on("click", linkKKDetailUI);
+						});
+					}
+					function linkKKDetailUI(e) {
+						const kkId = $(e.target).closest(".card").data("kkId");
+						location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
 					}
 
 					//*****다가오는 예약*****//
@@ -636,20 +650,20 @@
 						const kkName = $("#add1-modal-body-title span");
 						const oriTime = $(".add1-modal-body-content-time:first");
 						const addiTime = $(".add1-modal-body-content-time:last");
+
 						const subBtn = $("#addTimeModal .submit_button");
 
 						kkName.text($("#karaoke_name").text());
 						oriTime.text($("#reservation-time").get()[0].innerText);
-						const addiMinutes = await getAdditioinalMinutesInfo();
+						const addiMinutes = await getAdditioinalMinutes(getReservationId());
 						addiTime.text(minToHoursString(addiMinutes));
 						addiTime.data("minutes", addiMinutes);
 						inactivateBtn(subBtn);
 					}
-					async function getAdditioinalMinutesInfo(rId) {
-						// const res = await fetch("controller?cmd=additionalTimeInfo&reservationId=" + getReservationId());
-						// const data = await res.json();
-						let minutes = 90;
-						//let minutes = data.minutes;
+					async function getAdditioinalMinutes(rId) {
+						const res = await fetch("controller?cmd=addableTime&reservationId=" + rId);
+						const data = await res.json();
+						let minutes = data.minute;
 						return minutes;
 					}
 					function getReservationId() {
@@ -734,22 +748,32 @@
 					$("#time-setting-button").on("click", submitModal3);
 					async function submitModal3() {
 						const addMinute = parseInt($("#add1-add-time-arrow-img").data("minute"));
-						const res = await fetch("controller?cmd=payAdditioanlTime&reservationId=" + getReservationId() + "&additionalTime=" + addMinute);
+						const res = await fetch("controller?cmd=payAdditionalTimeAction&reservationId=" + getReservationId() + "&additionalTime=" + addMinute);
 						const data = await res.json();
 						if (!data.result) {
 							alert("예약에 실패하였습니다! 다른 사람이 먼저 해당 시간에 예약했을 수 있습니다.");
-							location.href = "controller?cmd=mainUI";
 						}
+						location.href = "controller?cmd=mainUI";
 					}
 
-					$("#add2-add-time-button").on("click", cancelReservation);
+					$("#cancleReservationModal1 #add2-add-time-button").on("click", cancelReservation);
 					async function cancelReservation() {
-						const res = await fetch("controller?cmd=cancelReservation&reservationId=" + getReservationId());
-						const data = await res.json();
-						if (data.result) {
-							alert("예약 취소에 실패하였습니다.");
+						if (isEndTimeIn20Min()) {
+							alert("20분 이내 예약은 취소할 수 없습니다.");
 							location.href = "controller?cmd=mainUI";
+							return;
 						}
+
+						const res = await fetch("controller?cmd=cancelReservationAction&reservationId=" + getReservationId());
+						const data = await res.json();
+						if (!data.result) {
+							alert("예약 취소에 실패하였습니다.");
+						}
+						location.href = "controller?cmd=mainUI";
+					}
+
+					function isEndTimeIn20Min() {
+						return false;
 					}
 
 

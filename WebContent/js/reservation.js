@@ -11,123 +11,318 @@ $(".reservations-status-button").on("click", function () {
     $.ajax({
       url: "controller?cmd=uncompletedReservationListAction",
       method: "POST",
-      dataType : "json",
+      dataType: "json",
       success: function (response) {
-    	  $("#reservation-contents-wrapper").empty();
-    	  console.log(response);
-    	  for (var i = 0; i < response.length; i++) {
-    		  
-    		  //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
-    		  let startDate = new Date(response[i].startTime.date.year, response[i].startTime.date.month - 1, response[i].startTime.date.day,
-    				  response[i].startTime.time.hour, response[i].startTime.time.minute, response[i].startTime.time.second);
-    		  let endDate = new Date(response[i].endTime.date.year, response[i].endTime.date.month - 1, response[i].endTime.date.day, 
-    				  response[i].endTime.time.hour, response[i].endTime.time.minute, response[i].endTime.time.second);
-    		  	  
-    		  let startDateFormat = startDate.getFullYear() + '년' + startDate.getMonth() + '월' + startDate.getDate() + '일';
-    		  let endDateFormat = endDate.getFullYear() + '년' + endDate.getMonth() + '월' + endDate.getDate() + '일';
+        $("#reservation-contents-wrapper").empty();
+        console.log(response);
+        for (var i = 0; i < response.length; i++) {
+          //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
+          let startDate = new Date(
+            response[i].startTime.date.year,
+            response[i].startTime.date.month - 1,
+            response[i].startTime.date.day,
+            response[i].startTime.time.hour,
+            response[i].startTime.time.minute,
+            response[i].startTime.time.second
+          );
+          let endDate = new Date(
+            response[i].endTime.date.year,
+            response[i].endTime.date.month - 1,
+            response[i].endTime.date.day,
+            response[i].endTime.time.hour,
+            response[i].endTime.time.minute,
+            response[i].endTime.time.second
+          );
 
-    		  let startHourFormat = startDate.getHours().toString().padStart(2, '0');
-    		  let startMinuteFormat = startDate.getMinutes().toString().padStart(2, '0');
-    		  
-    		  let endHourFormat = endDate.getHours().toString().padStart(2, '0');
-    		  let endMinuteFormat = endDate.getMinutes().toString().padStart(2, '0');
-    		  
-    		  reselt = '<div class="reservation-content-wrapper" id='
-    			+ response[i].reservationId
-    			+ '><div class="reservation-status-wrapper">'
-				+ '<span class="reservation-status">이용 중</span></div>'
-				+ '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>'
-				+ '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">'
-				+ '<span id="karaoke-name" class="kk-name">'
-				+ response[i].KKname
-				+ '</span><img src="img/arrow_right.svg" id="arrow_right" />'
-				+ '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="'
-				+ response[i].startTime
-				+ '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />'
-				+ '<div>'
-				+ startDateFormat + " - " + endDateFormat
-				+ '</div><div class="reservation-start-time"><span class="reservation-start-hour">'
-				+ startHourFormat
-				+ '</span> <span>:</span>'
-				+ '<span id="reservation-start-minute">'
-				+ startMinuteFormat
-				+ '</span></div><span>-</span><div class="reservation-end-time">'
-				+ '<span class="reservation-end-hour">'
-				+ endHourFormat
-				+ '</span> <span>:</span> <span class="reservation-end-minute">'
-				+ endMinuteFormat
-				+ '</span>'
-				+ '</div></div></div><div class="button_wrapper"><button type="button" class="submit-button add-time-button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>'
-				+ '<button class="cancle-button inquire-modal-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>'
-				+ '</div></div></div></div>';
-			$("#reservation-contents-wrapper").append(reselt);
-		}
+          let startDateFormat =
+            startDate.getFullYear() +
+            "년" +
+            startDate.getMonth() +
+            "월" +
+            startDate.getDate() +
+            "일";
+          let endDateFormat =
+            endDate.getFullYear() +
+            "년" +
+            endDate.getMonth() +
+            "월" +
+            endDate.getDate() +
+            "일";
+
+          let startHourFormat = startDate
+            .getHours()
+            .toString()
+            .padStart(2, "0");
+          let startMinuteFormat = startDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+
+          let endHourFormat = endDate.getHours().toString().padStart(2, "0");
+          let endMinuteFormat = endDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+
+          reselt =
+            '<div class="reservation-content-wrapper" id=' +
+            response[i].reservationId +
+            '><div class="reservation-status-wrapper">' +
+            '<span class="reservation-status">이용 중</span></div>' +
+            '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>' +
+            '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">' +
+            '<span id="karaoke-name" class="kk-name">' +
+            response[i].KKname +
+            '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
+            '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
+            response[i].startTime +
+            '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
+            "<div>" +
+            startDateFormat +
+            " - " +
+            endDateFormat +
+            '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
+            startHourFormat +
+            "</span> <span>:</span>" +
+            '<span id="reservation-start-minute">' +
+            startMinuteFormat +
+            '</span></div><span>-</span><div class="reservation-end-time">' +
+            '<span class="reservation-end-hour">' +
+            endHourFormat +
+            '</span> <span>:</span> <span class="reservation-end-minute">' +
+            endMinuteFormat +
+            "</span>" +
+            '</div></div></div><div class="button_wrapper"><button type="button" class="submit-button add-time-button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>' +
+            '<button class="cancel-button inquire-modal-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>' +
+            "</div></div></div></div>";
+          $("#reservation-contents-wrapper").append(reselt);
+        }
       },
     });
   }
-  
+
   // 이용 완료
   if ($(this).attr("id") == "status-2") {
-	    $.ajax({
-	      url: "controller?cmd=completedReservationListAction",
-	      method: "POST",
-	      dataType : "json",
-	      success: function (response) {
-	    	  $("#reservation-contents-wrapper").empty();
-	    	  console.log(response);
-	    	  for (var i = 0; i < response.length; i++) {
-	    		  
-	    		  //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
-	    		  let startDate = new Date(response[i].startTime.date.year, response[i].startTime.date.month - 1, response[i].startTime.date.day,
-	    				  response[i].startTime.time.hour, response[i].startTime.time.minute, response[i].startTime.time.second);
-	    		  let endDate = new Date(response[i].endTime.date.year, response[i].endTime.date.month - 1, response[i].endTime.date.day, 
-	    				  response[i].endTime.time.hour, response[i].endTime.time.minute, response[i].endTime.time.second);
-	    		  	  
-	    		  let startDateFormat = startDate.getFullYear() + '년' + startDate.getMonth() + '월' + startDate.getDate() + '일';
-	    		  let endDateFormat = endDate.getFullYear() + '년' + endDate.getMonth() + '월' + endDate.getDate() + '일';
+    $.ajax({
+      url: "controller?cmd=completedReservationListAction",
+      method: "POST",
+      dataType: "json",
+      success: function (response) {
+        $("#reservation-contents-wrapper").empty();
+        console.log(response);
+        for (var i = 0; i < response.length; i++) {
+          //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
+          let startDate = new Date(
+            response[i].reservationVO.startTime.date.year,
+            response[i].reservationVO.startTime.date.month - 1,
+            response[i].reservationVO.startTime.date.day,
+            response[i].reservationVO.startTime.time.hour,
+            response[i].reservationVO.startTime.time.minute,
+            response[i].reservationVO.startTime.time.second
+          );
+          let endDate = new Date(
+            response[i].reservationVO.endTime.date.year,
+            response[i].reservationVO.endTime.date.month - 1,
+            response[i].reservationVO.endTime.date.day,
+            response[i].reservationVO.endTime.time.hour,
+            response[i].reservationVO.endTime.time.minute,
+            response[i].reservationVO.endTime.time.second
+          );
 
-	    		  let startHourFormat = startDate.getHours().toString().padStart(2, '0');
-	    		  let startMinuteFormat = startDate.getMinutes().toString().padStart(2, '0');
-	    		  
-	    		  let endHourFormat = endDate.getHours().toString().padStart(2, '0');
-	    		  let endMinuteFormat = endDate.getMinutes().toString().padStart(2, '0');
-	    		  
-	    		  reselt = '<div class="reservation-content-wrapper" id='
-	    			+ response[i].reservationId
-	    			+ '><div class="reservation-status-wrapper">'
-					+ '<span class="reservation-status">이용 완료</span></div>'
-					+ '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>'
-					+ '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">'
-					+ '<span id="karaoke-name" class="kk-name">'
-					+ response[i].KKname
-					+ '</span><img src="img/arrow_right.svg" id="arrow_right" />'
-					+ '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="'
-					+ response[i].startTime
-					+ '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />'
-					+ '<div>'
-					+ startDateFormat + " - " + endDateFormat
-					+ '</div><div class="reservation-start-time"><span class="reservation-start-hour">'
-					+ startHourFormat
-					+ '</span> <span>:</span>'
-					+ '<span id="reservation-start-minute">'
-					+ startMinuteFormat
-					+ '</span></div><span>-</span><div class="reservation-end-time">'
-					+ '<span class="reservation-end-hour">'
-					+ endHourFormat
-					+ '</span> <span>:</span> <span class="reservation-end-minute">'
-					+ endMinuteFormat
-					+ '</span>'
-					+ '</div></div></div><div class="button_wrapper"><button type="button" class="submit-button review-button1" data-bs-toggle="modal"data-bs-target="#addReviewModal">리뷰 작성(3일 남음)</button>'
-					+ '<button class="cancle-button" data-bs-toggle="modal"data-bs-target="#cancleReservationModal1">예약 취소</button>'
-					+ '</div></div></div></div>';
-				$("#reservation-contents-wrapper").append(reselt);
-	    	  }
-			},
-	    });
-	  }
-  
-  
-/*    $.ajax({
+          let startDateFormat =
+            startDate.getFullYear() +
+            "년" +
+            startDate.getMonth() +
+            "월" +
+            startDate.getDate() +
+            "일";
+          let endDateFormat =
+            endDate.getFullYear() +
+            "년" +
+            endDate.getMonth() +
+            "월" +
+            endDate.getDate() +
+            "일";
+
+          let startHourFormat = startDate
+            .getHours()
+            .toString()
+            .padStart(2, "0");
+          let startMinuteFormat = startDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+
+          let endHourFormat = endDate.getHours().toString().padStart(2, "0");
+          let endMinuteFormat = endDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+          
+          let reviewButton = null;
+          let inquireButton = '<button class="cancel-button" data-bs-toggle="modal"data-bs-target="#addInquireModal">문의/신고</button>';
+          
+          console.log(response[i].isReviewWritten);
+          
+          // 리뷰 작성 여부 처리
+          if (response[i].isReviewWritten) {
+        	  reviewButton = '<button type="button" disabled class="submit-button review-button2"> 리뷰 작성 완료 </button>';
+          }else{
+        	  reviewButton = '<button type="button" class="submit-button review-button1" data-bs-toggle="modal"data-bs-target="#addReviewModal">리뷰 작성</button>';
+          }
+          
+          // 3일 이후 여부 처리
+          const today = new Date;
+          
+          let diff = Math.abs(today.getTime() - endDate.getTime());
+          diff = Math.floor(diff / (1000 * 60 * 60 * 24));
+//        console.log(diff);
+          
+          if (diff > 3) {
+        	  reviewButton = '<button type="button" disabled class="submit-button review-button2"> 리뷰 작성 불가 </button>';
+        	  inquireButton = '';
+        	  if (response[i].isReviewWritten) {
+            	  reviewButton = '<button type="button" disabled class="submit-button review-button2"> 리뷰 작성 완료 </button>';
+        	  }
+          }
+          
+          result =
+            '<div class="reservation-content-wrapper" id=' +
+            response[i].reservationVO.reservationId +
+            '><div class="reservation-status-wrapper">' +
+            '<span class="reservation-status">이용 완료</span></div>' +
+            '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>' +
+            '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">' +
+            '<span id="karaoke-name" class="kk-name">' +
+            response[i].reservationVO.KKname +
+            '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
+            '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
+            response[i].reservationVO.startTime +
+            '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
+            "<div>" +
+            startDateFormat +
+            " - " +
+            endDateFormat +
+            '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
+            startHourFormat +
+            "</span> <span>:</span>" +
+            '<span id="reservation-start-minute">' +
+            startMinuteFormat +
+            '</span></div><span>-</span><div class="reservation-end-time">' +
+            '<span class="reservation-end-hour">' +
+            endHourFormat +
+            '</span> <span>:</span> <span class="reservation-end-minute">' +
+            endMinuteFormat +
+            "</span>" +
+            '</div></div></div><div class="button_wrapper">' +
+            reviewButton +
+            inquireButton +
+            "</div></div></div></div>";
+          $("#reservation-contents-wrapper").append(result);
+        }// for문 end
+      } // success end
+    });
+  }
+
+  // 취소
+  if ($(this).attr("id") == "status-3") {
+    $.ajax({
+      url: "controller?cmd=canceledReservationListAction",
+      method: "POST",
+      dataType: "json",
+      success: function (response) {
+        $("#reservation-contents-wrapper").empty();
+        console.log(response);
+        for (var i = 0; i < response.length; i++) {
+          //+ day[startDay.getday()] + 요일).toString() 요일 변환 귀찮앗거 일단 안하는거롤
+          let startDate = new Date(
+            response[i].startTime.date.year,
+            response[i].startTime.date.month - 1,
+            response[i].startTime.date.day,
+            response[i].startTime.time.hour,
+            response[i].startTime.time.minute,
+            response[i].startTime.time.second
+          );
+          let endDate = new Date(
+            response[i].endTime.date.year,
+            response[i].endTime.date.month - 1,
+            response[i].endTime.date.day,
+            response[i].endTime.time.hour,
+            response[i].endTime.time.minute,
+            response[i].endTime.time.second
+          );
+
+          let startDateFormat =
+            startDate.getFullYear() +
+            "년" +
+            startDate.getMonth() +
+            "월" +
+            startDate.getDate() +
+            "일";
+          let endDateFormat =
+            endDate.getFullYear() +
+            "년" +
+            endDate.getMonth() +
+            "월" +
+            endDate.getDate() +
+            "일";
+
+          let startHourFormat = startDate
+            .getHours()
+            .toString()
+            .padStart(2, "0");
+          let startMinuteFormat = startDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+
+          let endHourFormat = endDate.getHours().toString().padStart(2, "0");
+          let endMinuteFormat = endDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+
+          reselt =
+            '<div class="reservation-content-wrapper" id=' +
+            response[i].reservationId +
+            '><div class="reservation-status-wrapper">' +
+            '<span class="reservation-status">취소 완료</span></div>' +
+            '<div class="reservation-content"><div id="KK_img"><img src="img/KK_img.svg" /></div>' +
+            '<div class="reservation-detail-wrapper"><div class="reservation-detail"><div class="reservation-detail-row">' +
+            '<span id="karaoke-name" class="kk-name">' +
+            response[i].KKname +
+            '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
+            '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
+            response[i].startTime +
+            '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
+            "<div>" +
+            startDateFormat +
+            " - " +
+            endDateFormat +
+            '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
+            startHourFormat +
+            "</span> <span>:</span>" +
+            '<span id="reservation-start-minute">' +
+            startMinuteFormat +
+            '</span></div><span>-</span><div class="reservation-end-time">' +
+            '<span class="reservation-end-hour">' +
+            endHourFormat +
+            '</span> <span>:</span> <span class="reservation-end-minute">' +
+            endMinuteFormat +
+            "</span>" +
+            "</div></div></div>" +
+            '<div id="cancle-info"><span>취소 수수료</span><div><span>' +
+            4500 +
+            "</span><span>원</span><span>(50%)</span></div></div>" +
+            "</div></div></div>";
+
+          $("#reservation-contents-wrapper").append(reselt);
+        }
+      },
+    });
+  }
+
+  /*    $.ajax({
       url: "controller?cmd=idCheckAction",
       data: { manager_id: $(this).val() },
       success: function (responseText) {
@@ -165,7 +360,7 @@ $(".reservations-status-button").on("click", function () {
 // }
 
 // 시간 추가 버튼 클릭 시 - 시간 추가 모달 설정
-$("#reservation-contents-wrapper").on("click", ".add-time-button", function() {
+$("#reservation-contents-wrapper").on("click", ".add-time-button", function () {
   // 초기화
   // $(".set-hour").text("");
   // $(".set-minute").text("");
@@ -174,16 +369,14 @@ $("#reservation-contents-wrapper").on("click", ".add-time-button", function() {
   $("#setting-hour").val("");
   $("#setting-minute").val("");
   $("#add1-add-time-button").attr("disabled", true);
-  
-	// 노래방 이름 옮겨놓기
-	const kkname = $("#karaoke-name").text();
-	console.log(kkname);
-	$(".add-kkname").text(kkname);
-	
-	// 시작 시간, 종료시간 옮겨놓기
-	$(".reservation-start-hour")
-	
-	
+
+  // 노래방 이름 옮겨놓기
+  const kkname = $("#karaoke-name").text();
+  console.log(kkname);
+  $(".add-kkname").text(kkname);
+
+  // 시작 시간, 종료시간 옮겨놓기
+  $(".reservation-start-hour");
 });
 
 // 추가 가능 시간 설정하기
@@ -315,67 +508,136 @@ $("#add1-add-time-button").on("click", function () {
 
 //////////////////////////////////////////
 // 리뷰 모달
-$("#reservation-contents-wrapper").on("click", ".review-button1", function() {
-	const kkname = $("#karaoke-name").text();
-	console.log(kkname);
-	$("#review-kkname").text(kkname);
+// 리뷰 모달 오픈 버튼 클릭 시
+$("#reservation-contents-wrapper").on("click", ".review-button1", function () {
+  // 클릭한 reservation 아이디 옮겨놓기
+  const reservationId = $(this)
+    .closest(".reservation-content-wrapper")
+    .attr("id");
+  $("#addReviewModal").attr("data-reservationId", reservationId);
+
+  // 노래방 이름 옮겨놓기
+  const kkname = $(this)
+    .closest(".reservation-detail-wrapper")
+    .find(".kk-name")
+    .text();
+  $("#review-kkname").text(kkname);
 });
 
+//모달 내 리뷰 등록 버튼 클릭 시 이벤트
+$("#add-review-button").on("click", function () {
+  const reservationId = $(this).closest(".modal").attr("data-reservationId");
+  const content = $("#review-description").val();
+  const star = $("#review-star").val();
 
-// 노래방 이름 옮겨놓기
-const kkname = $("#karaoke-name").text();
-console.log(kkname);
-$("#review-kkname").text(kkname);
+  if (content.length < 10) {
+    alert("10자 이상 입력하세요.");
+    return false;
+  }
+
+  $.ajax({
+    url: "controller?cmd=addReviewAction",
+    type: "POST",
+    data: { reservationId: reservationId, content: content, star: star },
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      // console.log(data.result);
+      if (data) {
+        $("#addReviewModal2").modal("show");
+      } else {
+        // 나중에 처리
+      }
+    },
+  });
+});
 
 //////////////////////////////////////////
 // 문의/신고 모달
 
-// 문의/신고 모달 오픈 버튼 클릭 시 
-$("#reservation-contents-wrapper").on("click", ".inquire-modal-button", function() {
+// 문의/신고 모달 오픈 버튼 클릭 시
+$("#reservation-contents-wrapper").on(
+  "click",
+  ".inquire-modal-button",
+  function () {
+    // 클릭한 reservation 아이디 옮겨놓기
+    //	console.log($(this).closest(".reservation_content_wrapper").attr("id"));
+    const reservationId = $(this)
+      .closest(".reservation-content-wrapper")
+      .attr("id");
+    //	console.log("reservationId : "+reservationId);
+    $("#addInquireModal").attr("data-reservationId", reservationId);
 
-	// 클릭한 reservation 아이디 옮겨놓기
-//	console.log($(this).closest(".reservation_content_wrapper").attr("id"));
-	const reservationId = $(this).closest(".reservation_content_wrapper").attr("id");
-//	console.log("reservationId : "+reservationId);
-	$("#addInquireModal").attr("data-reservationId", reservationId);
-	
-	// 노래방 이름 옮겨놓기
-	$("#inquire-kkname").text("");
-	const kkname = $("#karaoke-name").text();
-	console.log(kkname);
-	$("#inquire-kkname").text(kkname);
-	
-});
+    // 노래방 이름 옮겨놓기
+    $("#inquire-kkname").text("");
+    const kkname = $("#karaoke-name").text();
+    console.log(kkname);
+    $("#inquire-kkname").text(kkname);
+  }
+);
 
 // 모달 내 문의/신고하기 버튼 클릭 시 이벤트
 $("#inquire-button").on("click", function () {
-		
-	const reservationId = $(this).closest(".modal").attr("data-reservationId");
-	const content = $("#inquire-description").val();
-//	const textarea = document.getElementById('inquire-description').value;
-	
-	if (content.length < 10) {
-		alert("10자 이상 입력하세요.");
-	    return false;
-	}
-	
-	$.ajax({
-		url : "controller?cmd=addInquireAction",
-		type : "POST",
-		data : {"reservationId" : reservationId, "content" : content},
-		dataType : "json",
-		success : function(data) {
-			console.log(data);
-			// console.log(data.result);
-			if (data) {
-				$("#addInquireModal2").modal("show");
-			}else{
-				// 나중에 처리
-			}
-		},
-	});
+  const reservationId = $(this).closest(".modal").attr("data-reservationId");
+  const content = $("#inquire-description").val();
+  //	const textarea = document.getElementById('inquire-description').value;
 
-//	// action 속성 동적으로 설정하기
-//	form.action = 'controller?cmd=addInquireAction&reservationId=' + reservationId;
-//	$("#addInquireModal2").modal("show");
+  if (content.length < 10) {
+    alert("10자 이상 입력하세요.");
+    return false;
+  }
+
+  $.ajax({
+    url: "controller?cmd=addInquireAction",
+    type: "POST",
+    data: { reservationId: reservationId, content: content },
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      // console.log(data.result);
+      if (data) {
+        $("#addInquireModal2").modal("show");
+      } else {
+        // 나중에 처리
+      }
+    },
+  });
+
+  //	// action 속성 동적으로 설정하기
+  //	form.action = 'controller?cmd=addInquireAction&reservationId=' + reservationId;
+  //	$("#addInquireModal2").modal("show");
+});
+
+////////////////////////////////////
+
+// 예약 취소 모달 버튼 클릭 시
+$("#reservation-contents-wrapper").on("click", ".cancel-button", function () {
+  // 클릭한 reservation 아이디 옮겨놓기
+  //	console.log($(this).closest(".reservation_content_wrapper").attr("id"));
+  const reservationId = $(this)
+    .closest(".reservation-content-wrapper")
+    .attr("id");
+  //	console.log("reservationId : "+reservationId);
+  $("#cancelReservationModal1").attr("data-reservationId", reservationId);
+});
+
+//모달 내 취소하기 버튼 클릭 시 이벤트
+$("#reservation-delete-button").on("click", function () {
+  const reservationId = $(this).closest(".modal").attr("data-reservationId");
+
+  $.ajax({
+    url: "controller?cmd=addInquireAction",
+    type: "POST",
+    data: { reservationId: reservationId },
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      // console.log(data.result);
+      if (data) {
+        $("#cancelReservationModal2").modal("show");
+      } else {
+        // 나중에 처리
+      }
+    },
+  });
 });
