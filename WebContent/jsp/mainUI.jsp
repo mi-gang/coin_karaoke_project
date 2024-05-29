@@ -755,11 +755,14 @@
 
 					function getActivatedBrand() {
 						const brands = $("#brand-container button");
+						let brand = '';
 						brands.each(function () {
 							if ($(this).hasClass("brand-activate")) {
-								return $(this).text();
+								brand = $(this).text();
+								return false;
 							}
 						})
+						return brand;
 					}
 
 					function updateChart(brand) {
@@ -781,15 +784,15 @@
 								result_data = response; //JSON.parse()
 								let output = "";
 								for (let i = 0; i < result_data.length; i++) {
-									output += `<div class="music_output" id="music_output">
-																	<div class="music_num">` + result_data[i].no + `</div>
-																	<div class="music_info">
-																	<span class="music_title">` + result_data[i].title + `</span>
-																	<span class="music_singer">` + result_data[i].singer + `</span>
-																	</div>
-																	<div class="music_like">
-																	<img class="like_img" src="img/folder_open.svg"></div>
-																	</div>`;
+									output += `<div class="music_output" id="music_output" data-set-musicNum=` + result_data[i].no + ` data-set-musicTitle="` + result_data[i].title + `" data-set-singer="` + result_data[i].singer + `" >
+            <div class="music_num">` + result_data[i].no + `</div>
+            <div class="music_info">
+              <span class="music_title">` + result_data[i].title + `</span>
+              <span class="music_singer">` + result_data[i].singer + `</span>
+            </div>
+            <div class="music_like">
+             <img class="like_img" src="img/folder_open.svg"></div>
+             </div>`;
 								}
 								$(".music_list_output").html(output);
 							},
@@ -844,9 +847,9 @@
 										+ musicNum
 										+ ' data-set-playId='
 										+ musicbymyplaylistData[i].playListId
-										+ ' data-set-musicTitle='
+										+ ' data-set-musicTitle="'
 										+ musictitle
-										+ ' data-set-singer='
+										+ '" data-set-singer='
 										+ musicSinger
 										+ ' data-set-isMusic='
 										+ musicbymyplaylistData[i].isMusic
@@ -871,7 +874,8 @@
 						const musicSinger = $(this).closest(".playlist").attr('data-set-singer');
 						isMusic = $(this).closest(".playlist").attr('data-set-isMusic');
 						console.log(isMusic);
-						let entInput = $(".on").attr("id");
+						let entInput = getActivatedBrand();
+						console.log("brand:" + entInput);
 						playlistId = $(this).closest(".playlist").attr('data-set-playId');
 						console.log(playlistId);
 						if (isMusic === "false") {
@@ -964,43 +968,7 @@
 							}
 						})
 					})
-					//플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
-					$(".playlist_list").on("click", ".like_btn", function () {
-						let entInput = $(".on").attr("id");
-						const musicNumElement = $(this).closest(".music_output").find(".music_num");
-						const musicNum = musicNumElement.text();
-						console.log(musicNum);
-						const musicTitleElement = $(this).closest(".music_output").find(".music_title");
-						const musictitle = musicTitleElement.text();
-						const musicSingerElement = $(this).closest(".music_output").find(".music_singer");
-						const musicSinger = musicSingerElement.text();
-						console.log(musicSinger);
-						const musicPlaylistId = $(this).closest(".playlist").find("playlistId");
-						const playListId = musicPlaylistId.text();
-						console.log(playListId);
-						//const playListIdElement = $(this).closest(".playlist").find(".music_singer");
-						//const musicSinger = musicSingerElement.text();     
-						$.ajax({
-							url: "controller?cmd=addMusic",
-							data: {
-								brand: entInput,//brand
-								songId: musicNum, //musicNum
-								title: musictitle,
-								singer: musicSinger,
-								playlistId: playListId,
-							},
-							error: function (jqXHR, textStatus, errorThrown) {
-								alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
-							},
-							success: function (result) {
-								// result_data=JSON.parse(result)
-								// console.log(result_data);
-								//if(result_data.result!=true){
-								//alert('플레이리스트가 추가되지 않았습니다.');
 
-							}
-						})
-					});
 				</script>
 			</body>
 
