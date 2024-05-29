@@ -57,8 +57,8 @@
             <div class="filterContainer">
                 <div class="filterWrapper">
                     <span class="filterItem">${searchGu}</span>
-                    <span class="filterItem">23:30 ~ 01:20</span>
-                    <span class="filterItem">40분</span>
+                    <span class="filterItem">${searchTime}</span>
+                    <span class="filterItem">${usingTime }</span>
                     <!-- <span class="filterItem">단체 가능</span> -->
                     <c:forEach items="${chkOptionsContents}" var="optionItem">
                     	<span class="filterItem">${optionItem}</span>

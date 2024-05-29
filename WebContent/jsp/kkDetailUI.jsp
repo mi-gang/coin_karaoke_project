@@ -1,322 +1,203 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="com.google.gson.GsonBuilder"%>
-<%@page import="com.google.gson.JsonObject"%>
-<%@page import="com.google.gson.Gson"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="java.util.ArrayList"%>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>:: 노래방 상세정보</title>
-    <link
-      rel="stylesheet"
-      href="css/common.css"
-    />
-    <link
-      rel="stylesheet"
-      href="css/kkDetailUI.css"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/starRate.css">
-	<script src="js/starRate.js"></script>
-  </head>
-  <body>
-    <!--헤더-->
-    <header>
-      <img
-        src="img/left arrow.svg"
-        alt="이전 페이지 이동"
-      />
-      <span>${KKVO.getName()}</span>
-    </header>
-    <!-- 컨텐츠 컨테이너 -->
-    <div id="container">
-      <img
-        src="img/representativeKKImg2.png"
-        alt="노래방 상세정보 대표 이미지"
-        id="representativeKKImg"
-      />
-      <div class="wrapper">
-        <div class="tabWrapper">
-          <div
-            class="tapMenu active"
-            data-menu="defaultInfo"
-          >
-            기본 정보
-          </div>
-          <div
-            class="tapMenu"
-            data-menu="review"
-          >
-            리뷰
-          </div>
-        </div>
-        <div class="contentsContainer">
-          <div
-            id="defaultInfoContainer"
-            class="selected"
-          >
-            <div class="infoList">
-              <p class="infoTitle">주소</p>
-              <p class="kkAddress">${KKVO.getAddress()}</p>
-              <p id="distance">현재 위치: 800m</p>
-              <div class="toMapBtn">길찾기</div>
-            </div>
-            <div class="infoList">
-              <p class="infoTitle">영업시간</p>
-              <p><span id="opTimeInfo"></span>~<span id="csTimeInfo"></span> <span id="infoNote"></span></p>
-            </div>
-            <div class="infoList">
-              <p class="infoTitle">대표 키워드</p>
-              <div class="keywordsWrapper"></div>
-            </div>
-          </div>
-          <div id="reviewContainer">
-            <div class="starScoreContainer">
-              <div class="avgStarScoresWrapper">
-                <!-- <p id="avgStarScore">4.6</p> -->
-                <p id="avgStarScore">${starRating}</p>
-                <p class="countReviews">총 <span id="countReviewsValue"></span>개 리뷰</p>
-                <div class="starsWrapper">
-                <div class="rating-wrap">
-					<div class="rating">
-						<div class="overlay"></div>
-					</div>
-				</div>
-                  <%-- <svg
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_42_1687)">
-                      <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                        fill="#9747FF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_42_1687">
-                        <rect
-                          width="25"
-                          height="25"
-                          fill="white"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_42_1687)">
-                      <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                        fill="#9747FF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_42_1687">
-                        <rect
-                          width="25"
-                          height="25"
-                          fill="white"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_42_1687)">
-                      <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                        fill="#9747FF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_42_1687">
-                        <rect
-                          width="25"
-                          height="25"
-                          fill="white"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_42_1687)">
-                      <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                        fill="#9747FF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_42_1687">
-                        <rect
-                          width="25"
-                          height="25"
-                          fill="white"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <svg
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_42_1687)">
-                      <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                        fill="#9747FF"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_42_1687">
-                        <rect
-                          width="25"
-                          height="25"
-                          fill="white"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg> --%>
-                </div>
-              </div>
-              <div class="starScoreGraphWrapper">
-                <div class="graphItem">
-                  <p class="scoreGrade">5점</p>
-                  <div class="graphWrapper">
-                    <div
-                      class="graph"
-                      id="graph5Score"
-                    ></div>
-                    <div class="graphBackground"></div>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+  <%@page import="com.google.gson.GsonBuilder" %>
+    <%@page import="com.google.gson.JsonObject" %>
+      <%@page import="com.google.gson.Gson" %>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+          <%@page import="java.util.ArrayList" %>
+            <!DOCTYPE html>
+            <html>
+
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>:: 노래방 상세정보</title>
+              <link rel="stylesheet" href="css/common.css" />
+              <link rel="stylesheet" href="css/kkDetailUI.css" />
+              <link rel="preconnect" href="https://fonts.googleapis.com" />
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+              <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+                rel="stylesheet" />
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            </head>
+
+            <body>
+              <!--헤더-->
+              <header>
+                <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+                <span data-kk-id="${kkId}">${KKVO.getName()}</span>
+              </header>
+              <!-- 컨텐츠 컨테이너 -->
+              <div id="container">
+                <img src="img/representativeKKImg2.png" alt="노래방 상세정보 대표 이미지" id="representativeKKImg" />
+                <div class="wrapper">
+                  <div class="tabWrapper">
+                    <div class="tapMenu active" data-menu="defaultInfo">
+                      기본 정보
+                    </div>
+                    <div class="tapMenu" data-menu="review">
+                      리뷰
+                    </div>
                   </div>
-                  <p
-                    class="scoreCount"
-                    id="score5Cnt"
-                  >
-                    5
-                  </p>
-                </div>
-                <div class="graphItem">
-                  <p class="scoreGrade">4점</p>
-                  <div class="graphWrapper">
-                    <div
-                      class="graph"
-                      id="graph4Score"
-                    ></div>
-                    <div class="graphBackground"></div>
+                  <div class="contentsContainer">
+                    <div id="defaultInfoContainer" class="selected">
+                      <div class="infoList">
+                        <p class="infoTitle">주소</p>
+                        <p class="kkAddress">${KKVO.getAddress()}</p>
+                        <p id="distance">현재 위치: 800m</p>
+                        <div class="toMapBtn">길찾기</div>
+                      </div>
+                      <div class="infoList">
+                        <p class="infoTitle">영업시간</p>
+                        <p><span id="opTimeInfo"></span>~<span id="csTimeInfo"></span> <span id="infoNote"></span></p>
+                      </div>
+                      <div class="infoList">
+                        <p class="infoTitle">대표 키워드</p>
+                        <div class="keywordsWrapper"></div>
+                      </div>
+                    </div>
+                    <div id="reviewContainer">
+                      <div class="starScoreContainer">
+                        <div class="avgStarScoresWrapper">
+                          <!-- <p id="avgStarScore">4.6</p> -->
+                          <p id="avgStarScore">${starRating}</p>
+                          <p class="countReviews">총 <span id="countReviewsValue"></span>개 리뷰</p>
+                          <div class="starsWrapper">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_42_1687)">
+                                <path
+                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
+                                  fill="#9747FF" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_42_1687">
+                                  <rect width="25" height="25" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_42_1687)">
+                                <path
+                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
+                                  fill="#9747FF" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_42_1687">
+                                  <rect width="25" height="25" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_42_1687)">
+                                <path
+                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
+                                  fill="#9747FF" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_42_1687">
+                                  <rect width="25" height="25" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_42_1687)">
+                                <path
+                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
+                                  fill="#9747FF" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_42_1687">
+                                  <rect width="25" height="25" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_42_1687)">
+                                <path
+                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
+                                  fill="#9747FF" />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_42_1687">
+                                  <rect width="25" height="25" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="starScoreGraphWrapper">
+                          <div class="graphItem">
+                            <p class="scoreGrade">5점</p>
+                            <div class="graphWrapper">
+                              <div class="graph" id="graph5Score"></div>
+                              <div class="graphBackground"></div>
+                            </div>
+                            <p class="scoreCount" id="score5Cnt">
+                              5
+                            </p>
+                          </div>
+                          <div class="graphItem">
+                            <p class="scoreGrade">4점</p>
+                            <div class="graphWrapper">
+                              <div class="graph" id="graph4Score"></div>
+                              <div class="graphBackground"></div>
+                            </div>
+                            <p class="scoreCount" id="score4Cnt">
+                              3
+                            </p>
+                          </div>
+                          <div class="graphItem">
+                            <p class="scoreGrade">3점</p>
+                            <div class="graphWrapper">
+                              <div class="graph" id="graph3Score"></div>
+                              <div class="graphBackground"></div>
+                            </div>
+                            <p class="scoreCount" id="score3Cnt">
+                              0
+                            </p>
+                          </div>
+                          <div class="graphItem">
+                            <p class="scoreGrade">2점</p>
+                            <div class="graphWrapper">
+                              <div class="graph" id="graph2Score"></div>
+                              <div class="graphBackground"></div>
+                            </div>
+                            <p class="scoreCount" id="score2Cnt">
+                              0
+                            </p>
+                          </div>
+                          <div class="graphItem">
+                            <p class="scoreGrade">1점</p>
+                            <div class="graphWrapper">
+                              <div class="graph" id="graph1Score"></div>
+                              <div class="graphBackground"></div>
+                            </div>
+                            <p class="scoreCount" id="score1Cnt">
+                              0
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="textReviewContainer"></div>
+                    </div>
                   </div>
-                  <p
-                    class="scoreCount"
-                    id="score4Cnt"
-                  >
-                    3
-                  </p>
                 </div>
-                <div class="graphItem">
-                  <p class="scoreGrade">3점</p>
-                  <div class="graphWrapper">
-                    <div
-                      class="graph"
-                      id="graph3Score"
-                    ></div>
-                    <div class="graphBackground"></div>
+
+                <!-- 로그인 모달 -->
+                <div class="modalBack">
+                  <div class="modal">
+                    <div class="iconDiv"><img src="img/close.svg" alt="모달 닫기"></div>
+                    <p>즐겨찾기는 로그인한 유저만 사용 가능한 기능입니다.</p>
+                    <div class="loginBtn">로그인하러 가기</div>
                   </div>
-                  <p
-                    class="scoreCount"
-                    id="score3Cnt"
-                  >
-                    0
-                  </p>
                 </div>
-                <div class="graphItem">
-                  <p class="scoreGrade">2점</p>
-                  <div class="graphWrapper">
-                    <div
-                      class="graph"
-                      id="graph2Score"
-                    ></div>
-                    <div class="graphBackground"></div>
-                  </div>
-                  <p
-                    class="scoreCount"
-                    id="score2Cnt"
-                  >
-                    0
-                  </p>
-                </div>
-                <div class="graphItem">
-                  <p class="scoreGrade">1점</p>
-                  <div class="graphWrapper">
-                    <div
-                      class="graph"
-                      id="graph1Score"
-                    ></div>
-                    <div class="graphBackground"></div>
-                  </div>
-                  <p
-                    class="scoreCount"
-                    id="score1Cnt"
-                  >
-                    0
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="textReviewContainer"></div>
-          </div>
-        </div>
-      </div>
+          </div>                
       
-      <!-- 로그인 모달 -->
-      <div class="modalBack">
-	    <div class="modal">
-	    	<div class="iconDiv"><img src="img/close.svg" alt="모달 닫기"></div>
-	    	<p>즐겨찾기는 로그인한 유저만 사용 가능한 기능입니다.</p>
-	    	<div class="loginBtn">로그인하러 가기</div>
-	    </div>
-	  </div>
-      
-    </div>
+    
     <!-- 하단 메뉴바 -->
     <nav>
       <div
@@ -701,35 +582,35 @@
             $(this).removeClass("add");
           }
         }); */
-        // 예약하기 버튼 클릭시, 예약하기 페이지로 이동 (현재는 alert)
-        $(".btn").click(function () {
-          alert("예약 페이지로 이동!");
-          return;
-        });
+                  // 예약하기 버튼 클릭시, 예약하기 페이지로 이동 (현재는 alert)
+                  $(".btn").click(function () {
+                    location.href = "controller?cmd=addReservationUI&kkId=" + $("header span").data("kkId");
+                    return;
+                  });
 
-     // 하단 메뉴바를 통한 페이지 이동
-        $("nav div").on("click", function() {
-      	  const clickedDiv = $(this);
-      	  const imgAlt = clickedDiv.find("img").attr("alt");
-      	  switch(imgAlt) {
-      	  case "메인 페이지":
-      		  location.replace("controller?cmd=mainUI");
-      		  break;
-      	  case "노래방 검색 페이지":
-      		  location.replace("controller?cmd=kkFilterUI");
-      		  break;
-      	  case "노래 검색 페이지":
-      		  location.replace("controller?cmd=musicListUI");
-      		  break;
-      	  case "나의 예약 내역 페이지":
-      		  location.replace("controller?cmd=reservationListUIAction");
-      		  break;
-      	  case "마이페이지":
-      		  location.replace("controller?cmd=mypageUIAction");
-      		  break;
-      	  }
-        });
-      });
-    </script>
-  </body>
-</html>
+                  // 하단 메뉴바를 통한 페이지 이동
+                  $("nav div").on("click", function () {
+                    const clickedDiv = $(this);
+                    const imgAlt = clickedDiv.find("img").attr("alt");
+                    switch (imgAlt) {
+                      case "메인 페이지":
+                        location.replace("controller?cmd=mainUI");
+                        break;
+                      case "노래방 검색 페이지":
+                        location.replace("controller?cmd=kkFilterUI");
+                        break;
+                      case "노래 검색 페이지":
+                        location.replace("controller?cmd=musicListUI");
+                        break;
+                      case "나의 예약 내역 페이지":
+                        location.replace("controller?cmd=reservationListUIAction");
+                        break;
+                      case "마이페이지":
+                        location.replace("controller?cmd=mypageUIAction");
+                        break;
+                    }
+                  });
+                });
+              </script>
+            </body>
+            </html>

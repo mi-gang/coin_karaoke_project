@@ -49,6 +49,7 @@ import com.oopsw.controller.action.ResetPassword;
 import com.oopsw.controller.action.ReviewListAction;
 import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.SearchForKKWithOptions;
+import com.oopsw.controller.action.SearchedKKList;
 import com.oopsw.controller.action.SendValidationNumber;
 import com.oopsw.controller.action.UncompletedReservationListAction;
 import com.oopsw.controller.action.UpdateKKBookmark;
@@ -219,7 +220,7 @@ public class ActionFactory {
 			case "amountStarReviewListByType":
 				action = new AmountStarReviewListByType();
 				break;
-			//***** 플레이리스트 *****
+			// ***** 플레이리스트 *****
 			case "mypagePlaylistUI":
 				action = new MypagePlaylistUI();
 				break;
@@ -248,7 +249,11 @@ public class ActionFactory {
 				action = new PlaylistMusicList();
 				break;
 			case "updatePlaylistTitle":
-				action=new UpdatePlaylistTitle();
+				action = new UpdatePlaylistTitle();
+				break;
+			// 임시
+			case "searchedKKList":
+				action = new SearchedKKList();
 				break;
 			default:
 				action = new wrongCmd();

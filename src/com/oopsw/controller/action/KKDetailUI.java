@@ -27,9 +27,9 @@ public class KKDetailUI implements Action {
 			request.setAttribute("starRating", starRating);
 			request.setAttribute("KKVO", vo);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		request.setAttribute("kkId", requestKkId);
 		return url;
 		// return new Url("jsp/kkDetailUI.jsp", Url.FORWARD);
 	}

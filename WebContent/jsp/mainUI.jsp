@@ -210,7 +210,7 @@
 						</section>
 						<section id="chart-wrapper" class="wrapper">
 							<div id="chart-header" class="wrapper-header">
-								<span class="header-title">인기 차트</span>
+								<span class="header-title">최신 음악 차트</span>
 								<div id="brand-container">
 									<button class="brand-activate">TJ</button>
 									<button>KY</button>
