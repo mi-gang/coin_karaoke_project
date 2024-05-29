@@ -82,7 +82,7 @@
 							</div>
 							<div id="KK-container">
 								<c:forEach var="kk" items="${recommendKKList}">
-									<div class="card">
+									<div class="card" data-kk-id="${kk.getKkId()}">
 										<img src="img/representativeKKImg1.png" class="card-img-top"
 											alt="${kk.getName()}">
 										<div class="card-body">
@@ -544,18 +544,8 @@
 
 					//*** 추천 노래방 목록 ***
 					updateStarContainer();
-					function updateStarContainer() {
-						$(".starContainer").each(function (i, item) {
-							const
-								rating = item.querySelector(".rating");
-							const
-								overlay = item.querySelector(".overlay");
-							const
-								rate = item.querySelector(".starRate").dataset.starRate;
-							drawStarRate(rating, overlay, rate);
-						});
+					updateRecommendKKsLink();
 
-					}
 					const
 						label = document.querySelector(".label");
 					const
@@ -604,7 +594,7 @@
 						const data = await res.json();
 						let str = "";
 						for (let i = 0; i < data.length; i++) {
-							str += `<div class="card"><img src = "img/representativeKKImg1.png" class="card-img-top" alt = "` + data[i].name + `" >
+							str += `<div class="card" data-kk-id="` + data[i].kkId + `"><img src = "img/representativeKKImg1.png" class="card-img-top" alt = "` + data[i].name + `" >
         <div class="card-body">
             <div class="card-title">`+ data[i].name + `
             </div>
@@ -628,6 +618,29 @@
 
 						$("#KK-container").html(str);
 						updateStarContainer();
+						updateRecommendKKsLink();
+					}
+
+					function updateStarContainer() {
+						$(".starContainer").each(function (i, item) {
+							const
+								rating = item.querySelector(".rating");
+							const
+								overlay = item.querySelector(".overlay");
+							const
+								rate = item.querySelector(".starRate").dataset.starRate;
+							drawStarRate(rating, overlay, rate);
+						});
+
+					}
+					function updateRecommendKKsLink() {
+						$("#KK-container .card").each(function (i, item) {
+							$(item).on("click", linkKKDetailUI);
+						});
+					}
+					function linkKKDetailUI(e) {
+						const kkId = $(e.target).closest(".card").data("kkId");
+						location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
 					}
 
 					//*****다가오는 예약*****//
