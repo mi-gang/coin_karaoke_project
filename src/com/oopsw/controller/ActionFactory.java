@@ -52,6 +52,7 @@ import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.SearchedKKList;
 import com.oopsw.controller.action.SendValidationNumber;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.UpdateKKBookmark;
 import com.oopsw.controller.action.UpdateNickname;
 import com.oopsw.controller.action.UpdatePassword;
 import com.oopsw.controller.action.UpdateUserUI;
@@ -213,6 +214,9 @@ public class ActionFactory {
 			case "deleteBookmarkAction":
 				action = new DeleteBookmarkAction();
 				break;
+			case "updateKKBookmark":
+				action = new UpdateKKBookmark();
+				break;
 			case "amountStarReviewListByType":
 				action = new AmountStarReviewListByType();
 				break;
@@ -251,7 +255,6 @@ public class ActionFactory {
 			case "searchedKKList":
 				action = new SearchedKKList();
 				break;
-
 			default:
 				action = new wrongCmd();
 				break;

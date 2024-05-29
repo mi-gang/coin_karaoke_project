@@ -342,59 +342,66 @@
             <div class="music_like">
              <img class="like_img" src="img/folder_open.svg"></div>
              </div>`;
-								}
-								$(".music_list_output").html(data);
-							},
-						});
-						// $(".music_list_output").html(data); 복붙완료
-					},
-				});
-			});
-			//새로운 플레이리스트 만드는 비동기
-			$("#confirm2").on("click", function () {
-				console.log("시작");
-				const titleInput = document.querySelector(".new_play_list_title_input");
-				$.ajax({
-					url: "controller?cmd=addPlaylist",
-					data: {
-						newTitle: titleInput.value//brand
-					},
-					error: function (jqXHR, textStatus, errorThrown) {
-						alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
-					},
-					success: function (result) {
-						// result_data=JSON.parse(result)
-						// console.log(result_data);
-						//if(result_data.result!=true){
-						//alert('플레이리스트가 추가되지 않았습니다.');
-						alert("저장되었습니다!");
-						modal.classList.remove("on");
+                }
+                $(".music_list_output").html(data);
+              },
+            });
+            // $(".music_list_output").html(data); 복붙완료
+          },
+        });
+      });
+      //새로운 플레이리스트 만드는 비동기
+      $("#confirm2").on("click", function () {
+    	  console.log("시작");
+   	const titleInput = document.querySelector(".new_play_list_title_input");
+   	$.ajax({
+   	url: "controller?cmd=addPlaylist",
+	    data: { 	
+	      newTitle: titleInput.value//brand
+	     },
+	     error: function(jqXHR, textStatus, errorThrown) {
+ 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+ 	      },
+	     success: function (result){
+	    	// result_data=JSON.parse(result)
+	    	// console.log(result_data);
+			//if(result_data.result!=true){
+			//alert('플레이리스트가 추가되지 않았습니다.');
+			alert("저장되었습니다!");
+			modal.classList.remove("on"); 
+			
+	     }
+       })
+      });
+      
+   	  // 하단 메뉴바를 통한 페이지 이동
+      $("nav div").on("click", function() {
+    	  const clickedDiv = $(this);
+    	  const imgAlt = clickedDiv.find("img").attr("alt");
+    	  switch(imgAlt) {
+    	  case "메인 페이지":
+    		  // location.replace("controller?cmd=mainUI");
+    		  location.href = "controller?cmd=mainUI";
+    		  break;
+    	  case "노래방 검색 페이지":
+    		  // location.replace("controller?cmd=kkFilterUI");
+    		  location.href = "controller?cmd=kkFilterUI";
+    		  break;
+    	  case "노래 검색 페이지":
+    		  // location.replace("controller?cmd=musicListUI");
+    		  location.href = "controller?cmd=musicListUI";
+    		  break;
+    	  case "나의 예약 내역 페이지":
+    		  // location.replace("controller?cmd=reservationListUIAction");
+    		  location.href = "controller?cmd=reservationListUIAction";
+    		  break;
+    	  case "마이페이지":
+    		  // location.replace("controller?cmd=mypageUIAction");
+    		  location.href = "controller?cmd=mypageUIAction";
+    		  break;
+    	  }
+      });
 
-					}
-				})
-			});
-			// 하단 메뉴바를 통한 페이지 이동
-			$("nav div").on("click", function () {
-				const clickedDiv = $(this);
-				const imgAlt = clickedDiv.find("img").attr("alt");
-				switch (imgAlt) {
-					case "메인 페이지":
-						location.replace("controller?cmd=mainUI");
-						break;
-					case "노래방 검색 페이지":
-						location.replace("controller?cmd=kkFilterUI");
-						break;
-					case "노래 검색 페이지":
-						location.replace("controller?cmd=musicListUI");
-						break;
-					case "나의 예약 내역 페이지":
-						location.replace("controller?cmd=reservationListUIAction");
-						break;
-					case "마이페이지":
-						location.replace("controller?cmd=mypageUIAction");
-						break;
-				}
-			});
 		</script>
 	</body>
 

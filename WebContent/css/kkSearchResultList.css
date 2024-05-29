@@ -134,6 +134,14 @@
   border-radius: 1rem;
 }
 
+.noResultData {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	text-align: center;
+}
+
 /* 로그인 모달 */
 .modalBack {
   position: absolute;
