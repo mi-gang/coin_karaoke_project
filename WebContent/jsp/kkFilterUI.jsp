@@ -610,7 +610,8 @@
     			  console.log(status); */
     		  }
     	  })
-    	  location.replace("controller?cmd=searchForKKWithOptions&searchGu="+searchGu+"&chkAdditionalOptions="+chkAdditionalOptions+"&chkCount="+chkCount);
+    	  // location.replace("controller?cmd=searchForKKWithOptions&searchGu="+searchGu+"&chkAdditionalOptions="+chkAdditionalOptions+"&chkCount="+chkCount);
+    	  location.href = "controller?cmd=searchForKKWithOptions&searchGu="+searchGu+"&chkAdditionalOptions="+chkAdditionalOptions+"&chkCount="+chkCount;
       })
       
       // 하단 메뉴바를 통한 페이지 이동
@@ -619,19 +620,24 @@
     	  const imgAlt = clickedDiv.find("img").attr("alt");
     	  switch(imgAlt) {
     	  case "메인 페이지":
-    		  location.replace("controller?cmd=mainUI");
+    		  // location.replace("controller?cmd=mainUI");
+    		  location.href = "controller?cmd=mainUI";
     		  break;
     	  case "노래방 검색 페이지":
-    		  location.replace("controller?cmd=kkFilterUI");
+    		  // location.replace("controller?cmd=kkFilterUI");
+    		  location.href = "controller?cmd=kkFilterUI";
     		  break;
     	  case "노래 검색 페이지":
-    		  location.replace("controller?cmd=musicListUI");
+    		  // location.replace("controller?cmd=musicListUI");
+    		  location.href = "controller?cmd=musicListUI";
     		  break;
     	  case "나의 예약 내역 페이지":
-    		  location.replace("controller?cmd=reservationListUIAction");
+    		  // location.replace("controller?cmd=reservationListUIAction");
+    		  location.href = "controller?cmd=reservationListUIAction";
     		  break;
     	  case "마이페이지":
-    		  location.replace("controller?cmd=mypageUIAction");
+    		  // location.replace("controller?cmd=mypageUIAction");
+    		  location.href = "controller?cmd=mypageUIAction";
     		  break;
     	  }
       });

@@ -336,7 +336,8 @@
       	// 헤더의 '이전 페이지' 접근하기
       	$("header img").on("click", function() {
       		// console.log(sessionStorage.getItem("prevURL"));
-      		location.replace("controller"+sessionStorage.getItem("prevURL"));
+      		// location.replace("controller"+sessionStorage.getItem("prevURL"));
+      		history.back();
       	});
       	
         const kkId = "${KKVO.getKkId()}";

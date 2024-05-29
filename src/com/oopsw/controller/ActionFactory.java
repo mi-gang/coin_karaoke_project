@@ -50,6 +50,7 @@ import com.oopsw.controller.action.RoomReservationStatusListAction;
 import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.SendValidationNumber;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.UpdateKKBookmark;
 import com.oopsw.controller.action.UpdateNickname;
 import com.oopsw.controller.action.UpdatePassword;
 import com.oopsw.controller.action.UpdateUserUI;
@@ -204,6 +205,9 @@ public class ActionFactory {
 				break;
 			case "deleteBookmarkAction":
 				action = new DeleteBookmarkAction();
+				break;
+			case "updateKKBookmark":
+				action = new UpdateKKBookmark();
 				break;
 			case "amountStarReviewListByType":
 				action = new AmountStarReviewListByType();
