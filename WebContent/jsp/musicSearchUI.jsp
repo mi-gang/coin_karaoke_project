@@ -380,11 +380,13 @@
 			//alert('플레이리스트가 추가되지 않았습니다.');
 			//alert("저장되었습니다!");
 			modal.classList.remove("on"); 
-			
+			$("#create_playlist").hide();
+			$(".new_play_list_title_input").val("");
+			//refreshPlaylists();
 	     }
        })
       })
-
+     
     </script>
 </body>
 </html>
