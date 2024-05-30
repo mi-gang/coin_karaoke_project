@@ -206,6 +206,12 @@
     	console.log(playlistId);
         location.href="controller?cmd=playlistMusicUI&playlistId=" + playlistId;
          })
+   //userId 없을때 경고 문구 alert 창      
+   var userId = '<%=(String)session.getAttribute("userId")%>';
+    if(userId=="null"){
+   alert("로그인 후 사용하세요")	 
+    }    
+         
     </script>
 </body>
 </html>

@@ -10,7 +10,8 @@ public class AddPlaylist implements Action {
 //userId 연동해야함.session으로 받아서 집어넣음
 	@Override
 	public Url execute(HttpServletRequest request) {
-		String userId="test@test.com";
+		//String userId="test@test.com";
+		String userId = (String) request.getSession().getAttribute("userId");
 		String newTitle=request.getParameter("newTitle");
 		boolean result=new MusicService().addPlaylist(newTitle, userId);
 		request.setAttribute("addReslut", result);

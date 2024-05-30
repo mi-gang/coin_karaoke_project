@@ -150,8 +150,17 @@
 
 			const modal = document.querySelector(".modal_overlay");
 			const modalOpen = document.querySelector(".like_img");
+			 var userId = '<%=(String)session.getAttribute("userId")%>';
 			//플레이리스트 목록 불러오기
 			$(".music_list_output").on("click", ".music_output .like_img", function () {
+				if(userId==="null"){
+					 $(".modal_overlay2").show(); 
+					 $(".login_btn").on("click",function(){
+						 location.href="controller?cmd=loginUI";
+					 })
+					 
+				}
+				else{
 				modal.classList.add("on");
 				let entInput = $(".on").attr("id");
 				console.log(entInput);
@@ -173,12 +182,8 @@
 					error: function (jqXHR, textStatus, errorThrown) {
 						alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
 					},
-					success: function (list) {
-    	    	if(list===null){
-    	    		 $(".modal_overlay2").show(); 
-    	    	}
-    	    	else{
-						//	console.log(JSON.parse(list));
+					success: function (list) {						
+   						//	console.log(JSON.parse(list));
 						let musicbymyplaylistData = JSON.parse(list);
 						let playListTitle = "";
 						for (i in musicbymyplaylistData) {
@@ -209,8 +214,8 @@
     	 
     	     // const result_data = list;
     	    }    
-    	    } })  	 
-    	});
+    	    })  	 
+				}});
       //플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
       $(".playlist_list").on("click", ".like_btn", function() {
     	  const  musicNum = $(this).closest(".playlist").attr('data-set-MusicNum');

@@ -124,15 +124,6 @@ public class ActionFactory {
 			case "addReservationUI":
 				action = new AddReservationUI();
 				break;
-			case "musicListUI":
-				action = new MusicListUI();
-				break;
-			case "checkMusicbymyplaylist":
-				action = new CheckMusicbymyplaylist();
-				break;
-			case "addPlaylist":
-				action = new AddPlaylist();
-				break;
 			case "kkFilterUI":
 				action = new KKFilterUI();
 				break;
@@ -250,6 +241,15 @@ public class ActionFactory {
 				break;
 			case "updatePlaylistTitle":
 				action = new UpdatePlaylistTitle();
+				break;
+			case "checkMusicbymyplaylist":
+				action = new CheckMusicbymyplaylist();
+				break;
+			case "musicListUI":
+				action = new MusicListUI();
+				break;
+			case "addPlaylist":
+				action = new AddPlaylist();
 				break;
 			// 임시
 			case "searchedKKList":

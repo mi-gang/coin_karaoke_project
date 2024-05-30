@@ -15,7 +15,8 @@ public class DeletePlaylist implements Action {
 	@Override
 	public Url execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String userId="test@test.com";
+		//String userId="test@test.com";
+		String userId = (String) request.getSession().getAttribute("userId");
 		int playlistId=Integer.parseInt(request.getParameter("playlistId"));
 		boolean result=new MusicService().deletePlaylist(userId, playlistId);
 			request.setAttribute("result", result);
