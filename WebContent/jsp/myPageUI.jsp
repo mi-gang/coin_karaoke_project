@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +14,6 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/kkSearchResultList.css" />
     <link rel="stylesheet" href="css/mypage.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,7 +32,9 @@ pageEncoding="UTF-8"%>
         <img />
         <div id="mypage-header">
           <span>마이페이지</span>
+			<c:if test="${userId != null}">
           <button
+            type="button"
             id="logout-button1"
             class="logout-button"
             data-bs-toggle="modal"
@@ -40,6 +42,7 @@ pageEncoding="UTF-8"%>
           >
             로그아웃
           </button>
+			</c:if>
         </div>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -208,7 +211,9 @@ pageEncoding="UTF-8"%>
             }
 
             let bookmarkItem =
-              '<div class="resultItem"><div class="leftSide"><p class="resultKKTitle">' +
+              '<div class="resultItem" id="' +
+              kkId +
+              '"><div class="leftSide"><p class="resultKKTitle">' +
               kkName +
               '</p><div class="starScoreWrapper"><span id="starAvgScore">' +
               starRating +
@@ -257,8 +262,39 @@ pageEncoding="UTF-8"%>
 
             $("#review-item").append(reviewItem);
             $("#review-amount").append(data.reviewCount);
+            
+        	$.ajax({
+        		url: "controller?cmd=checkKKBookmarkAction",
+        		data: {"kkId": kkId}, 
+        		dataType:"json",
+        		success: function(data) {
+        			console.log(data);
+        			let checkMyBookmark = data.result;
+        			console.log(checkMyBookmark);
+        			const bookmarkIcon = $(".bookmark");
+        			
+        			if(checkMyBookmark == true) {
+        				bookmarkIcon.addClass("bookmark add");
+        				bookmarkIcon.css("background-image", "url(img/bookmarkFill.svg)");
+        			} else if(checkMyBookmark == false) {
+        				bookmarkIcon.css("background-image", "url(img/bookmarkOutline.svg)");
+        			}
+        		}
+        	});
           },
         });
+        
+/*         let kkId = $(".resultItem").attr("id");
+        const bookmarks = $(".bookmark").get();
+        const leftSideList = document.querySelector(".leftSide");
+        const rightSideImgList = document.querySelector(".kkRepresentativeImg");
+        console.log(kkId); */
+
+        // 내가 북마크한 노래방이면 아이콘 fill으로 페이지 노출
+    		
+
+        
+        
       });
 
       // 하단 메뉴바를 통한 페이지 이동
@@ -283,40 +319,10 @@ pageEncoding="UTF-8"%>
             break;
         }
       });
+
     </script>
 
     <script src="js/mypage.js"></script>
     
-    <script>
-	 	// 하단 메뉴바를 통한 페이지 이동
-	    $("nav div").on("click", function() {
-	  	  const clickedDiv = $(this);
-	  	  const imgAlt = clickedDiv.find("img").attr("alt");
-	  	  switch(imgAlt) {
-	  	  case "메인 페이지":
-	  		  // location.replace("controller?cmd=mainUI");
-	  		  location.href = "controller?cmd=mainUI";
-	  		  break;
-	  	  case "노래방 검색 페이지":
-	  		  // location.replace("controller?cmd=kkFilterUI");
-	  		  location.href = "controller?cmd=kkFilterUI";
-	  		  break;
-	  	  case "노래 검색 페이지":
-	  		  // location.replace("controller?cmd=musicListUI");
-	  		  location.href = "controller?cmd=musicListUI";
-	  		  break;
-	  	  case "나의 예약 내역 페이지":
-	  		  // location.replace("controller?cmd=reservationListUIAction");
-	  		  location.href = "controller?cmd=reservationListUIAction";
-	  		  break;
-	  	  case "마이페이지":
-	  		  // location.replace("controller?cmd=mypageUIAction");
-	  		  location.href = "controller?cmd=mypageUIAction";
-	  		  break;
-	  	  }
-	    });
-	 	
-			
-    </script>
   </body>
 </html>
