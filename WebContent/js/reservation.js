@@ -107,16 +107,14 @@ $(".reservations-status-button").on("click", function () {
               '<span id="karaoke-name" class="kk-name">' +
               response[i].KKname +
               '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
-              '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
-              response[i].startTime +
-              '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
-              "<div>" +
+              '</div><div class="reservation-time">' +
+              '<div>' +
               startDateFormat +
-              " - " +
+              ' - ' +
               endDateFormat +
-              '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
+              '</div><div class="reservation-time-info"><div class="reservation-start-time"><span class="reservation-start-hour">' +
               startHourFormat +
-              "</span> <span>:</span>" +
+              '</span> <span>:</span>' +
               '<span class="reservation-start-minute">' +
               startMinuteFormat +
               '</span></div><span>-</span><div class="reservation-end-time">' +
@@ -124,7 +122,7 @@ $(".reservations-status-button").on("click", function () {
               endHourFormat +
               '</span> <span>:</span> <span class="reservation-end-minute">' +
               endMinuteFormat +
-              "</span>" +
+              "</span></div>" +
               '</div></div></div><div class="button-wrapper"><button type="button" class="submit-button add-time-button" data-bs-toggle="modal"data-bs-target="#addTimeModal">시간 추가</button>' +
               button2 +
               "</div></div></div></div>";
@@ -241,24 +239,22 @@ $(".reservations-status-button").on("click", function () {
               '<span id="karaoke-name" class="kk-name">' +
               response[i].reservationVO.KKname +
               '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
-              '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
-              response[i].reservationVO.startTime +
-              '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
-              "<div>" +
+              '</div><div class="reservation-time">' +
+              '<div>' +
               startDateFormat +
-              " - " +
+              ' - ' +
               endDateFormat +
-              '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
+              '</div><div class="reservation-time-info"><div class="reservation-start-time"><span class="reservation-start-hour">' +
               startHourFormat +
-              "</span> <span>:</span>" +
-              '<span id="reservation-start-minute">' +
+              '</span> <span>:</span>' +
+              '<span class="reservation-start-minute">' +
               startMinuteFormat +
               '</span></div><span>-</span><div class="reservation-end-time">' +
               '<span class="reservation-end-hour">' +
               endHourFormat +
               '</span> <span>:</span> <span class="reservation-end-minute">' +
               endMinuteFormat +
-              "</span>" +
+              "</span></div>" +
               '</div></div></div><div class="button-wrapper">' +
               reviewButton +
               inquireButton +
@@ -344,26 +340,24 @@ $(".reservations-status-button").on("click", function () {
               '<span id="karaoke-name" class="kk-name">' +
               response[i].KKname +
               '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
-              '</div><div id="reservation-time"><fmt:parseDate var="reservationDate" value="' +
-              response[i].startTime +
-              '"pattern="yyyy-MM-dd"/> <fmt:formatDate value="${reservationDate}" pattern="yyyy-MM-dd" />' +
-              "<div>" +
+              '</div><div class="reservation-time">' +
+              '<div>' +
               startDateFormat +
-              " - " +
+              ' - ' +
               endDateFormat +
-              '</div><div class="reservation-start-time"><span class="reservation-start-hour">' +
+              '</div><div class="reservation-time-info"><div class="reservation-start-time"><span class="reservation-start-hour">' +
               startHourFormat +
-              "</span> <span>:</span>" +
-              '<span id="reservation-start-minute">' +
+              '</span> <span>:</span>' +
+              '<span class="reservation-start-minute">' +
               startMinuteFormat +
               '</span></div><span>-</span><div class="reservation-end-time">' +
               '<span class="reservation-end-hour">' +
               endHourFormat +
               '</span> <span>:</span> <span class="reservation-end-minute">' +
               endMinuteFormat +
-              "</span>" +
+              "</span></div>" +
               "</div></div></div>" +
-              '<div id="cancel-info"><span>취소 수수료</span><div><span>' +
+              '<div class="cancel-info"><span>취소 수수료</span><div><span>' +
               4500 +
               "</span><span>원</span><span>(50%)</span></div></div>" +
               "</div></div></div>";

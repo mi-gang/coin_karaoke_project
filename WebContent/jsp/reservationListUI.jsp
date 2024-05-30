@@ -452,14 +452,15 @@ pageEncoding="UTF-8"%>
             <div class="review-modal-body-wrapper">
               <!-- <span class="cancel-modal-title">취소 완료</span> -->
               <span class="review-modal-content" id="review-kkname"></span>
-              <p>별점</p>
+              <div class="star-wrapper">
+              <span id="star">별점</span>
               <input
                 type="text"
                 class="review-star"
                 id="review-star"
-                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                maxlength="1"
+                maxlength="3"
               />
+              </div>
               <textarea
                 id="review-description"
                 class="description"

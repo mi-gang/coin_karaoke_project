@@ -113,8 +113,9 @@
 }
 
 .reservation-detail-wrapper {
-  display: grid;
-  grid-template-rows: 2fr 1fr;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
 }
 
 .reservation-detail {
@@ -138,8 +139,8 @@
 .reservation-time {
   font-size: 1.4rem;
   display: flex;
-  flex-direction: row;
-  column-gap: 0.2rem;
+  flex-direction: column;
+  row-gap: 0.2rem;
 }
 
 .reservation-start-time {
@@ -194,16 +195,18 @@
   background-color: #e4e4e4;
 }
 
-#cancel-info {
+.cancel-info {
   font-weight: 400;
   font-size: 1.3rem;
   line-height: 16px;
 
   display: flex;
   column-gap: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  
 }
 
-#cancel-info > div {
+.cancel-info > div {
   color: #ff5e5e;
 }
 
@@ -573,4 +576,34 @@
 .submit-button:disabled {
   color: #888888;
   background-color: #e4e4e4;
+}
+
+.reservation-time-info{
+  display: flex;
+  flex-direction: row;
+}
+
+#star{
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 16px;
+}
+
+#review-star{
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: 5px;
+  border-style: solid;
+
+  border-width: 1px;
+  border-color: #e4e4e4;
+  background-color: #ffffff;
+
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.star-wrapper{
+	
 }

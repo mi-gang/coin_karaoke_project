@@ -319,10 +319,6 @@ public class ReservationService {
 		
 		return result;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> mypageBE
 	/** 마이페이지 */
 	public myPageVO myPageInfo(String userId) {
 
