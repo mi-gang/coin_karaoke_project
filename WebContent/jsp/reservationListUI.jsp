@@ -32,6 +32,12 @@ pageEncoding="UTF-8"%>
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
+      <div class="modal_overlay">
+			<div class="modal_isMember" id="modal_isMember">
+				<div class="modal_alert">로그인 유저만 사용할 수 있는 서비스입니다</div>
+				<input class="login_btn" id="login_move" type="button" value="로그인하러 가기" />
+			</div>
+		</div>
         <div id="reservation-wrapper">
           <div id="reservations-status">
             <button class="reservations-status-button" id="status-1">
@@ -612,6 +618,7 @@ pageEncoding="UTF-8"%>
     <script src="js/reservation.js"></script>
 
     <script>
+    
       // 하단 메뉴바를 통한 페이지 이동
       $("nav div").on("click", function () {
         const clickedDiv = $(this);
@@ -639,6 +646,17 @@ pageEncoding="UTF-8"%>
             break;
         }
       });
+    
+    //처음으로 페이지 들어왔을때 모달 뜨게하기
+        const modal = document.querySelector(".modal_overlay");
+	 	var userId = '<%=(String)session.getAttribute("userId")%>';
+		if(userId==="null"){
+		modal.classList.add("on");	
+		$(".login_btn").on("click",function(){
+		 location.href = "controller?cmd=loginUI";
+	  });
+	  }
+    console.log(userId);
     </script>
   </body>
 </html>

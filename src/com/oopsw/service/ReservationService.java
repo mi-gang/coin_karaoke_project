@@ -319,6 +319,7 @@ public class ReservationService {
 		
 		return result;
 	}
+
 	/** 마이페이지 */
 	public myPageVO myPageInfo(String userId) {
 
