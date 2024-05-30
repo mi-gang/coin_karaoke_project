@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +14,6 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/kkSearchResultList.css" />
     <link rel="stylesheet" href="css/mypage.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,24 +32,34 @@ pageEncoding="UTF-8"%>
         <img />
         <div id="mypage-header">
           <span>마이페이지</span>
-          <button
-            id="logout-button1"
-            class="logout-button"
-            data-bs-toggle="modal"
-            data-bs-target="#logoutModal"
-          >
-            로그아웃
-          </button>
+          <c:if test="${userId != null}">
+            <button
+              type="button"
+              id="logout-button1"
+              class="logout-button"
+              data-bs-toggle="modal"
+              data-bs-target="#logoutModal"
+            >
+              로그아웃
+            </button>
+          </c:if>
         </div>
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
-      <div class="modal_overlay">
-			<div class="modal_isMember" id="modal_isMember">
-				<div class="modal_alert">로그인 유저만 사용할 수 있는 서비스입니다</div>
-				<input class="login_btn" id="login_move" type="button" value="로그인하러 가기" />
-			</div>
-		</div>
+        <div class="modal_overlay">
+          <div class="modal_isMember" id="modal_isMember">
+            <div class="modal_alert">
+              로그인 유저만 사용할 수 있는 서비스입니다
+            </div>
+            <input
+              class="login_btn"
+              id="login_move"
+              type="button"
+              value="로그인하러 가기"
+            />
+          </div>
+        </div>
         <div id="user-info-wrapper">
           <img id="mypage-user-icon" src="img/mypage-user.svg" />
           <div id="user-info">
@@ -173,16 +183,16 @@ pageEncoding="UTF-8"%>
     </div>
 
     <script>
-    //처음으로 페이지 들어왔을때 모달 뜨게하기
-    const modal = document.querySelector(".modal_overlay");
- 	var userId = '<%=(String)session.getAttribute("userId")%>';
-	if(userId==="null"){
-	modal.classList.add("on");	
-	$(".login_btn").on("click",function(){
-	 location.href = "controller?cmd=loginUI";
-  });
-  }
-		
+      //처음으로 페이지 들어왔을때 모달 뜨게하기
+      const modal = document.querySelector(".modal_overlay");
+      var userId = '<%=(String)session.getAttribute("userId")%>';
+      if (userId === "null") {
+        modal.classList.add("on");
+        $(".login_btn").on("click", function () {
+          location.href = "controller?cmd=loginUI";
+        });
+      }
+
       //
       /*     $(document).ready(function () {
     	let userId = sessionStorage.getItem('userId');
@@ -224,7 +234,9 @@ pageEncoding="UTF-8"%>
             }
 
             let bookmarkItem =
-              '<div class="resultItem"><div class="leftSide"><p class="resultKKTitle">' +
+              '<div class="resultItem" id="' +
+              kkId +
+              '"><div class="leftSide"><p class="resultKKTitle">' +
               kkName +
               '</p><div class="starScoreWrapper"><span id="starAvgScore">' +
               starRating +
@@ -273,8 +285,41 @@ pageEncoding="UTF-8"%>
 
             $("#review-item").append(reviewItem);
             $("#review-amount").append(data.reviewCount);
+
+            $.ajax({
+              url: "controller?cmd=checkKKBookmarkAction",
+              data: { kkId: kkId },
+              dataType: "json",
+              success: function (data) {
+                console.log(data);
+                let checkMyBookmark = data.result;
+                console.log(checkMyBookmark);
+                const bookmarkIcon = $(".bookmark");
+
+                if (checkMyBookmark == true) {
+                  bookmarkIcon.addClass("bookmark add");
+                  bookmarkIcon.css(
+                    "background-image",
+                    "url(img/bookmarkFill.svg)"
+                  );
+                } else if (checkMyBookmark == false) {
+                  bookmarkIcon.css(
+                    "background-image",
+                    "url(img/bookmarkOutline.svg)"
+                  );
+                }
+              },
+            });
           },
         });
+
+        /*         let kkId = $(".resultItem").attr("id");
+        const bookmarks = $(".bookmark").get();
+        const leftSideList = document.querySelector(".leftSide");
+        const rightSideImgList = document.querySelector(".kkRepresentativeImg");
+        console.log(kkId); */
+
+        // 내가 북마크한 노래방이면 아이콘 fill으로 페이지 노출
       });
 
       // 하단 메뉴바를 통한 페이지 이동
@@ -302,36 +347,35 @@ pageEncoding="UTF-8"%>
     </script>
 
     <script src="js/mypage.js"></script>
-    
+
     <script>
-	 	// 하단 메뉴바를 통한 페이지 이동
-	    $("nav div").on("click", function() {
-	  	  const clickedDiv = $(this);
-	  	  const imgAlt = clickedDiv.find("img").attr("alt");
-	  	  switch(imgAlt) {
-	  	  case "메인 페이지":
-	  		  // location.replace("controller?cmd=mainUI");
-	  		  location.href = "controller?cmd=mainUI";
-	  		  break;
-	  	  case "노래방 검색 페이지":
-	  		  // location.replace("controller?cmd=kkFilterUI");
-	  		  location.href = "controller?cmd=kkFilterUI";
-	  		  break;
-	  	  case "노래 검색 페이지":
-	  		  // location.replace("controller?cmd=musicListUI");
-	  		  location.href = "controller?cmd=musicListUI";
-	  		  break;
-	  	  case "나의 예약 내역 페이지":
-	  		  // location.replace("controller?cmd=reservationListUIAction");
-	  		  location.href = "controller?cmd=reservationListUIAction";
-	  		  break;
-	  	  case "마이페이지":
-	  		  // location.replace("controller?cmd=mypageUIAction");
-	  		  location.href = "controller?cmd=mypageUIAction";
-	  		  break;
-	  	  }
-	    });
-	
+      // 하단 메뉴바를 통한 페이지 이동
+      $("nav div").on("click", function () {
+        const clickedDiv = $(this);
+        const imgAlt = clickedDiv.find("img").attr("alt");
+        switch (imgAlt) {
+          case "메인 페이지":
+            // location.replace("controller?cmd=mainUI");
+            location.href = "controller?cmd=mainUI";
+            break;
+          case "노래방 검색 페이지":
+            // location.replace("controller?cmd=kkFilterUI");
+            location.href = "controller?cmd=kkFilterUI";
+            break;
+          case "노래 검색 페이지":
+            // location.replace("controller?cmd=musicListUI");
+            location.href = "controller?cmd=musicListUI";
+            break;
+          case "나의 예약 내역 페이지":
+            // location.replace("controller?cmd=reservationListUIAction");
+            location.href = "controller?cmd=reservationListUIAction";
+            break;
+          case "마이페이지":
+            // location.replace("controller?cmd=mypageUIAction");
+            location.href = "controller?cmd=mypageUIAction";
+            break;
+        }
+      });
     </script>
   </body>
 </html>
