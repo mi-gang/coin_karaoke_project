@@ -1,4 +1,9 @@
-6; // 예약 상태 탭 클릭 시
+
+$(document).ready(function() {
+	$("#status-1").click();
+});
+// 예약 상태 탭 클릭 시
+
 
 $(".reservations-status-button").on("click", function () {
   $(".reservations-status-button").removeClass("active");

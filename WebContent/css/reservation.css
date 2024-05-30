@@ -43,7 +43,7 @@
   background-color: transparent;
 }
 
-.active {
+#reservations-status > .active {
   border: 1px solid #9747ff;
   border-radius: 40px;
   background-color: transparent;
@@ -107,8 +107,9 @@
 }
 
 .reservation-content {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1.5rem;
 }
 
 .reservation-detail-wrapper {
@@ -183,9 +184,9 @@
   font-size: 1.2rem;
 }
 
-.review-button1 {
-  width: 12rem;
-}
+/* .review-button1 {
+  width: 7.5rem;
+} */
 
 .review-button2 {
   width: 9.5rem;
