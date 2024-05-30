@@ -39,97 +39,8 @@ pageEncoding="EUC-KR"%>
           </select>
           <input type="text" placeholder="상호명을 입력하세요." />
         </div>
+
         <div id="bookmark-items">
-          <div id="bookmark-item">
-            <div class="resultItem">
-              <div class="leftSide">
-                <p class="resultKKTitle">스타버스 코인노래방</p>
-                <div class="starScoreWrapper">
-                  <span id="starAvgScore">4.6</span>
-                  <div class="stars">
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/star_half.svg" alt="0.5점 별" />
-                  </div>
-                </div>
-                <p class="resultKKAddress">서울 금천구 가산디지털1로 151</p>
-                <div class="representativeKeywords">
-                  <span class="representativeKeywordItem">단체 이용 가능</span>
-                  <span class="representativeKeywordItem">24시</span>
-                </div>
-              </div>
-              <div class="rightSide">
-                <div class="bookmark"></div>
-                <img
-                  class="kkRepresentativeImg"
-                  src="img/representativeKKImg1.png"
-                  alt="노래방 대표 이미지"
-                />
-              </div>
-            </div>
-          </div>
-          <div id="bookmark-item">
-            <div class="resultItem">
-              <div class="leftSide">
-                <p class="resultKKTitle">스타버스 코인노래방</p>
-                <div class="starScoreWrapper">
-                  <span id="starAvgScore">4.6</span>
-                  <div class="stars">
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/star_half.svg" alt="0.5점 별" />
-                  </div>
-                </div>
-                <p class="resultKKAddress">서울 금천구 가산디지털1로 151</p>
-                <div class="representativeKeywords">
-                  <span class="representativeKeywordItem">단체 이용 가능</span>
-                  <span class="representativeKeywordItem">24시</span>
-                </div>
-              </div>
-              <div class="rightSide">
-                <div class="bookmark"></div>
-                <img
-                  class="kkRepresentativeImg"
-                  src="img/representativeKKImg1.png"
-                  alt="노래방 대표 이미지"
-                />
-              </div>
-            </div>
-          </div>
-          <div id="bookmark-item">
-            <div class="resultItem">
-              <div class="leftSide">
-                <p class="resultKKTitle">스타버스 코인노래방</p>
-                <div class="starScoreWrapper">
-                  <span id="starAvgScore">4.6</span>
-                  <div class="stars">
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/filledStar.svg" alt="채워진 별" />
-                    <img src="img/star_half.svg" alt="0.5점 별" />
-                  </div>
-                </div>
-                <p class="resultKKAddress">서울 금천구 가산디지털1로 151</p>
-                <div class="representativeKeywords">
-                  <span class="representativeKeywordItem">단체 이용 가능</span>
-                  <span class="representativeKeywordItem">24시</span>
-                </div>
-              </div>
-              <div class="rightSide">
-                <div class="bookmark"></div>
-                <img
-                  class="kkRepresentativeImg"
-                  src="img/representativeKKImg1.png"
-                  alt="노래방 대표 이미지"
-                />
-              </div>
-            </div>
-          </div>
           <div id="bookmark-item">
             <div class="resultItem">
               <div class="leftSide">
@@ -179,5 +90,39 @@ pageEncoding="EUC-KR"%>
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      // 나의 리뷰 불러오기 ajax
+      $(document).ready(function () {
+        console.log("저장한 노래방 불러오기");
+        $.ajax({
+          url: "controller?cmd=myReviewListAction",
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+              var reviewItem =
+                '<div class="review-item" data-id=' +
+                data[i].reviewId +
+                '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
+                data[i].KKname +
+                '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
+                '<div class="review-content2"><span class="review-date">' +
+                data[i].startTime.date.year +
+                " ." +
+                data[i].startTime.date.month +
+                " ." +
+                data[i].startTime.date.day +
+                '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
+                '<span class="review-description">' +
+                data[i].content +
+                "</span></div></div>";
+              $("#review-items").append(reviewItem);
+              $("#review-count").text(data.length);
+            }
+          },
+        });
+      });
+    </script>
   </body>
 </html>

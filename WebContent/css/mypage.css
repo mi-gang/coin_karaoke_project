@@ -55,7 +55,7 @@
   column-gap: 16rem;
 }
 
-#logout-button {
+.logout-button {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.5rem;
 
@@ -525,4 +525,61 @@
   justify-content: center;
   align-items: center;
   row-gap: 2rem;
+}
+
+.submit-button {
+  width: 7.5rem;
+  height: 3.2rem;
+
+  background: #9747ff;
+  border-radius: 10px;
+  border: none;
+
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.add-button {
+  width: 9rem;
+  height: 4rem;
+  font-size: 1.5rem;
+}
+
+
+/* 모달 */
+
+/* 부트스트랩 속성 변경 */
+
+.modal-header {
+  border-bottom: none;
+  padding: 2rem 2rem;
+}
+
+.modal-footer {
+  justify-content: center;
+  border-top: none;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.btn-close {
+  width: 2rem;
+  height: 2rem;
+  background-size: 2rem;
+}
+
+.modal-dialog-centered {
+  justify-content: center;
+}
+
+.modal-content {
+  width: 90%;
+  border-radius: 1rem;
+}
+/* 공통 */
+
+.modal-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
 }

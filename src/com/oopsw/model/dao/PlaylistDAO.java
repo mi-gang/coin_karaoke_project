@@ -246,10 +246,9 @@ public class PlaylistDAO {
 	/** 플레이리스트 개수 불러오기 */
 	public int getPlaylistCount(String userId) {
 
-		String sql = "select count(review_id) "
-				+ "from reviews r "
-				+ "JOIN reservations re ON re.reservation_id = r.reservation_id "
-				+ "where re.user_id=?";
+		String sql = "select count(playlist_id) "
+				+ "from playlists  "
+				+ "where user_id=?";
 
 		int result = 0;
 

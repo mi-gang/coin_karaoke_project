@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,13 +27,13 @@
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+        <img />
         <span>나의 예약</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
       <div id="container">
         <div id="reservation-wrapper">
-          <div id="reservations_status">
+          <div id="reservations-status">
             <button class="reservations-status-button" id="status-1">
               이용 중/예정
             </button>
@@ -47,11 +47,10 @@
           <div id="reservation-list">
             <div id="total-reservation">
               <span>총 </span>
-              <span>2</span>
+              <span id="content-amount"></span>
               <span>건</span>
             </div>
-            <div id="reservation-contents-wrapper">
-            </div>
+            <div id="reservation-contents-wrapper"></div>
           </div>
         </div>
       </div>
@@ -67,10 +66,7 @@
           <img src="img/musicIcon.svg" alt="노래 검색 페이지" />
         </div>
         <div>
-          <img
-            src="img/reservationIcon_on.svg"
-            alt="나의 예약 내역 페이지"
-          />
+          <img src="img/reservationIcon_on.svg" alt="나의 예약 내역 페이지" />
         </div>
         <div><img src="img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
@@ -113,17 +109,19 @@
                   <span class="add1-modal-body-content-title"
                     >기존 예약 시간</span
                   >
-                  <div class="add1-modal-body-content-time"
-                    >
-                   <div >
-                      <span id="add1-original-start">1</span>
-                      <span>시간</span>
+                  <div class="add1-modal-body-content-time">
+                    <div>
+                      <span id="add1-original-startHour"></span>
+                      <span>:</span>
+                      <span id="add1-original-startMinute"></span>
                     </div>
-                    <div >
-                      <span id="additional-minute-a-status">34</span>
-                      <span>분</span>
+                    <span>-</span>
+                    <div>
+                      <span id="add1-original-endHour"></span>
+                      <span>:</span>
+                      <span id="add1-original-endMinute"></span>
                     </div>
-                   </div>
+                  </div>
                 </div>
                 <hr />
                 <div class="add1-modal-body-content">
@@ -296,7 +294,6 @@
             <button
               type="button"
               class="submit-button add-button back-button"
-              id="time-setting-button"
               data-bs-toggle="modal"
               data-bs-target="#addTimeModal"
               data-bs-dismiss="modal"
@@ -308,7 +305,6 @@
               class="submit-button add-button"
               id="time-setting-button"
               data-bs-toggle="modal"
-              data-bs-target="#addTimeModal4"
               data-bs-dismiss="modal"
             >
               결제
@@ -455,19 +451,18 @@
           <div class="modal-body">
             <div class="review-modal-body-wrapper">
               <!-- <span class="cancel-modal-title">취소 완료</span> -->
-              <span class="review-modal-content" id="review-kkname"
-                ></span
-              >
+              <span class="review-modal-content" id="review-kkname"></span>
               <p>별점</p>
               <input
-                  type="text"
-                  class="review-star"
-                  id="review-star"
-                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                  maxlength="1"
-                />
+                type="text"
+                class="review-star"
+                id="review-star"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                maxlength="1"
+              />
               <textarea
-                id="review-description" class="description"
+                id="review-description"
+                class="description"
                 placeholder="이용한 노래방에 대한 솔직한 리뷰를 남겨주세요."
               ></textarea>
             </div>
@@ -539,8 +534,9 @@
               data-bs-dismiss="modal"
             ></button>
           </div>
-<!-- 		<form action="" method="post" id="inquire-action">
- -->          <!-- Modal body -->
+          <!-- 		<form action="" method="post" id="inquire-action">
+ -->
+          <!-- Modal body -->
           <div class="modal-body">
             <div class="inquire-modal-body-wrapper">
               <!-- <span class="cancel-modal-title">취소 완료</span> -->
@@ -548,7 +544,8 @@
                 >세븐스타코인노래연습장 철산역점</span
               >
               <textarea
-                id="inquire-description" class="description"
+                id="inquire-description"
+                class="description"
                 name="content"
                 placeholder="노래방에 문의 또는 신고할 내용을 작성해주세요."
               ></textarea>
@@ -612,35 +609,35 @@
     </div>
 
     <script src="js/reservation.js"></script>
-    
+
     <script>
-	 	// 하단 메뉴바를 통한 페이지 이동
-	    $("nav div").on("click", function() {
-	  	  const clickedDiv = $(this);
-	  	  const imgAlt = clickedDiv.find("img").attr("alt");
-	  	  switch(imgAlt) {
-	  	  case "메인 페이지":
-	  		  // location.replace("controller?cmd=mainUI");
-	  		  location.href = "controller?cmd=mainUI";
-	  		  break;
-	  	  case "노래방 검색 페이지":
-	  		  // location.replace("controller?cmd=kkFilterUI");
-	  		  location.href = "controller?cmd=kkFilterUI";
-	  		  break;
-	  	  case "노래 검색 페이지":
-	  		  // location.replace("controller?cmd=musicListUI");
-	  		  location.href = "controller?cmd=musicListUI";
-	  		  break;
-	  	  case "나의 예약 내역 페이지":
-	  		  // location.replace("controller?cmd=reservationListUIAction");
-	  		  location.href = "controller?cmd=reservationListUIAction";
-	  		  break;
-	  	  case "마이페이지":
-	  		  // location.replace("controller?cmd=mypageUIAction");
-	  		  location.href = "controller?cmd=mypageUIAction";
-	  		  break;
-	  	  }
-	    });
+      // 하단 메뉴바를 통한 페이지 이동
+      $("nav div").on("click", function () {
+        const clickedDiv = $(this);
+        const imgAlt = clickedDiv.find("img").attr("alt");
+        switch (imgAlt) {
+          case "메인 페이지":
+            // location.replace("controller?cmd=mainUI");
+            location.href = "controller?cmd=mainUI";
+            break;
+          case "노래방 검색 페이지":
+            // location.replace("controller?cmd=kkFilterUI");
+            location.href = "controller?cmd=kkFilterUI";
+            break;
+          case "노래 검색 페이지":
+            // location.replace("controller?cmd=musicListUI");
+            location.href = "controller?cmd=musicListUI";
+            break;
+          case "나의 예약 내역 페이지":
+            // location.replace("controller?cmd=reservationListUIAction");
+            location.href = "controller?cmd=reservationListUIAction";
+            break;
+          case "마이페이지":
+            // location.replace("controller?cmd=mypageUIAction");
+            location.href = "controller?cmd=mypageUIAction";
+            break;
+        }
+      });
     </script>
   </body>
 </html>
