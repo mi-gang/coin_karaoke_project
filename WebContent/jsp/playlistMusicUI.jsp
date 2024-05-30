@@ -209,24 +209,27 @@
         modal3.classList.remove("on");
       });
       $(document).ready(function () {
-          $("#tj").click();
+    	  $(".button").on("click", function () {
+              var entInput = this.id;
+               console.log(entInput);
+            });
+            const ent = $(".button").get();
+            let button = "";
+            ent.forEach(function (option) {
+              option.addEventListener("click", function () {
+                ent.forEach(function (item) {
+                  item.classList.remove("on");
+                });
+                option.classList.add("on");
+              });
+            });
+    	  
+    	  $("#tj").click();
+          
         });
         // const ent = document.querySelector(".button");
         //클릭한 버튼 값 가지고 오기
-        $(".button").on("click", function () {
-          var entInput = this.id;
-           console.log(entInput);
-        });
-        const ent = $(".button").get();
-        let button = "";
-        ent.forEach(function (option) {
-          option.addEventListener("click", function () {
-            ent.forEach(function (item) {
-              item.classList.remove("on");
-            });
-            option.classList.add("on");
-          });
-        });
+      
       
       
       //플레이 리스트 이름 가져오기
