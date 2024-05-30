@@ -4,6 +4,10 @@
     color: #E3CDFF;  // 연보라색
     color: #E4E4E4;  // 옅은회색
  */
+ 
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
 
 /* 검색조건 영역 */
 .filterContainer {

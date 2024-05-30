@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
 header span {
 	margin-left: 3.5rem;
 }

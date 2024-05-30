@@ -47,7 +47,7 @@
             <div class="playlist_song_num"></div>
           </div>
           <div class="ent_button_group">
-            <input class="button" id="tj" type="button" value="TJ" />
+            <input class="button on" id="tj" type="button" value="TJ" />
             <input class="button" id="kumyoung" type="button" value="KY" />
           </div>
           <div class="music_outputs">
