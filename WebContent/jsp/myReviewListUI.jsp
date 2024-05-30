@@ -28,7 +28,11 @@ pageEncoding="UTF-8"%>
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+        <img
+          id="review-back-button"
+          src="img/left arrow.svg"
+          alt="이전 페이지 이동"
+        />
         <span>나의 리뷰</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -42,8 +46,7 @@ pageEncoding="UTF-8"%>
             <span id="review-count"></span>
             <span>건</span>
           </div>
-          <div id="review-items">
-          </div>
+          <div id="review-items"></div>
         </div>
       </div>
       <!-- 하단 메뉴바 -->
@@ -146,9 +149,8 @@ pageEncoding="UTF-8"%>
     </div>
 
     <script src="js/mypage.js"></script>
-    
-        <script>
-    
+
+    <script>
       // 하단 메뉴바를 통한 페이지 이동
       $("nav div").on("click", function () {
         const clickedDiv = $(this);
@@ -176,6 +178,6 @@ pageEncoding="UTF-8"%>
             break;
         }
       });
-      </script>
+    </script>
   </body>
 </html>

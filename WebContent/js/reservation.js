@@ -1,9 +1,7 @@
-
-$(document).ready(function() {
-	$("#status-1").click();
+$(document).ready(function () {
+  $("#status-1").click();
 });
 // 예약 상태 탭 클릭 시
-
 
 $(".reservations-status-button").on("click", function () {
   $(".reservations-status-button").removeClass("active");
@@ -108,13 +106,13 @@ $(".reservations-status-button").on("click", function () {
               response[i].KKname +
               '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
               '</div><div class="reservation-time">' +
-              '<div>' +
+              "<div>" +
               startDateFormat +
-              ' - ' +
+              " - " +
               endDateFormat +
               '</div><div class="reservation-time-info"><div class="reservation-start-time"><span class="reservation-start-hour">' +
               startHourFormat +
-              '</span> <span>:</span>' +
+              "</span> <span>:</span>" +
               '<span class="reservation-start-minute">' +
               startMinuteFormat +
               '</span></div><span>-</span><div class="reservation-end-time">' +
@@ -240,13 +238,13 @@ $(".reservations-status-button").on("click", function () {
               response[i].reservationVO.KKname +
               '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
               '</div><div class="reservation-time">' +
-              '<div>' +
+              "<div>" +
               startDateFormat +
-              ' - ' +
+              " - " +
               endDateFormat +
               '</div><div class="reservation-time-info"><div class="reservation-start-time"><span class="reservation-start-hour">' +
               startHourFormat +
-              '</span> <span>:</span>' +
+              "</span> <span>:</span>" +
               '<span class="reservation-start-minute">' +
               startMinuteFormat +
               '</span></div><span>-</span><div class="reservation-end-time">' +
@@ -341,13 +339,13 @@ $(".reservations-status-button").on("click", function () {
               response[i].KKname +
               '</span><img src="img/arrow_right.svg" id="arrow_right" />' +
               '</div><div class="reservation-time">' +
-              '<div>' +
+              "<div>" +
               startDateFormat +
-              ' - ' +
+              " - " +
               endDateFormat +
               '</div><div class="reservation-time-info"><div class="reservation-start-time"><span class="reservation-start-hour">' +
               startHourFormat +
-              '</span> <span>:</span>' +
+              "</span> <span>:</span>" +
               '<span class="reservation-start-minute">' +
               startMinuteFormat +
               '</span></div><span>-</span><div class="reservation-end-time">' +
@@ -462,9 +460,16 @@ $("#reservation-contents-wrapper").on("click", ".add-time-button", function () {
   });
 
   // 미성년자 회원일 경우 안내창 설정하기
-  // if () {
-  //   $("#add1-notice").text("미성년자는 10시 이후 출입이 제한됩니다.");
-  // }
+  $.ajax({
+    url: "controller?cmd=isAdult",
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      if (!data) {
+        $("#add1-notice").text("미성년자는 10시 이후 출입이 제한됩니다.");
+      }
+    },
+  });
 });
 
 //////////////////////////////////////////////////////////////////////////////////

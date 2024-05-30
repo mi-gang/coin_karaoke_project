@@ -240,9 +240,7 @@ prefix="c"%>
               kkName +
               '</p><div class="starScoreWrapper"><span id="starAvgScore">' +
               starRating +
-              '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" />' +
-              '<img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" />' +
-              '<img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" />' +
+              '</span><div class="rating-wrap"><div class="rating"><div class="overlay"></div></div></div>' +
               '</div></div><p class="resultKKAddress">' +
               '</p><div class="representativeKeywords">' +
               contents +
@@ -310,16 +308,19 @@ prefix="c"%>
                 }
               },
             });
+
+            // 해당 노래방의 평균 별점만큼 별 아이콘
+            updateStarContainer();
+            function updateStarContainer() {
+              $(".starScoreWrapper").each(function (i, item) {
+                const rating = item.querySelector(".rating");
+                const overlay = item.querySelector(".overlay");
+                const rate = item.querySelector("#starAvgScore").textContent;
+                drawStarRate(rating, overlay, rate);
+              });
+            }
           },
         });
-
-        /*         let kkId = $(".resultItem").attr("id");
-        const bookmarks = $(".bookmark").get();
-        const leftSideList = document.querySelector(".leftSide");
-        const rightSideImgList = document.querySelector(".kkRepresentativeImg");
-        console.log(kkId); */
-
-        // 내가 북마크한 노래방이면 아이콘 fill으로 페이지 노출
       });
 
       // 하단 메뉴바를 통한 페이지 이동
@@ -347,36 +348,5 @@ prefix="c"%>
     </script>
 
     <script src="js/mypage.js"></script>
-
-    <script>
-      // 하단 메뉴바를 통한 페이지 이동
-      $("nav div").on("click", function () {
-        const clickedDiv = $(this);
-        const imgAlt = clickedDiv.find("img").attr("alt");
-        switch (imgAlt) {
-          case "메인 페이지":
-            // location.replace("controller?cmd=mainUI");
-            location.href = "controller?cmd=mainUI";
-            break;
-          case "노래방 검색 페이지":
-            // location.replace("controller?cmd=kkFilterUI");
-            location.href = "controller?cmd=kkFilterUI";
-            break;
-          case "노래 검색 페이지":
-            // location.replace("controller?cmd=musicListUI");
-            location.href = "controller?cmd=musicListUI";
-            break;
-          case "나의 예약 내역 페이지":
-            // location.replace("controller?cmd=reservationListUIAction");
-            location.href = "controller?cmd=reservationListUIAction";
-            break;
-          case "마이페이지":
-            // location.replace("controller?cmd=mypageUIAction");
-            location.href = "controller?cmd=mypageUIAction";
-            break;
-        }
-      });
-      
-    </script>
   </body>
 </html>
