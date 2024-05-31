@@ -48,25 +48,17 @@
                         (${statusInfo.count})</div>
                       <div class="timeRow">
                         <c:forEach var="widthVO" items="${widthListList.get(statusInfo.index)}" varStatus="statusWidth">
-                          <div class="time usedTime" style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("
-                            offset")})"></div>
-                          <div class="time usedTime" style="width:${widthVO.get(" width")};left:calc(0.7rem +
+                          <div class="time usedTime" style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")})"></div>
+                          <div class="time usedTime" style="width:${widthVO.get("width")};left:calc(0.7rem +
                             ${widthVO.get("offset")})" data-bs-toggle="popover" data-bs-trigger="hover"
-                            data-start-time="${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("
-                            HH:mm"))}"
-                            data-end-time="${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("
-                            HH:mm"))}"
-                            data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("
-                            HH:mm"))}~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))
-                            }예약불가"></div>
+                            data-start-time="${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}"
+                            data-end-time="${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))}"
+                            data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))}예약불가"></div>
                           <div class="time cleaningTime"
-                            style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get(" offset")} +
+                            style="width:${cleaningTimeSec};left:calc(0.7rem + ${widthVO.get("offset")} +
                             ${widthVO.get("width")} - ${cleaningTimeSec})" data-bs-toggle="popover"
                             data-bs-trigger="hover"
-                            data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("
-                            HH:mm"))
-                            }~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))
-                            }예약불가"></div>
+                            data-bs-content="${info.getRoomName()}: ${info.getReservationVOs().get(statusWidth.index).getStartTime().format(DateTimeFormatter.ofPattern("HH:mm"))}~${info.getReservationVOs().get(statusWidth.index).getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))}예약불가"></div>
                         </c:forEach>
                       </div>
                     </div>
