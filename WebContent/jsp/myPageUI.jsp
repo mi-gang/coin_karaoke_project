@@ -241,7 +241,7 @@ prefix="c"%>
               '</p><div class="starScoreWrapper"><span id="starAvgScore">' +
               starRating +
               '</span><div class="rating-wrap"><div class="rating"><div class="overlay"></div></div></div>' +
-              '</div></div><p class="resultKKAddress">' +
+              '</div><p class="resultKKAddress">' +
               '</p><div class="representativeKeywords">' +
               contents +
               '</div></div><div class="rightSide"><div class="bookmark"></div>' +
@@ -348,5 +348,6 @@ prefix="c"%>
     </script>
 
     <script src="js/mypage.js"></script>
+    <script src="js/starRate.js"></script>
   </body>
 </html>

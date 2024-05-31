@@ -17,10 +17,16 @@ $("#review-page").on("click", function () {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // 돌아가는지 확인
-// 노래방 상세 페이지 이동
+// 노래방 상세 페이지 이동 - 북마크
 $("#bookmark-item").on("click", ".resultKKTitle", function () {
   kkId = $(this).closest(".resultItem").attr("id");
-  location.href = "controller?cmd=KKDetailUI$kkId=" + kkId;
+  location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
+});
+
+//노래방 상세 페이지 이동 - 리뷰
+$("#myReview-wrapper").on("click", ".KK-title", function () {
+  kkId = $(this).closest(".review-item").attr("data-id");
+  location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
 });
 
 // 회원정보 수정
