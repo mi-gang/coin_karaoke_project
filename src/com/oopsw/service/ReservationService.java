@@ -335,32 +335,45 @@ public class ReservationService {
 		Collection<String> keywordList = new ArrayList<String>();
 		List<String[]> tmpKKList = new KKDAO(conn).getMypageBookmarkKK(userId);
 
-		System.out.println(tmpKKList);
-
-		int kkId = Integer.parseInt(tmpKKList.get(0)[0]);
-		String name = tmpKKList.get(0)[1];
-		String address = tmpKKList.get(0)[2];
-		float starRating = new ReservationDAO(conn).getStarAvgByKKId(kkId);
-
-		if (tmpKKList.size() > 1) {
-			keywordList = new ArrayList<String>();
-			keywordList.add(tmpKKList.get(0)[3]);
-
-			for (int i = 1; i < tmpKKList.size(); i++) {
-				keywordList.add(tmpKKList.get(i)[3]);
+		System.out.println("nickname : "+nickname);
+		System.out.println("tmpKKList : "+tmpKKList);
+		
+		KKVO kkVO = null;
+		int bookmarkCount = 0;
+		
+		if (tmpKKList.size() != 0) {
+			int kkId = Integer.parseInt(tmpKKList.get(0)[0]);
+			String name = tmpKKList.get(0)[1];
+			String address = tmpKKList.get(0)[2];
+			float starRating = new ReservationDAO(conn).getStarAvgByKKId(kkId);
+			
+			if (tmpKKList.size() > 1) {
+				keywordList = new ArrayList<String>();
+				keywordList.add(tmpKKList.get(0)[3]);
+				
+				for (int i = 1; i < tmpKKList.size(); i++) {
+					keywordList.add(tmpKKList.get(i)[3]);
+				}
 			}
+			kkVO = new KKVO(kkId, name, address, starRating, keywordList);
+			bookmarkCount = new KKDAO(conn).getBookmarkCount(userId);
 		}
-		KKVO kkVO = new KKVO(kkId, name, address, starRating, keywordList);
-		int bookmarkCount = new KKDAO(conn).getBookmarkCount(userId);
 
 		// 플레이리스트
 		Collection<PlaylistVO> playlistVOs = new PlaylistDAO(conn).getmypagePlaylist(userId);
-		int playlistCount = new PlaylistDAO(conn).getPlaylistCount(userId);
+		int playlistCount = 0;
+		if (playlistVOs.size() != 0) {
+			playlistCount = new PlaylistDAO(conn).getPlaylistCount(userId);
+		}
 
 		// 리뷰
 		ReviewVO reviewVO = new ReviewDAO(conn).getReviewByUserId(userId);
-		int reviewCount = new ReviewDAO(conn).getReviewCount(userId);
+		int reviewCount = 0;
 
+		if (reviewVO != null) {
+			reviewCount  = new ReviewDAO(conn).getReviewCount(userId);
+		}
+		
 		myPageVO myPageVO = new myPageVO(nickname, kkVO, bookmarkCount, reviewVO, reviewCount, playlistVOs,
 				playlistCount);
 

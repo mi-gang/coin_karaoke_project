@@ -20,7 +20,7 @@
 	<div id="mobileContainer">
 		<!--헤더-->
 		<header>
-			<img id="back-button" src="img/left arrow.svg" alt="이전 페이지 이동" /> <span>나의 노래</span>
+			<img id="back-button" src="img/left arrow.svg" alt="이전 페이지 이동" /> <span>나의 플레이리스트</span>
 		</header>
 		<!-- 컨텐츠 컨테이너 -->
 		<div id="container">
