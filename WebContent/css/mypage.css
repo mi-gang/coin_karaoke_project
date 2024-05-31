@@ -1,9 +1,47 @@
-#container {
-  row-gap: 3rem;
-  overflow: scroll;
+/* 임시 폰트 설정 */
+* {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-header {
+#container {
+  row-gap: 2rem;
+  overflow: scroll;
+  justify-content: flex-start;
+  padding: 2rem 0;
+}
+
+#content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 95%;
+  row-gap: 3rem;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  border-radius: 1rem;
+  cursor: pointer;
+  border: 0.1rem solid #f1f1f1;
+}
+
+.empty-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #808080;
+  padding: 5rem 0;
+}
+
+#mypage {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -17,11 +55,13 @@ header {
   column-gap: 16rem;
 }
 
-#logout-button {
+.logout-button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.5rem;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-content: center;
   align-items: center;
   width: 8rem;
   height: 3rem;
@@ -61,6 +101,7 @@ header {
   width: 90%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   row-gap: 1rem;
 }
 
@@ -72,6 +113,7 @@ header {
   justify-content: center;
   align-items: center;
   column-gap: 3rem;
+  padding: 2rem;
 }
 
 #mypage-user-icon {
@@ -119,6 +161,65 @@ header {
 }
 
 /* 북마크 */
+
+#bookmark-items {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  width: 39.4rem;
+  height: 15.901rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+#KK-search {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  width: 20rem;
+  height: 4rem;
+  /* margin-top: 2rem; */
+
+  border: 1px solid #808080;
+  border-radius: 40px;
+}
+
+.KK-search-input {
+  width: 80%;
+  height: 2.8rem;
+  border: none;
+  padding-left: 2rem;
+  font-size: 130%;
+  font-weight: bold;
+  outline: none;
+}
+
+.KK-search-img {
+  width: 1.7rem;
+  margin-right: 3rem;
+}
+
+#search-filter {
+  box-sizing: border-box;
+
+  background: #f2f2f2;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 40px;
+  padding: 0.5rem;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
 
 /* 별점 */
 
@@ -192,8 +293,10 @@ header {
   width: 100%;
   display: flex;
   flex-direction: row;
-  column-gap: 3rem;
+  column-gap: 2rem;
   justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .playlist {
@@ -206,9 +309,9 @@ header {
 
 /* 리뷰 */
 
-#review-item {
-  width: 35rem;
-  height: 16rem;
+.review-item {
+  /* width: 35rem;
+  height: 16rem; */
 
   background: #ffffff;
   border: 1px solid #f1f1f1;
@@ -220,13 +323,13 @@ header {
   row-gap: 1rem;
 }
 
-#review-content1 {
+.review-content1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#review-content2 {
+.review-content2 {
   display: flex;
   flex-direction: column;
   row-gap: 0.8rem;
@@ -283,4 +386,356 @@ header {
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+}
+
+#myReview-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* margin: 2rem; */
+  row-gap: 2rem;
+  width: 90%;
+}
+
+#total_reservation {
+  width: 100%;
+  height: 3.5rem;
+  column-gap: 1rem;
+  padding: 1rem;
+}
+
+#total_reservation > span {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.resultKKTitle {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.cancle-modal-body-wrapper {
+  width: 100%;
+  height: 11rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 3rem;
+}
+
+.cancle-modal-title {
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 25px;
+
+  text-align: center;
+}
+
+.cancle-modal-content {
+  /* width: 30rem;
+  height: 15rem; */
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 22px;
+  text-align: center;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 2rem 2rem;
+}
+
+.modal-footer {
+  justify-content: center;
+  border-top: none;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.btn-close {
+  width: 2rem;
+  height: 2rem;
+  background-size: 2rem;
+}
+
+.modal-dialog-centered {
+  justify-content: center;
+}
+
+.modal-content {
+  width: 90%;
+  border-radius: 1rem;
+}
+
+.submit_button {
+  width: 7.5rem;
+  height: 3.2rem;
+
+  background: #9747ff;
+  border-radius: 10px;
+  border: none;
+
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+/* 비로그인 */
+
+.login-button {
+  font-weight: 500;
+  font-size: 2rem;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #9747ff;
+
+  padding: 0.6rem 1.4rem;
+
+  border: 1px solid #9747ff;
+  border-radius: 40px;
+  background-color: transparent;
+}
+
+.nonuser-notice {
+  font-weight: 400;
+  font-size: 2rem;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
+#nonuser-overlay {
+  position: absolute;
+  width: 431px;
+  height: 645px;
+  left: calc(50% - 431px / 2 + 0.5px);
+  top: 216px;
+
+  background: rgba(246, 246, 246, 0.94);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+}
+
+.submit-button {
+  width: 7.5rem;
+  height: 3.2rem;
+
+  background: #9747ff;
+  border-radius: 10px;
+  border: none;
+
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.add-button {
+  width: 9rem;
+  height: 4rem;
+  font-size: 1.5rem;
+}
+
+/* 모달 */
+
+/* 부트스트랩 속성 변경 */
+
+.modal-header {
+  border-bottom: none;
+  padding: 2rem 2rem;
+}
+
+.modal-footer {
+  justify-content: center;
+  border-top: none;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.btn-close {
+  width: 2rem;
+  height: 2rem;
+  background-size: 2rem;
+}
+
+.modal-dialog-centered {
+  justify-content: center;
+}
+
+.modal-content {
+  width: 90%;
+  border-radius: 1rem;
+}
+/* 공통 */
+
+.modal-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.modal_overlay {
+  /* width: 100%;
+  height: 100%; */
+  width: 100%;
+  min-height: calc(100vh - 7.4rem);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: #e4e4e4;
+}
+.modal_overlay.on {
+  display: block;
+  min-height: calc(100vh - 7.4rem);
+  min-width: 100%;
+}
+.modal_isMember {
+  width: 35rem;
+  height: 29.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70%;
+  margin-left: 9%;
+  position: absolute;
+  /* display: none;*/
+  background-color: #e4e4e4;
+}
+.modal_alert {
+  font-size: 200%;
+  width: 27erm;
+  height: 7.1rem;
+  word-break: keep-all;
+  margin-top: 9rem;
+  text-align: center;
+  font-weight: 500;
+}
+.login_btn {
+  width: 15.7rem;
+  height: 3.5rem;
+  border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2.6rem;
+  margin-left: 9.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 로그아웃 모달 */
+
+.cancel-modal-body-wrapper {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 3rem;
+}
+
+.cancel-modal-title {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 25px;
+}
+
+/* KK */
+
+.resultKKTitle {
+  margin: 0;
+  margin-bottom: 0.3rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.starScoreWrapper {
+  display: flex;
+  gap: 0.4rem;
+  /* width: 13.8rem; */
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 2.4rem;
+}
+
+.starScoreWrapper span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e3cdff;
+}
+
+.representativeKeywords {
+  width: 22rem;
+  height: 2.2rem;
+  margin-top: 1.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.representativeKeywordItem {
+  display: inline-block;
+  padding: 0.3rem 1.3rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #f2f2f2;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 39.4rem;
+  height: 15.901rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  border: 0.1rem solid #f1f1f1;
+}
+
+.leftSide {
+  width: 19.5rem;
+  height: 11.8rem;
+  margin-right: 5.3rem;
+  font-size: 1.2rem;
+}
+
+.rightSide {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 10rem;
+  height: inherit;
+}
+
+.kkRepresentativeImg {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1rem;
+}
+
+.bookmark {
+  /* position: fixed;
+    right: 3.5rem; */
+  width: 2.4rem;
+  height: 3.1rem;
+  cursor: pointer;
+  background-image: url("../img/bookmarkOutline.svg");
+}
+
+.bookmark.add {
+  background-image: url("../img/bookmarkFill.svg");
 }

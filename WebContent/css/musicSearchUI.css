@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+header span {
+	margin-left: 3.5rem;
+}
+
 #container {
   display: flex;
   justify-content: flex-start;
@@ -167,6 +175,22 @@ input {
   display: flex;
 }
 .modal_overlay {
+  /* width: 100%;
+  height: 100%; */
+  width: 100%;
+  min-height: calc(100vh - 7.4rem);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: rgba(71, 58, 58, 0.25);
+}
+.modal_overlay.on {
+  display: block;
+  min-height: calc(100vh - 7.4rem);
+  min-width: 100%;
+}
+.modal_overlay2 {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -175,7 +199,7 @@ input {
   display: none;
   background-color: rgba(71, 58, 58, 0.25);
 }
-.modal_overlay.on {
+.modal_overlay2.on {
   display: block;
 }
 .modal_playlist {
@@ -384,4 +408,7 @@ input {
   margin-top: 2.6rem;
   margin-left: 9.5rem;
   margin-bottom: 1rem;
+}
+.playlistId{
+
 }

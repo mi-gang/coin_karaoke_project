@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/musicSearchUI.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/musicSearchUI.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,7 +19,7 @@
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="/img/left arrow.svg" alt="이전 페이지 이동" />
+        <img src="img/left arrow.svg" alt="이전 페이지 이동" />
         <span>노래 검색</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -33,7 +33,7 @@
           />
           <img
             class="music_search"
-            src="/img/search.svg"
+            src="img/search.svg"
             id="music_search"
             style="cursor: pointer"
           />
@@ -50,27 +50,27 @@
               <span class="music_singer"></span>
             </div>
             <div class="music_like">
-              <img class="like_img" src="/img/folder_open.svg" />
+              <img class="like_img" src="img/folder_open.svg" />
             </div>
           </div>
         </div>
       </div>
       <!-- 하단 메뉴바 -->
       <nav>
-        <div><img src="/img/mainPageIcon.svg" alt="메인 페이지" /></div>
-        <div><img src="/img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
-        <div><img src="/img/musicIcon.svg" alt="노래 검색 페이지" /></div>
+        <div><img src="img/mainPageIcon.svg" alt="메인 페이지" /></div>
+        <div><img src="img/searchIcon.svg" alt="노래방 검색 페이지" /></div>
+        <div><img src="img/musicIcon.svg" alt="노래 검색 페이지" /></div>
         <div>
-          <img src="/img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
+          <img src="img/reservationIcon.svg" alt="나의 예약 내역 페이지" />
         </div>
-        <div><img src="/img/userIcon.svg" alt="마이페이지" /></div>
+        <div><img src="img/userIcon.svg" alt="마이페이지" /></div>
       </nav>
     </div>
     <div class="modal_overlay">
       <div class="modal_playlist" id="modal_playlist">
         <div class="music_like_modal">
           <div class="close_btn">
-            <img class="close_img" src="/img/close.svg" />
+            <img class="close_img" src="img/close.svg" />
           </div>
           <div class="modal_title">내 음악에 저장하기</div>
           <div class="playlist_list">
@@ -78,14 +78,14 @@
               <img
                 class="like_btn"
                 id="music_saved"
-                src="/img/folder_open.svg"
+                src="img/folder_open.svg"
               />
               <span class="list_title">음악</span>
             </span>
           </div>
         </div>
         <div class="create_music_list">
-          <img class="plus_img" src="/img/add_circle_outline.svg" />
+          <img class="plus_img" src="img/add_circle_outline.svg" />
           <span class="create_title">신규 플레이리스트 생성</span>
         </div>
         <input class="confirm_btn" id="confirm" type="button" value="저장" />
@@ -93,7 +93,7 @@
       <div class="modal_create" id="create_playlist" style="display: none">
         <div class="music_like_modal">
           <div class="close_btn2">
-            <img class="close_img2" src="/img/close.svg" />
+            <img class="close_img2" src="img/close.svg" />
           </div>
           <div class="modal_title">새 플레이 리스트</div>
           <div class="new_play_list_title">플레이 리스트 명</div>
@@ -107,7 +107,7 @@
       </div>
       <div class="modal_isMember" id="modal_isMember">
         <div class="close_btn3">
-          <img class="close_img3" src="/img/close.svg" />
+          <img class="close_img3" src="img/close.svg" />
         </div>
         <div class="modal_alert">로그인 유저만 사용할 수 있는 서비스입니다</div>
         <input
@@ -121,11 +121,11 @@
     <script>
       var img = document.getElementById("music_saved");
       img.addEventListener("click", function () {
-        img.src = "/img/song_notsave.svg";
+        img.src = "img/song_notsave.svg";
       });
 
       // function toggleSaved() {
-      //   document.getElementById("music_saved").src = "/img/song_notsave.svg";
+      //   document.getElementById("music_saved").src = "img/song_notsave.svg";
       // }
       // $(".like_btn").on("click", function toggleSaved() {});
       // const ent = document.querySelector(".button");
@@ -215,7 +215,7 @@
               <span class="music_singer">${value.singer}</span>
             </div>
             <div class="music_like">
-             <img class="like_img" src="/img/folder_open.svg"></div>
+             <img class="like_img" src="img/folder_open.svg"></div>
              </div>`;
             }
             $.ajax({
@@ -239,7 +239,7 @@
               <span class="music_singer">${value.singer}</span>
             </div>
             <div class="music_like">
-             <img class="like_img" src="/img/folder_open.svg"></div>
+             <img class="like_img" src="img/folder_open.svg"></div>
              </div>`;
                 }
                 $(".music_list_output").html(data);
@@ -248,7 +248,17 @@
             // $(".music_list_output").html(data);
           },
         });
-      });
+        $(".music_like").on("click",function(){
+        	$.ajax({url:"controller?cmd=checkMusicbymyPlaylist",    
+        		data : {brand : $(".on").attr("id")
+        			    songId : $(".music_num").value},
+        		success : function(responseText2){
+        			result_data=JSON.parse(responseText2),//Text=>Json parsing
+        			$("#OutputPW").text(result_data.result)
+        			$('#OutputPW').show();
+        		}});
+        });
+      });//data: {input : $('#input1').val()}
     </script>
   </body>
 </html>

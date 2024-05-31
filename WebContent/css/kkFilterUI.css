@@ -4,9 +4,17 @@
     color: #E3CDFF;  // 연보라색
     color: #E4E4E4;  // 옅은회색
  */
+ 
+* {
+  font-family: "Noto Sans KR", sans-serif;
+} 
 
 p {
   margin: 0;
+}
+
+header span {
+	margin-left: 3.5rem;
 }
 
 #container {
@@ -27,7 +35,7 @@ p {
 .subTitle {
   margin: 0;
   margin-bottom: 1.6rem;
-  font-size: 2.8rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 

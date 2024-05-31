@@ -2,4 +2,8 @@
 .project
 /.classpath
 /.project
-.classpath
+.setting/
+build/
+.idea/
+bin/
+src/test/

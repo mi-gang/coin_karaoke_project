@@ -1,13 +1,17 @@
 @charset "UTF-8";
 
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
 #container {
   display: flex;
   justify-content: flex-start;
 }
 
 .playlists {
-  width: 100%;
-  height: 100%;
+  width: 43rem;
+  height: 76rem;
   overflow-y: scroll;
 }
 
@@ -41,6 +45,8 @@
 .delete_img {
   float: right;
   margin: 0;
+   width: 2.4rem;
+  height: 2.4rem;
 }
 .delete_playlist {
   width: 2.4rem;
@@ -70,6 +76,7 @@
   position: fixed;
   top: 70.2rem;
   left: 2.1rem;
+
 }
 .plus_img {
   width: 3rem;
@@ -77,6 +84,7 @@
   display: flex;
   margin-top: 1.6rem;
   margin-left: 3.1rem;
+
 }
 .create_title {
   font-size: 200%;
@@ -97,7 +105,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  display: none;
+ width: 43rem;
+ display: none;
+  height: 76rem
   background-color: rgba(71, 58, 58, 0.25);
 }
 .modal_overlay.on {

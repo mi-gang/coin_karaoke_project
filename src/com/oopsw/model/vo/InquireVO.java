@@ -10,6 +10,11 @@ public class InquireVO {
 		setContent(content);
 		setReservationId(reservationId);
 	}
+	
+	public InquireVO(String content, int reservationId) {
+		setContent(content);
+		setReservationId(reservationId);
+	}
 
 	public int getInquireId() {
 		return inquireId;

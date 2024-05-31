@@ -15,7 +15,7 @@
   overflow: scroll;
 }
 
-#reservation_wrapper {
+#reservation-wrapper {
   width: 100%;
   height: 3.5rem;
   display: grid;
@@ -24,7 +24,7 @@
   row-gap: 2rem;
 }
 
-#reservations_status {
+#reservations-status {
   width: 100%;
   height: 3.5rem;
 
@@ -33,7 +33,7 @@
   column-gap: 1rem;
 }
 
-#reservations_status > button {
+#reservations-status > button {
   font-size: 1.6rem;
 
   width: 106px;
@@ -43,13 +43,13 @@
   background-color: transparent;
 }
 
-.active {
+#reservations-status > .active {
   border: 1px solid #9747ff;
   border-radius: 40px;
   background-color: transparent;
 }
 
-#reservation_list {
+#reservation-list {
   width: 100%;
   height: 100%;
   display: flex;
@@ -59,13 +59,13 @@
   align-items: center;
 }
 
-#total_reservation {
+#total-reservation {
   width: 100%;
   height: 3.5rem;
   column-gap: 1rem;
 }
 
-#total_reservation > span {
+#total-reservation > span {
   font-size: 1.8rem;
   font-weight: 700;
 }
@@ -76,7 +76,7 @@
   row-gap: 2rem;
 }
 
-.reservation_content_wrapper {
+.reservation-content-wrapper {
   display: flex;
   flex-direction: column;
   background: #ffffff;
@@ -87,17 +87,18 @@
   row-gap: 1rem;
 }
 
-#reservation_status_wrapper {
+.reservation-status-wrapper {
   width: 10rem;
   height: 2.2rem;
   background: #f2f2f2;
   border-radius: 40px;
   display: flex;
+  flex-direction: row;
   justify-items: center;
   align-items: center;
 }
 
-#reservation_status {
+.reservation-status {
   font-weight: 700;
   font-size: 12px;
   width: 10rem;
@@ -105,61 +106,60 @@
   color: #808080;
 }
 
-#reservation_content {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+.reservation-content {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1.5rem;
 }
 
-#reservation_detail_wrapper {
-  display: grid;
-  grid-template-rows: 2fr 1fr;
+.reservation-detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
 }
 
-#reservation_detail {
+.reservation-detail {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
 }
 
-#reservation_detail_row {
+.reservation-detail-row {
   display: flex;
   flex-direction: row;
   column-gap: 0.5rem;
 }
 
-/* #arrow_right {
-  size: 1px;
-} */
-
-#karaoke_name {
+.kk-name {
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 20px;
 }
 
-#reservation-time {
+.reservation-time {
   font-size: 1.4rem;
   display: flex;
-  flex-direction: row;
-  column-gap: 0.2rem;
+  flex-direction: column;
+  row-gap: 0.2rem;
 }
 
-#reservation-start-time {
-  display: flex;
-  flex-direction: row;
-}
-#reservation-end-time {
+.reservation-start-time {
   display: flex;
   flex-direction: row;
 }
 
-#button_wrapper {
+.reservation-end-time {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-wrapper {
   display: flex;
   justify-content: end;
   gap: 1rem;
 }
 
-.submit_button {
+.submit-button {
   width: 7.5rem;
   height: 3.2rem;
 
@@ -171,7 +171,7 @@
   color: #ffffff;
 }
 
-.cancle_button {
+.cancel-button {
   width: 7.5rem;
   height: 3.2rem;
 
@@ -185,24 +185,27 @@
   font-size: 1.2rem;
 }
 
-.review-button1 {
-  width: 12rem;
-}
+/* .review-button1 {
+  width: 7.5rem;
+} */
 
 .review-button2 {
   width: 9.5rem;
+  color: #888888;
+  background-color: #e4e4e4;
 }
 
-#cancle-info {
+.cancel-info {
   font-weight: 400;
   font-size: 1.3rem;
   line-height: 16px;
 
   display: flex;
   column-gap: 0.5rem;
+  padding: 0.5rem 0.5rem;
 }
 
-#cancle-info > div {
+.cancel-info > div {
   color: #ff5e5e;
 }
 
@@ -350,11 +353,6 @@
   font-size: 1.5rem;
 }
 
-.submit_button:disabled {
-  color: #888888;
-  background-color: #e4e4e4;
-}
-
 #add1-add-time-arrow-img {
   display: flex;
   flex-direction: row;
@@ -384,8 +382,7 @@
   height: 3rem;
   border: none;
   background-color: transparent;
-
-  background-image: url("/img/down\ arrow.svg");
+  background-image: url("/WebContent/img/down_arrow.svg");
   background-repeat: no-repeat;
   background-size: 3rem;
   cursor: pointer;
@@ -498,7 +495,7 @@
 
 /* 예약 취소 모달 */
 
-.cancle-modal-body-wrapper {
+.cancel-modal-body-wrapper {
   width: 100%;
   height: 11rem;
   display: flex;
@@ -508,7 +505,7 @@
   row-gap: 3rem;
 }
 
-.cancle-modal-title {
+.cancel-modal-title {
   font-weight: 700;
   font-size: 1.8rem;
   line-height: 25px;
@@ -516,7 +513,7 @@
   text-align: center;
 }
 
-.cancle-modal-content {
+.cancel-modal-content {
   /* width: 30rem;
   height: 15rem; */
 
@@ -541,7 +538,7 @@
   line-height: 20px;
 }
 
-#review-description {
+.description {
   width: 90%;
   height: 25rem;
 
@@ -573,4 +570,89 @@
 
 .inquire-button {
   width: 12rem;
+}
+
+.submit-button:disabled {
+  color: #888888;
+  background-color: #e4e4e4;
+}
+.modal_overlay {
+  /* width: 100%;
+  height: 100%; */
+  width: 100%;
+  min-height: calc(100vh - 7.4rem);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  background-color: #e4e4e4;
+}
+.modal_overlay.on {
+  display: block;
+  min-height: calc(100vh - 7.4rem);
+  min-width: 100%;
+}
+.modal_isMember {
+  width: 35rem;
+  height: 29.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70%;
+  margin-left: 9%;
+  position: absolute;
+  /* display: none;*/
+  background-color: #e4e4e4;
+}
+.modal_alert {
+  font-size: 200%;
+  width: 27erm;
+  height: 7.1rem;
+  word-break: keep-all;
+  margin-top: 9rem;
+  text-align: center;
+  font-weight: 500;
+}
+.login_btn {
+  width: 15.7rem;
+  height: 3.5rem;
+  border-radius: 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #9747ff;
+  color: white;
+  border: none;
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2.6rem;
+  margin-left: 9.5rem;
+  margin-bottom: 1rem;
+}
+.reservation-time-info {
+  display: flex;
+  flex-direction: row;
+}
+
+#star {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 16px;
+}
+
+#review-star {
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: 5px;
+  border-style: solid;
+
+  border-width: 1px;
+  border-color: #e4e4e4;
+  background-color: #ffffff;
+
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.star-wrapper {
 }
