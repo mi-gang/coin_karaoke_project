@@ -104,7 +104,6 @@
             function getEncryptedPw(password) {
                 const hash = CryptoJS.SHA256(password);
                 let encryptedPw = hash.toString(CryptoJS.enc.Hex);
-                encryptedPw = password;
                 return encryptedPw;
             }
 
@@ -237,8 +236,8 @@
             }
 
             function checkStrongPassword(password) {
-                // return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
-                return password.length > 0;
+                return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
+                // return password.length > 0;
             }
 
 

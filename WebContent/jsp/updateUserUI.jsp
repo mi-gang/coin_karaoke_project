@@ -27,6 +27,9 @@
 					<link rel="stylesheet" href="css/common.css">
 					<link rel="stylesheet" href="css/updateUserUI.css">
 
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
+
 				</head>
 
 				<body>
@@ -190,7 +193,7 @@
 							const newPassword = $("#password");
 
 							try {
-								const res = await fetch("controller?cmd=updatePassword&oldPassword=" + oldPassword.val() + "&newPassword=" + newPassword.val());
+								const res = await fetch("controller?cmd=updatePassword&oldPassword=" + getEncryptedPw(oldPassword.val()) + "&newPassword=" + getEncryptedPw(newPassword.val()));
 								const data = await res.json();
 								result = data.result;
 							} catch {
@@ -203,6 +206,11 @@
 								$("#pwErrorMessage").text("기존 비밀번호가 일치하지 않습니다.");
 							}
 
+						}
+						function getEncryptedPw(password) {
+							const hash = CryptoJS.SHA256(password);
+							let encryptedPw = hash.toString(CryptoJS.enc.Hex);
+							return encryptedPw;
 						}
 
 						function checkLoginActivate(e) {
@@ -279,8 +287,8 @@
 
 
 						function checkStrongPassword(password) {
-							// return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
-							return password.length > 1;
+							return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-])[A-Za-z\d@$!%*#?&-]{8,}$/.test(password);
+							// return password.length > 1;
 						}
 					</script>
 				</body>

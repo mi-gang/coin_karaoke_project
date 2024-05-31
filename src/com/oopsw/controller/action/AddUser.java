@@ -30,6 +30,7 @@ public class AddUser implements Action {
 	
 		if(successAdd){
 			System.out.println("O 회원가입에 성공하였습니다. : addUserAction");
+			request.getSession().setAttribute("userId", userId);
 		}else{
 			System.out.println("X 회원가입에 실패하였습니다. : addUserAction");
 		}
