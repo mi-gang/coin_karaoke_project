@@ -9,6 +9,10 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
+header span {
+	margin-left: 3.5rem;
+}
+
 /* 검색조건 영역 */
 .filterContainer {
   display: flex;

@@ -17,10 +17,16 @@ $("#review-page").on("click", function () {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // 돌아가는지 확인
-// 노래방 상세 페이지 이동
+// 노래방 상세 페이지 이동 - 북마크
 $("#bookmark-item").on("click", ".resultKKTitle", function () {
   kkId = $(this).closest(".resultItem").attr("id");
-  location.href = "controller?cmd=KKDetailUI$kkId=" + kkId;
+  location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
+});
+
+//노래방 상세 페이지 이동 - 리뷰
+$("#myReview-wrapper").on("click", ".KK-title", function () {
+  kkId = $(this).closest(".review-item").attr("data-id");
+  location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
 });
 
 // 회원정보 수정
@@ -68,26 +74,28 @@ $(document).ready(function () {
     dataType: "json",
     success: function (data) {
       console.log(data);
-      for (var i = 0; i < data.length; i++) {
-        var reviewItem =
-          '<div class="review-item" data-id=' +
-          data[i].reviewId +
-          '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
-          data[i].KKname +
-          '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
-          '<div class="review-content2"><span class="review-date">' +
-          data[i].startTime.date.year +
-          " ." +
-          data[i].startTime.date.month +
-          " ." +
-          data[i].startTime.date.day +
-          '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
-          '<span class="review-description">' +
-          data[i].content +
-          "</span></div></div>";
-        $("#review-items").append(reviewItem);
-        $("#review-count").text(data.length);
+      if (data.length != 0) {
+	      for (var i = 0; i < data.length; i++) {
+	        var reviewItem =
+	          '<div class="review-item" data-id=' +
+	          data[i].reviewId +
+	          '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
+	          data[i].KKname +
+	          '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
+	          '<div class="review-content2"><span class="review-date">' +
+	          data[i].startTime.date.year +
+	          " ." +
+	          data[i].startTime.date.month +
+	          " ." +
+	          data[i].startTime.date.day +
+	          '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
+	          '<span class="review-description">' +
+	          data[i].content +
+	          "</span></div></div>";
+	        $("#review-items").append(reviewItem);
+	      }
       }
+      $("#review-count").text(data.length);
     },
   });
 });

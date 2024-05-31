@@ -1,5 +1,5 @@
 /* 임시 폰트 설정 */
-* {
+body {
   font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -13,6 +13,8 @@
   /* flex: 1; */
   background-color: #fff;
   overflow: scroll;
+    font-family: "Noto Sans KR", sans-serif;
+  
 }
 
 #reservation-wrapper {
@@ -382,7 +384,7 @@
   height: 3rem;
   border: none;
   background-color: transparent;
-  background-image: url("/WebContent/img/down_arrow.svg");
+  background-image: url(../img/down_arrow.svg);
   background-repeat: no-repeat;
   background-size: 3rem;
   cursor: pointer;
@@ -640,7 +642,7 @@
 }
 
 #review-star {
-  width: 3rem;
+  width: 4rem;
   height: 3rem;
 
   border-radius: 5px;
@@ -655,4 +657,15 @@
 }
 
 .star-wrapper {
+	display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+      align-items: center;
+}
+
+.star-wrapper > p{
+  font-size: 1.5rem;
+  text-align: center;
+    margin : 0;
 }

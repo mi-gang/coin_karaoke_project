@@ -21,7 +21,7 @@
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+        <img id="back-button" src="img/left arrow.svg" alt="이전 페이지 이동" />
         <span>나의 노래</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -391,6 +391,11 @@
             location.href = "controller?cmd=mypageUIAction";
             break;
         }
+      });
+      
+      // 뒤로 가기 -> 마이페이지로
+      $("#back-button").on("click", function () {
+        location.href = "controller?cmd=mypagePlaylistUI";
       });
      
     </script>

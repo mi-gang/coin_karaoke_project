@@ -97,8 +97,8 @@
 												</div>
 											</div>
 											<div class="KK-usability">
-												<span>777m</span> <span>혼잡도: <span class="normal"
-														data-crowded="0.5">보통</span></span>
+												<span></span> <span><span class="normal"
+														data-crowded="0.5"></span></span>
 											</div>
 										</div>
 									</div>
@@ -607,9 +607,9 @@
                 </div>
             </div>
             <div class="KK-usability">
-                <span>777m</span> <span>혼잡도: <span
+                <span></span> <span><span
                     class="normal"
-                    data-crowded="0.5">보통</span></span>
+                    data-crowded="0.5"></span></span>
             </div>
         </div>
                     </div > `;
@@ -638,6 +638,10 @@
 						});
 					}
 					function linkKKDetailUI(e) {
+						// 메인 페이지에서 노래방 상세페이지로 이동하는 경우, 노래방 상세페이지 '이전 페이지' 눌렀을때 메인화면으로 돌아오기 위해 prevURL
+						const backToResultPage = window.location.search;
+						console.log(backToResultPage);
+						sessionStorage.setItem("backToResultPage", backToResultPage);
 						const kkId = $(e.target).closest(".card").data("kkId");
 						location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
 					}
@@ -817,6 +821,9 @@
 								result_data = response; //JSON.parse()
 								let output = "";
 								for (let i = 0; i < result_data.length; i++) {
+									if (i < 6) {
+										continue;
+									}
 									output += `<div class="music_output" id="music_output" data-set-musicNum=` + result_data[i].no + ` data-set-musicTitle="` + result_data[i].title + `" data-set-singer="` + result_data[i].singer + `" >
             <div class="music_num">` + result_data[i].no + `</div>
             <div class="music_info">
@@ -1001,34 +1008,34 @@
 							}
 						})
 					});
-					
+
 					// 하단 메뉴바를 통한 페이지 이동
-	                $("nav div").on("click", function() {
-	              	  const clickedDiv = $(this);
-	              	  const imgAlt = clickedDiv.find("img").attr("alt");
-	              	  switch(imgAlt) {
-	              	  case "메인 페이지":
-	              		  // location.replace("controller?cmd=mainUI");
-	              		  location.href = "controller?cmd=mainUI";
-	              		  break;
-	              	  case "노래방 검색 페이지":
-	              		  // location.replace("controller?cmd=kkFilterUI");
-	              		  location.href = "controller?cmd=kkFilterUI";
-	              		  break;
-	              	  case "노래 검색 페이지":
-	              		  // location.replace("controller?cmd=musicListUI");
-	              		  location.href = "controller?cmd=musicListUI";
-	              		  break;
-	              	  case "나의 예약 내역 페이지":
-	              		  // location.replace("controller?cmd=reservationListUIAction");
-	              		  location.href = "controller?cmd=reservationListUIAction";
-	              		  break;
-	              	  case "마이페이지":
-	              		  // location.replace("controller?cmd=mypageUIAction");
-	              		  location.href = "controller?cmd=mypageUIAction";
-	              		  break;
-	              	  }
-	                });
+					$("nav div").on("click", function () {
+						const clickedDiv = $(this);
+						const imgAlt = clickedDiv.find("img").attr("alt");
+						switch (imgAlt) {
+							case "메인 페이지":
+								// location.replace("controller?cmd=mainUI");
+								location.href = "controller?cmd=mainUI";
+								break;
+							case "노래방 검색 페이지":
+								// location.replace("controller?cmd=kkFilterUI");
+								location.href = "controller?cmd=kkFilterUI";
+								break;
+							case "노래 검색 페이지":
+								// location.replace("controller?cmd=musicListUI");
+								location.href = "controller?cmd=musicListUI";
+								break;
+							case "나의 예약 내역 페이지":
+								// location.replace("controller?cmd=reservationListUIAction");
+								location.href = "controller?cmd=reservationListUIAction";
+								break;
+							case "마이페이지":
+								// location.replace("controller?cmd=mypageUIAction");
+								location.href = "controller?cmd=mypageUIAction";
+								break;
+						}
+					});
 
 				</script>
 			</body>

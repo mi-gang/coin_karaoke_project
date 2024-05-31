@@ -214,14 +214,17 @@ prefix="c"%>
 
             // 닉네임
             $("#user-nickname").text(data.nickname);
+            console.log(data.nickname);
+            console.log(data);
 
             // 저장한 노래방
+            
+            if (data.kkVO != null) {
             let kkId = data.kkVO.kkId;
             let kkName = data.kkVO.name;
             let starRating = data.kkVO.starRating;
             let address = data.kkVO.address;
             let contents = "";
-
             for (
               var i = 0;
               i < data.kkVO.representativeKeywordList.length;
@@ -232,7 +235,10 @@ prefix="c"%>
                 data.kkVO.representativeKeywordList[i] +
                 "</span>";
             }
+			}
 
+            
+            if (data.bookmarkCount > 0) {
             let bookmarkItem =
               '<div class="resultItem" id="' +
               kkId +
@@ -241,7 +247,7 @@ prefix="c"%>
               '</p><div class="starScoreWrapper"><span id="starAvgScore">' +
               starRating +
               '</span><div class="rating-wrap"><div class="rating"><div class="overlay"></div></div></div>' +
-              '</div></div><p class="resultKKAddress">' +
+              '</div><p class="resultKKAddress">' +
               '</p><div class="representativeKeywords">' +
               contents +
               '</div></div><div class="rightSide"><div class="bookmark"></div>' +
@@ -249,41 +255,8 @@ prefix="c"%>
               "</div></div>";
 
             $("#bookmark-item").append(bookmarkItem);
-            $("#bookmark-amount").append(data.bookmarkCount);
-
-            // 나의 플레이리스트
-            for (var i = 0; i < data.playlistVOs.length; i++) {
-              $("#playlist" + [i + 1]).attr(
-                "data-playListId",
-                data.playlistVOs[i].playListId
-              );
-              $("#playlist-name" + [i + 1]).append(
-                data.playlistVOs[i].playListTitle
-              );
-            }
-            $("#playlist-amount").append(data.playlistCount);
-
-            // 나의 리뷰
-            let reviewItem =
-              '<div class="review-item" data-id=' +
-              data.reviewVO.reviewId +
-              '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
-              data.reviewVO.KKname +
-              '</span><img src="img/arrow_right.svg" /></div></div>' +
-              '<div class="review-content2"><span class="review-date">' +
-              data.reviewVO.startTime.date.year +
-              " ." +
-              data.reviewVO.startTime.date.month +
-              " ." +
-              data.reviewVO.startTime.date.day +
-              '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
-              '<span class="review-description">' +
-              data.reviewVO.content +
-              "</span></div></div>";
-
-            $("#review-item").append(reviewItem);
-            $("#review-amount").append(data.reviewCount);
-
+            
+            // 북마크 색
             $.ajax({
               url: "controller?cmd=checkKKBookmarkAction",
               data: { kkId: kkId },
@@ -308,6 +281,56 @@ prefix="c"%>
                 }
               },
             });
+            
+			}else{
+			$("#bookmark-item").append('<div class="non-item">저장한 노래방이 없습니다.</div>');
+			}
+
+            $("#bookmark-amount").append(data.bookmarkCount);
+
+            // 나의 플레이리스트
+            
+            if (data.playlistVOs.length != 0) {
+	            for (var i = 0; i < data.playlistVOs.length; i++) {
+	              $("#playlist" + [i + 1]).attr(
+	                "data-playListId",
+	                data.playlistVOs[i].playListId
+	              );
+	              $("#playlist-name" + [i + 1]).append(
+	                data.playlistVOs[i].playListTitle
+	              );
+	            }
+            }
+            
+            $("#playlist-amount").append(data.playlistCount);
+
+            // 나의 리뷰
+            
+            if (data.reviewCount > 0) {
+	            let reviewItem =
+	              '<div class="review-item" data-id=' +
+	              data.reviewVO.reviewId +
+	              '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
+	              data.reviewVO.KKname +
+	              '</span><img src="img/arrow_right.svg" /></div></div>' +
+	              '<div class="review-content2"><span class="review-date">' +
+	              data.reviewVO.startTime.date.year +
+	              " ." +
+	              data.reviewVO.startTime.date.month +
+	              " ." +
+	              data.reviewVO.startTime.date.day +
+	              '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
+	              '<span class="review-description">' +
+	              data.reviewVO.content +
+	              "</span></div></div>";
+	
+	            $("#review-item").append(reviewItem);
+            }else{
+			$("#review-item").append('<div class="non-item">작성한 리뷰가 없습니다.</div>');
+			}
+            $("#review-amount").append(data.reviewCount);
+
+
 
             // 해당 노래방의 평균 별점만큼 별 아이콘
             updateStarContainer();
@@ -348,5 +371,6 @@ prefix="c"%>
     </script>
 
     <script src="js/mypage.js"></script>
+    <script src="js/starRate.js"></script>
   </body>
 </html>

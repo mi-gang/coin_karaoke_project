@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,10 +23,14 @@ public class MyReviewListAction implements Action {
 		Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
-		reviewVOs = service.getReviewListByUserId("test@test.com");
+		HttpSession session = request.getSession();
+		Object userId = session.getAttribute("userId");
+		
+		reviewVOs = service.getReviewListByUserId((String) userId);
         request.setAttribute("dataToSend", gson.toJson(reviewVOs));
 		
 		return new Url("json/data.jsp", Url.FORWARD);
 	}
 
 }
+//

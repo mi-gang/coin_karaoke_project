@@ -18,6 +18,8 @@
               <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
                 rel="stylesheet" />
               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+              <link rel="stylesheet" href="css/starRate.css">
+			  <script src="js/starRate.js"></script>
             </head>
 
             <body>
@@ -62,71 +64,11 @@
                           <p id="avgStarScore">${starRating}</p>
                           <p class="countReviews">총 <span id="countReviewsValue"></span>개 리뷰</p>
                           <div class="starsWrapper">
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_42_1687)">
-                                <path
-                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                                  fill="#9747FF" />
-                              </g>
-                              <defs>
-                                <clipPath id="clip0_42_1687">
-                                  <rect width="25" height="25" fill="white" />
-                                </clipPath>
-                              </defs>
-                            </svg>
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_42_1687)">
-                                <path
-                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                                  fill="#9747FF" />
-                              </g>
-                              <defs>
-                                <clipPath id="clip0_42_1687">
-                                  <rect width="25" height="25" fill="white" />
-                                </clipPath>
-                              </defs>
-                            </svg>
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_42_1687)">
-                                <path
-                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                                  fill="#9747FF" />
-                              </g>
-                              <defs>
-                                <clipPath id="clip0_42_1687">
-                                  <rect width="25" height="25" fill="white" />
-                                </clipPath>
-                              </defs>
-                            </svg>
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_42_1687)">
-                                <path
-                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                                  fill="#9747FF" />
-                              </g>
-                              <defs>
-                                <clipPath id="clip0_42_1687">
-                                  <rect width="25" height="25" fill="white" />
-                                </clipPath>
-                              </defs>
-                            </svg>
-                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_42_1687)">
-                                <path
-                                  d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"
-                                  fill="#9747FF" />
-                              </g>
-                              <defs>
-                                <clipPath id="clip0_42_1687">
-                                  <rect width="25" height="25" fill="white" />
-                                </clipPath>
-                              </defs>
-                            </svg>
+                          	<div class="rating-wrap">
+								<div class="rating">
+									<div class="overlay"></div>
+								</div>
+							</div>
                           </div>
                         </div>
                         <div class="starScoreGraphWrapper">
@@ -208,25 +150,10 @@
     </nav>
 
     <script>
-      $(document).ready(function () {
-    	// prevURL: 로그인 후 다시 돌아올 현재 페이지
-    	/* const prevURL1 = window.location.search;
-      	console.log(prevURL1);
-      	const encodedPrevURL = encodeURIComponent(prevURL1);
-      	console.log(encodedPrevURL);
-      	sessionStorage.setItem("prevURL", encodedPrevURL); */
-      	/* const currentURL = window.location.search;
-      	console.log(currentURL);
-      	const encodedCurrURL = encodeURIComponent(currentURL);
-      	sessionStorage.setItem("currURL", encodedCurrURL); */
-      	
-      	
+      $(document).ready(function () {  	
       	// 헤더의 '이전 페이지' 접근하기
       	$("header img").on("click", function() {
-      		// console.log(sessionStorage.getItem("prevURL"));
-      		location.replace("controller"+sessionStorage.getItem("prevURL"));
-      		/* $(window).trigger("refreshPreviousPage");
-      		history.back(); */
+      		location.href = "controller"+sessionStorage.getItem("backToResultPage");
       	});
       	
      	// 해당 노래방의 평균 별점만큼 별 아이콘
@@ -240,10 +167,7 @@
 			});
 		};
       	
-      	
         const kkId = "${KKVO.getKkId()}";
-        console.log(kkId);
-        console.log("1 ajax success data: ");
         // 로그인 여부에 따라 북마크
         $.ajax({
         	url: "controller?cmd=checkKKBookmarkAction",
@@ -307,11 +231,11 @@
         			$("#bookmark").on("click", function()  {
         				//console.log("로그인해야 북마크 가능!");
         				// alert("로그인한 유저만 북마크 가능합니다. 로그인 페이지로 이동합니다 :)");
-        				const prevURL1 = window.location.search;
-        		      	console.log(prevURL1);
-        		      	const encodedPrevURL = encodeURIComponent(prevURL1);
+        				const prevURL = window.location.search;
+        		      	console.log(prevURL);
+        		      	const encodedPrevURL = encodeURIComponent(prevURL);
         		      	console.log(encodedPrevURL);
-        		      	sessionStorage.setItem("prevURL", encodedPrevURL);
+        		      	sessionStorage.setItem("prevURL", prevURL);
         		      	
         		      	$(".modal").css("display", "flex");
 							$(".modal").addClass("active");
@@ -335,7 +259,8 @@
 						      	console.log(encodedPrevURL);
 						      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
 				            	//
-								location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+								// location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+						      	location.href = "controller?cmd=loginUI";
 							});
 							
         		      	// location.replace("controller?cmd=loginUI");
@@ -405,16 +330,17 @@
       							
       		            		// location.replace("controller?cmd=loginUI");
       		            		console.log("텍스트 리뷰 보기 버튼 클릭");
-      		            		const prevURL1 = window.location.search;
-      		                	console.log(prevURL1);
-      		                	const encodedPrevURL = encodeURIComponent(prevURL1);
+      		            		const prevURL = window.location.search;
+      		                	console.log(prevURL);
+      		                	const encodedPrevURL = encodeURIComponent(prevURL);
       		                	console.log(encodedPrevURL);
-      		                	sessionStorage.setItem("prevURL", encodedPrevURL);
+      		                	sessionStorage.setItem("prevURL", prevURL);
       		            		console.log(sessionStorage.getItem("prevURL"));
       		            		let sessionPrevURL = sessionStorage.getItem("prevURL");
       		            		console.log(sessionPrevURL);
       		            		
-      		            		location.replace("controller?cmd=loginUI&prevURL="+sessionPrevURL);
+      		            		// location.replace("controller?cmd=loginUI&prevURL="+sessionPrevURL);
+      		            		location.href = "controller?cmd=loginUI";
       		            	});
       					}
       				});       				
@@ -572,45 +498,64 @@
         } else {
           $("#graph1Score").css("width", ratio1);
         } */
-
-        /* // 북마크 아이콘 클릭해서 추가/취소
-        $("#bookmark").click(function () {
-          console.log(this.className);
-          if (this.className === "bookmark") {
-            $(this).addClass("add");
-          } else {
-            $(this).removeClass("add");
-          }
-        }); */
-                  // 예약하기 버튼 클릭시, 예약하기 페이지로 이동 (현재는 alert)
-                  $(".btn").click(function () {
-                    location.href = "controller?cmd=addReservationUI&kkId=" + $("header span").data("kkId");
-                    return;
-                  });
-
-                  // 하단 메뉴바를 통한 페이지 이동
-                  $("nav div").on("click", function () {
-                    const clickedDiv = $(this);
-                    const imgAlt = clickedDiv.find("img").attr("alt");
-                    switch (imgAlt) {
-                      case "메인 페이지":
-                        location.replace("controller?cmd=mainUI");
-                        break;
-                      case "노래방 검색 페이지":
-                        location.replace("controller?cmd=kkFilterUI");
-                        break;
-                      case "노래 검색 페이지":
-                        location.replace("controller?cmd=musicListUI");
-                        break;
-                      case "나의 예약 내역 페이지":
-                        location.replace("controller?cmd=reservationListUIAction");
-                        break;
-                      case "마이페이지":
-                        location.replace("controller?cmd=mypageUIAction");
-                        break;
-                    }
-                  });
-                });
-              </script>
-            </body>
-            </html>
+        
+	     // 예약하기 버튼 클릭시, 로그인 여부에 따라 예약하기 페이지로 이동 
+	     $(".btn").click(function () {
+	    	 <c:if test="${userId != null}">
+	    	 	// 로그인 O -> 예약하기 페이지로 이동
+	    	 	location.href = "controller?cmd=addReservationUI&kkId=" + $("header span").data("kkId");
+	    	 </c:if>
+	    	 <c:if test="${userId == null}">
+	    	 	// 로그인X -> 로그인 유도 모달 열기
+	    	 	$(".modal").css("display", "flex");
+				$(".modal").addClass("active");
+				if($(".modal").hasClass("active")) {
+					$(".modalBack").css("display", "flex");
+				}
+				
+				// 로그인 유도 모달창 닫기
+				$(".modal img").on("click", function() {
+					$(".modalBack").css("display", "none");
+					$(".modal").css("display", "none");
+				});
+				
+				// 로그인 UI로 이동
+				$(".loginBtn").on("click", function() {
+					// prevURL 저장을 위한 작업
+	            	const prevURL = window.location.search;
+			      	console.log(prevURL);
+			      	sessionStorage.setItem("prevURL", prevURL);
+			      	const encodedPrevURL = encodeURIComponent(prevURL);
+			      	console.log(encodedPrevURL);
+			      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
+			      	location.href = "controller?cmd=loginUI";
+				});
+	    	 </c:if>
+	     });
+	
+	     // 하단 메뉴바를 통한 페이지 이동
+	     $("nav div").on("click", function () {
+	       const clickedDiv = $(this);
+	       const imgAlt = clickedDiv.find("img").attr("alt");
+	       switch (imgAlt) {
+	         case "메인 페이지":
+	           location.replace("controller?cmd=mainUI");
+	           break;
+	         case "노래방 검색 페이지":
+	           location.replace("controller?cmd=kkFilterUI");
+	           break;
+	         case "노래 검색 페이지":
+	           location.replace("controller?cmd=musicListUI");
+	           break;
+	         case "나의 예약 내역 페이지":
+	           location.replace("controller?cmd=reservationListUIAction");
+	           break;
+	         case "마이페이지":
+	           location.replace("controller?cmd=mypageUIAction");
+	           break;
+	       }
+	     });
+	   });
+ 		</script>
+	</body>
+</html>

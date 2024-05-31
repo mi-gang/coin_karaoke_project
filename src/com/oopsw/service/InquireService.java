@@ -1,6 +1,7 @@
 package com.oopsw.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -28,6 +29,12 @@ public class InquireService {
 		boolean result = false;
 
 		result = new InquireDAO(conn).addInquire(inquireVO);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return result;
 	}

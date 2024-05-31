@@ -739,3 +739,11 @@
 .bookmark.add {
   background-image: url("../img/bookmarkFill.svg");
 }
+
+.non-item{
+	display: flex;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 1.6rem;
+  padding: 7rem;
+}
