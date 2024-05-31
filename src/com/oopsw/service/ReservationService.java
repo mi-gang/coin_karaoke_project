@@ -221,11 +221,12 @@ public class ReservationService {
 		int availableMinutes = 60 * 24; //아무 예약이 없으면 24시간까지 추가 가능
 		
 		LocalDateTime upcomingReservationTime = rDao.getUpcomingReservationByReservationId(reservationId);
-		if(upcomingReservationTime != null){
-			// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
-			Duration diff = Duration.between(endTime, upcomingReservationTime);
-			availableMinutes = (int) diff.toMinutes() - 15;// TODO: 청소시간 15분 상수로 바꾸기
+		if(upcomingReservationTime == null){
+			return availableMinutes;
 		}
+		// 불러온 시작 시건에서 기존 에약의 end date를 빼서 남은 시간 게산해서 보내기
+		Duration diff = Duration.between(endTime, upcomingReservationTime);
+		availableMinutes = (int) diff.toMinutes() - 15;// TODO: 청소시간 15분 상수로 바꾸기
 
 		// 성인 유무 같이 보내기
 		boolean isAdult = false;
