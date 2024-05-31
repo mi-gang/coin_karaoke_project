@@ -109,9 +109,8 @@ public class UserService {
 			e.printStackTrace();
 		}
 
-		// XXX: DB 샘플데이터 활용을 위해 평문비밀번호 사용중. 서비스 시 아래 줄 삭제.
 		System.out.println(encryptedPassword);
-		encryptedPassword = password;
+//		encryptedPassword = password;
 		return encryptedPassword;
 	}
 
