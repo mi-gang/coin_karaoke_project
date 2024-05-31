@@ -45,13 +45,7 @@
     <!-- 모바일 컨테이너 -->
     <div id="mobileContainer">
         <!--헤더-->
-        <header>
-          <img
-            src="img/left arrow.svg"
-            alt="이전 페이지 이동"
-          />
-          <span>노래방 검색 결과</span>
-        </header>
+        <header><span>노래방 검색 결과</span></header>
         <!-- 컨텐츠 컨테이너 -->
         <div id="container">
             <div class="filterContainer">
@@ -147,20 +141,7 @@
         /* $(window).on("refreshPreviousPage", function() {
         	window.location.reload();
         }); */
-            $(document).ready(function () {
-            	/* // prevURL 저장을 위한 작업
-            	const prevURL = window.location.search;
-		      	console.log(prevURL);
-		      	sessionStorage.setItem("prevURL", prevURL);
-		      	const encodedPrevURL = encodeURIComponent(prevURL);
-		      	console.log(encodedPrevURL);
-		      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
-            	// */
-            	// 헤더 - 이전 페이지로 이동
-            	$("header img").on("click", function() {
-            		history.back();
-            	});
-            	
+            $(document).ready(function () {          	
             	
             	// 해당 노래방의 평균 별점만큼 별 아이콘
             	updateStarContainer();
@@ -265,7 +246,8 @@
        							      	console.log(encodedPrevURL);
        							      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
        					            	//
-       									location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+       									// location.replace("controller?cmd=loginUI&prevURL="+encodedPrevURL);
+       							     	location.replace("controller?cmd=loginUI");
        								});
              					}
              				}
@@ -356,6 +338,7 @@
 		            	const prevURL = window.location.search;
 				      	console.log(prevURL);
 				      	sessionStorage.setItem("prevURL", prevURL);
+				      	sessionStorage.setItem("backToResultPage", prevURL);
 				      	const encodedPrevURL = encodeURIComponent(prevURL);
 				      	console.log(encodedPrevURL);
 				      	sessionStorage.setItem("ePrevURL", encodedPrevURL);
@@ -365,9 +348,9 @@
 	       					/* data:{selectedKKId: kkId} */
 	       					data: {clickedKKId: kkId}
 	            		});
-	         			location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
+	         			// location.replace("controller?cmd=kkDetailUI&clickedKKId="+kkId);
 	         			// location.replace("controller?cmd=kkDetailUI&prevURL="+encodedPrevURL);
-	         			// location.href = "controller?cmd=kkDetailUI&clickedKKId="+kkId;
+	         			location.href = "controller?cmd=kkDetailUI&clickedKKId="+kkId;
          			});
              	});
              	
