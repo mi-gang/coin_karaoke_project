@@ -1,5 +1,6 @@
 package com.oopsw.controller.action;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.oopsw.controller.Action;
 import com.oopsw.controller.Url;
+import com.oopsw.model.dao.KKDAO;
 import com.oopsw.model.vo.ReservationVO;
+import com.oopsw.service.KKService;
 import com.oopsw.service.ReservationRoomInfoVO;
 import com.oopsw.service.ReservationService;
 
@@ -33,6 +36,12 @@ public class AddReservationUI implements Action {
 		request.setAttribute("widthListList", widthListList);
 		System.out.println("widthListList: " + widthListList);
 		request.setAttribute("cleaningTimeSec", getWidthByMin(CLEANING_TIME_SEC) + "rem");
+		try {
+			request.setAttribute("kkName", new KKService().getSelectedKKBasicInfo(Integer.toString(kkId)).getName());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return new Url("jsp/addReservationUI.jsp", Url.FORWARD);
 	}
 
