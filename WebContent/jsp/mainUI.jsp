@@ -638,6 +638,10 @@
 						});
 					}
 					function linkKKDetailUI(e) {
+						// 메인 페이지에서 노래방 상세페이지로 이동하는 경우, 노래방 상세페이지 '이전 페이지' 눌렀을때 메인화면으로 돌아오기 위해 prevURL
+						const backToResultPage = window.location.search;
+						console.log(backToResultPage);
+						sessionStorage.setItem("backToResultPage", backToResultPage);
 						const kkId = $(e.target).closest(".card").data("kkId");
 						location.href = "controller?cmd=kkDetailUI&clickedKKId=" + kkId;
 					}

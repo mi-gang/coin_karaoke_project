@@ -469,6 +469,7 @@
         const endDateTime = getEndDateTime();
         const usingMinutes = getUsingMinutes();
         let optionParameters = getOptionParameters();
+        console.log("검색 버튼 클릭");
         location.href = "controller?cmd=searchedKKList&searchGu=" + searchGu + "&startTime=" + toLDT(startDateTime) + "&endTime=" + toLDT(endDateTime) + "&usingMinutes=" + usingMinutes + optionParameters;
       }
       function getOptionParameters() {

@@ -45,11 +45,9 @@
                 <img src="img/google_btn.svg"></a>
                 <img src="img/kakao_btn.svg"></a>
             </div>
+
         </div>
         <script>
-            // *
-            // prevURL : 로그인 페이지로 오기 전에 사용자가 보고있던 페이지 경로
-            // const prevURL = '${requestScope.prevURL}';
             const prevURL = sessionStorage.getItem("prevURL");
             console.log(prevURL);
             $("#prevURL").val(prevURL);
@@ -68,9 +66,12 @@
                     errorMessage.text("");
                 else if (!checkEmail(userId.val())) {
                     errorMessage.text("유효한 이메일을 입력해주세요.")
+                    errorMessage.css("text-align", "center");
                 }
                 else if (!checkPassword(password.val())) {
-                    errorMessage.text("비밀번호는 영문 대소문자와 숫자, 기호를 포함한 6자 이상이어야 합니다.");
+                    // errorMessage.text("비밀번호는 영문 대소문자와 숫자, 기호를 포함한 6자 이상이어야 합니다.");
+                    errorMessage.html("비밀번호는 영문 대소문자와 숫자,<br/>기호를 포함한 6자 이상이어야 합니다.");
+                    errorMessage.css("text-align", "center");
                 }
                 else {
                     errorMessage.text("");
@@ -99,16 +100,18 @@
                     url: "controller?cmd=login",
                     data: { userId: userId, password: getEncryptedPw(password), prevURL: prevURL },
                     dataType: "json",
-                    success: function (response) {
-                        console.log(response);
-                        console.log(response.loginSuccess);
-                        console.log(response.prevURL);
-                        if (response.loginSuccess === true) {
-                            console.log("response.status SUCCESS");
-                            // window.location.href = response.redirectURL;
-                            location.replace("controller" + response.prevURL);
+                    success: function (result) {
+                        if (result.result === true) {
+                            console.log("result SUCCESS");
+                            if (sessionStorage.getItem("prevURL") != null) {
+                                window.location.href = sessionStorage.getItem("prevURL");
+                            } else {
+                                window.location.href = "controller?cmd=mainUI";
+                            }
+                            return;
                         } else {
-                            console.log("response.statuse Fail");
+                            errorMessage.html("아이디 또는 비밀번호를 잘못 입력했습니다. <br/>입력하신 내용을 다시 확인해주세요.");
+                            errorMessage.css("text-align", "center");
                         }
                     }
                 });
