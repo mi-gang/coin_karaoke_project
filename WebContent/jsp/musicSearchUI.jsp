@@ -292,9 +292,9 @@
 
       const isMemberModal = document.querySelector(".create_music_list");
       const modalClose3 = document.querySelector(".close_img3");
-      isMemberModal.addEventListener("click", function () {
+    /*  isMemberModal.addEventListener("click", function () {
         $(".modal_overlay2").show();
-      });
+      });*/
       modalClose3.addEventListener("click", function () {
         $(".modal_overlay2").hide();
       });
