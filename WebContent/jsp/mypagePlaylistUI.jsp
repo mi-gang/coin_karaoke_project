@@ -20,7 +20,7 @@
 	<div id="mobileContainer">
 		<!--헤더-->
 		<header>
-			<img src="img/left arrow.svg" alt="이전 페이지 이동" /> <span>나의 노래</span>
+			<img id="back-button" src="img/left arrow.svg" alt="이전 페이지 이동" /> <span>나의 노래</span>
 		</header>
 		<!-- 컨텐츠 컨테이너 -->
 		<div id="container">
@@ -211,6 +211,11 @@
     if(userId=="null"){
    alert("로그인 후 사용하세요")	 
     }    
+    
+ // 리뷰 페이지 뒤로 가기 -> 마이페이지로
+    $("#back-button").on("click", function () {
+      location.href = "controller?cmd=mypageUIAction";
+    });
          
     </script>
 </body>

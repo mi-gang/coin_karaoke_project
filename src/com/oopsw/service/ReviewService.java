@@ -1,6 +1,7 @@
 package com.oopsw.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,6 +31,12 @@ public class ReviewService {
 		boolean result = false;
 
 		result = new ReviewDAO(conn).addReview(reviewVO);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return result;
 	}
@@ -40,6 +47,12 @@ public class ReviewService {
 		boolean result = false;
 
 		result = new ReviewDAO(conn).deleteReview(reviewId);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return result;
 	}
@@ -50,6 +63,12 @@ public class ReviewService {
 		Collection<ReviewVO> reviewVOs = new ArrayList<ReviewVO>();
 
 		reviewVOs = new ReviewDAO(conn).getReviewListByUserId(userId);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return reviewVOs;
 	}
