@@ -2,9 +2,9 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
-#container{
-	flex-direction: column;
-	row-gap: 1.5rem;
+#container {
+  flex-direction: column;
+  row-gap: 1.5rem;
 }
 
 /* 추천 노래방 */
@@ -12,19 +12,19 @@
   width: 100%;
   height: 26.8rem;
   border-bottom: 1px solid #b6b6b6;
-  
+  margin-left: 2.6rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   .wrapper-header {
-      width: 90%;
+    width: 90%;
     height: 7rem;
     display: flex;
     justify-content: space-between;
-    
-      }
+  }
 }
 
 .subTitle {
@@ -170,14 +170,14 @@
   width: 100%;
   height: 23.6rem;
   border-bottom: 1px solid #b6b6b6;
+  margin-left: 2.6rem;
 
   .wrapper-header {
-  
     width: 90%;
-    padding-left : 1.8rem;
+    padding-left: 1.8rem;
     display: flex;
     justify-content: space-between;
-	align-items: center;
+    align-items: center;
     height: 7rem;
 
     a {
@@ -574,10 +574,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-    
 
   .wrapper-header {
-    
     width: 90%;
     height: 7rem;
     display: flex;
@@ -599,7 +597,6 @@
       button.brand-activate {
         background-color: #9747ff;
         color: white;
-        
       }
     }
   }
