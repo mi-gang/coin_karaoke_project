@@ -74,26 +74,28 @@ $(document).ready(function () {
     dataType: "json",
     success: function (data) {
       console.log(data);
-      for (var i = 0; i < data.length; i++) {
-        var reviewItem =
-          '<div class="review-item" data-id=' +
-          data[i].reviewId +
-          '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
-          data[i].KKname +
-          '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
-          '<div class="review-content2"><span class="review-date">' +
-          data[i].startTime.date.year +
-          " ." +
-          data[i].startTime.date.month +
-          " ." +
-          data[i].startTime.date.day +
-          '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
-          '<span class="review-description">' +
-          data[i].content +
-          "</span></div></div>";
-        $("#review-items").append(reviewItem);
-        $("#review-count").text(data.length);
+      if (data.length != 0) {
+	      for (var i = 0; i < data.length; i++) {
+	        var reviewItem =
+	          '<div class="review-item" data-id=' +
+	          data[i].reviewId +
+	          '><div class="review-content1"><div class="KK-title"><span class="resultKKTitle">' +
+	          data[i].KKname +
+	          '</span><img src="img/arrow_right.svg" /></div><button class="delete-button review-delete">삭제</button></div>' +
+	          '<div class="review-content2"><span class="review-date">' +
+	          data[i].startTime.date.year +
+	          " ." +
+	          data[i].startTime.date.month +
+	          " ." +
+	          data[i].startTime.date.day +
+	          '</span><div class="stars"><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/filledStar.svg" alt="채워진 별" /><img src="img/star_half.svg" alt="0.5점 별" /></div>' +
+	          '<span class="review-description">' +
+	          data[i].content +
+	          "</span></div></div>";
+	        $("#review-items").append(reviewItem);
+	      }
       }
+      $("#review-count").text(data.length);
     },
   });
 });
