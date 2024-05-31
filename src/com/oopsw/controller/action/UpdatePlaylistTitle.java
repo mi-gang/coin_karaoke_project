@@ -15,7 +15,8 @@ public class UpdatePlaylistTitle implements Action {
 	public Url execute(HttpServletRequest request) {
 		 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			String playlistTitle=request.getParameter("newTitle") ;
-			String userId ="test@test.com";
+			//String userId ="test@test.com";
+			String userId = (String) request.getSession().getAttribute("userId");
 			int playlistId=Integer.parseInt(request.getParameter("playlistId")) ;
 			JsonObject json = new JsonObject();
 			json.addProperty("result", new MusicService().updatePlaylistTitle(playlistTitle, userId, playlistId));

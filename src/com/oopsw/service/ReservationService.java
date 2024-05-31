@@ -202,12 +202,18 @@ public class ReservationService {
 		// start_time, end_time, availableTime, 성인유무 을 보내야 함
 		AdditionalTimeInfoVO aTimeInfoVO = new AdditionalTimeInfoVO(startTime, endTime, availableHour, availableMinute,
 				isAdult);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return aTimeInfoVO;
 	}
-	
+
 	/** 추가가능시간 분 단위로 알려주기 */
-	public int getAddableMinutes(String userId, int reservationId){
+	public int getAddableMinutes(String userId, int reservationId) {
 		ReservationDAO rDao = new ReservationDAO(conn);
 		ReservationVO reservationVO = null;
 		reservationVO = rDao.getOriginalReservationTime(userId, reservationId);
@@ -228,14 +234,20 @@ public class ReservationService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		LocalDateTime maxEndTime=endTime.plusMinutes(availableMinutes);
+
+		LocalDateTime maxEndTime = endTime.plusMinutes(availableMinutes);
 		LocalDateTime limitTime = LocalDateTime.of(endTime.toLocalDate(), LocalTime.of(22, 0));
 		// TODO: 청소년 이용불가시간: 22~08시. 상수로 바꿀것.
 		// 청소년인 경우 22시까지만 놀 수 있는 추가시간으로 재설정
-		if(!isAdult && maxEndTime.isAfter(limitTime)){
-			
-			availableMinutes = (int)Duration.between(endTime, limitTime).toMinutes();
+		if (!isAdult && maxEndTime.isAfter(limitTime)) {
+
+			availableMinutes = (int) Duration.between(endTime, limitTime).toMinutes();
+		}
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 		return availableMinutes;
@@ -292,18 +304,25 @@ public class ReservationService {
 	public boolean addAdditionalReservation(String userId, int reservationId, int additionalTime) {
 		boolean result = false;
 		int realAddableMinutes = getAddableMinutes(userId, reservationId);
-		//유효성검사 보류
-		if(additionalTime > realAddableMinutes){
+		// 유효성검사 보류
+		if (additionalTime > realAddableMinutes) {
 			return false;
 		}
 		LocalDateTime endTime = new ReservationDAO(conn).getOriginalReservationTime(userId, reservationId).getEndTime();
 		result = new ReservationDAO(conn).updateReservation(endTime.plusMinutes(additionalTime), reservationId);
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
+
 	/** 마이페이지 */
 	public myPageVO myPageInfo(String userId) {
 
-		
 		// 닉네임
 		String nickname = null;
 		try {
@@ -311,11 +330,11 @@ public class ReservationService {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-				
+
 		// 저장된 노래방
 		Collection<String> keywordList = new ArrayList<String>();
 		List<String[]> tmpKKList = new KKDAO(conn).getMypageBookmarkKK(userId);
-		
+
 		System.out.println(tmpKKList);
 
 		int kkId = Integer.parseInt(tmpKKList.get(0)[0]);
@@ -337,11 +356,11 @@ public class ReservationService {
 		// 플레이리스트
 		Collection<PlaylistVO> playlistVOs = new PlaylistDAO(conn).getmypagePlaylist(userId);
 		int playlistCount = new PlaylistDAO(conn).getPlaylistCount(userId);
-		
+
 		// 리뷰
 		ReviewVO reviewVO = new ReviewDAO(conn).getReviewByUserId(userId);
 		int reviewCount = new ReviewDAO(conn).getReviewCount(userId);
-		
+
 		myPageVO myPageVO = new myPageVO(nickname, kkVO, bookmarkCount, reviewVO, reviewCount, playlistVOs,
 				playlistCount);
 

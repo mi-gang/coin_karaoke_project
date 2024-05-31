@@ -52,6 +52,7 @@ import com.oopsw.controller.action.SearchForKKWithOptions;
 import com.oopsw.controller.action.SearchedKKList;
 import com.oopsw.controller.action.SendValidationNumber;
 import com.oopsw.controller.action.UncompletedReservationListAction;
+import com.oopsw.controller.action.UpdateKKBookmark;
 import com.oopsw.controller.action.UpdateNickname;
 import com.oopsw.controller.action.UpdatePassword;
 import com.oopsw.controller.action.UpdateUserUI;
@@ -122,15 +123,6 @@ public class ActionFactory {
 				break;
 			case "addReservationUI":
 				action = new AddReservationUI();
-				break;
-			case "musicListUI":
-				action = new MusicListUI();
-				break;
-			case "checkMusicbymyplaylist":
-				action = new CheckMusicbymyplaylist();
-				break;
-			case "addPlaylist":
-				action = new AddPlaylist();
 				break;
 			case "kkFilterUI":
 				action = new KKFilterUI();
@@ -213,6 +205,9 @@ public class ActionFactory {
 			case "deleteBookmarkAction":
 				action = new DeleteBookmarkAction();
 				break;
+			case "updateKKBookmark":
+				action = new UpdateKKBookmark();
+				break;
 			case "amountStarReviewListByType":
 				action = new AmountStarReviewListByType();
 				break;
@@ -247,11 +242,19 @@ public class ActionFactory {
 			case "updatePlaylistTitle":
 				action = new UpdatePlaylistTitle();
 				break;
+			case "checkMusicbymyplaylist":
+				action = new CheckMusicbymyplaylist();
+				break;
+			case "musicListUI":
+				action = new MusicListUI();
+				break;
+			case "addPlaylist":
+				action = new AddPlaylist();
+				break;
 			// 임시
 			case "searchedKKList":
 				action = new SearchedKKList();
 				break;
-
 			default:
 				action = new wrongCmd();
 				break;

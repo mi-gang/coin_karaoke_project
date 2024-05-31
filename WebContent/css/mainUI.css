@@ -1,16 +1,30 @@
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+#container{
+	flex-direction: column;
+	row-gap: 1.5rem;
+}
+
 /* 추천 노래방 */
 #recommend-wrapper {
-  width: 40.4rem;
+  width: 100%;
   height: 26.8rem;
-  margin-left: 2.6rem;
   border-bottom: 1px solid #b6b6b6;
-
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
   .wrapper-header {
+      width: 90%;
+    height: 7rem;
     display: flex;
     justify-content: space-between;
-
-    height: 8rem;
-  }
+    
+      }
 }
 
 .subTitle {
@@ -36,9 +50,9 @@
   border: 0 none;
   /*border: 1px solid red;*/
   outline: 0 none;
-  padding-left: 15px;
+  margin-right: 15px;
   color: #000;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 400;
   background: transparent;
   cursor: pointer;
@@ -48,7 +62,7 @@
   background-color: #fff;
   border: 0.1rem solid #f9f9f9;
   list-style-type: none;
-  padding: 0;
+  padding-right: 1rem;
   border-radius: 0.5rem;
   overflow: scroll;
   max-height: 0;
@@ -153,22 +167,23 @@
 }
 /* 다가오는 예약 일정 */
 #upcoming-wrapper {
-  width: 40.4rem;
+  width: 100%;
   height: 23.6rem;
-  margin-left: 2.6rem;
   border-bottom: 1px solid #b6b6b6;
 
   .wrapper-header {
+  
+    width: 90%;
+    padding-left : 1.8rem;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+	align-items: center;
+    height: 7rem;
 
     a {
-      margin-right: 2rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: black;
       text-decoration-line: none;
-      margin-bottom: 1.3rem;
     }
   }
 }
@@ -553,17 +568,25 @@
 
 /* 인기차트 */
 #chart-wrapper {
+  width: 100%;
   height: 27.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    
 
   .wrapper-header {
-    padding-left: 2.6rem;
-    height: 8.8rem;
+    
+    width: 90%;
+    height: 7rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     box-shadow: 0px +10px -5px -3px rgba(181, 181, 181, 0.25);
 
     #brand-container {
-      margin-right: 1.7rem;
+      font-size: 1.4rem;
 
       button {
         width: 7rem;
@@ -576,6 +599,7 @@
       button.brand-activate {
         background-color: #9747ff;
         color: white;
+        
       }
     }
   }
@@ -989,7 +1013,7 @@ input search type일때 붙는 못생긴 x 지우기 */
 }
 
 .wrapper-header {
-  padding-top: 2.6rem;
+  padding-top: 1.5rem;
 }
 
 .header-title {
@@ -1003,10 +1027,11 @@ input search type일때 붙는 못생긴 x 지우기 */
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 39.1rem;
+  width: 100%;
   height: 16.3rem;
   font-size: 2rem;
-  background-color: rgba(246, 246, 246, 0.94);
+  border-radius: 5px;
+  background-color: rgba(246, 246, 246, 0.9);
 }
 
 .invisibleUnLoginUser.on {
@@ -1026,14 +1051,14 @@ input search type일때 붙는 못생긴 x 지우기 */
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 34.2rem;
-  height: 3.3rem;
+  width: 34rem;
+  height: 3rem;
   padding: 2rem 1rem;
   font-size: 1.8rem;
   font-weight: 700;
   color: #9747ff;
-  border-radius: 1rem;
-  border: 0.3rem solid #9747ff;
+  border-radius: 2rem;
+  border: 0.2rem solid #9747ff;
   cursor: pointer;
 }
 

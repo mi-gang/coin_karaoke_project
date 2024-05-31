@@ -34,7 +34,6 @@
             <button class="label">이용 지역을 선택해주세요.</button>
             <img src="img/down_arrow.svg" alt="드롭다운" />
             <ul class="regionList">
-              <li class="regionItem">서울 전체</li>
               <li class="regionItem">강남구</li>
               <li class="regionItem">강동구</li>
               <li class="regionItem">강북구</li>
@@ -564,26 +563,31 @@
       // })
 
       // 하단 메뉴바를 통한 페이지 이동
-      $("nav div").on("click", function () {
-        const clickedDiv = $(this);
-        const imgAlt = clickedDiv.find("img").attr("alt");
-        switch (imgAlt) {
-          case "메인 페이지":
-            location.replace("controller?cmd=mainUI");
-            break;
-          case "노래방 검색 페이지":
-            location.replace("controller?cmd=kkFilterUI");
-            break;
-          case "노래 검색 페이지":
-            location.replace("controller?cmd=musicListUI");
-            break;
-          case "나의 예약 내역 페이지":
-            location.replace("controller?cmd=reservationListUIAction");
-            break;
-          case "마이페이지":
-            location.replace("controller?cmd=mypageUIAction");
-            break;
-        }
+      $("nav div").on("click", function() {
+    	  const clickedDiv = $(this);
+    	  const imgAlt = clickedDiv.find("img").attr("alt");
+    	  switch(imgAlt) {
+    	  case "메인 페이지":
+    		  // location.replace("controller?cmd=mainUI");
+    		  location.href = "controller?cmd=mainUI";
+    		  break;
+    	  case "노래방 검색 페이지":
+    		  // location.replace("controller?cmd=kkFilterUI");
+    		  location.href = "controller?cmd=kkFilterUI";
+    		  break;
+    	  case "노래 검색 페이지":
+    		  // location.replace("controller?cmd=musicListUI");
+    		  location.href = "controller?cmd=musicListUI";
+    		  break;
+    	  case "나의 예약 내역 페이지":
+    		  // location.replace("controller?cmd=reservationListUIAction");
+    		  location.href = "controller?cmd=reservationListUIAction";
+    		  break;
+    	  case "마이페이지":
+    		  // location.replace("controller?cmd=mypageUIAction");
+    		  location.href = "controller?cmd=mypageUIAction";
+    		  break;
+    	  }
       });
     </script>
   </body>

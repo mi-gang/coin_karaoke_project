@@ -17,7 +17,8 @@ public class MyPlaylist implements Action {
 	public Url execute(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 //		Object userId = session.getAttribute("userId");
-		String userId="test@test.com";
+		String userId = (String) request.getSession().getAttribute("userId");
+		//String userId="test@test.com";
 //		Url url= new Url("html/loginUI.html", Url.FORWARD);
 		Collection<PlaylistVO> list=new MusicService().getPlaylistList(userId); //userId.toString()濡� 援먯껜�삁�젙
 //		if(session.getAttribute("userId") != null){

@@ -16,7 +16,8 @@ public class PlaylistTitle implements Action {
 	public Url execute(HttpServletRequest request) {
 		 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		HttpSession session = request.getSession();
-		String userId="test@test.com";
+		//String userId="test@test.com";
+		String userId = (String) request.getSession().getAttribute("userId");
 		int playlistId=Integer.parseInt(request.getParameter("playlistId"));
 		JsonObject json = new JsonObject();
 		//boolean result= true;

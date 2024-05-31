@@ -28,7 +28,11 @@ pageEncoding="UTF-8"%>
     <div id="mobileContainer">
       <!--헤더-->
       <header>
-        <img src="img/left arrow.svg" alt="이전 페이지 이동" />
+        <img
+          id="review-back-button"
+          src="img/left arrow.svg"
+          alt="이전 페이지 이동"
+        />
         <span>나의 리뷰</span>
       </header>
       <!-- 컨텐츠 컨테이너 -->
@@ -42,8 +46,7 @@ pageEncoding="UTF-8"%>
             <span id="review-count"></span>
             <span>건</span>
           </div>
-          <div id="review-items">
-          </div>
+          <div id="review-items"></div>
         </div>
       </div>
       <!-- 하단 메뉴바 -->
@@ -146,5 +149,35 @@ pageEncoding="UTF-8"%>
     </div>
 
     <script src="js/mypage.js"></script>
+
+    <script>
+      // 하단 메뉴바를 통한 페이지 이동
+      $("nav div").on("click", function () {
+        const clickedDiv = $(this);
+        const imgAlt = clickedDiv.find("img").attr("alt");
+        switch (imgAlt) {
+          case "메인 페이지":
+            // location.replace("controller?cmd=mainUI");
+            location.href = "controller?cmd=mainUI";
+            break;
+          case "노래방 검색 페이지":
+            // location.replace("controller?cmd=kkFilterUI");
+            location.href = "controller?cmd=kkFilterUI";
+            break;
+          case "노래 검색 페이지":
+            // location.replace("controller?cmd=musicListUI");
+            location.href = "controller?cmd=musicListUI";
+            break;
+          case "나의 예약 내역 페이지":
+            // location.replace("controller?cmd=reservationListUIAction");
+            location.href = "controller?cmd=reservationListUIAction";
+            break;
+          case "마이페이지":
+            // location.replace("controller?cmd=mypageUIAction");
+            location.href = "controller?cmd=mypageUIAction";
+            break;
+        }
+      });
+    </script>
   </body>
 </html>

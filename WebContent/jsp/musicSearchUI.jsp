@@ -150,8 +150,17 @@
 
 			const modal = document.querySelector(".modal_overlay");
 			const modalOpen = document.querySelector(".like_img");
+			 var userId = '<%=(String)session.getAttribute("userId")%>';
 			//플레이리스트 목록 불러오기
 			$(".music_list_output").on("click", ".music_output .like_img", function () {
+				if(userId==="null"){
+					 $(".modal_overlay2").show(); 
+					 $(".login_btn").on("click",function(){
+						 location.href="controller?cmd=loginUI";
+					 })
+					 
+				}
+				else{
 				modal.classList.add("on");
 				let entInput = $(".on").attr("id");
 				console.log(entInput);
@@ -173,8 +182,8 @@
 					error: function (jqXHR, textStatus, errorThrown) {
 						alert("실패했습니다: " + textStatus + " - " + errorThrown); // More detailed error message
 					},
-					success: function (list) {
-						//	console.log(JSON.parse(list));
+					success: function (list) {						
+   						//	console.log(JSON.parse(list));
 						let musicbymyplaylistData = JSON.parse(list);
 						let playListTitle = "";
 						for (i in musicbymyplaylistData) {
@@ -185,85 +194,88 @@
 								a = "src = 'img/song_notsave.svg'";
 							}
 
-							playListTitle += '<span class="playlist" data-set-MusicNum='
-								+ musicNum
-								+ ' data-set-playId='
-								+ musicbymyplaylistData[i].playListId
-								+ ' data-set-musicTitle='
-								+ musictitle
-								+ ' data-set-singer='
-								+ musicSinger
-								+ ' data-set-isMusic='
-								+ musicbymyplaylistData[i].isMusic
-								+ '><img class="like_btn" id="music_saved" '
-								+ a
-								+ '/> <span	class="list_title">'
-								+ musicbymyplaylistData[i].playListTitle
-								+ '</span></span></span>'
-						}
-						$(".playlist_list").html(playListTitle);
+    	    playListTitle += '<span class="playlist" data-set-MusicNum='
+    	    		+musicNum
+    	    		+' data-set-playId='
+    	    		+musicbymyplaylistData[i].playListId
+    	    		+' data-set-musicTitle='
+    	    		+musictitle
+    	    		+' data-set-singer='
+    	    		+musicSinger
+    	    		+' data-set-isMusic='
+    	    		+musicbymyplaylistData[i].isMusic
+    	    		+ '><img class="like_btn" id="music_saved" ' 
+    	    		+ a 
+    	    		+ '/> <span	class="list_title">' 
+    	    		+ musicbymyplaylistData[i].playListTitle
+					+ '</span></span></span>'
+    	    	}
+    	    	 $(".playlist_list").html(playListTitle);
+    	 
+    	     // const result_data = list;
+    	    }    
+    	    })  	 
+				}});
+      //플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
+      $(".playlist_list").on("click", ".like_btn", function() {
+    	  const  musicNum = $(this).closest(".playlist").attr('data-set-MusicNum');
+    	  console.log(musicNum);
+    	  const  musictitle =$(this).closest(".playlist").attr('data-set-musicTitle');
+    	  console.log(musictitle);
+    	  const  musicSinger = $(this).closest(".playlist").attr('data-set-singer');
+  		isMusic=$(this).closest(".playlist").attr('data-set-isMusic');
+  		console.log(isMusic);
+    	  let entInput = $(".on").attr("id");
+    	  playlistId=$(this).closest(".playlist").attr('data-set-playId');
+    	  console.log(playlistId);
+    	  const clickedLikeBtn = $(this);
+    	    const isMusicSaved = clickedLikeBtn.attr("src") === "img/folder_open.svg";
 
-						// const result_data = list;
-					}
-				})
-			});
-			//플레이리스트에 음악 저장==>플레이리스트 목록 모달 호출하는 ajax 처리문 바로 밑에 또 비동기로 처리해야할듯. playlist_id
-			$(".playlist_list").on("click", ".like_btn", function () {
-				const musicNum = $(this).closest(".playlist").attr('data-set-MusicNum');
-				console.log(musicNum);
-				const musictitle = $(this).closest(".playlist").attr('data-set-musicTitle');
-				console.log(musictitle);
-				const musicSinger = $(this).closest(".playlist").attr('data-set-singer');
-				isMusic = $(this).closest(".playlist").attr('data-set-isMusic');
-				console.log(isMusic);
-				let entInput = $(".on").attr("id");
-				playlistId = $(this).closest(".playlist").attr('data-set-playId');
-				console.log(playlistId);
-				if (isMusic === "false") {
-					console.log("추가 ajax");
-					$.ajax({
-						url: "controller?cmd=addMusic",
-						data: {
-							brand: entInput,//brand
-							songId: musicNum, //musicNum
-							title: musictitle,
-							singer: musicSinger,
-							playlistId: playlistId,
-						},
-						error: function (jqXHR, textStatus, errorThrown) {
-							alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
-						},
-						success: function (result) {
-							alert('음악이 추가되었습니다.');
-							document.getElementById("music_saved").src = "img/folder_open.svg";
-						}
-					})
-				}//isMusic 값에 따라 ajax 동작(여기서는 addMusic)
-				else {
-					console.log("삭제 ajax");
-					$.ajax({
-						url: "controller?cmd=deleteMusic",
-						data: {
-							brand: entInput,//brand
-							songId: musicNum, //musicNum
-							playlistId: playlistId,
-						},
-						error: function (jqXHR, textStatus, errorThrown) {
-							alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
-						},
-						success: function (result) {
-							alert('음악이 삭제되었습니다.');
-							document.getElementById("music_saved").src = "img/song_notsave.svg";
-						}
-					})
-				}//isMusic 값에 따라 ajax 동작(여기서는 deleteMusic)
-
-			});
-			const modalClose = document.querySelector(".close_img");
-			modalOpen.addEventListener("click", function () {
-				modal.classList.add("on");
-			});
-			// $(".music_like").on("click", ".like_img", function () {});
+   	  if(isMusic==="false"){
+   		console.log("추가 ajax");
+   	  	$.ajax({
+   	  	   	url: "controller?cmd=addMusic",
+   	  		    data: { 	
+   	  		    	 brand: entInput,//brand
+   	  	    	     songId: musicNum, //musicNum
+   	  	    	     title: musictitle,
+   	  	    	     singer: musicSinger,
+   	  	    	     playlistId: playlistId,
+   	  		     },
+   	  		     error: function(jqXHR, textStatus, errorThrown) {
+   	  	 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+   	  	 	      },
+   	  		     success: function (result){
+   	  				//alert('음악이 추가되었습니다.');
+   	  			//document.getElementById("music_saved").src = "img/folder_open.svg";
+   	  		    clickedLikeBtn.attr("src", "img/folder_open.svg");
+   	  		     }
+   	  	       })}//isMusic 값에 따라 ajax 동작(여기서는 addMusic)
+   	  	       else{
+   	  	    	console.log("삭제 ajax");
+   	  	   $.ajax({
+   	  	   	url: "controller?cmd=deleteMusic",
+   	  		    data: { 	
+   	  		    	 brand: entInput,//brand
+   	  	    	     songId: musicNum, //musicNum
+   	  	    	     playlistId: playlistId,
+   	  		     },
+   	  		     error: function(jqXHR, textStatus, errorThrown) {
+   	  	 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+   	  	 	      },
+   	  		     success: function (result){
+   	  				//alert('음악이 삭제되었습니다.');
+   	  			//document.getElementById("music_saved").src = "img/song_notsave.svg";
+   	  		    clickedLikeBtn.attr("src", "img/song_notsave.svg");
+   	  		     }
+   	  	       })}//isMusic 값에 따라 ajax 동작(여기서는 deleteMusic)
+   	  	    	   
+      }); 
+      const modalClose = document.querySelector(".close_img");
+      modalOpen.addEventListener("click", function () {
+        modal.classList.add("on");
+      });
+      // $(".music_like").on("click", ".like_img", function () {});
 
 			modalClose.addEventListener("click", function () {
 				modal.classList.remove("on");
@@ -278,14 +290,14 @@
 				$("#create_playlist").hide();
 			});
 
-			const isMemberModal = document.querySelector(".create_music_list");
-			const modalClose3 = document.querySelector(".close_img3");
-			isMemberModal.addEventListener("click", function () {
-				$("#create_playlist").show();
-			});
-			modalClose3.addEventListener("click", function () {
-				$("#modal_isMember").hide();
-			});
+      const isMemberModal = document.querySelector(".create_music_list");
+      const modalClose3 = document.querySelector(".close_img3");
+      isMemberModal.addEventListener("click", function () {
+        $(".modal_overlay2").show();
+      });
+      modalClose3.addEventListener("click", function () {
+        $(".modal_overlay2").hide();
+      });
 
 
 			$(".music_output").hide();
@@ -342,59 +354,68 @@
             <div class="music_like">
              <img class="like_img" src="img/folder_open.svg"></div>
              </div>`;
-								}
-								$(".music_list_output").html(data);
-							},
-						});
-						// $(".music_list_output").html(data); 복붙완료
-					},
-				});
-			});
-			//새로운 플레이리스트 만드는 비동기
-			$("#confirm2").on("click", function () {
-				console.log("시작");
-				const titleInput = document.querySelector(".new_play_list_title_input");
-				$.ajax({
-					url: "controller?cmd=addPlaylist",
-					data: {
-						newTitle: titleInput.value//brand
-					},
-					error: function (jqXHR, textStatus, errorThrown) {
-						alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown);
-					},
-					success: function (result) {
-						// result_data=JSON.parse(result)
-						// console.log(result_data);
-						//if(result_data.result!=true){
-						//alert('플레이리스트가 추가되지 않았습니다.');
-						alert("저장되었습니다!");
-						modal.classList.remove("on");
+                }
+                $(".music_list_output").html(data);
+              },
+            });
+            // $(".music_list_output").html(data); 복붙완료
+          },
+        });
+      });
+      //새로운 플레이리스트 만드는 비동기
+      $("#confirm2").on("click", function () {
+    	  console.log("시작");
+   	const titleInput = document.querySelector(".new_play_list_title_input");
+   	$.ajax({
+   	url: "controller?cmd=addPlaylist",
+	    data: { 	
+	      newTitle: titleInput.value//brand
+	     },
+	     error: function(jqXHR, textStatus, errorThrown) {
+ 	        alert("플레이리스트 추가에 실패했습니다: " + textStatus + " - " + errorThrown); 
+ 	      },
+	     success: function (result){
+	    	// result_data=JSON.parse(result)
+	    	// console.log(result_data);
+			//if(result_data.result!=true){
+			//alert('플레이리스트가 추가되지 않았습니다.');
+			//alert("저장되었습니다!");
+			modal.classList.remove("on"); 
+			$("#create_playlist").hide();
+			$(".new_play_list_title_input").val("");
+			//refreshPlaylists();
+	     }
+       })
+      });
+      
+   	  // 하단 메뉴바를 통한 페이지 이동
+      $("nav div").on("click", function() {
+    	  const clickedDiv = $(this);
+    	  const imgAlt = clickedDiv.find("img").attr("alt");
+    	  switch(imgAlt) {
+    	  case "메인 페이지":
+    		  // location.replace("controller?cmd=mainUI");
+    		  location.href = "controller?cmd=mainUI";
+    		  break;
+    	  case "노래방 검색 페이지":
+    		  // location.replace("controller?cmd=kkFilterUI");
+    		  location.href = "controller?cmd=kkFilterUI";
+    		  break;
+    	  case "노래 검색 페이지":
+    		  // location.replace("controller?cmd=musicListUI");
+    		  location.href = "controller?cmd=musicListUI";
+    		  break;
+    	  case "나의 예약 내역 페이지":
+    		  // location.replace("controller?cmd=reservationListUIAction");
+    		  location.href = "controller?cmd=reservationListUIAction";
+    		  break;
+    	  case "마이페이지":
+    		  // location.replace("controller?cmd=mypageUIAction");
+    		  location.href = "controller?cmd=mypageUIAction";
+    		  break;
+    	  }
+      });
 
-					}
-				})
-			});
-			// 하단 메뉴바를 통한 페이지 이동
-			$("nav div").on("click", function () {
-				const clickedDiv = $(this);
-				const imgAlt = clickedDiv.find("img").attr("alt");
-				switch (imgAlt) {
-					case "메인 페이지":
-						location.replace("controller?cmd=mainUI");
-						break;
-					case "노래방 검색 페이지":
-						location.replace("controller?cmd=kkFilterUI");
-						break;
-					case "노래 검색 페이지":
-						location.replace("controller?cmd=musicListUI");
-						break;
-					case "나의 예약 내역 페이지":
-						location.replace("controller?cmd=reservationListUIAction");
-						break;
-					case "마이페이지":
-						location.replace("controller?cmd=mypageUIAction");
-						break;
-				}
-			});
 		</script>
 	</body>
 

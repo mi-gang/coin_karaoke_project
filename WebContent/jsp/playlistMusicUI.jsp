@@ -47,7 +47,7 @@
             <div class="playlist_song_num"></div>
           </div>
           <div class="ent_button_group">
-            <input class="button" id="tj" type="button" value="TJ" />
+            <input class="button on" id="tj" type="button" value="TJ" />
             <input class="button" id="kumyoung" type="button" value="KY" />
           </div>
           <div class="music_outputs">
@@ -209,24 +209,27 @@
         modal3.classList.remove("on");
       });
       $(document).ready(function () {
-          $("#tj").click();
+    	  $(".button").on("click", function () {
+              var entInput = this.id;
+               console.log(entInput);
+            });
+            const ent = $(".button").get();
+            let button = "";
+            ent.forEach(function (option) {
+              option.addEventListener("click", function () {
+                ent.forEach(function (item) {
+                  item.classList.remove("on");
+                });
+                option.classList.add("on");
+              });
+            });
+    	  
+    	  $("#tj").click();
+          
         });
         // const ent = document.querySelector(".button");
         //클릭한 버튼 값 가지고 오기
-        $(".button").on("click", function () {
-          var entInput = this.id;
-           console.log(entInput);
-        });
-        const ent = $(".button").get();
-        let button = "";
-        ent.forEach(function (option) {
-          option.addEventListener("click", function () {
-            ent.forEach(function (item) {
-              item.classList.remove("on");
-            });
-            option.classList.add("on");
-          });
-        });
+      
       
       
       //플레이 리스트 이름 가져오기
@@ -258,6 +261,7 @@
  	       
    	}})
     //플레이 리스트 내에 저장되어 있는 곡 리스트 가져오기(버튼 선택으로 바꿔야함.)=> 버튼을 무조건 한번 눌러야 송출됨. + 곡 개수 가져오기
+    //문제 : 플레이리스트의 버튼을 한번 눌러야 제대로 된 데이터를 가져옴.. 
     $(".ent_button_group").on("click", function () {
     	 let entInput = $(".on").attr("id");
     	// console.log($(".on"));
@@ -295,7 +299,7 @@
 	    	 $(".music_outputs").html(""); // 새 내용 추가 전에 컨테이너 지우기
 	    	    if (result.length === 0) {
 	    	      // 데이터 없음 메시지 출력
-	    	      $(".music_outputs").html("<h1>데이터가 없습니다.</h1>");
+	    	      $(".music_outputs").html("<h1> 저장된 음악이 없습니다.</h1>");
 	    	    } else {
 	    	      $(".music_outputs").html(playListTitle);
 	    	      console.log(result);
@@ -318,6 +322,7 @@
     	     }
            })
 	})
+      
 	//플레이리스트 이름 변경하기(드롭다운)
        $(".confirm_btn").on("click", function () {
         
@@ -342,7 +347,7 @@
           
   //  $(".modal_playlist_title").text(playlistTitle.value);
           //플레이리스트 삭제하기
-           $(".ok_btn").on("click", function () {
+      $(".ok_btn").on("click", function () {
        	$.ajax({
        	url: "controller?cmd=deletePlaylist",
     	    data: { 	
@@ -357,10 +362,36 @@
     			console.log("저장");
     			 location.href = "controller?cmd=mypagePlaylistUI";
     	     }
-           })
-          })
-          
-
+           });
+          });
+                
+      // 하단 메뉴바를 통한 페이지 이동
+      $("nav div").on("click", function () {
+        const clickedDiv = $(this);
+        const imgAlt = clickedDiv.find("img").attr("alt");
+        switch (imgAlt) {
+          case "메인 페이지":
+            // location.replace("controller?cmd=mainUI");
+            location.href = "controller?cmd=mainUI";
+            break;
+          case "노래방 검색 페이지":
+            // location.replace("controller?cmd=kkFilterUI");
+            location.href = "controller?cmd=kkFilterUI";
+            break;
+          case "노래 검색 페이지":
+            // location.replace("controller?cmd=musicListUI");
+            location.href = "controller?cmd=musicListUI";
+            break;
+          case "나의 예약 내역 페이지":
+            // location.replace("controller?cmd=reservationListUIAction");
+            location.href = "controller?cmd=reservationListUIAction";
+            break;
+          case "마이페이지":
+            // location.replace("controller?cmd=mypageUIAction");
+            location.href = "controller?cmd=mypageUIAction";
+            break;
+        }
+      });
      
     </script>
   </body>
